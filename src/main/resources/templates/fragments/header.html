@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+
+</head>
+<body>
+<!-- Navigation -->
+<div th:fragment="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                    <!--<li th:if="${#authorization.expression('!isAuthenticated()')}">-->
+
+                <li>
+                    <a href="#" style="color: Green;" th:href="@{/signup}"><span th:text="#{navMenu.signup}"/>
+                    </a>
+                </li>
+                <li class="divider-vertical"/>
+                <li  th:if="${#authorization.expression('!isAuthenticated()')}">
+                    <a href="#" style="color: Green;" th:href="@{/login}">
+                        <span th:text="#{navMenu.login}"/>
+
+                    </a>
+                </li>
+
+                    <!--</li>-->
+                    <!--<li th:if="${#authorization.expression('isAuthenticated()')}">-->
+                    <li th:if="${#authorization.expression('isAuthenticated()')}" style=" color: #FFFFFF">
+                    <a href="#"  th:href="@{'/getUser/'+ ${session.currentUser.id}}">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <b th:text="${session.currentUser.username}"></b>
+                    </a>
+                    </li>
+                    <li class="divider-vertical"/>
+                    <li th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a href="#" style="color: red;" th:href="@{/j_spring_security_logout}">
+                            <span th:text="#{navMenu.logout}"/>
+                        </a>
+                    </li>
+                    <!--</li>-->
+
+                    <li class="divider-vertical"/>
+
+                    <li class="dropdown">
+
+                            <a href="#" class="dropdown-toggle"
+                               data-toggle="dropdown" th:title="#{navMenu.languageChange}">
+                                <img th:if="${#locale.getLanguage().contentEquals('ru')}" src="/images/flags/ru.png"/>
+                                <img th:if="${#locale.getLanguage().contentEquals('en')}" src="/images/flags/en.png"/>
+                                <b class="caret">
+
+                                </b>
+                            </a>
+
+
+                        <ul class="dropdown-menu">
+                            <li id='lang-en'><a href="#" th:href="@{/?languageVar=en}" th:title="#{navMenu.english}"><img
+                                    src="/images/flags/en.png"/></a></li>
+                            <li id='lang-ru'><a href="#" th:href="@{/?languageVar=ru}" th:title="#{navMenu.russian}"><img
+                                    src="/images/flags/ru.png"/></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="menu">
+            <div class="container">
+                <ul>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.home}"/></a></li>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.howitworks}"/></a></li>
+                    <li><a href="#" th:href="@{/courses}"><span th:text="#{navMenu.courses}"/></a></li>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.events}"/></a></li>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.blog}"/></a></li>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.sertification}"/></a></li>
+                    <li><a href="#" th:href="@{/}"><span th:text="#{navMenu.help}"/></a></li>
+
+                    <!--отладочные -->
+                    <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#"
+                                                                                     th:href="@{/test_validator}">Validator</a>
+                    </li>
+                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/console"
+                                                                                     >Консоль базы</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+</div>
+
+</body>
+</html>

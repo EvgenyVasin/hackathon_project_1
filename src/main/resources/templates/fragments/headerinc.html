@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:fragment="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <!-- Custom CSS -->
+    <link href="/css/modern-business.css"
+          th:href="@{/css/modern-business.css}" rel="stylesheet" media="screen"/>
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css"
+          th:href="@{/css/font-awesome/css/font-awesome.min.css}" rel="stylesheet" media="screen"/>
+
+    <!-- jQuery -->
+    <script src="/js/jquery-2.1.4.min.js"
+            th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script type="text/javascript" >
+        String.prototype.replaceAll = function(character,replaceChar){
+            var word = this.valueOf();
+
+            while(word.indexOf(character) != -1)
+                word = word.replace(character,replaceChar);
+
+            return word;
+        }
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

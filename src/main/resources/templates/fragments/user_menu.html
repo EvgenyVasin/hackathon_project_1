@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+
+</head>
+<body>
+<div th:fragment="user_menu">
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
+    <nav id="sidebar"  role="navigation" th:if="${#authorization.expression('isAuthenticated()')}">
+
+        <div class="text-center" id="author" >
+            <br/>
+            <img style="width: 150px;position:relative; left: 19%; " src="#" th:src="${'/imgUser=' + session.currentUser.id}"  class="img-circle img-responsive" />
+            <h3 th:text="${session.currentUser.firstName + ' ' + session.currentUser.lastName}"></h3>
+            <small class="label label-warning" th:if="${session.currentUser.userRole.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
+            <small class="label label-warning" th:if="${session.currentUser.userRole.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
+        </div>
+        <ul>
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">Статьи</a></li>
+            <li><a href="#">Видео</a></li>
+            <li><a href="#">Выход</a></li>
+        </ul>
+    </nav>
+    <!--</nav>-->
+</div>
+
+</body>
+</html>

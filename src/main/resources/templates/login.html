@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="#{navMenu.login}"/>
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <th:block th:include="fragments/header :: header"></th:block>
+</head>
+<body>
+<!--<div class="container">-->
+<!--<div th:if="${param.error}">-->
+<!--<span th:text="#{login.LoginFail}"/>-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--<span th:text="#{login.logout}"/>-->
+<!--</div>-->
+
+<!--<h2><span th:text="#{navMenu.login}"/></h2>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<form th:action="@{/j_spring_security_check}" method="post">-->
+<!--<table>-->
+<!--<tr >-->
+<!--<td><span th:text="#{login.UserName}"/></td>-->
+<!--<td><input type="text"  name="j_username" /></td>-->
+<!--</tr>-->
+<!--<tr >-->
+<!--<td><span th:text="#{login.pass}"/></td>-->
+<!--<td><input type="password" name="j_password" /></td>-->
+<!--</tr>-->
+
+<!--<tr>-->
+<!--<td><input type="submit" value="OK"/></td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</form>-->
+
+
+<!--</div>-->
+
+<div class="container">
+    <div class="row">
+        <div >
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{navMenu.login}"></strong>
+                    </div>
+                </div>
+                <form role="form" th:action="@{/j_spring_security_check}" method="post">
+                <div class="panel-body">
+                    <div class="row">
+                        <!--<div class="col-xs-6 col-sm-6 col-md-6 separator social-login-box"><br/>-->
+                            <!--<a href="#" class="btn facebook btn-block" role="button">Войти с помощью Facebook</a>-->
+                            <!--<br/>-->
+                            <!--<a href="#" class="btn twitter btn-block" role="button">Войти с помощью Twitter</a>-->
+                        <!--</div>-->
+                        <div class="col-xs-6 col-sm-6 col-md-6 login-box">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-user"></span></span>
+                                    <input type="text" class="form-control" name="j_username"
+                                           th:placeholder="#{users.username}" required="True" autofocus="True"/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-lock"></span></span>
+                                    <input type="password" class="form-control" name="j_password"
+                                           th:placeholder="#{users.password}" required="True"/>
+                                </div>
+                                <p>
+                                    <a href="#" th:text="#{users.fogot}"></a></p>
+                                <span th:text="#{users.notAccount}"/> <a href="#" th:href="@{/signup}"
+                                                                         th:text="#{navMenu.signup}"></a>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"  id="rememberme" name="_spring_security_remember_me" th:text="#{users.remember}"/>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" value="Remember" th:text="#{users.remember}"/>-->
+
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <button type="submit" class="btn btn-labeled btn-success">
+                                <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                    th:text="#{users.entrance}"/></button>
+                            <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                                <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                    th:text="#{users.exit}"/></button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
