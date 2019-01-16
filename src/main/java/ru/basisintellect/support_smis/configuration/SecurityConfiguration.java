@@ -25,13 +25,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests().antMatchers("/").permitAll().and()
-//                .authorizeRequests().antMatchers("/signup").permitAll()
-//                .anyRequest().authenticated();
+
+        /*http
+                .authorizeRequests().antMatchers("/").permitAll().and()
+                .authorizeRequests().antMatchers("/signup").permitAll()
+                .anyRequest().authenticated();*/
 
         http
-
 
                 .authorizeRequests().antMatchers("/console/**").permitAll().and()
                 .csrf()
@@ -40,7 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .frameOptions()
                 .disable()
                 ;
-
 
         http
                 .formLogin().loginPage("/login").permitAll().usernameParameter("j_username").successForwardUrl("/scopeSession")
@@ -56,8 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .rememberMe().key("jskills").tokenValiditySeconds(86400)
                 .and()
                 .csrf().disable();
-
-
     }
 
     @Autowired
@@ -69,8 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(customUserDetailsService)
                 .passwordEncoder(getBCryptPasswordEncoder());
-
-
     }
 
     @Bean(name = "bcryptEncoder")
@@ -78,5 +73,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
-
 }

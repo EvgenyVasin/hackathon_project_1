@@ -1,7 +1,6 @@
 package ru.basisintellect.support_smis.configuration;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -34,13 +33,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/**").addResourceLocations(
                     CLASSPATH_RESOURCE_LOCATIONS);
         }
-
-//        registry.addResourceHandler("/pictures/**").addResourceLocations("D:/pictures/");
-
-//        registry.addResourceHandler("/codemirror/**").addResourceLocations("/codemirror/");
-//        registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/");
-//        registry.addResourceHandler("/font-awesome/**").addResourceLocations("/font-awesome/");
-
     }
 
     @Bean(name="simpleMappingExceptionResolver")
@@ -66,13 +58,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index");
-//        registry.addViewController("/index").setViewName("/index");
-//        registry.addViewController("/test_validator").setViewName("test_validator");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/signup").setViewName("signup");
         registry.addViewController("/profile").setViewName("users/profile");
-//        registry.addViewController("/chat").setViewName("users/chat");
+        registry.addViewController("/info").setViewName("info");
     }
 
     /**
@@ -80,7 +70,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(siteInterceptor).addPathPatterns("/interceptorCall/*");
         registry.addInterceptor(getLocaleChangeInterceptor()).addPathPatterns("/*");
     }
 
@@ -90,9 +79,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         localeChangeInterceptor.setParamName("languageVar");
         return localeChangeInterceptor;
     }
-
-//    @Autowired
-//    private SiteInterceptor siteInterceptor;
 
     /**
      *  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
@@ -126,11 +112,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         resource.setDefaultEncoding("UTF-8");
         return resource;
     }
-    // as alternative with-out automatic reloading, you could use the following:
-//        @Bean
-//        public ResourceBundleMessageSource messageSource() {
-//                ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//                messageSource.setBasename("classpath:locales/messages");
-//                return messageSource;
-//        }
+    // В качестве альтернативы автоматической загрузке
+        /*@Bean
+        public ResourceBundleMessageSource messageSource() {
+                ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+                messageSource.setBasename("classpath:locales/messages");
+                return messageSource;
+        }*/
 }

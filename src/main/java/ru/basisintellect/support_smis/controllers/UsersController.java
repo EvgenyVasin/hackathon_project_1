@@ -15,6 +15,7 @@ import ru.basisintellect.support_smis.entities.User;
 import ru.basisintellect.support_smis.entities.UserRole;
 import ru.basisintellect.support_smis.repositories.UserRoleRepository;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
+import ru.basisintellect.support_smis.utils.ImgWorker;
 
 
 import java.util.*;
@@ -30,6 +31,8 @@ public class UsersController {
     BCryptPasswordEncoder bcryptEncoder;
     @Autowired
     UserRoleRepository roles;
+    @Autowired
+    ImgWorker images;
 
 
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -86,7 +89,7 @@ public class UsersController {
     @RequestMapping(value = "getUser/{userId}", method = RequestMethod.GET)
     public String getUser(@PathVariable("userId") Long userId, Model model)
     {
-        class UserMessage{
+        /*class UserMessage{
             public Boolean isIncoming;
             public User recipient;
             public String msg;
@@ -97,16 +100,16 @@ public class UsersController {
                 this.isIncoming = isIncoming;
             }
         }
-        List<UserMessage> userMessages = new ArrayList<UserMessage>();
-        User user = users.findOne(userId);
-        Set<Chat> chatList  = user.getChats();
+        List<UserMessage> userMessages = new ArrayList<UserMessage>();*/
+        User user = users.findById(userId).get();
+        /*Set<Chat> chatList  = user.getChats();
 
         for (Chat chat:chatList) {
             ChatMessage chatMessage = msgs.findTop1ByChatOrderByDateTimeDesc(chat);
             if(chatMessage!=null)
                 userMessages.add(new UserMessage(chat.getRecipient(),chatMessage.isIncoming(), chatMessage.getMsg()));
 
-        }
+        }*/
 
 //        List<ChatMessage> sendMsgs = msgs.findBySender(user);
 //        List<ChatMessage> reciveMsgs = msgs.findByRecipient(user);
@@ -126,7 +129,7 @@ public class UsersController {
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String editUser(Long userId, @RequestParam("img")MultipartFile img, String first_name, String last_name, String email, Model model)
     {
-        User user = users.findOne(userId);
+        User user = users.findById(userId).get();
         images.setImg(user, img);
         user.setFirstName(first_name);
         user.setLastName(last_name);

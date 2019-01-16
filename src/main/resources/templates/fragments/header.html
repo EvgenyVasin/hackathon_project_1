@@ -96,7 +96,7 @@
                     <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#"
                                                                                      th:href="@{/test_validator}">Validator</a>
                     </li>
-                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/console"
+                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console"
                                                                                      >Консоль базы</a>
                     </li>
 

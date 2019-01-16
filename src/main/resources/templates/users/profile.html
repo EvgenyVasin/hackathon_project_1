@@ -29,9 +29,9 @@
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab" th:text="#{users.about}"></a></li>
-                            <li th:if="${user.username==session.currentUser.username || #httpServletRequest.isUserInRole('ROLE_ADMIN')}" class=""><a href="#courses" data-toggle="tab"  th:text="#{users.availableCourses}"></a></li>
+                            <!--<li th:if="${user.username==session.currentUser.username || #httpServletRequest.isUserInRole('ROLE_ADMIN')}" class=""><a href="#courses" data-toggle="tab"  th:text="#{users.availableCourses}"></a></li>-->
                             <li th:if="${user.username==session.currentUser.username}" class=""><a href="#editProf" data-toggle="tab"  th:text="#{users.editProf}"></a></li>
-                            <li th:if="${#authorization.expression('isAuthenticated()')and (user.username==session.currentUser.username)}" class=""><a href="#messages" data-toggle="tab" th:text="#{users.messages}"></a></li>
+                            <!--<li th:if="${#authorization.expression('isAuthenticated()')and (user.username==session.currentUser.username)}" class=""><a href="#messages" data-toggle="tab" th:text="#{users.messages}"></a></li>-->
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <hr/>
@@ -45,13 +45,6 @@
                                             <h3 th:text="${user.firstName + ' ' + user.lastName}"></h3>
                                             <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
                                             <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
-                                            <!--<p>Я простой Русский пацан и мне всё по барабану.</p>-->
-                                            <!--<p class="sosmed-author">-->
-                                                <!--<a href="#"><i class="fa fa-facebook" title="Facebook"></i></a>-->
-                                                <!--<a href="#"><i class="fa fa-twitter" title="Twitter"></i></a>-->
-                                                <!--<a href="#"><i class="fa fa-google-plus" title="Google Plus"></i></a>-->
-                                                <!--<a href="#"><i class="fa fa-linkedin" title="Linkedin"></i></a>-->
-                                            <!--</p>-->
                                         </div>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-xs-12">
