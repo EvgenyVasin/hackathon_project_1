@@ -87,12 +87,13 @@
                     <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.blog}"/></a></li>-->
                     <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.sertification}"/></a></li>-->
                     <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.help}"/></a></li>-->
+                    <!--<li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/}" th:text="#{navMenu.SMISTable}">Validator</a></li>-->
 
                     <!--навигация-->
-                    <li th:if="!${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/}"><span th:text="#{navMenu.manySMIS}"/></a></li>
-                    <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/manySMISandEDIT}" th:text="#{navMenu.manySMIS}">Validator</a></li>
-                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console">Консоль базы</a></li>
-                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console">Администрирование</a></li>
+<!--список ПК ИВ СМИС-->          <li><a th:text="#{navMenu.SMISTable}" href="/smises_table"></a></li>
+                                  <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>
+<!--открыть БД в новой вкладке--> <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.DB}" href="/h2-console" target="_blank"></a></li>
+
 
 
 

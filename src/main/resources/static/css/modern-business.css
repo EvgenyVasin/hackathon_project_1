@@ -11,10 +11,6 @@
     font-size: 8px;
 }
 
-
-
-
-
 #sidebar {
     background: #0f0f0f;
     position: fixed;
@@ -215,10 +211,10 @@
 }
 
 .panel {
-    border-color: #0f0f0f;
+    border-color: #3b1a91;
 }
  .panel-primary .panel-heading {
-     background: #0f0f0f;
+     background: #3b1a91;
 }
 
 /*file_upload*/

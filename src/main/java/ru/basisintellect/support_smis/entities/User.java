@@ -10,11 +10,6 @@ import java.util.Date;
 @Table(name="users")
 public class User extends CustomImgEntity{
 
-
-
-//    @Column(name = "username", unique = true, length = 64, nullable = false)
-//    private String username;
-
     @Column(name = "password", length = 256, nullable = false)
     private String password;
 

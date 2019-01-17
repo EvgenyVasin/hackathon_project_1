@@ -6070,9 +6070,9 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 }
 
 .panel-primary > .panel-heading {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7
+    color: white;
+    background-color: #3b1a91;
+    border-color: #3b1a91
 }
 
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
@@ -6081,7 +6081,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 
 .panel-primary > .panel-heading .badge {
     color: #337ab7;
-    background-color: #fff
+    background-color: #3b1a91
 }
 
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {

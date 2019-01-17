@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/")
                 .and()
-                .rememberMe().key("jskills").tokenValiditySeconds(86400)
+                .rememberMe().key("basis").tokenValiditySeconds(86400)
                 .and()
                 .csrf().disable();
     }

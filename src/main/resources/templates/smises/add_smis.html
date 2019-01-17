@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <th:block th:include="fragments/header :: header"></th:block>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div >
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
+                    </div>
+                </div>
+                <form role="form" th:action="@{/addSmis}" method="post">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 login-box">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list_alt"></span></span>
+                                    <input type="text" class="form-control" name="region"
+                                           th:placeholder="#{complex.region}" required="True" autofocus="True"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control" name="agreement"
+                                           th:placeholder="#{complex.agreement}" required="True"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control" name="validity"
+                                           th:placeholder="#{complex.validity}" required="True"/>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control" name="contacts"
+                                           th:placeholder="#{complex.contacts}" required="True"/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control" name="url"
+                                           th:placeholder="#{complex.url}" required="True"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="submit" class="btn btn-labeled btn-success">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                        th:text="OK"/></button>
+                                <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                        th:text="#{users.exit}"/></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

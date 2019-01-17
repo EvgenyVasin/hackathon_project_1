@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{navMenu.SMISTable}"/>
+
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <th:block th:include="fragments/header :: header"></th:block>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="pannel-heading">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
+                    </div>
+                </div>
+                <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">
+                    <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                                <!--заголовки таблицы-->
+                                <th th:text="#{complex.region}"></th>
+                                <th th:text="#{complex.dateReg}"></th>
+                                <th th:text="#{complex.agreement}"></th>
+                                <th th:text="#{complex.validity}"></th>
+                                <th th:text="#{complex.contacts}"></th>
+                                <th th:text="#{complex.url}"></th>
+                                <th th:text="#{complex.enabled}"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table table-striped">
+                        <tr th:each="smis : ${smisesList}">
+                                <!--напонение таблицы-->
+                                <th th:text="${smis.region}"></th>
+                                <th th:text="${smis.dateRegistration}"></th>
+                                <th th:text="${smis.agreement}"></th>
+                                <th th:text="${smis.validity}"></th>
+                                <th th:text="${smis.contacts}"></th>
+                                <th th:text="${smis.url}"></th>
+                                <th th:text="${smis.enabled}"></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
