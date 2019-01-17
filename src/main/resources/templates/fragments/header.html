@@ -81,21 +81,22 @@
         <div id="menu"  >
             <div class="container" >
                 <ul>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.home}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.howitworks}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/courses}"><span th:text="#{navMenu.courses}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.events}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.blog}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.sertification}"/></a></li>
-                    <li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.help}"/></a></li>
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.home}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.howitworks}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/courses}"><span th:text="#{navMenu.courses}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.events}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.blog}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.sertification}"/></a></li>-->
+                    <!--<li><a href="#"  style="color: #3b1a91;" th:href="@{/}"><span th:text="#{navMenu.help}"/></a></li>-->
 
-                    <!--отладочные -->
-                    <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#"
-                                                                                     th:href="@{/test_validator}">Validator</a>
-                    </li>
-                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console"
-                                                                                     >Консоль базы</a>
-                    </li>
+                    <!--навигация-->
+                    <li th:if="!${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/}"><span th:text="#{navMenu.manySMIS}"/></a></li>
+                    <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="#" th:href="@{/manySMISandEDIT}" th:text="#{navMenu.manySMIS}">Validator</a></li>
+                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console">Консоль базы</a></li>
+                    <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="/h2-console">Администрирование</a></li>
+
+
+
 
                 </ul>
             </div>
