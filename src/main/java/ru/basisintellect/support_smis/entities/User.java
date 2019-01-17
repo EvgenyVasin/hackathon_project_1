@@ -12,8 +12,8 @@ public class User extends CustomImgEntity{
 
 
 
-    @Column(name = "username", unique = true, length = 64, nullable = false)
-    private String username;
+//    @Column(name = "username", unique = true, length = 64, nullable = false)
+//    private String username;
 
     @Column(name = "password", length = 256, nullable = false)
     private String password;
@@ -45,16 +45,16 @@ public class User extends CustomImgEntity{
     /**
      * @return the username
      */
-    public String getUsername() {
-        return username;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
 
     /**
      * @param username the username to set
      */
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     /**
      * @return the password
@@ -156,7 +156,7 @@ public class User extends CustomImgEntity{
                  */
     @Override
     public String toString() {
-        return "User [userId=" + getId() + ", username=" + username
+        return "User [userId=" + getId()
                 + ", password=" + password + ", firstName=" + firstName
                 + ", lastName=" + lastName
                 + ", userRoles=" + userRole

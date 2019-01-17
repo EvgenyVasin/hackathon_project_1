@@ -47,20 +47,19 @@ public class UsersController {
 
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public ModelAndView addUser(String username, String password, String password_confirm, String e_mail, Model model)
+    public ModelAndView addUser(String firstname, String lastname,String password, String password_confirm, String e_mail, Model model)
     {
         //no empty fields allowed
-        if (username.isEmpty() || password.isEmpty() || password_confirm.isEmpty())
+        if (firstname.isEmpty() || lastname.isEmpty() || e_mail.isEmpty()|| password.isEmpty() || password_confirm.isEmpty())
             return null;
         //passwords should match
         if (!password.equals(password_confirm))
             return null;
         UserRole userRole = roles.findByUserRoleName("ROLE_USER");
         User user = new User();
-        user.setUsername(username);
         user.setPassword(bcryptEncoder.encode(password));
-        user.setFirstName(" ");
-        user.setLastName(" ");
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
         user.setMail(e_mail);
         user.setUserRole(userRole);
         user.setDateRegistration(new Date());

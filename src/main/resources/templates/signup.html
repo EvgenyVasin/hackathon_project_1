@@ -6,6 +6,7 @@
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 </head>
 <body>
+
     <div class="container">
         <div class="row">
             <div >
@@ -23,9 +24,23 @@
                                     <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" name="username"
-                                               th:placeholder="#{users.username}" required="True" autofocus="True"/>
+                                        <input type="text" class="form-control" name="e_mail"
+                                               th:placeholder="#{users.eMail}" required="True" autofocus="True"/>
                                     </div>
+
+                                    <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <input type="text" class="form-control" name="firstname"
+                                               th:placeholder="#{users.firstName}" required="True"/>
+                                    </div>
+                                    <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <input type="text" class="form-control" name="lastname"
+                                               th:placeholder="#{users.lastName}" required="True"/>
+                                    </div>
+
                                     <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-lock"></span></span>
@@ -37,12 +52,6 @@
                                             class="glyphicon glyphicon-lock"></span></span>
                                         <input type="text" class="form-control" name="password_confirm"
                                                th:placeholder="#{users.passConf}" required="True"/>
-                                    </div>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-inbox"></span></span>
-                                        <input type="text" class="form-control" name="e_mail"
-                                               th:placeholder="#{users.eMail}" required="True" autofocus="True"/>
                                     </div>
                                 </div>
                             </div>

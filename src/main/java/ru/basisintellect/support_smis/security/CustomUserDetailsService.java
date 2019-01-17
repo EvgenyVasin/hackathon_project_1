@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        ru.basisintellect.support_smis.entities.User user = userRepository.findByUsername(username);
+        ru.basisintellect.support_smis.entities.User user = userRepository.findByMail(username);
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
 
         user.setLastDate(new Date());
@@ -45,7 +45,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                                             List<GrantedAuthority> authorities) {
 
 
-        return new User(user.getUsername(), user.getPassword(),
+        return new User(user.getMail(), user.getPassword(),
                 user.isEnabled(), true, true, true, authorities);
     }
 

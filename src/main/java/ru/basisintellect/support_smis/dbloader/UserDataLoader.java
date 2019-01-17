@@ -40,9 +40,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userRoleRepository.save(adminRole);
 
             User admin = new User();
-            admin.setUsername("admin");
+
             admin.setPassword(bcryptEncoder.encode("admin"));
-            admin.setMail("123@list.ru");
+            admin.setMail("admin@list.ru");
             admin.setFirstName("Foo");
             admin.setLastName("Bar");
             admin.setDateRegistration(new Date());
@@ -58,9 +58,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userRoleRepository.save(userRole);
 
             User user1 = new User();
-            user1.setUsername("user");
+
             user1.setPassword(bcryptEncoder.encode("user"));
-            user1.setMail("123@list.ru");
+            user1.setMail("user@list.ru");
             user1.setFirstName("John");
             user1.setLastName("Doe");
             user1.setUserRole(userRole);

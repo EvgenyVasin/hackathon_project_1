@@ -23,7 +23,7 @@ public class ScopeController {
     @RequestMapping(value = "/scopeSession", method = RequestMethod.POST)
     public String scopeExample(HttpServletRequest request, HttpSession session) {
         System.out.println("ScopeController scopeSession() is called");
-        User currentUser = users.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        User currentUser = users.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
         currentUser.setPassword("123654345");//ложный
         session.setAttribute("currentUser", currentUser);
         return "redirect:" + request.getScheme() +":/";

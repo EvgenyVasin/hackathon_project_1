@@ -30,7 +30,7 @@
                         <ul id="myTab" class="nav nav-pills">
                             <li class="active"><a href="#detail" data-toggle="tab" th:text="#{users.about}"></a></li>
                             <!--<li th:if="${user.username==session.currentUser.username || #httpServletRequest.isUserInRole('ROLE_ADMIN')}" class=""><a href="#courses" data-toggle="tab"  th:text="#{users.availableCourses}"></a></li>-->
-                            <li th:if="${user.username==session.currentUser.username}" class=""><a href="#editProf" data-toggle="tab"  th:text="#{users.editProf}"></a></li>
+                            <li th:if="${user.mail==session.currentUser.mail}" class=""><a href="#editProf" data-toggle="tab"  th:text="#{users.editProf}"></a></li>
                             <!--<li th:if="${#authorization.expression('isAuthenticated()')and (user.username==session.currentUser.username)}" class=""><a href="#messages" data-toggle="tab" th:text="#{users.messages}"></a></li>-->
                         </ul>
                         <div id="myTabContent" class="tab-content">
@@ -39,7 +39,7 @@
                                 <div class="col-lg-4 col-md-4 col-xs-12" >
                                         <div class="text-center" id="author">
                                             <img src="#" th:src="${'/imgUser=' + user.id}"  class="img-circle img-responsive"/>
-                                            <label style="background: #2e6da4;" th:if="${#authorization.expression('isAuthenticated()')and not (user.username==session.currentUser.username)}">
+                                            <label style="background: #2e6da4;" th:if="${#authorization.expression('isAuthenticated()')and not (user.mail==session.currentUser.mail)}">
                                                 <a style=" color: #FFFFFF" th:href="${'/addMsgForm/1/'+ user.id }" th:text="#{users.sendMsg}"></a>
                                             </label>
                                             <h3 th:text="${user.firstName + ' ' + user.lastName}"></h3>
@@ -60,37 +60,8 @@
                                     </table>
                                 </div>
                             </div>
-                            <div th:if="${#authorization.expression('isAuthenticated()')and (user.username==session.currentUser.username)}" class="tab-pane fade" id="messages">
-                                <p></p>
-                                <table th:if="${not #lists.isEmpty(msgList)}" class="table table-striped">
-                                    <tbody>
-                                    <tr  th:each="msg : ${msgList}">
-                                        <td><img class="img-circle img-responsive" src="#" width="100" th:src="${'/imgUser=' + msg.recipient.id}"/></td>
-                                        <td>
-                                            <h4 th:text="${msg.recipient.username}"/>
-                                            <table>
-                                                <tbody>
-                                                <tr>
 
-                                                    <td> <img class="img-circle img-responsive" th:if ="${not msg.isIncoming}" src="#" width="50" th:src="${'/imgUser=' + user.id}"/></td>
-                                                    <td th:text="${msg.msg}"></td>
-
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-
-
-
-                                        </td>
-
-                                        <td><a th:href="${'/chat/' + msg.recipient.id + '/' + session.currentUser.id}" th:text="#{courses.view}"></a></td>
-                                        <td><a th:href="${'/delete_course/' + msg.recipient.id}" th:text="#{courses.delete}"></a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div th:if="${user.username==#httpServletRequest.remoteUser}" class="tab-pane fade" id="editProf">
+                            <div th:if="${user.mail==session.currentUser.mail}" class="tab-pane fade" id="editProf">
                                 <p></p>
                                 <form role="form"  th:action="@{/editUser}" method="post" enctype="multipart/form-data">
                                     <input type="hidden" name="userId" th:value="${user.id}"/>

@@ -13,6 +13,6 @@ import ru.basisintellect.support_smis.entities.User;
 @Qualifier(value = "userRepository")
 public interface UsersRepository extends CrudRepository<User, Long> {
 
-    User findByUsername(String username);
+    User findByMail(String mail);
 
 }
