@@ -16,7 +16,7 @@
                         <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
                     </div>
                 </div>
-                <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">
+                <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
                     <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
                 </div>
                 <table class="table table-striped">
@@ -45,10 +45,8 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
-
 </body>
 </html>
