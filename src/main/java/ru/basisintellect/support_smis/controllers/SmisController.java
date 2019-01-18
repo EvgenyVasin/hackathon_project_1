@@ -7,13 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import ru.basisintellect.support_smis.entities.Smis;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by vasin.e on 17.01.2019.
@@ -26,8 +23,8 @@ public class SmisController {
 
     //добавление ПК ИВ СМИС
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public String addSmis(String region, String agreement, String validity, String contacts, String url, Model model){
-        if(region.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
+    public String addSmis(String region, String agreement, String validity, String contacts, String url, Model model) {
+        if (region.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
             return null;
         Smis smis = new Smis();
         smis.setRegion(region);
@@ -42,7 +39,7 @@ public class SmisController {
 
     //получение ПК ИВ СМИС
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
-    public String getSmis(@PathVariable("smisId") Long smisId, Model model){
+    public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
         Smis smis = smises.findById(smisId).get();
         model.addAttribute("smis", smis);
         return "smis/smis_details";
@@ -51,7 +48,7 @@ public class SmisController {
     //редактирование ПК ИВ СМИС
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smis_details", method = RequestMethod.POST)
-    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, Model model){
+    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, Model model) {
         Smis smis = smises.findById(smisId).get();
         smis.setRegion(region);
         smis.setAgreement(agreement);
@@ -63,7 +60,9 @@ public class SmisController {
         return "smises/smis_details";
     }
 
-    private String viewSmises(Model model){
+    //генерация страницы со смисами
+    @RequestMapping(value = "/smises_table")
+    public String viewSmises(Model model) {
         model.addAttribute("smisesList", smises.findAll());
         return "smises/smises_table";
     }

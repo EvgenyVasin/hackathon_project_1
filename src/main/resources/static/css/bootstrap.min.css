@@ -4716,7 +4716,9 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
     .navbar-nav > li > a {
         padding-top: 15px;
-        padding-bottom: 15px
+        padding-bottom: 15px;
+        margin-top:15px;
+        margin-right: 15px;
     }
 }
 

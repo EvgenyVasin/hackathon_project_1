@@ -32,8 +32,8 @@
                                 <th th:text="#{complex.enabled}"></th>
                         </tr>
                     </thead>
-                    <tbody class="table table-striped">
-                        <tr th:each="smis : ${smisesList}">
+                    <tbody th:if="${not #lists.isEmpty(smisesList)}" class="table table-striped">
+                        <tr  th:each="smis : ${smisesList}">
                                 <!--напонение таблицы-->
                                 <th th:text="${smis.region}"></th>
                                 <th th:text="${smis.dateRegistration}"></th>
