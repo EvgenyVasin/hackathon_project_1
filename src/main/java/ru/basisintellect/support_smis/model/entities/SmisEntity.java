@@ -155,7 +155,7 @@ public class SmisEntity extends CustomEntity {
                 + ", agreement = " + agreement
                 + ", validity = " + validity
                 + ", contacts = " + contacts
-                + ", URL = " + url.toString()
+                + ", URL = " + url
                 + ", enabled = " + enabled;
     }
 }
