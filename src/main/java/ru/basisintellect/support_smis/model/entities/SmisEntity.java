@@ -10,7 +10,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="SmisEntity")
+@Table(name="Smis")
 public class SmisEntity extends CustomEntity {
 
     //название
