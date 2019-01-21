@@ -1,6 +1,6 @@
 package ru.basisintellect.support_smis.entities;
 
-import org.hibernate.validator.constraints.URL;
+import ru.basisintellect.support_smis.soap_client.TestConnect;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,6 @@ public class Smis extends CustomEntity {
     //(не)работоспособность
     @Column(name="enabled", length = 1)
     private boolean enabled = false;
-
 
 
     //сеттеры параметров

@@ -9,10 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan
 @EnableAutoConfiguration
 public class SupportSmisApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SupportSmisApplication.class, args);
 	}
-
 }
 
