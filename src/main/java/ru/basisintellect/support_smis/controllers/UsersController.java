@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.basisintellect.support_smis.entities.User;
-import ru.basisintellect.support_smis.entities.UserRole;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
+import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.UserRoleRepository;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
 import ru.basisintellect.support_smis.utils.ImgWorker;
@@ -37,9 +37,9 @@ public class UsersController {
 
 //    @PreAuthorize("hasRole('ADMIN')")
 //    @RequestMapping(method = RequestMethod.GET)
-//    public List<User> getUsers()
+//    public List<UserEntity> getUsers()
 //    {
-//        List<User> result = new ArrayList<>();
+//        List<UserEntity> result = new ArrayList<>();
 //        users.findAll().forEach(result::add);
 //        return result;
 //    }
@@ -55,16 +55,16 @@ public class UsersController {
         //passwords should match
         if (!password.equals(password_confirm))
             return null;
-        UserRole userRole = roles.findByUserRoleName("ROLE_USER");
-        User user = new User();
-        user.setPassword(bcryptEncoder.encode(password));
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setMail(e_mail);
-        user.setUserRole(userRole);
-        user.setDateRegistration(new Date());
-        user.setEnabled(true);
-        users.save(user);
+        UserRoleEntity userRoleEntity = roles.findByUserRoleName("ROLE_USER");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setPassword(bcryptEncoder.encode(password));
+        userEntity.setFirstName(firstname);
+        userEntity.setLastName(lastname);
+        userEntity.setMail(e_mail);
+        userEntity.setUserRoleEntity(userRoleEntity);
+        userEntity.setDateRegistration(new Date());
+        userEntity.setEnabled(true);
+        users.save(userEntity);
         Map<String,String> attribute = new HashMap<>();
         attribute.put("msg_info", "регистрация завершена");
         return new ModelAndView("info",attribute);
@@ -90,18 +90,18 @@ public class UsersController {
     {
         /*class UserMessage{
             public Boolean isIncoming;
-            public User recipient;
+            public UserEntity recipient;
             public String msg;
 
-            public UserMessage(User recipient, Boolean isIncoming, String msg) {
+            public UserMessage(UserEntity recipient, Boolean isIncoming, String msg) {
                 this.recipient = recipient;
                 this.msg = msg;
                 this.isIncoming = isIncoming;
             }
         }
         List<UserMessage> userMessages = new ArrayList<UserMessage>();*/
-        User user = users.findById(userId).get();
-        /*Set<Chat> chatList  = user.getChats();
+        UserEntity userEntity = users.findById(userId).get();
+        /*Set<Chat> chatList  = userEntity.getChats();
 
         for (Chat chat:chatList) {
             ChatMessage chatMessage = msgs.findTop1ByChatOrderByDateTimeDesc(chat);
@@ -110,14 +110,14 @@ public class UsersController {
 
         }*/
 
-//        List<ChatMessage> sendMsgs = msgs.findBySender(user);
-//        List<ChatMessage> reciveMsgs = msgs.findByRecipient(user);
+//        List<ChatMessage> sendMsgs = msgs.findBySender(userEntity);
+//        List<ChatMessage> reciveMsgs = msgs.findByRecipient(userEntity);
 //        List<ChatMessage>messages = new ArrayList<>();
 //        for (ChatMessage sender:senders) {
-//            messages.add(msgs.findTop1BySenderAndRecipientOrderByDateTimeDesc(sender.getRecipient(), user));
+//            messages.add(msgs.findTop1BySenderAndRecipientOrderByDateTimeDesc(sender.getRecipient(), userEntity));
 //        }
 
-        model.addAttribute("user", user);
+        model.addAttribute("user", userEntity);
 //        model.addAttribute("msgList", userMessages);
 
 
@@ -128,14 +128,14 @@ public class UsersController {
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String editUser(Long userId, @RequestParam("img")MultipartFile img, String first_name, String last_name, String email, Model model)
     {
-        User user = users.findById(userId).get();
-        images.setImg(user, img);
-        user.setFirstName(first_name);
-        user.setLastName(last_name);
-        user.setMail(email);
-        users.save(user);
+        UserEntity userEntity = users.findById(userId).get();
+        images.setImg(userEntity, img);
+        userEntity.setFirstName(first_name);
+        userEntity.setLastName(last_name);
+        userEntity.setMail(email);
+        users.save(userEntity);
 
-        model.addAttribute("user", user);
+        model.addAttribute("user", userEntity);
         return "users/profile";
     }
 }

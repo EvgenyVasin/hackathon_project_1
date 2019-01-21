@@ -1,4 +1,4 @@
-package ru.basisintellect.support_smis.entities;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="users")
-public class User extends CustomImgEntity{
+public class UserEntity extends CustomImgEntity{
 
     @Column(name = "password", length = 256, nullable = false)
     private String password;
@@ -28,7 +28,7 @@ public class User extends CustomImgEntity{
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private UserRole userRole;
+    private UserRoleEntity userRoleEntity;
 
 
     @Column(name = "date_registration")
@@ -115,17 +115,17 @@ public class User extends CustomImgEntity{
     }
 
     /**
-     * @return the userRole
+     * @return the userRoleEntity
      */
-    public UserRole getUserRole() {
-        return userRole;
+    public UserRoleEntity getUserRoleEntity() {
+        return userRoleEntity;
     }
 
     /**
-     * @param userRole the userRoles to set
+     * @param userRoleEntity the userRoles to set
      */
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setUserRoleEntity(UserRoleEntity userRoleEntity) {
+        this.userRoleEntity = userRoleEntity;
     }
 
     public Date getDateRegistration() {
@@ -151,10 +151,10 @@ public class User extends CustomImgEntity{
                  */
     @Override
     public String toString() {
-        return "User [userId=" + getId()
+        return "UserEntity [userId=" + getId()
                 + ", password=" + password + ", firstName=" + firstName
                 + ", lastName=" + lastName
-                + ", userRoles=" + userRole
+                + ", userRoles=" + userRoleEntity
                 + ", enabled=" + enabled +"]";
     }
 

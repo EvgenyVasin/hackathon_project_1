@@ -1,4 +1,4 @@
-package ru.basisintellect.support_smis.entities;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,13 +11,13 @@ import javax.persistence.MappedSuperclass;
 public abstract class CustomImgEntity extends CustomEntity{
     @ManyToOne
     @JoinColumn(name = "img_id")
-    Image image;
+    ImageEntity imageEntity;
 
-    public Image getImage() {
-        return image;
+    public ImageEntity getImageEntity() {
+        return imageEntity;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageEntity(ImageEntity imageEntity) {
+        this.imageEntity = imageEntity;
     }
 }

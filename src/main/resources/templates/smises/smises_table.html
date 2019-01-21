@@ -33,15 +33,15 @@
                         </tr>
                     </thead>
                     <tbody th:if="${not #lists.isEmpty(smisesList)}" class="table table-striped">
-                        <tr  th:each="smis : ${smisesList}">
+                        <tr  th:each="smisEntity : ${smisesList}">
                                 <!--напонение таблицы-->
-                                <th th:text="${smis.region}"></th>
-                                <th th:text="${smis.dateRegistration}"></th>
-                                <th th:text="${smis.agreement}"></th>
-                                <th th:text="${smis.validity}"></th>
-                                <th th:text="${smis.contacts}"></th>
-                                <th th:text="${smis.url}"></th>
-                                <th th:text="${smis.enabled}"></th>
+                                <th th:text="${smisEntity.region}"></th>
+                                <th th:text="${smisEntity.dateRegistration}"></th>
+                                <th th:text="${smisEntity.agreement}"></th>
+                                <th th:text="${smisEntity.validity}"></th>
+                                <th th:text="${smisEntity.contacts}"></th>
+                                <th th:text="${smisEntity.url}"></th>
+                                <th th:text="${smisEntity.enabled}"></th>
                         </tr>
                     </tbody>
                 </table>

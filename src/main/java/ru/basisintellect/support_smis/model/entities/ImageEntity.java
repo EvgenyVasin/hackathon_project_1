@@ -1,4 +1,4 @@
-package ru.basisintellect.support_smis.entities;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "img_links")
-public class Image extends CustomEntity{
+public class ImageEntity extends CustomEntity{
     @Column(name = "img_link", length = 256)
     private String imgLink;
 

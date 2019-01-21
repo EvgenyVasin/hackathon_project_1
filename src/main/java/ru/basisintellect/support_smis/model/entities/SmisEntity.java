@@ -1,6 +1,4 @@
-package ru.basisintellect.support_smis.entities;
-
-import ru.basisintellect.support_smis.soap_client.TestConnect;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +10,8 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="Smis")
-public class Smis extends CustomEntity {
+@Table(name="SmisEntity")
+public class SmisEntity extends CustomEntity {
 
     //название
     @Column(name="region", length = 512)
@@ -143,7 +141,7 @@ public class Smis extends CustomEntity {
     /**
      * @return the enabled
      */
-    public boolean getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
     //конец блока геттеров

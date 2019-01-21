@@ -1,4 +1,4 @@
-package ru.basisintellect.support_smis.entities;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "user_roles")
-public class UserRole {
+public class UserRoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,7 +54,7 @@ public class UserRole {
      */
     @Override
     public String toString() {
-        return "UserRole [userRoleId=" + userRoleId + ", userRoleName="
+        return "UserRoleEntity [userRoleId=" + userRoleId + ", userRoleName="
                 + userRoleName + "]";
     }
 

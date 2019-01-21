@@ -28,10 +28,10 @@
                 </li>
                 <!--профиль пользователя-->
                 <li th:if="${#authorization.expression('isAuthenticated()')}" style=" color: #FFFFFF">
-                    <a href="#" th:href="@{'/getUser/'+ ${session.currentUser.id}}">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <b th:text="${session.currentUser.firstName}"></b>
-                        <b th:text="${session.currentUser.lastName}"></b>
+                    <a href="#" th:href="@{'/getUser/'+ ${session.currentUserEntity.id}}">
+                        <span class="glyphicon glyphicon-userEntity"></span>
+                        <b th:text="${session.currentUserEntity.firstName}"></b>
+                        <b th:text="${session.currentUserEntity.lastName}"></b>
                     </a>
                 </li>
                 <!--выход-->

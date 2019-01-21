@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.basisintellect.support_smis.entities.User;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
 
 
@@ -23,9 +23,9 @@ public class ScopeController {
     @RequestMapping(value = "/scopeSession", method = RequestMethod.POST)
     public String scopeExample(HttpServletRequest request, HttpSession session) {
         System.out.println("ScopeController scopeSession() is called");
-        User currentUser = users.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
-        currentUser.setPassword("123654345");//ложный
-        session.setAttribute("currentUser", currentUser);
+        UserEntity currentUserEntity = users.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
+        currentUserEntity.setPassword("123654345");//ложный
+        session.setAttribute("currentUser", currentUserEntity);
         return "redirect:" + request.getScheme() +":/";
     }
 }

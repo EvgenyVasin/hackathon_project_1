@@ -11,13 +11,13 @@
 <body>
 <div class="container">
     <form role="form"  th:action="@{/editUser}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="userId" th:value="${session.currentUser.id}"/>
+        <input type="hidden" name="userId" th:value="${session.currentUserEntity.id}"/>
         <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-picture"></span></span>
             <label class="file_upload" required="False">
-                <mark th:if="${not #strings.isEmpty(session.currentUser.image)}" th:text="${session.currentUser.image.imgLink}"></mark>
-                <mark th:if="${#strings.isEmpty(session.currentUser.image)}" th:text="#{users.avatar}"></mark>
+                <mark th:if="${not #strings.isEmpty(session.currentUserEntity.imageEntity)}" th:text="${session.currentUserEntity.imageEntity.imgLink}"></mark>
+                <mark th:if="${#strings.isEmpty(session.currentUserEntity.imageEntity)}" th:text="#{users.avatar}"></mark>
 
                 <input type="file" name="img" th:placeholder="#{users.avatar}"/>
             </label>
@@ -60,18 +60,18 @@
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
             <input type="text" class="form-control" name="first_name"
-                   th:placeholder="#{users.firstName}" th:value="${session.currentUser.firstName}" autofocus = "True"/>
+                   th:placeholder="#{users.firstName}" th:value="${session.currentUserEntity.firstName}" autofocus = "True"/>
         </div>
         <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
             <input type="text" class="form-control" name="last_name"
-                   th:placeholder="#{users.lastName}" th:value="${session.currentUser.lastName}"/>
+                   th:placeholder="#{users.lastName}" th:value="${session.currentUserEntity.lastName}"/>
         </div>
         <div class="input-group">
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-list-alt"></span></span>
-            <input type="email" class="form-control rounded" name="email" th:placeholder="#{users.eMail}" th:value="${user.mail}"/>
+            <input type="email" class="form-control rounded" name="email" th:placeholder="#{users.eMail}" th:value="${userEntity.mail}"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success" data-original-title="" title="">OK</button>

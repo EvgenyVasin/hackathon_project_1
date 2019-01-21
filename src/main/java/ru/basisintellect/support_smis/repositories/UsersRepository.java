@@ -3,7 +3,7 @@ package ru.basisintellect.support_smis.repositories;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.basisintellect.support_smis.entities.User;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
 
 
 /**
@@ -11,8 +11,8 @@ import ru.basisintellect.support_smis.entities.User;
  */
 @Repository
 @Qualifier(value = "userRepository")
-public interface UsersRepository extends CrudRepository<User, Long> {
+public interface UsersRepository extends CrudRepository<UserEntity, Long> {
 
-    User findByMail(String mail);
+    UserEntity findByMail(String mail);
 
 }

@@ -2,77 +2,147 @@ package ru.basisintellect.support_smis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.basisintellect.support_smis.entities.Smis;
+import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ws.soap.client.SoapFaultClientException;
+import ru.basisintellect.support_smis.controllers.SmisController;
+import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.soap_client.TestConnect;
+import ru.basisintellect.support_smis.soap_client.TestConnectClient;
+import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
+import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class SmisService {
+class MyThread implements Runnable {
 
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+    private volatile boolean cancelled = false;
+
+TestConnectClient connectClient = new TestConnectClient();
+SmisService smisService;
+    public MyThread(SmisService smisService) {
+        this.smisService = smisService;
+    }
+
+    @Override
+    public void run() {
+        while (!cancelled){
+            for (SmisEntity smisEntity:smises) {
+                try {
+
+
+                    connectClient.setDefaultUri(smisEntity.getUrl());
+                    TestRequest request = new TestRequest();
+                    TestResponse response = connectClient.testConnect(request);
+
+                } catch (SoapFaultClientException e) {
+                    //ловим наше исключение - комплекс работает
+                    if(!smisEntity.isEnabled()){
+                        smisEntity.setEnabled(true);
+                        smisService.onChangeState(true);
+                    }
+
+                } catch (Exception e){
+                    //ловим любое другое исключение - не работает
+                    if(smisEntity.isEnabled()){
+                        smisEntity.setEnabled(false);
+                        smisService.onChangeState(false);
+                    }
+                }
+            }
+
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+    MyThread myRunnable;
+    List<SmisEntity> smises;
     @Autowired
     SmisRepository smisesRepo;
 
-    List<Smis> smises;
+    @Autowired
+    SmisController smisController;
 
     @Autowired
     public void init(){
-        smises = (List<Smis>) smisesRepo.findAll();
+        if(myRunnable != null)
+            myRunnable.setCancelled(true);
+        smises = (List<SmisEntity>) smisesRepo.findAll();
+        myRunnable = new MyThread(this);
+  Thread myThread= new Thread(myRunnable);
+  myThread.start();
+
     }
 
-    public Smis findSmisById(Long id){
-        Smis result = null;
-        for (Smis smis : smises) {
-            if (id == smis.getId())
-                result = smis;
+    public SmisEntity findSmisById(Long id){
+        SmisEntity result = null;
+        for (SmisEntity smisEntity : smises) {
+            if (id == smisEntity.getId())
+                result = smisEntity;
             break;
         }
         return result;
     }
 
-    public Smis addSmis(String region, String agreement, String validity, String contacts, String url){
-        Smis smis = new Smis();
-        smis.setRegion(region);
-        smis.setDateRegistration(new Date());
-        smis.setAgreement(agreement);
-        smis.setValidity(validity);
-        smis.setContacts(contacts);
-        smis.setUrl(url);
-        smisesRepo.save(smis);
-        smises.add(smis);
-        return smis;
+    public void onChangeState(Boolean state){
+        System.out.println("**********************************************************************************");
     }
 
-    public List<Smis> getAllSmises(){
+    public SmisEntity addSmis(String region, String agreement, String validity, String contacts, String url){
+        SmisEntity smisEntity = new SmisEntity();
+        smisEntity.setRegion(region);
+        smisEntity.setDateRegistration(new Date());
+        smisEntity.setAgreement(agreement);
+        smisEntity.setValidity(validity);
+        smisEntity.setContacts(contacts);
+        smisEntity.setUrl(url);
+        smisesRepo.save(smisEntity);
+        smises.add(smisEntity);
+        return smisEntity;
+    }
+
+    public List<SmisEntity> getAllSmises(){
         return smises;
     }
 
-    public Smis editSmis (Long id, String region, String agreement, String validity, String contacts, String url){
+    public SmisEntity editSmis (Long id, String region, String agreement, String validity, String contacts, String url){
         //добавить проверку на валидность id
-        Smis smis = findSmisById(id);
-        smis.setRegion(region);
-        smis.setAgreement(agreement);
-        smis.setValidity(validity);
-        smis.setContacts(contacts);
-        smis.setUrl(url);
-        smisesRepo.save(smis);
-        return smis;
+        SmisEntity smisEntity = findSmisById(id);
+        smisEntity.setRegion(region);
+        smisEntity.setAgreement(agreement);
+        smisEntity.setValidity(validity);
+        smisEntity.setContacts(contacts);
+        smisEntity.setUrl(url);
+        smisesRepo.save(smisEntity);
+        return smisEntity;
 }
 
     public void deleteSmis(Long id){
         //добавить проверку на валидность id
-        Smis smis = findSmisById(id);
+        SmisEntity smisEntity = findSmisById(id);
         smisesRepo.deleteById(id);
-        smises.remove(smis);
+        smises.remove(smisEntity);
     }
 
     public void changeStatusSmik(Long id){
         //добавить проверку на валидность id
-        Smis smis = findSmisById(id);
-        smis.setEnabled(TestConnect.checkStatus(smis.getUrl()));
-        smisesRepo.save(smis);
+        SmisEntity smisEntity = findSmisById(id);
+        smisEntity.setEnabled(TestConnect.checkStatus(smisEntity.getUrl()));
+        smisesRepo.save(smisEntity);
     }
 
     /*private class TestConnect implements Runnable{

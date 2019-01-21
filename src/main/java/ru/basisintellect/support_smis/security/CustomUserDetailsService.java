@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.basisintellect.support_smis.entities.UserRole;
+
+import ru.basisintellect.support_smis.model.entities.UserEntity;
+import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
 
 
@@ -32,28 +34,28 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        ru.basisintellect.support_smis.entities.User user = userRepository.findByMail(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
+        UserEntity userEntity = userRepository.findByMail(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(userEntity.getUserRoleEntity());
 
-        user.setLastDate(new Date());
-        userRepository.save(user);
+        userEntity.setLastDate(new Date());
+        userRepository.save(userEntity);
 
-        return buildUserForAuthentication(user, authorities);
+        return buildUserForAuthentication(userEntity, authorities);
     }
 
-    private User buildUserForAuthentication(ru.basisintellect.support_smis.entities.User user,
+    private User buildUserForAuthentication(UserEntity userEntity,
                                             List<GrantedAuthority> authorities) {
 
 
-        return new User(user.getMail(), user.getPassword(),
-                user.isEnabled(), true, true, true, authorities);
+        return new User(userEntity.getMail(), userEntity.getPassword(),
+                userEntity.isEnabled(), true, true, true, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(UserRole userRole) {
+    private List<GrantedAuthority> buildUserAuthority(UserRoleEntity userRoleEntity) {
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(0);
 
-            authorities.add(new SimpleGrantedAuthority(userRole.getUserRoleName()));
+            authorities.add(new SimpleGrantedAuthority(userRoleEntity.getUserRoleName()));
 
 
         return authorities;

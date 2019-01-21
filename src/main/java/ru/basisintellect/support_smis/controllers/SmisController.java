@@ -7,11 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.basisintellect.support_smis.entities.Smis;
-import ru.basisintellect.support_smis.repositories.SmisRepository;
+import org.springframework.web.servlet.ModelAndView;
 import ru.basisintellect.support_smis.services.SmisService;
-
-import java.util.Date;
 
 /**
  * Created by vasin.e on 17.01.2019.
@@ -52,5 +49,6 @@ public class SmisController {
         model.addAttribute("smisesList", smisService.getAllSmises());
         return "smises/smises_table";
     }
+
 
 }

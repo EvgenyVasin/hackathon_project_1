@@ -1,4 +1,4 @@
-package ru.basisintellect.support_smis.entities;
+package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
 

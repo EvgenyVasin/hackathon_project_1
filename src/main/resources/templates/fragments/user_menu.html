@@ -11,10 +11,10 @@
 
         <div class="text-center" id="author" >
             <br/>
-            <img style="width: 150px;position:relative; left: 19%; " src="#" th:src="${'/imgUser=' + session.currentUser.id}"  class="img-circle img-responsive" />
-            <h3 th:text="${session.currentUser.firstName + ' ' + session.currentUser.lastName}"></h3>
-            <small class="label label-warning" th:if="${session.currentUser.userRole.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
-            <small class="label label-warning" th:if="${session.currentUser.userRole.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
+            <img style="width: 150px;position:relative; left: 19%; " src="#" th:src="${'/imgUser=' + session.currentUserEntity.id}"  class="img-circle img-responsive" />
+            <h3 th:text="${session.currentUserEntity.firstName + ' ' + session.currentUserEntity.lastName}"></h3>
+            <small class="label label-warning" th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
+            <small class="label label-warning" th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
         </div>
         <ul>
             <li><a href="#">Главная</a></li>

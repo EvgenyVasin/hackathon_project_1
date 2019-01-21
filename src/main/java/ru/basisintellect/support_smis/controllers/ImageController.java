@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.basisintellect.support_smis.entities.CustomImgEntity;
-import ru.basisintellect.support_smis.entities.Image;
-import ru.basisintellect.support_smis.entities.User;
-import ru.basisintellect.support_smis.repositories.ImageRepository;
+import ru.basisintellect.support_smis.model.entities.CustomImgEntity;
+import ru.basisintellect.support_smis.model.entities.ImageEntity;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
 
 import java.io.BufferedInputStream;
@@ -35,13 +34,13 @@ public class ImageController {
 
     @RequestMapping(value = "/imgUser={userId}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getUserImg(@PathVariable(value = "userId") Long  userId) throws IOException {
-        User user = users.findById(userId).get();
-        return getImg(user, getClass().getResource("/static/images/noavatar.png").getFile());
+        UserEntity userEntity = users.findById(userId).get();
+        return getImg(userEntity, getClass().getResource("/static/images/noavatar.png").getFile());
     }
 
 //    @RequestMapping(value = "/imgUser={username}", method = RequestMethod.GET)
 //    public ResponseEntity<byte[]> getUserImg(@PathVariable(value = "username") String  username) throws IOException {
-//        User user = users.findByUsername(username);
+//        UserEntity user = users.findByUsername(username);
 //        return getImg(user, getClass().getResource("/static/images/noavatar.png").getFile());
 //    }
 
@@ -58,12 +57,12 @@ public class ImageController {
         ByteArrayOutputStream out = null;
         InputStream input = null;
 
-        Image image = detal.getImage();
+        ImageEntity imageEntity = detal.getImageEntity();
 
         String imgLink;
 
-        if(image != null)
-            imgLink = image.getImgLink();
+        if(imageEntity != null)
+            imgLink = imageEntity.getImgLink();
         else
             imgLink = altImg;
 

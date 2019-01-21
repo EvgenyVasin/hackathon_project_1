@@ -7,9 +7,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.basisintellect.support_smis.entities.Smis;
-import ru.basisintellect.support_smis.entities.User;
-import ru.basisintellect.support_smis.entities.UserRole;
+import ru.basisintellect.support_smis.model.entities.SmisEntity;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
+import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.repositories.UserRoleRepository;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
@@ -44,11 +44,11 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
 
-            UserRole adminRole = new UserRole();
+            UserRoleEntity adminRole = new UserRoleEntity();
             adminRole.setUserRoleName("ROLE_ADMIN");
             userRoleRepository.save(adminRole);
 
-            User admin = new User();
+            UserEntity admin = new UserEntity();
 
             admin.setPassword(bcryptEncoder.encode("admin"));
             admin.setMail("admin@list.ru");
@@ -56,36 +56,36 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             admin.setLastName("Bar");
             admin.setDateRegistration(new Date());
             ;
-            admin.setUserRole(adminRole);
+            admin.setUserRoleEntity(adminRole);
             admin.setEnabled(true);
             userRepository.save(admin);
 
 
 
-            UserRole userRole = new UserRole();
-            userRole.setUserRoleName("ROLE_USER");
-            userRoleRepository.save(userRole);
+            UserRoleEntity userRoleEntity = new UserRoleEntity();
+            userRoleEntity.setUserRoleName("ROLE_USER");
+            userRoleRepository.save(userRoleEntity);
 
-            User user1 = new User();
+            UserEntity userEntity1 = new UserEntity();
 
-            user1.setPassword(bcryptEncoder.encode("user"));
-            user1.setMail("user@list.ru");
-            user1.setFirstName("John");
-            user1.setLastName("Doe");
-            user1.setUserRole(userRole);
-            user1.setEnabled(true);
-            user1.setDateRegistration(new Date());
-            userRepository.save(user1);
+            userEntity1.setPassword(bcryptEncoder.encode("user"));
+            userEntity1.setMail("user@list.ru");
+            userEntity1.setFirstName("John");
+            userEntity1.setLastName("Doe");
+            userEntity1.setUserRoleEntity(userRoleEntity);
+            userEntity1.setEnabled(true);
+            userEntity1.setDateRegistration(new Date());
+            userRepository.save(userEntity1);
 
             //Добавление СМИСа для тестов
-            Smis smis = new Smis();
-            smis.setRegion("Мост тура");
-            smis.setDateRegistration(new Date());
-            smis.setAgreement("соглашение");
-            smis.setValidity("11.12.2019");
-            smis.setContacts("8(919)7658734");
-            smis.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
-            smises.save(smis);
+            SmisEntity smisEntity = new SmisEntity();
+            smisEntity.setRegion("Мост тура");
+            smisEntity.setDateRegistration(new Date());
+            smisEntity.setAgreement("соглашение");
+            smisEntity.setValidity("11.12.2019");
+            smisEntity.setContacts("8(919)7658734");
+            smisEntity.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisEntity);
             smisService.init();
             //
 
