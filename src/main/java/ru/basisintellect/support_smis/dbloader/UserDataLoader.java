@@ -55,7 +55,6 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             admin.setFirstName("Foo");
             admin.setLastName("Bar");
             admin.setDateRegistration(new Date());
-            ;
             admin.setUserRoleEntity(adminRole);
             admin.setEnabled(true);
             userRepository.save(admin);
@@ -87,6 +86,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEntity.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
             smises.save(smisEntity);
             smisService.init();
+
             //
 
         }  catch (final Exception err) {
