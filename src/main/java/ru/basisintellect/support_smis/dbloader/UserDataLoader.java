@@ -78,7 +78,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
             //Добавление СМИСа для тестов
             SmisEntity smisEntity = new SmisEntity();
-            smisEntity.setRegion("Мост тура");
+            smisEntity.setRegion("Мост Тура");
             smisEntity.setDateRegistration(new Date());
             smisEntity.setAgreement("соглашение");
             smisEntity.setValidity("11.12.2019");
