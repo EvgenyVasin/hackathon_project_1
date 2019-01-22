@@ -1667,7 +1667,6 @@ img {
 }
 
 .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
-    display: block;
     max-width: 100%;
     height: auto
 }
@@ -4034,16 +4033,9 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     width: 100%
 }
 
-.fade {
-    opacity: 0;
-    -webkit-transition: opacity .15s linear;
-    -o-transition: opacity .15s linear;
-    transition: opacity .15s linear
-}
 
-.fade.in {
-    opacity: 1
-}
+
+
 
 .collapse {
     display: none
@@ -4760,10 +4752,6 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
     .nav-tabs-justified > .active > a, .nav-tabs-justified > .active > a:focus, .nav-tabs-justified > .active > a:hover {
         border-bottom-color: #fff
     }
-}
-
-.tab-content > .tab-pane {
-    display: none
 }
 
 .tab-content > .active {
@@ -6556,15 +6544,6 @@ button.close {
     outline: 0
 }
 
-.modal.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0, -25%);
-    -ms-transform: translate(0, -25%);
-    -o-transform: translate(0, -25%);
-    transform: translate(0, -25%)
-}
 
 .modal.in .modal-dialog {
     -webkit-transform: translate(0, 0);
@@ -6607,10 +6586,7 @@ button.close {
     background-color: #000
 }
 
-.modal-backdrop.fade {
-    filter: alpha(opacity=0);
-    opacity: 0
-}
+
 
 .modal-backdrop.in {
     filter: alpha(opacity=50);
