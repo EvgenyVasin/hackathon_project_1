@@ -34,13 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
-        UserEntity userEntity = userRepository.findByMail(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(userEntity.getUserRoleEntity());
+        UserEntity user = userRepository.findByMail(username);
+        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
 
-        userEntity.setLastDate(new Date());
-        userRepository.save(userEntity);
+        user.setLastDate(new Date());
+        userRepository.save(user);
 
-        return buildUserForAuthentication(userEntity, authorities);
+        return buildUserForAuthentication(user, authorities);
     }
 
     private User buildUserForAuthentication(UserEntity userEntity,

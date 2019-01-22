@@ -57,7 +57,7 @@ public class ImageController {
         ByteArrayOutputStream out = null;
         InputStream input = null;
 
-        ImageEntity imageEntity = detal.getImageEntity();
+        ImageEntity imageEntity = detal.getImage();
 
         String imgLink;
 

@@ -45,7 +45,7 @@ public class ImgWorker {
                     imageEntity.setImgLink(rootPath + img.getOriginalFilename());
                     images.save(imageEntity);
                 }
-                entity.setImageEntity(imageEntity);
+                entity.setImage(imageEntity);
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -28,7 +28,7 @@ public class UserEntity extends CustomImgEntity{
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private UserRoleEntity userRoleEntity;
+    private UserRoleEntity userRole;
 
 
     @Column(name = "date_registration")
@@ -117,15 +117,15 @@ public class UserEntity extends CustomImgEntity{
     /**
      * @return the userRoleEntity
      */
-    public UserRoleEntity getUserRoleEntity() {
-        return userRoleEntity;
+    public UserRoleEntity getUserRole() {
+        return userRole;
     }
 
     /**
-     * @param userRoleEntity the userRoles to set
+     * @param userRole the userRoles to set
      */
-    public void setUserRoleEntity(UserRoleEntity userRoleEntity) {
-        this.userRoleEntity = userRoleEntity;
+    public void setUserRole(UserRoleEntity userRole) {
+        this.userRole = userRole;
     }
 
     public Date getDateRegistration() {
@@ -154,7 +154,7 @@ public class UserEntity extends CustomImgEntity{
         return "UserEntity [userId=" + getId()
                 + ", password=" + password + ", firstName=" + firstName
                 + ", lastName=" + lastName
-                + ", userRoles=" + userRoleEntity
+                + ", userRoles=" + userRole
                 + ", enabled=" + enabled +"]";
     }
 

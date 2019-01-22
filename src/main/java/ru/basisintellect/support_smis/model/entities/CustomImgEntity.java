@@ -11,13 +11,13 @@ import javax.persistence.MappedSuperclass;
 public abstract class CustomImgEntity extends CustomEntity{
     @ManyToOne
     @JoinColumn(name = "img_id")
-    ImageEntity imageEntity;
+    ImageEntity image;
 
-    public ImageEntity getImageEntity() {
-        return imageEntity;
+    public ImageEntity getImage() {
+        return image;
     }
 
-    public void setImageEntity(ImageEntity imageEntity) {
-        this.imageEntity = imageEntity;
+    public void setImage(ImageEntity image) {
+        this.image = image;
     }
 }
