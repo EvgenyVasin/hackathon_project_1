@@ -55,15 +55,15 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             admin.setFirstName("Foo");
             admin.setLastName("Bar");
             admin.setDateRegistration(new Date());
-            admin.setUserRoleEntity(adminRole);
+            admin.setUserRole(adminRole);
             admin.setEnabled(true);
             userRepository.save(admin);
 
 
 
-            UserRoleEntity userRoleEntity = new UserRoleEntity();
-            userRoleEntity.setUserRoleName("ROLE_USER");
-            userRoleRepository.save(userRoleEntity);
+            UserRoleEntity userRole = new UserRoleEntity();
+            userRole.setUserRoleName("ROLE_USER");
+            userRoleRepository.save(userRole);
 
             UserEntity userEntity1 = new UserEntity();
 
@@ -71,7 +71,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userEntity1.setMail("user@list.ru");
             userEntity1.setFirstName("John");
             userEntity1.setLastName("Doe");
-            userEntity1.setUserRoleEntity(userRoleEntity);
+            userEntity1.setUserRole(userRole);
             userEntity1.setEnabled(true);
             userEntity1.setDateRegistration(new Date());
             userRepository.save(userEntity1);

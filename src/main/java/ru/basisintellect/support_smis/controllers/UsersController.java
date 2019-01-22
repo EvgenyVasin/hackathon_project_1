@@ -55,13 +55,13 @@ public class UsersController {
         //passwords should match
         if (!password.equals(password_confirm))
             return null;
-        UserRoleEntity userRoleEntity = roles.findByUserRoleName("ROLE_USER");
+        UserRoleEntity userRole = roles.findByUserRoleName("ROLE_USER");
         UserEntity userEntity = new UserEntity();
         userEntity.setPassword(bcryptEncoder.encode(password));
         userEntity.setFirstName(firstname);
         userEntity.setLastName(lastname);
         userEntity.setMail(e_mail);
-        userEntity.setUserRoleEntity(userRoleEntity);
+        userEntity.setUserRole(userRole);
         userEntity.setDateRegistration(new Date());
         userEntity.setEnabled(true);
         users.save(userEntity);
@@ -128,14 +128,14 @@ public class UsersController {
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String editUser(Long userId, @RequestParam("img")MultipartFile img, String first_name, String last_name, String email, Model model)
     {
-        UserEntity userEntity = users.findById(userId).get();
-        images.setImg(userEntity, img);
-        userEntity.setFirstName(first_name);
-        userEntity.setLastName(last_name);
-        userEntity.setMail(email);
-        users.save(userEntity);
+        UserEntity user = users.findById(userId).get();
+        images.setImg(user, img);
+        user.setFirstName(first_name);
+        user.setLastName(last_name);
+        user.setMail(email);
+        users.save(user);
 
-        model.addAttribute("user", userEntity);
+        model.addAttribute("user", user);
         return "users/profile";
     }
 }
