@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                                 <!--заголовки таблицы-->
-                                <th th:text="#{complex.region}"></th>
+                                <th th:text="#{complex.name}"></th>
                                 <th th:text="#{complex.dateReg}"></th>
                                 <th th:text="#{complex.agreement}"></th>
                                 <th th:text="#{complex.validity}"></th>
@@ -35,7 +35,7 @@
                     <tbody th:if="${not #lists.isEmpty(smisesList)}" class="table table-striped">
                         <tr  th:each="smis : ${smisesList}">
                                 <!--напонение таблицы-->
-                                <th th:text="${smis.region}"></th>
+                                <th th:text="${smis.name}"></th>
                                 <th th:text="${smis.dateRegistration}"></th>
                                 <th th:text="${smis.agreement}"></th>
                                 <th th:text="${smis.validity}"></th>

@@ -1,8 +1,6 @@
 package ru.basisintellect.support_smis.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,9 +11,12 @@ import java.util.Date;
 @Table(name="Smis")
 public class SmisEntity extends CustomEntity {
 
+    @ManyToOne
+    @JoinColumn(name = "parent_smis_id")
+    private SmisEntity parentSmis;
     //название
-    @Column(name="region", length = 512)
-    private String region;
+    @Column(name="name", length = 512)
+    private String name;
 
     //дата регистрации ПК ИВ в системе
     @Column(name = "date_registration")
@@ -44,10 +45,10 @@ public class SmisEntity extends CustomEntity {
 
     //сеттеры параметров
     /**
-     * @param region the username to set
+     * @param name the username to set
      */
-    public void setRegion (String region){
-        this.region = region;
+    public void setName (String name){
+        this.name = name;
     }
 
     /**
@@ -91,6 +92,11 @@ public class SmisEntity extends CustomEntity {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public void setParentSmis(SmisEntity parentSmis) {
+        this.parentSmis = parentSmis;
+    }
+
     //конец блока сеттеров
 
 
@@ -99,8 +105,8 @@ public class SmisEntity extends CustomEntity {
     /**
      * @return the region
      */
-    public String getRegion() {
-        return region;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -144,13 +150,18 @@ public class SmisEntity extends CustomEntity {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public SmisEntity getParentSmis() {
+        return parentSmis;
+    }
+
     //конец блока геттеров
 
 
 
     @Override
     public String toString() {
-        return "SMIS [SmisID = " + getId() + ", region = " + region
+        return "SMIS [SmisID = " + getId() + ", region = " + name
                 + ", date_registration = " + dateRegistration
                 + ", agreement = " + agreement
                 + ", validity = " + validity

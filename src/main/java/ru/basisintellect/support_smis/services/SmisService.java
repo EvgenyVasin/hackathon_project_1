@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
+import ru.basisintellect.support_smis.model.Node;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.soap_client.TestConnectClient;
@@ -12,6 +13,7 @@ import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
 import java.util.Date;
 import java.util.List;
+import java.util.TreeSet;
 
 @Service
 public class SmisService {
@@ -70,6 +72,8 @@ public class SmisService {
 
     MyThread myRunnable;
     List<SmisEntity> smises;
+
+    Node<SmisEntity> treeSmis;
     @Autowired
     SmisRepository smisesRepo;
 
@@ -80,6 +84,7 @@ public class SmisService {
     public void init() {
         if (myRunnable != null)
             myRunnable.setCancelled(true);
+
         smises = (List<SmisEntity>) smisesRepo.findAll();
         myRunnable = new MyThread(this);
         Thread myThread = new Thread(myRunnable);
@@ -101,9 +106,9 @@ public class SmisService {
         System.out.println("**********************************************************************************");
     }
 
-    public SmisEntity addSmis(String region, String agreement, String validity, String contacts, String url) {
+    public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url) {
         SmisEntity smisEntity = new SmisEntity();
-        smisEntity.setRegion(region);
+        smisEntity.setName(name);
         smisEntity.setDateRegistration(new Date());
         smisEntity.setAgreement(agreement);
         smisEntity.setValidity(validity);
@@ -118,10 +123,10 @@ public class SmisService {
         return smises;
     }
 
-    public SmisEntity editSmis(Long id, String region, String agreement, String validity, String contacts, String url) {
+    public SmisEntity editSmis(Long id, String name, String agreement, String validity, String contacts, String url) {
         //добавить проверку на валидность id
         SmisEntity smisEntity = findSmisById(id);
-        smisEntity.setRegion(region);
+        smisEntity.setName(name);
         smisEntity.setAgreement(agreement);
         smisEntity.setValidity(validity);
         smisEntity.setContacts(contacts);
