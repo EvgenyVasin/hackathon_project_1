@@ -30,10 +30,10 @@ public class SmisController {
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
-        if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
-            return null;
+        /*if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
+            return null;*/
         smisService.addSmis(name, agreement, validity, contacts, url, parent_id);
-        return viewSmises(model);
+        return viewListSmises(model);
     }
 
     //получение ПК ИВ СМИС

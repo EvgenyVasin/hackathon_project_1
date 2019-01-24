@@ -50,7 +50,7 @@
                                 <th th:text="#{complex.description}"></th>
                         </tr>
                     </thead>
-                    <tbody th:if="${not #lists.isEmpty(smisesList)}" class="table table-striped">
+                    <tbody  class="table table-striped">
                         <tr  th:each="smis : ${smisesList}">
                                 <!--напонение таблицы-->
                                 <th th:text="${smis.name}"></th>

@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title th:text="#{navMenu.ThreeSmis}"/>
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
-
 </head>
 <body>
-<p>Здесь будет детальная информация по ПК ИВ СМИС.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="pannel-heading">
+                <div class="text-center">
+                    <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <!--заголовки таблицы-->
+                    <th th:text="#{complex.name}"></th>
+                    <th th:text="#{complex.region}"></th>
+                    <th th:text="#{complex.dateReg}"></th>
+                    <th th:text="#{complex.agreement}"></th>
+                    <th th:text="#{complex.validity}"></th>
+                    <th th:text="#{complex.contacts}"></th>
+                    <th th:text="#{complex.url}"></th>
+                    <th th:text="#{complex.enabled}"></th>
+                    <th th:text="#{complex.description}"></th>
+                </tr>
+                </thead>
+                <tbody class="table table-striped">
+                <tr >
+                    <!--напонение таблицы-->
+                    <th th:text="${smis.name}"></th>
+                    <th th:text="${smis.region}"></th>
+                    <th th:text="${smis.dateRegistration}"></th>
+                    <th th:text="${smis.agreement}"></th>
+                    <th th:text="${smis.validity}"></th>
+                    <th th:text="${smis.contacts}"></th>
+                    <th th:text="${smis.url}"></th>
+                    <th th:text="${smis.enabled}"></th>
+                    <th th:text="${smis.description}"></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>

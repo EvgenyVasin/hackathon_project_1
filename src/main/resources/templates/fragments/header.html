@@ -49,10 +49,16 @@
                 <ul>
                     <!--список ПК ИВ СМИС-->
                     <li><a th:text="#{navMenu.SMISTable}" href="/smises_table"></a></li>
-                    <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>
+                    <!--<li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>-->
+                    <!--дерево СМИСов-->
+                    <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"
+                           th:text="#{navMenu.ThreeSmis}"
+                           href="/smises_list"></a>
+                    </li>
                     <!--открыть БД в новой вкладке-->
                     <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.DB}"
                            href="/h2-console" target="_blank"></a></li>
+
                 </ul>
             </div>
         </div>

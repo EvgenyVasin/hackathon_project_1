@@ -97,9 +97,10 @@ public class SmisService {
     public SmisEntity findSmisById(Long id) {
         SmisEntity result = null;
         for (SmisEntity smisEntity : smises) {
-            if (id == smisEntity.getId())
+            if (id == smisEntity.getId()) {
                 result = smisEntity;
-            break;
+                break;
+            }
         }
         return result;
     }
