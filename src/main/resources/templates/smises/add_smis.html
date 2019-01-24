@@ -21,9 +21,10 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6 login-box">
 
+                                <!--группа инпутов для добавления нового СМИСа-->
                                 <div class="input-group">
                                     <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list_alt"></span></span>
+                                            class="glyphicon glyphicon-list-alt"></span></span>
                                     <input type="text" class="form-control" name="name"
                                            th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                 </div>
@@ -55,21 +56,17 @@
                                            th:placeholder="#{complex.url}" required="True"/>
                                 </div>
 
-
-
-                                <div class="form-group">
-                                    <span class="input-group-addon" spanclass="glyphicon glyphicon-list-alt"></span></span>
-
-                                    <select class="form-control" >
-                                        <option disabled="disabled" selected="selected" > -- alege agentia --</option>
-                                        <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}" ></option>
+                                <!---->
+                                <!--выпадающий список для выбора родителя-->
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <select class="form-control" name="parent_id" required>
+                                        <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
+                                        <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
                                     </select>
-
                                 </div>
-
-
-
-
+                                <!---->
 
                             </div>
                         </div>

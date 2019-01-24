@@ -43,6 +43,14 @@ public class SmisEntity extends CustomEntity {
     @Column(name="enabled", length = 1)
     private boolean enabled = false;
 
+    //регион
+    @Column(name="region", length = 512)
+    private String region;
+
+    //коментарий
+    @Column(name="description", length = 512)
+    private String description;
+
 
     //сеттеры параметров
     /**
@@ -97,6 +105,14 @@ public class SmisEntity extends CustomEntity {
 
     public void setParentSmis(SmisEntity parentSmis) {
         this.parentSmis = parentSmis;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     //конец блока сеттеров
@@ -158,10 +174,18 @@ public class SmisEntity extends CustomEntity {
         return parentSmis;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     //конец блока геттеров
 
 
-
+    //текстовое представление объекта для отладки
     @Override
     public String toString() {
         return "SMIS [SmisID = " + getId() + ", region = " + name
@@ -170,6 +194,8 @@ public class SmisEntity extends CustomEntity {
                 + ", validity = " + validity
                 + ", contacts = " + contacts
                 + ", URL = " + url
-                + ", enabled = " + enabled;
+                + ", enabled = " + enabled
+                + ", region = " + region
+                + ", description = " + description;
     }
 }

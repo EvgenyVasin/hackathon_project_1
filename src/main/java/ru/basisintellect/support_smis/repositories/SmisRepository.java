@@ -16,5 +16,4 @@ import java.util.Optional;
 @Qualifier(value = "smisRepository")
 public interface SmisRepository extends CrudRepository<SmisEntity, Long> {
     Optional<SmisEntity> findById(Long id);
-    Optional<SmisEntity> findByParentSmis(SmisEntity parentSmis);
 }

@@ -28,10 +28,10 @@ public class SmisController {
 
     //добавление ПК ИВ СМИС
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public String addSmis(String name, String agreement, String validity, String contacts, String url, SmisEntity parent, Model model) {
+    public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
         if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
             return null;
-        smisService.addSmis(name, agreement, validity, contacts, url, parent);
+        smisService.addSmis(name, agreement, validity, contacts, url, parent_id);
         return viewSmises(model);
     }
 
@@ -57,6 +57,13 @@ public class SmisController {
         return "smises/smises_table";
     }
 
+    //генерация листа со смисами для страницы добавления
+    @RequestMapping(value = "/add_smis")
+    public String viewSmisesAdd(Model model) {
+        model.addAttribute("smisesList", smisService.getAllSmises());
+        return "smises/add_smis";
+    }
+
     //генерация страницы со смисами2
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
@@ -74,10 +81,7 @@ public class SmisController {
                 obj.appendField("itemParentId", null);
             data.add(obj);
         }
-
         model.addAttribute("data", data);
         return "smises/smises_list";
     }
-
-
 }

@@ -106,7 +106,7 @@ public class SmisService {
         System.out.println("**********************************************************************************");
     }
 
-    public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url, SmisEntity parent) {
+    public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id) {
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         smisEntity.setDateRegistration(new Date());
@@ -114,7 +114,7 @@ public class SmisService {
         smisEntity.setValidity(validity);
         smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
-        smisEntity.setParentSmis(parent);
+        smisEntity.setParentSmis(smisesRepo.findById(parent_id).get());
         smisesRepo.save(smisEntity);
         smises.add(smisEntity);
         return smisEntity;
