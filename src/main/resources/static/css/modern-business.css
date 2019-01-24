@@ -3798,6 +3798,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
     border-color: #4cae4c
 }
 
+.btn-add {
+    color: #fff;
+    background-color: #303F9F;
+    border-color: #7E57C2
+}
+
 .btn-success.focus, .btn-success:focus {
     color: #fff;
     background-color: #449d44;

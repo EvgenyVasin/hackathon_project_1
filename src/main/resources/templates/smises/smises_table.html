@@ -17,7 +17,17 @@
                     </div>
                 </div>
                 <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
-                    <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
+
+                    <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер-->
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <button class="btn btn-labeled btn-add">
+                            <span class="btn-label">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                            <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
+                        </button>
+                    </div>
+
                 </div>
                 <table class="table table-striped">
                     <thead>

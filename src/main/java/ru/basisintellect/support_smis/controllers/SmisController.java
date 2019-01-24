@@ -27,6 +27,7 @@ public class SmisController {
     SmisService smisService;
 
     //добавление ПК ИВ СМИС
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
         if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
@@ -36,6 +37,7 @@ public class SmisController {
     }
 
     //получение ПК ИВ СМИС
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
     public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
         model.addAttribute("smis", smisService.findSmisById(smisId));
@@ -58,6 +60,7 @@ public class SmisController {
     }
 
     //генерация листа со смисами для страницы добавления
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/add_smis")
     public String viewSmisesAdd(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
