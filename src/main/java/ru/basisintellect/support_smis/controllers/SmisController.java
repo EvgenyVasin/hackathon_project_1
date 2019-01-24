@@ -41,7 +41,7 @@ public class SmisController {
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
     public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
         model.addAttribute("smis", smisService.findSmisById(smisId));
-        return "smis/smis_details";
+        return "smises/smis_details";
     }
 
     //редактирование ПК ИВ СМИС
