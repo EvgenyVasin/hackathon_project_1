@@ -14,17 +14,12 @@
 
 <div class="container">
     <div id="main" style="height: 100%">
-
-
         <div class="row" id="real-estates-detail">
-
-
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="text-center">
                             <strong class="panel-title" th:text="#{users.profile}"></strong>
                         </div>
-
                     </div>
                     <div class="panel-body">
                         <div id="myTabContent" class="tab-content">
@@ -32,16 +27,8 @@
                             <div class="tab-pane fade active in" id="detail">
                                 <div class="col-lg-4 col-md-4 col-xs-12" >
                                         <div class="text-center" id="author">
-
-
-
-
-
-                                                <img src="#" th:src="${'/imgUser=' + user.id}"  class="img-circle img-responsive"/>
-
-
-
-
+                                            <!--отображение аватара пользователя-->
+                                            <!--<img src="#" th:src="${'/imgUser=' + user.id}"  class="img-circle img-responsive"/>-->
                                             <h3 th:text="${user.firstName + ' ' + user.lastName}"></h3>
                                             <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
                                             <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
@@ -60,28 +47,21 @@
                                         <p></p>
                                         <form role="form"  th:action="@{/editUser}" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="userId" th:value="${user.id}"/>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span
-                                                            class="glyphicon glyphicon-picture"></span></span>
-
-
-
+                                            <!--загрузка картинки-->
+                                            <!--<div class="input-group my">
+                                                    <span class="input-group-addon"><spanclass="glyphicon glyphicon-picture"></span></span>
                                                     <label class="file_upload form-control" required="False">
                                                     <mark th:if="${not #strings.isEmpty(user.image)}" th:text="${user.image.imgLink}"></mark>
                                                     <input type="file" name="img" th:placeholder="#{users.avatar}"/>
                                                     </label>
-
-
-
-                                                </div>
-
+                                            </div>-->
                                             <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
                                                 <input type="text" class="form-control" name="first_name"
                                                        th:placeholder="#{users.firstName}" th:value="${user.firstName}" autofocus = "True"/>
                                             </div>
+
                                             <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
@@ -100,14 +80,10 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-
         </div>
-
     </div><!-- /.main -->
 </div><!-- /.container -->
 </body>

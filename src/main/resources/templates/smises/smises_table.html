@@ -30,6 +30,7 @@
                                 <th th:text="#{complex.contacts}"></th>
                                 <th th:text="#{complex.url}"></th>
                                 <th th:text="#{complex.enabled}"></th>
+                                <th th:text="#{complex.parentSmis}"></th>
                         </tr>
                     </thead>
                     <tbody th:if="${not #lists.isEmpty(smisesList)}" class="table table-striped">
@@ -42,6 +43,7 @@
                                 <th th:text="${smis.contacts}"></th>
                                 <th th:text="${smis.url}"></th>
                                 <th th:text="${smis.enabled}"></th>
+                                <th th:text="${smis.parentSmis}"></th>
                         </tr>
                     </tbody>
                 </table>

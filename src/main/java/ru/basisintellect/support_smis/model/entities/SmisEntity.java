@@ -14,6 +14,7 @@ public class SmisEntity extends CustomEntity {
     @ManyToOne
     @JoinColumn(name = "parent_smis_id")
     private SmisEntity parentSmis;
+
     //название
     @Column(name="name", length = 512)
     private String name;
@@ -93,6 +94,7 @@ public class SmisEntity extends CustomEntity {
         this.enabled = enabled;
     }
 
+
     public void setParentSmis(SmisEntity parentSmis) {
         this.parentSmis = parentSmis;
     }
@@ -150,6 +152,7 @@ public class SmisEntity extends CustomEntity {
     public boolean isEnabled() {
         return enabled;
     }
+
 
     public SmisEntity getParentSmis() {
         return parentSmis;

@@ -19,23 +19,28 @@
             padding: 6px 0 0 0 !important;
             line-height: normal;
             text-align: center;
-            word-wrap: break-word;
-            word-break: break-all;
+
         }
         .treeCSS li {
             position: relative;
             display: table-cell;
+
         }
+
         /* Отступ между пунктами */
         .treeCSS li:not(:only-child) {
             padding: 0 .5em;
+            margin: .5em;
         }
+
         .treeCSS li:last-child {
             padding-right: 0;
         }
+
         .treeCSS li:first-child {
             padding-left: 0;
         }
+
         /* Линии */
         .treeCSS ul:before,
         .treeCSS ul li:before,
@@ -81,6 +86,23 @@
             cursor: pointer;
 
         }
+
+        /*рамки*/
+        .item {
+            border: #3700b3 2px outset;
+            padding: 1px;
+            color: black;
+            border-collapse: collapse !important;
+        }
+
+        /*.active {
+            background-color: #5cb85c;
+        }*/
+
+        .noactive{
+            background-color: #b00020;
+        }
+
     </style>
 <script type="text/javascript" th:inline="javascript">
 
@@ -129,10 +151,8 @@
 
         $('#treeCSS').append(tree)
             .on('click', '.item',function(){
-                $('.active').not(this).removeClass('active').toggleClass('noactive');
-                $(this).toggleClass('active');
-                $(this).innerText = "12345"
-                // document.body.style.backgroundColor="lavender";
+                $('.noactive').not(this).removeClass('noactive');
+                $(this).toggleClass('noactive');
             })
             // .on('click', '.state',function(){
             //     $(this).parent().toggleClass('collapse expand');

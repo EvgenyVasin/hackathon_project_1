@@ -54,6 +54,23 @@
                                     <input type="text" class="form-control" name="url"
                                            th:placeholder="#{complex.url}" required="True"/>
                                 </div>
+
+
+
+                                <div class="form-group">
+                                    <span class="input-group-addon" spanclass="glyphicon glyphicon-list-alt"></span></span>
+
+                                    <select class="form-control" >
+                                        <option disabled="disabled" selected="selected" > -- alege agentia --</option>
+                                        <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}" ></option>
+                                    </select>
+
+                                </div>
+
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -71,7 +88,11 @@
                     </div>
                 </form>
 
+
+
             </div>
+
+
 
         </div>
     </div>

@@ -1,6 +1,7 @@
 package ru.basisintellect.support_smis.controllers;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,10 +28,10 @@ public class SmisController {
 
     //добавление ПК ИВ СМИС
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public String addSmis(String name, String agreement, String validity, String contacts, String url, Model model) {
+    public String addSmis(String name, String agreement, String validity, String contacts, String url, SmisEntity parent, Model model) {
         if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
             return null;
-        smisService.addSmis(name, agreement, validity, contacts, url);
+        smisService.addSmis(name, agreement, validity, contacts, url, parent);
         return viewSmises(model);
     }
 
@@ -44,8 +45,8 @@ public class SmisController {
     //редактирование ПК ИВ СМИС
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smis_details", method = RequestMethod.POST)
-    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, Model model) {
-        model.addAttribute("smis", smisService.editSmis(smisId, region, agreement, validity, contacts, url));
+    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, SmisEntity parent, Model model) {
+        model.addAttribute("smis", smisService.editSmis(smisId, region, agreement, validity, contacts, url, parent));
         return "smises/smis_details";
     }
 
@@ -74,7 +75,6 @@ public class SmisController {
             data.add(obj);
         }
 
-        System.out.println(data.toString());
         model.addAttribute("data", data);
         return "smises/smises_list";
     }

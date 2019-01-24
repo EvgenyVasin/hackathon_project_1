@@ -106,7 +106,7 @@ public class SmisService {
         System.out.println("**********************************************************************************");
     }
 
-    public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url) {
+    public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url, SmisEntity parent) {
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         smisEntity.setDateRegistration(new Date());
@@ -114,6 +114,7 @@ public class SmisService {
         smisEntity.setValidity(validity);
         smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
+        smisEntity.setParentSmis(parent);
         smisesRepo.save(smisEntity);
         smises.add(smisEntity);
         return smisEntity;
@@ -123,7 +124,7 @@ public class SmisService {
         return smises;
     }
 
-    public SmisEntity editSmis(Long id, String name, String agreement, String validity, String contacts, String url) {
+    public SmisEntity editSmis(Long id, String name, String agreement, String validity, String contacts, String url, SmisEntity parent) {
         //добавить проверку на валидность id
         SmisEntity smisEntity = findSmisById(id);
         smisEntity.setName(name);
@@ -131,6 +132,7 @@ public class SmisService {
         smisEntity.setValidity(validity);
         smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
+        smisEntity.setParentSmis(parent);
         smisesRepo.save(smisEntity);
         return smisEntity;
     }
