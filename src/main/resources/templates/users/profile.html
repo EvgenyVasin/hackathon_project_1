@@ -13,78 +13,109 @@
 <body>
 
 <div class="container">
-    <div id="main" style="height: 100%">
-        <div class="row" id="real-estates-detail">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="text-center">
-                            <strong class="panel-title" th:text="#{users.profile}"></strong>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div id="myTabContent" class="tab-content">
-                            <hr/>
-                            <div class="tab-pane fade active in" id="detail">
-                                <div class="col-lg-4 col-md-4 col-xs-12" >
-                                        <div class="text-center" id="author">
-                                            <!--отображение аватара пользователя-->
-                                            <!--<img src="#" th:src="${'/imgUser=' + user.id}"  class="img-circle img-responsive"/>-->
-                                            <h3 th:text="${user.firstName + ' ' + user.lastName}"></h3>
-                                            <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
-                                            <small class="label label-warning" th:if="${user.userRole.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
-                                        </div>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-xs-12">
-                                    <h4 th:text="#{users.historyProfile}"></h4>
-                                    <table class="table table-th-block">
-                                        <tbody>
-                                        <tr><td class="active" th:text="#{users.registrationDate}"></td><td th:text="${user.dateRegistration}"></td></tr>
-                                        <tr><td class="active" th:text="#{users.recentActivity}"></td><td th:text="${user.lastDate}"></td></tr>
-                                        </tbody>
-                                    </table>
-
-                                    <div th:if="${user.mail==session.currentUser.mail}" class="" id="editProf">
-                                        <p></p>
-                                        <form role="form"  th:action="@{/editUser}" method="post" enctype="multipart/form-data">
-                                            <input type="hidden" name="userId" th:value="${user.id}"/>
-                                            <!--загрузка картинки-->
-                                            <!--<div class="input-group my">
-                                                    <span class="input-group-addon"><spanclass="glyphicon glyphicon-picture"></span></span>
-                                                    <label class="file_upload form-control" required="False">
-                                                    <mark th:if="${not #strings.isEmpty(user.image)}" th:text="${user.image.imgLink}"></mark>
-                                                    <input type="file" name="img" th:placeholder="#{users.avatar}"/>
-                                                    </label>
-                                            </div>-->
-                                            <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                                <input type="text" class="form-control" name="first_name"
-                                                       th:placeholder="#{users.firstName}" th:value="${user.firstName}" autofocus = "True"/>
-                                            </div>
-
-                                            <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                                <input type="text" class="form-control" name="last_name"
-                                                       th:placeholder="#{users.lastName}" th:value="${user.lastName}"/>
-                                            </div>
-                                            <div class="input-group">
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-list-alt"></span></span>
-                                                <input type="email" class="form-control rounded" name="email" th:placeholder="#{users.eMail}" th:value="${user.mail}"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-success" data-original-title="" title="">OK</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="row">
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{users.profile}"></strong>
                     </div>
                 </div>
+            </div>
+            <form role="form" th:action="@{/editUser}" method="post" enctype="multipart/form-data">
+            <div class="panel-body">
+
+
+
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="text-center" id="author">
+                        <!--отображение аватара пользователя-->
+                        <!--<img src="#" th:src="${'/imgUser=' + user.id}"  class="img-circle img-responsive"/>-->
+                        <h3 th:text="${user.firstName + ' ' + user.lastName}"></h3>
+                        <small class="label label-warning"
+                               th:if="${user.userRole.userRoleName=='ROLE_ADMIN'}"
+                               th:text="#{users.roleAdmin}"/>
+                        <small class="label label-warning"
+                               th:if="${user.userRole.userRoleName=='ROLE_USER'}"
+                               th:text="#{users.roleUser}"/>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-xs-12">
+                    <h4 th:text="#{users.historyProfile}"></h4>
+                    <table class="table table-th-block">
+                        <tbody>
+                        <tr>
+                            <td class="active" th:text="#{users.registrationDate}"></td>
+                            <td th:text="${user.dateRegistration}"></td>
+                        </tr>
+                        <tr>
+                            <td class="active" th:text="#{users.recentActivity}"></td>
+                            <td th:text="${user.lastDate}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <!--загрузка картинки-->
+                    <!--<div class="input-group my">
+                            <span class="input-group-addon"><spanclass="glyphicon glyphicon-picture"></span></span>
+                            <label class="file_upload form-control" required="False">
+                            <mark th:if="${not #strings.isEmpty(user.image)}" th:text="${user.image.imgLink}"></mark>
+                            <input type="file" name="img" th:placeholder="#{users.avatar}"/>
+                            </label>
+                    </div>-->
+                    <div class="input-group">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-list-alt"></span></span>
+                        <input type="text" class="form-control" name="first_name"
+                               th:placeholder="#{users.firstName}" th:value="${user.firstName}"
+                               autofocus="True"/>
+                    </div>
+
+                    <div class="input-group">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-list-alt"></span></span>
+                        <input type="text" class="form-control" name="last_name"
+                               th:placeholder="#{users.lastName}" th:value="${user.lastName}"/>
+                    </div>
+                    <div class="input-group">
+                                                <span class="input-group-addon"><span
+                                                        class="glyphicon glyphicon-list-alt"></span></span>
+                        <input type="email" class="form-control rounded" name="email"
+                               th:placeholder="#{users.eMail}" th:value="${user.mail}"/>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="subscription"
+                                   name="subscription"
+                                   th:text="#{users.subscription}"/>
+                        </label>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <button type="submit" class="btn btn-labeled btn-success">
+                            <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                th:text="#{users.ok}"/></button>
+                        <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                            <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                th:text="#{users.exit}"/></button>
+                    </div>
+                </div>
+            </div>
+            </form>
         </div>
-    </div><!-- /.main -->
+    </div>
+</div>
+</div>
+</div>
+
 </div><!-- /.container -->
 </body>
 </html>

@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div >
+        <div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="text-center">
@@ -16,9 +16,9 @@
                     </div>
                 </div>
                 <form role="form" th:action="@{/j_spring_security_check}" method="post">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6 login-box">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 login-box">
 
                                 <div class="input-group">
                                     <span class="input-group-addon"><span
@@ -36,27 +36,22 @@
                                     <a href="#" th:text="#{users.fogot}"></a></p>
                                 <span th:text="#{users.notAccount}"/> <a href="#" th:href="@{/signup}"
                                                                          th:text="#{navMenu.signup}"></a>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"  id="rememberme" name="_spring_security_remember_me" th:text="#{users.remember}"/>
-                                </label>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <button type="submit" class="btn btn-labeled btn-success">
-                                <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
-                                    th:text="#{users.entrance}"/></button>
-                            <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
-                                <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
-                                    th:text="#{users.exit}"/></button>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="submit" class="btn btn-labeled btn-success">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                        th:text="#{users.entrance}"/></button>
+                                <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                        th:text="#{users.exit}"/></button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
