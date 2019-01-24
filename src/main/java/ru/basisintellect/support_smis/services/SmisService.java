@@ -121,7 +121,9 @@ public class SmisService {
         smisEntity.setValidity(validity);
         smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
-        smisEntity.setParentSmis(smisesRepo.findById(parent_id).get());
+        if (parent_id != null) {
+            smisEntity.setParentSmis(smisesRepo.findById(parent_id).get());
+        }
         smisesRepo.save(smisEntity);
         smises.add(smisEntity);
         return smisEntity;
