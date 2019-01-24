@@ -18,8 +18,8 @@
         .treeCSS ul {
             position: relative;
             display: table;
-            margin: 15px 0 0 0 !important;
-            padding: 16px 0 0 0 !important;
+            margin: 25px 0 0 0 !important;
+            padding: 26px 0 0 0 !important;
             line-height: normal;
             text-align: center;
 
@@ -50,14 +50,14 @@
         .treeCSS ul li:after {
             content: "";
             position: absolute;
-            top: -15px;
+            top: -26px;
             left: 0;
             width: 50%;
-            height: 15px;
+            height: 26px;
             border-right: 1px solid #999;
         }
         .treeCSS ul:before {
-            top: -14px;
+            top: -25px;
         }
         .treeCSS ul li:not(:only-child):before {
             border-top: 1px solid #999;
@@ -88,13 +88,19 @@
         /*рамки*/
         .item {
             border: #3700b3 2px outset;
-            padding: 1px;
+            padding: 12px;
             color: black;
             border-collapse: collapse !important;
+            width: min-content !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
 
-
-
+        #statebar {
+            width: 15px;
+            height: 15px;
+            size: 15px;
+        }
     </style>
 <script type="text/javascript" th:inline="javascript">
 
@@ -103,10 +109,10 @@
 
     function setConnected(connected) {
         if (connected) {
-            document.getElementById("satebar").innerText = "websocket is connected";
+            document.getElementById("statebar").style["background-color"] = "Lime";
         }
         else {
-            document.getElementById("satebar").innerText = "websocket not connected";
+            document.getElementById("statebar").style["background-color"] = "Red";
         }
     }
 
@@ -162,9 +168,9 @@
             items.map(
                 function(el) {
                     var li = $('<li>').append(
-                        $('<a>').addClass('state')
+                        $('<div>').addClass('state')
                         ).append(
-                        $('<a>').html(el.itemName).attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
+                        $('<div>').html(el.itemName).attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
                         ),
                         nestedTree = createTree(data, el.itemId);
 
@@ -207,9 +213,16 @@
 </head>
 <body onload="connect();">
 <div class="container">
-    <div id = "satebar">
 
-    </div>
+    <table>
+        <tbody>
+        <tr>
+        <td><b>Контроль: &nbsp;</b></td>
+        <td><div id = "statebar"></div></td>
+        </tr>
+        </tbody>
+    </table>
+
     <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
         <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
     </div>
