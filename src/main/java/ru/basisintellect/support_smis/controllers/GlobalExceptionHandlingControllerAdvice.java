@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandlingControllerAdvice {
 
     public static final String DEFAULT_ERROR_VIEW = "error/error";
 
-    @ExceptionHandler(value = Exception.class)
+//    @ExceptionHandler(value = Exception.class)
     public ModelAndView
     defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         // If the exception is annotated with @ResponseStatus rethrow it and let

@@ -41,7 +41,7 @@ public class SmisEntity extends CustomEntity {
 
     //(не)работоспособность
     @Column(name="enabled", length = 1)
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     //регион
     @Column(name="region", length = 512)

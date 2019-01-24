@@ -31,15 +31,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/signup").permitAll()
                 .anyRequest().authenticated();*/
 
-        http
+        http.csrf().disable();
 
-                .authorizeRequests().antMatchers("/console/**").permitAll().and()
-                .csrf()
-                .disable()
-                .headers()
-                .frameOptions()
-                .disable()
-                ;
+        // The pages does not require login
+        http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
+
+        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
+        // If no login, it will redirect to /login page.
+        http.authorizeRequests().antMatchers("/smises").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/users").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
+        // For ADMIN only.
+        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+
+        // When the user has logged in as XX.
+        // But access a page that requires role YY,
+        // AccessDeniedException will be thrown.
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/login");
 
         http
                 .formLogin().loginPage("/login").permitAll().usernameParameter("j_username").successForwardUrl("/scopeSession")

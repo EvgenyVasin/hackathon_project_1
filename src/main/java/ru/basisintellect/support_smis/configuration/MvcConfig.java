@@ -35,26 +35,26 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         }
     }
 
-    @Bean(name="simpleMappingExceptionResolver")
-    public SimpleMappingExceptionResolver
-    createSimpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver r =
-                new SimpleMappingExceptionResolver();
-
-        Properties mappings = new Properties();
-        mappings.setProperty("/error", "error/error");
-        mappings.setProperty("InvalidCreditCardException", "creditCardError");
-
-        r.setExceptionMappings(mappings);  // None by default
-        r.setDefaultErrorView("error/error");    // No default
-        r.setExceptionAttribute("ex");     // Default is "exception"
-        r.setWarnLogCategory("example.MvcLogger");     // No default
-        return r;
-    }
+//    @Bean(name="simpleMappingExceptionResolver")
+//    public SimpleMappingExceptionResolver
+//    createSimpleMappingExceptionResolver() {
+//        SimpleMappingExceptionResolver r =
+//                new SimpleMappingExceptionResolver();
+//
+//        Properties mappings = new Properties();
+//        mappings.setProperty("/error", "error/error");
+//        mappings.setProperty("InvalidCreditCardException", "creditCardError");
+//
+//        r.setExceptionMappings(mappings);  // None by default
+//        r.setDefaultErrorView("error/error");    // No default
+//        r.setExceptionAttribute("ex");     // Default is "exception"
+//        r.setWarnLogCategory("example.MvcLogger");     // No default
+//        return r;
+//    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/login");
+        registry.addViewController("/").setViewName("smises/smises_list");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/signup").setViewName("signup");

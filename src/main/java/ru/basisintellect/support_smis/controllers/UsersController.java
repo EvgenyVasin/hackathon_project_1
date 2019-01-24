@@ -84,7 +84,7 @@ public class UsersController {
 //        users.delete(id);
 //    }
 
-//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "getUser/{userId}", method = RequestMethod.GET)
     public String getUser(@PathVariable("userId") Long userId, Model model)
     {

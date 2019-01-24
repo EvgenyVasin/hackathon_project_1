@@ -53,6 +53,7 @@ public class SmisController {
     }
 
     //генерация страницы со смисами
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_table")
     public String viewSmises(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
