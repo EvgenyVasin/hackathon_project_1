@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/private/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .and()
-                .logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/")
+                .logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login")
                 .and()
                 .rememberMe().key("basis").tokenValiditySeconds(86400)
                 .and()

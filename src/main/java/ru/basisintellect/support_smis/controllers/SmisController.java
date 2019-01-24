@@ -68,7 +68,8 @@ public class SmisController {
     }
 
     //генерация страницы со смисами2
-    @RequestMapping(value = "/")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();
         List<SmisEntity> list = smisService.getAllSmises();

@@ -98,7 +98,17 @@
             width: 15px;
             height: 15px;
             size: 15px;
+            border: 2px solid black;
         }
+
+        a {
+            margin-left: 25px;
+        }
+
+        .nav-table {
+            margin-left: 100px;
+        }
+
     </style>
 <script type="text/javascript" th:inline="javascript">
 
@@ -107,10 +117,10 @@
 
     function setConnected(connected) {
         if (connected) {
-            document.getElementById("statebar").style["background-color"] = "#1B5E20";
+            document.getElementById("statebar").style["background-color"] = "Lime";
         }
         else {
-            document.getElementById("statebar").style["background-color"] = "#B71C1C";
+            document.getElementById("statebar").style["background-color"] = "Red";
         }
     }
 
@@ -206,20 +216,36 @@
 
 </head>
 <body onload="connect();">
-<div class="container">
 
-    <table>
-        <tbody>
-        <tr>
+<table class="nav-table">
+    <tbody>
+    <tr>
         <td><b>Контроль: &nbsp;</b></td>
         <td><div id = "statebar"></div></td>
-        </tr>
-        </tbody>
-    </table>
+        <td><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
+    </tr>
+    </tbody>
+</table>
 
-    <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
-        <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
+<div class="container">
+
+
+
+    <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер
+    <div class="col-xs-6 col-sm-6 col-md-6" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
+        <button class="btn btn-labeled btn-add" onclick="onClickAdd();">
+                            <span class="btn-label">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+        </button>
     </div>
+    <script>
+        function onClickAdd() {
+            document.location.href ="add_smis";
+        }
+    </script>
+    -->
+
     <div id="treeCSS"></div>
 </div>
 </body>

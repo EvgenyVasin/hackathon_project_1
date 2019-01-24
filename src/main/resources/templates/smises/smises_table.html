@@ -20,13 +20,19 @@
 
                     <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер-->
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <button class="btn btn-labeled btn-success btn-add">
+                        <button class="btn btn-labeled btn-add" onclick="onClickAdd();">
                             <span class="btn-label">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </span>
-                            <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
+                            <a th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
                         </button>
                     </div>
+                    <script>
+                        function onClickAdd() {
+                            document.location.href ="add_smis";
+                        }
+                    </script>
+                    <!---->
 
                 </div>
                 <table class="table table-striped">
