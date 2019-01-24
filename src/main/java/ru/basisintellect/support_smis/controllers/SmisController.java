@@ -76,12 +76,12 @@ public class SmisController {
         for (SmisEntity entity : list) {
             SmisEntity parentSMIS = entity.getParentSmis();
             JSONObject obj = new JSONObject();
-            obj.appendField("itemId", entity.getId());
-            obj.appendField("itemName", entity.getName());
+            obj.put("itemId", entity.getId());
+            obj.put("itemName", entity.getName());
             if(parentSMIS != null)
-                obj.appendField("itemParentId", entity.getParentSmis().getId());
+                obj.put("itemParentId", entity.getParentSmis().getId());
             else
-                obj.appendField("itemParentId", null);
+                obj.put("itemParentId", null);
             data.add(obj);
         }
         model.addAttribute("data", data);

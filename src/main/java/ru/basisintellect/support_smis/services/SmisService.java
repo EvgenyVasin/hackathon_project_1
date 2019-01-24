@@ -1,10 +1,11 @@
 package ru.basisintellect.support_smis.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
-import ru.basisintellect.support_smis.model.Node;
+import ru.basisintellect.support_smis.model.SmisStateMsg;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.soap_client.TestConnectClient;
@@ -13,7 +14,6 @@ import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
 import java.util.Date;
 import java.util.List;
-import java.util.TreeSet;
 
 @Service
 public class SmisService {
@@ -48,14 +48,14 @@ public class SmisService {
                         //ловим наше исключение - комплекс работает
                         if (!smisEntity.isEnabled()) {
                             smisEntity.setEnabled(true);
-                            smisService.onChangeState(true);
+                            smisService.onChangeState(smisEntity.getId(),true);
                         }
 
                     } catch (Exception e) {
                         //ловим любое другое исключение - не работает
                         if (smisEntity.isEnabled()) {
                             smisEntity.setEnabled(false);
-                            smisService.onChangeState(false);
+                            smisService.onChangeState(smisEntity.getId(),false);
                         }
                     }
                 }
@@ -73,7 +73,9 @@ public class SmisService {
     MyThread myRunnable;
     List<SmisEntity> smises;
 
-    Node<SmisEntity> treeSmis;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
+
     @Autowired
     SmisRepository smisesRepo;
 
@@ -102,8 +104,12 @@ public class SmisService {
         return result;
     }
 
-    public void onChangeState(Boolean state) {
-        System.out.println("**********************************************************************************");
+    public void onChangeState(Long id, Boolean state) {
+        SmisStateMsg msg = new SmisStateMsg();
+        msg.setId(id);
+        msg.setActive(state);
+        simpMessagingTemplate.convertAndSend("/topic/changestate", msg);
+//        System.out.println("**********************************************************************************");
     }
 
     public SmisEntity addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id) {

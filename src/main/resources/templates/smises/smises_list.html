@@ -8,7 +8,10 @@
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
 
     <style>
         .treeCSS,
@@ -84,6 +87,7 @@
         }
         .item {
             cursor: pointer;
+
         }
 
         /*рамки*/
@@ -94,16 +98,58 @@
             border-collapse: collapse !important;
         }
 
-        /*.active {
-            background-color: #5cb85c;
-        }*/
 
-        .noactive{
-            background-color: #b00020;
-        }
 
     </style>
 <script type="text/javascript" th:inline="javascript">
+
+
+    var stompClient = null;
+
+    function setConnected(connected) {
+        if (connected) {
+            document.getElementById("satebar").innerText = "websocket is connected";
+        }
+        else {
+            document.getElementById("satebar").innerText = "websocket not connected";
+        }
+    }
+
+    function connect() {
+
+        var socket = new SockJS('/gs-guide-websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            init();
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/changestate', function (greeting) {
+                changeState(greeting.body);
+            });
+        });
+    }
+
+    function disconnect() {
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log("Disconnected");
+    }
+
+
+    function changeState(message) {
+        var msg = JSON.parse(message);
+        // var id = message.id;
+        // var state = message.state;
+        var item = document.getElementById(msg.id);
+        if (msg.active == false){
+            item.style["background-color"] = "Red";
+        }else{
+            item.style["background-color"] = "White";
+        }
+    }
+
 
 
     var listCategories;
@@ -123,7 +169,7 @@
                     var li = $('<li>').append(
                         $('<a>').addClass('state')
                         ).append(
-                        $('<a>').html(el.itemName).attr('id', el.itemId).addClass('item')
+                        $('<a>').html(el.itemName).attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
                         ),
                         nestedTree = createTree(data, el.itemId);
 
@@ -150,8 +196,10 @@
 
         $('#treeCSS').append(tree)
             .on('click', '.item',function(){
-                $('.noactive').not(this).removeClass('noactive');
-                $(this).toggleClass('noactive');
+                $('.active').not(this).removeClass('active').toggleClass('noactive');
+                $(this).toggleClass('active');
+                $(this).innerText = "12345"
+                // document.body.style.backgroundColor="lavender";
             })
             // .on('click', '.state',function(){
             //     $(this).parent().toggleClass('collapse expand');
@@ -162,8 +210,14 @@
 </script>
 
 </head>
-<body onload="init()">
+<body onload="connect();">
 <div class="container">
+    <div id = "satebar">
+
+    </div>
+    <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
+        <a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>
+    </div>
     <div id="treeCSS"></div>
 </div>
 </body>
