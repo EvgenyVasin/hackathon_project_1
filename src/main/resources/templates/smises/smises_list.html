@@ -23,6 +23,7 @@
             line-height: normal;
             text-align: center;
 
+
         }
         .treeCSS li {
             position: relative;
@@ -80,10 +81,6 @@
             border-top: 1px solid #999;
         }
 
-        .item {
-            cursor: pointer;
-
-        }
 
         /*рамки*/
         .item {
@@ -94,6 +91,7 @@
             width: min-content !important;
             margin-left: auto !important;
             margin-right: auto !important;
+            cursor: pointer;
         }
 
         #statebar {
@@ -197,15 +195,11 @@
 
         $('#treeCSS').append(tree)
             .on('click', '.item',function(){
-                $('.active').not(this).removeClass('active').toggleClass('noactive');
-                $(this).toggleClass('active');
-                $(this).innerText = "12345"
-                // document.body.style.backgroundColor="lavender";
+
+                document.location.href ="smis_details/"+this.id;
+
             })
-            // .on('click', '.state',function(){
-            //     $(this).parent().toggleClass('collapse expand');
-            //     // document.body.style.backgroundColor="lavender";
-            // })
+
 
     }
 </script>
