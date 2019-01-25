@@ -95,8 +95,6 @@ public class SmisService {
             } catch (ConcurrentModificationException e){
                 myThread.start();
             }
-
-
     }
 
     public SmisEntity findSmisById(Long id) {
