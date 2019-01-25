@@ -33,34 +33,32 @@ public class SmisService {
             this.smisService = smisService;
         }
 
+
         @Override
         public void run() {
             while (!cancelled) {
                 for (SmisEntity smisEntity : smises) {
                     try {
-
-
                         connectClient.setDefaultUri(smisEntity.getUrl());
                         TestRequest request = new TestRequest();
                         TestResponse response = connectClient.testConnect(request);
-
-                    } catch (SoapFaultClientException e) {
+                    } /* catch (SoapFaultClientException e) {
                         //ловим наше исключение - комплекс работает
-                        if (!smisEntity.isEnabled()) {
                             smisEntity.setEnabled(true);
                             smisService.onChangeState(smisEntity.getId(),true);
-                        }
 
-                    } catch (Exception e) {
+                    }*/ catch (Exception e) {
                         //ловим любое другое исключение - не работает
-                        if (smisEntity.isEnabled()) {
-                            smisEntity.setEnabled(false);
-                            smisService.onChangeState(smisEntity.getId(),false);
-                        }
+                            if (e instanceof SoapFaultClientException) {
+                                smisEntity.setEnabled(true);
+                                smisService.onChangeState(smisEntity.getId(), true);
+
+                            }else{
+                                smisEntity.setEnabled(false);
+                                smisService.onChangeState(smisEntity.getId(), false);
+                            }
                     }
                 }
-
-
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
@@ -87,10 +85,11 @@ public class SmisService {
         if (myRunnable != null)
             myRunnable.setCancelled(true);
 
-        smises = (List<SmisEntity>) smisesRepo.findAll();
-        myRunnable = new MyThread(this);
-        Thread myThread = new Thread(myRunnable);
-        myThread.start();
+            smises = (List<SmisEntity>) smisesRepo.findAll();
+            myRunnable = new MyThread(this);
+            Thread myThread = new Thread(myRunnable);
+            myThread.start();
+
 
     }
 
