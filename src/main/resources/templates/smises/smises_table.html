@@ -5,9 +5,10 @@
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
-</head>
-<body>
+    <script src="/js/detect.js"></script>
 
+</head>
+<body onload="detectBr()">
     <div class="container">
         <div class="row">
             <div class="panel panel-primary">
@@ -56,8 +57,10 @@
                                 <th th:text="${smis.name}"></th>
                                 <th th:text="${smis.region}"></th>
                                 <th th:text="${smis.dateRegistration}"></th>
-                                <th th:text="${smis.agreement}"></th>
-                                <th th:text="${smis.validity}"></th>
+                                <th><a th:text="${smis.agreement}"
+                                       th:href="${smis.agreement}"
+                                       type="application/file"></a></th>
+                                <th th:text="${smis.validity}"></a></th>
                                 <th th:text="${smis.contacts}"></th>
                                 <th th:text="${smis.url}"></th>
                                 <th th:text="${smis.enabled}"></th>
@@ -66,6 +69,24 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6" id="ChromeDetector">
+
+            </div>
+
+            <script>
+                function detectBr() {
+                    var brType = (detect.parse(navigator.userAgent)).browser.family;
+                    if (brType.toString() === "Chrome") {
+                        var btnChrome = document.getElementById("ChromeDetector");
+                        btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
+                            '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
+                            '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
+                            'target="_blank"style="text-decoration: none; color: white">' +
+                            'Внимание! Для открытия ссылок на файлы пройдите по ссылке и установите расширение для Chrome!</a></button>';
+                    }
+                }
+            </script>
         </div>
     </div>
 </body>

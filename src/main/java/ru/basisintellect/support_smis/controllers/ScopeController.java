@@ -26,6 +26,6 @@ public class ScopeController {
         UserEntity currentUser = users.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
         currentUser.setPassword("123654345");//ложный
         session.setAttribute("currentUser", currentUser);
-        return "redirect:" + request.getScheme() +":/smises_list";
+        return "redirect:/smises_list";
     }
 }
