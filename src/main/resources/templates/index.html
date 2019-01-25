@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head xmlns:th="http://www.thymeleaf.org">
 
     <title>ЦОП СМИС</title>
@@ -10,7 +10,24 @@
 <body>
 
 <h2 style="color: #ff0000">Страница в разработке!</h2>
+<p><button type="button" onclick="btnClick();">добавить файл</button></p>
+<form role="form" th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
+    <p>Загрузите ваши файлы на сервер</p>
 
+    <p id="files"></p>
 
+        <input type="submit" value="Отправить"></p>
+</form>
+<script>
+
+    function btnClick() {
+        var files = document.getElementById('files');
+        var p = document.createElement('p');
+        p.style.wordWrap = 'break-word';
+        p.innerHTML = '<input type="file" name="files" multiple/>';
+        files.appendChild(p);
+    }
+
+</script>
 </body>
 </html>
