@@ -12,6 +12,7 @@ import ru.basisintellect.support_smis.soap_client.TestConnectClient;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
+import java.util.ConcurrentModificationException;
 import java.util.Date;
 import java.util.List;
 
@@ -88,7 +89,12 @@ public class SmisService {
             smises = (List<SmisEntity>) smisesRepo.findAll();
             myRunnable = new MyThread(this);
             Thread myThread = new Thread(myRunnable);
-            myThread.start();
+
+            try {
+                myThread.start();
+            } catch (ConcurrentModificationException e){
+                myThread.start();
+            }
 
 
     }
