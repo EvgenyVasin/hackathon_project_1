@@ -34,8 +34,23 @@
                         }
                     </script>
                     <!---->
-
                 </div>
+                <!--пустой див для добавления кнопки в браузере Chrome-->
+                <div class="col-xs-6 col-sm-6 col-md-6 btn-right" id="ChromeDetector"></div>
+                <!--определение версии браузера, отображение ссылки на плагин для Хрома, если открыто в Хроме-->
+                <script>
+                    function detectBr() {
+                        var brType = (detect.parse(navigator.userAgent)).browser.family;
+                        if (brType.toString() === "Chrome") {
+                            var btnChrome = document.getElementById("ChromeDetector");
+                            btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
+                                '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
+                                '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
+                                'target="_blank"style="text-decoration: none; color: white">' +
+                                'Установить плагин для ссылок</a></button>';
+                        }
+                    }
+                </script>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -69,24 +84,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="col-xs-6 col-sm-6 col-md-6" id="ChromeDetector">
-
-            </div>
-
-            <script>
-                function detectBr() {
-                    var brType = (detect.parse(navigator.userAgent)).browser.family;
-                    if (brType.toString() === "Chrome") {
-                        var btnChrome = document.getElementById("ChromeDetector");
-                        btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
-                            '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
-                            '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
-                            'target="_blank"style="text-decoration: none; color: white">' +
-                            'Внимание! Для открытия ссылок на файлы пройдите по ссылке и установите расширение для Chrome!</a></button>';
-                    }
-                }
-            </script>
         </div>
     </div>
 </body>

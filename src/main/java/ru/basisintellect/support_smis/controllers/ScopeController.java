@@ -27,5 +27,6 @@ public class ScopeController {
         currentUser.setPassword("123654345");//ложный
         session.setAttribute("currentUser", currentUser);
         return "redirect:/smises_list";
+        //перенаправление на стартовую страницу
     }
 }

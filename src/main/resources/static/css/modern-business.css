@@ -7475,5 +7475,10 @@ button.close {
     }
 }
 
+.btn-right {
+    float: right;
+    margin-right: -350px;
+}
+
 /*# sourceMappingURL=bootstrap.min.css.map */
 
