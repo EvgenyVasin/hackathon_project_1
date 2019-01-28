@@ -52,7 +52,7 @@ public class SmisService {
                     }*/ catch (Exception e) {
                         //ловим любое другое исключение - не работает
                             if (e instanceof SoapFaultClientException) {
-                                smisEntity.setState();
+                                smisEntity.setEnabled(true);
                                 smisService.onChangeState(smisEntity.getId(), true);
 
                             }else{

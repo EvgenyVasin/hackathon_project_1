@@ -25,7 +25,6 @@ public class UserEntity extends CustomImgEntity{
     @Column(name = "enabled", length = 1, nullable = false)
     private boolean enabled;
 
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private UserRoleEntity userRole;
