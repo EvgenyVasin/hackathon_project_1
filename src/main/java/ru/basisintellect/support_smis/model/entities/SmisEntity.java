@@ -1,7 +1,10 @@
 package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vasin.e on 17.01.2019.
@@ -27,32 +30,29 @@ public class SmisEntity extends CustomEntity {
     @Column(name="agreement", length = 512)
     private String agreement;
 
-    //срок дейсвтия соглашения
-    @Column(name="validity", length = 256)
-    private String validity;
-
-    //контакты
-    @Column(name="contacts", length = 512)
-    private String contacts;
-
     //точка доступа к серверу для опроса
     @Column(name="url", length = 512)
     private String url;
 
     //(не)работоспособность
-    @Column(name="enabled", length = 1)
-    private boolean enabled = true;
+    @OneToOne
+    @JoinColumn(name = "state_id", nullable = false)
+    private StateEntity state;
 
     //регион
+    @OneToOne
     @Column(name="region", length = 512)
-    private String region;
+    private RegionEntity region;
 
     //коментарий
     @Column(name="description", length = 512)
     private String description;
 
+    //контакты
+    @Column(name="contacts")
+    private Set<ContactEntity> contacts;
 
-    //сеттеры параметров
+        //сеттеры параметров
     /**
      * @param name the username to set
      */
@@ -75,31 +75,10 @@ public class SmisEntity extends CustomEntity {
     }
 
     /**
-     * @param validity the username to set
-     */
-    public void setValidity(String validity) {
-        this.validity = validity;
-    }
-
-    /**
-     * @param contacts the username to set
-     */
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
-
-    /**
      * @param url the username to set
      */
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    /**
-     * @param enabled the username to set
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
 
@@ -107,12 +86,20 @@ public class SmisEntity extends CustomEntity {
         this.parentSmis = parentSmis;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(RegionEntity region) {
         this.region = region;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setState(StateEntity state) {
+        this.state = state;
+    }
+
+    public void setContacts(Set<ContactEntity> contacts) {
+        this.contacts = contacts;
     }
 
     //конец блока сеттеров
@@ -142,31 +129,10 @@ public class SmisEntity extends CustomEntity {
     }
 
     /**
-     * @return the validity
-     */
-    public String getValidity() {
-        return validity;
-    }
-
-    /**
-     * @return the contacts
-     */
-    public String getContacts() {
-        return contacts;
-    }
-
-    /**
      * @return the url
      */
     public String getUrl() {
         return url;
-    }
-
-    /**
-     * @return the enabled
-     */
-    public boolean isEnabled() {
-        return enabled;
     }
 
 
@@ -174,12 +140,21 @@ public class SmisEntity extends CustomEntity {
         return parentSmis;
     }
 
-    public String getRegion() {
+    public RegionEntity getRegion() {
         return region;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public StateEntity getState() {
+        return state;
+    }
+
+    @OneToMany(mappedBy = "Smis")
+    public Set<ContactEntity> getContacts() {
+        return contacts;
     }
 
     //конец блока геттеров
@@ -191,10 +166,7 @@ public class SmisEntity extends CustomEntity {
         return "SMIS [SmisID = " + getId() + ", region = " + name
                 + ", date_registration = " + dateRegistration
                 + ", agreement = " + agreement
-                + ", validity = " + validity
-                + ", contacts = " + contacts
                 + ", URL = " + url
-                + ", enabled = " + enabled
                 + ", region = " + region
                 + ", description = " + description;
     }

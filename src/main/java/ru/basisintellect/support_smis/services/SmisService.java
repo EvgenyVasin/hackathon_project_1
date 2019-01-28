@@ -35,6 +35,7 @@ public class SmisService {
         }
 
 
+        Long i = (long) 0;
         @Override
         public void run() {
             while (!cancelled) {
@@ -61,6 +62,10 @@ public class SmisService {
                     }
                 }
                 try {
+
+                    /*addSmis("name", "name", "name", "name","name", i);
+                    i++;*/
+
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

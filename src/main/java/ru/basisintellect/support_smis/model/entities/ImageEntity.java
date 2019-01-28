@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "img_links")
 public class ImageEntity extends CustomEntity{
+
     @Column(name = "img_link", length = 256)
     private String imgLink;
 

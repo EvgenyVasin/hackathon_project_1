@@ -1,11 +1,11 @@
 package ru.basisintellect.support_smis.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "region")
 public class RegionEntity extends CustomEntity {
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "smis_id")
     SmisEntity smisEntity;
     @Column(name = "name", length = 128)

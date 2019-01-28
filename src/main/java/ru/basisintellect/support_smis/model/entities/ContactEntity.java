@@ -11,6 +11,8 @@ public class ContactEntity extends CustomEntity {
     SmisEntity smisEntity;
     @Column(name = "name", length = 128)
     String name;
+    @Column (name = "position")
+    String position;
     @Column(name = "fone_number", length = 128)
     String fonNumber;
 
@@ -37,5 +39,13 @@ public class ContactEntity extends CustomEntity {
 
     public void setFonNumber(String fonNumber) {
         this.fonNumber = fonNumber;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

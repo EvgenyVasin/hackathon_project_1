@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
 </head>
 <body>
-
 <div class="container">
     <div class="row">
         <div >
@@ -82,7 +80,11 @@
                                 </div>
                                 <!---->
 
-
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="file" class="form-control" multiple="multiple" name="files" autofocus="True"/>
+                                </div>
 
                             </div>
                         </div>
