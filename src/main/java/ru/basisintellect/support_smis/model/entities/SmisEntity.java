@@ -49,7 +49,6 @@ public class SmisEntity extends CustomEntity {
     private String description;
 
     //контакты
-    @Column(name="contacts")
     private Set<ContactEntity> contacts;
 
         //сеттеры параметров
@@ -152,7 +151,7 @@ public class SmisEntity extends CustomEntity {
         return state;
     }
 
-    @OneToMany(mappedBy = "Smis")
+    @OneToMany(mappedBy = "Smis", cascade = CascadeType.ALL)
     public Set<ContactEntity> getContacts() {
         return contacts;
     }
