@@ -1,17 +1,14 @@
 package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by vasin.e on 17.01.2019.
  */
 
 @Entity
-@Table(name="Smis")
+@Table(name="smis")
 public class SmisEntity extends CustomEntity {
 
     @ManyToOne
@@ -35,13 +32,13 @@ public class SmisEntity extends CustomEntity {
     private String url;
 
     //(не)работоспособность
-    @OneToOne
-    @JoinColumn(name = "state_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "state_id")
     private StateEntity state;
 
     //регион
-    @OneToOne
-    @Column(name="region", length = 512)
+    @ManyToOne
+    @JoinColumn(name = "region_id")
     private RegionEntity region;
 
     //коментарий
@@ -49,7 +46,11 @@ public class SmisEntity extends CustomEntity {
     private String description;
 
     //контакты
-    private Set<ContactEntity> contacts;
+    @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private  Set<ContactEntity> contacts;
+
+    @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private  Set<FileEntity> files;
 
         //сеттеры параметров
     /**
@@ -97,10 +98,13 @@ public class SmisEntity extends CustomEntity {
         this.state = state;
     }
 
-    public void setContacts(Set<ContactEntity> contacts) {
+    public void setContacts( Set<ContactEntity> contacts) {
         this.contacts = contacts;
     }
 
+    public void setFiles( Set<FileEntity> files) {
+        this.files = files;
+    }
     //конец блока сеттеров
 
 
@@ -139,6 +143,7 @@ public class SmisEntity extends CustomEntity {
         return parentSmis;
     }
 
+
     public RegionEntity getRegion() {
         return region;
     }
@@ -151,9 +156,14 @@ public class SmisEntity extends CustomEntity {
         return state;
     }
 
-    @OneToMany(mappedBy = "Smis", cascade = CascadeType.ALL)
-    public Set<ContactEntity> getContacts() {
+
+    public  Collection<ContactEntity> getContacts() {
         return contacts;
+    }
+
+
+    public Collection<FileEntity> getFiles() {
+        return files;
     }
 
     //конец блока геттеров

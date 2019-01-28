@@ -1,22 +1,31 @@
 package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "region")
 public class RegionEntity extends CustomEntity {
-    @OneToOne
-    @JoinColumn(name = "smis_id")
-    SmisEntity smisEntity;
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    Set<SmisEntity> smises;
+
     @Column(name = "name", length = 128)
     String name;
 
-    public SmisEntity getSmisEntity() {
-        return smisEntity;
+    public RegionEntity() {
     }
 
-    public void setSmisEntity(SmisEntity smisEntity) {
-        this.smisEntity = smisEntity;
+    public RegionEntity(String name) {
+        this.name = name;
+    }
+
+    public Set<SmisEntity> getSmises() {
+        return smises;
+    }
+
+    public void setSmises(Set<SmisEntity> smises) {
+        this.smises = smises;
     }
 
     public String getName() {

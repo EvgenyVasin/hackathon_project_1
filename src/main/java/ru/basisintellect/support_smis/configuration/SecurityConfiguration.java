@@ -26,37 +26,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        /*http
-                .authorizeRequests().antMatchers("/").permitAll().and()
-                .authorizeRequests().antMatchers("/signup").permitAll()
-                .anyRequest().authenticated();*/
+        http
+
+                .authorizeRequests().antMatchers("/console/**").permitAll().and()
+                .csrf()
+                .disable()
+                .headers()
+                .frameOptions()
+                .disable()
+        ;
 
         http.csrf().disable();
 
-        // The pages does not require login
-        http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
-
-        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
-        // If no login, it will redirect to /login page.
-        http.authorizeRequests().antMatchers("/smises/*").access("hasAnyRole('USER', 'ADMIN')");
-        http.authorizeRequests().antMatchers("/users/*").access("hasAnyRole('USER', 'ADMIN')");
-
-        // For ADMIN only.
-        http.authorizeRequests().antMatchers("/admin").access("hasRole('ADMIN')");
-
-        // When the user has logged in as XX.
-        // But access a page that requires role YY,
-        // AccessDeniedException will be thrown.
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/login");
 
         http
                 .formLogin().loginPage("/login").permitAll().usernameParameter("j_username").successForwardUrl("/scopeSession")
                 .passwordParameter("j_password").loginProcessingUrl("/j_spring_security_check").failureUrl("/login?error=true")
-                .and()
-                .httpBasic()
-                .and()
-                .authorizeRequests().antMatchers("/private/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
                 .and()
                 .logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login")
                 .and()
@@ -64,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
+
 
     @Autowired
     @Qualifier("customUserDetailsService")

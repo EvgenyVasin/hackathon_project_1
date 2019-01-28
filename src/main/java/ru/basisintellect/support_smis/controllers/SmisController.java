@@ -21,7 +21,7 @@ import java.util.List;
  * Created by vasin.e on 17.01.2019.
  */
 
-@Controller
+//@Controller
 public class SmisController {
     @Autowired
     SmisService smisService;

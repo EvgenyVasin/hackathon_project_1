@@ -7,31 +7,13 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "user_roles")
-public class UserRoleEntity {
+public class UserRoleEntity extends CustomEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer userRoleId;
 
     @Column(name = "role_name", nullable = false, unique = true, length = 128)
     private String userRoleName;
 
 
-
-    /**
-     * @return the userRoleId
-     */
-    public Integer getUserRoleId() {
-        return userRoleId;
-    }
-
-    /**
-     * @param userRoleId the userRoleId to set
-     */
-    public void setUserRoleId(Integer userRoleId) {
-        this.userRoleId = userRoleId;
-    }
 
     /**
      * @return the userRoleName
@@ -54,7 +36,7 @@ public class UserRoleEntity {
      */
     @Override
     public String toString() {
-        return "UserRoleEntity [userRoleId=" + userRoleId + ", userRoleName="
+        return "UserRoleEntity [userRoleId=" + this.getId() + ", userRoleName="
                 + userRoleName + "]";
     }
 

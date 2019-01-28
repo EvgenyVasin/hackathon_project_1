@@ -1,16 +1,14 @@
 package ru.basisintellect.support_smis.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name="file")
 public class FileEntity extends CustomEntity{
 
     @ManyToOne
-    @JoinColumn(name = "smis_id")
-    SmisEntity smisEntity;
+    @JoinColumn(name = "smis_id", nullable = false)
+    SmisEntity smis;
 
     @Column(name = "name", length = 128)
     String name;
@@ -20,11 +18,11 @@ public class FileEntity extends CustomEntity{
 
 
     public SmisEntity getSmisEntity() {
-        return smisEntity;
+        return smis;
     }
 
     public void setSmisEntity(SmisEntity smisEntity) {
-        this.smisEntity = smisEntity;
+        this.smis = smisEntity;
     }
 
     public String getName() {

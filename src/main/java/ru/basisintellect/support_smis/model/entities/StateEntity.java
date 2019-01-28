@@ -5,17 +5,28 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="State")
-public class StateEntity extends CustomEntity{
+@Table(name = "State")
+public class StateEntity extends CustomEntity {
 
-    @Column(name="state_name")
-    private String StateName;
+    @Column(name = "state_name")
+    private String stateName;
+
+    @Column(name = "state_code")
+    private String stateCode;
 
     public String getStateName() {
-        return StateName;
+        return stateName;
     }
 
     public void setStateName(String stateName) {
-        StateName = stateName;
+        this.stateName = stateName;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 }

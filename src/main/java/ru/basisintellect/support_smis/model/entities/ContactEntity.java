@@ -1,23 +1,30 @@
 package ru.basisintellect.support_smis.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name="contact")
 public class ContactEntity extends CustomEntity {
 
     @ManyToOne
-    @JoinColumn(name = "smis_id")
-    SmisEntity smisEntity;
+    @JoinColumn(name = "smis_id", nullable = false)
+    SmisEntity smis;
+
     @Column(name = "name", length = 128)
     String name;
-    @Column (name = "position")
+    @Column (name = "position", length = 128)
     String position;
     @Column(name = "fone_number", length = 128)
     String fonNumber;
 
+    public ContactEntity() {
+    }
+
     public ContactEntity(SmisEntity smisEntity, String name, String position, String fonNumber) {
-        this.smisEntity = smisEntity;
+        this.smis = smisEntity;
         this.name = name;
         this.position = position;
         this.fonNumber = fonNumber;
@@ -25,12 +32,12 @@ public class ContactEntity extends CustomEntity {
 
 
 
-    public SmisEntity getSmisEntity() {
-        return smisEntity;
+    public SmisEntity getSmis() {
+        return smis;
     }
 
-    public void setSmisEntity(SmisEntity smisEntity) {
-        this.smisEntity = smisEntity;
+    public void setSmis(SmisEntity smisEntity) {
+        this.smis = smisEntity;
     }
 
     public String getName() {

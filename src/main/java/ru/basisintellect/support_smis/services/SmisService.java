@@ -7,19 +7,24 @@ import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
 import ru.basisintellect.support_smis.model.SmisStateMsg;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
+import ru.basisintellect.support_smis.model.entities.StateEntity;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
+import ru.basisintellect.support_smis.repositories.StateRepository;
 import ru.basisintellect.support_smis.soap_client.TestConnectClient;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
-import java.util.ConcurrentModificationException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-@Service
+//@Service
 public class SmisService {
 
     class MyThread implements Runnable {
+
+        @Autowired
+        StateRepository repository;
+
+        List<StateEntity> states = (List)repository.findAll();
 
         public void setCancelled(boolean cancelled) {
             this.cancelled = cancelled;
@@ -52,11 +57,11 @@ public class SmisService {
                     }*/ catch (Exception e) {
                         //ловим любое другое исключение - не работает
                             if (e instanceof SoapFaultClientException) {
-                                smisEntity.setState();
+                                smisEntity.setState(states.get(1));
                                 smisService.onChangeState(smisEntity.getId(), true);
 
                             }else{
-                                smisEntity.setEnabled(false);
+                                smisEntity.setState(states.get(2));
                                 smisService.onChangeState(smisEntity.getId(), false);
                             }
                     }
@@ -71,6 +76,8 @@ public class SmisService {
                     e.printStackTrace();
                 }
             }
+
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
     }
 
@@ -126,8 +133,8 @@ public class SmisService {
         smisEntity.setName(name);
         smisEntity.setDateRegistration(new Date());
         smisEntity.setAgreement(agreement);
-        smisEntity.setValidity(validity);
-        smisEntity.setContacts(contacts);
+//        smisEntity.setValidity(validity);
+//        smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
         if (parent_id != null) {
             smisEntity.setParentSmis(smisesRepo.findById(parent_id).get());
@@ -146,8 +153,8 @@ public class SmisService {
         SmisEntity smisEntity = findSmisById(id);
         smisEntity.setName(name);
         smisEntity.setAgreement(agreement);
-        smisEntity.setValidity(validity);
-        smisEntity.setContacts(contacts);
+//        smisEntity.setValidity(validity);
+//        smisEntity.setContacts(contacts);
         smisEntity.setUrl(url);
         smisEntity.setParentSmis(parent);
         smisesRepo.save(smisEntity);

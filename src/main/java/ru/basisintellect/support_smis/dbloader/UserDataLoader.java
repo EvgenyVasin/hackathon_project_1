@@ -36,7 +36,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     SmisRepository smises;
 
     @Autowired
-    SmisService smisService;
+    private RegionRepository regionRepository;
+//    @Autowired
+//    SmisService smisService;
 
     @Autowired
     StateRepository stateRepository;
@@ -51,19 +53,26 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             //добавление состояний работоспособности СМИС
             StateEntity stateUnSuccess = new StateEntity();
             stateUnSuccess.setStateName("НЕ РАБОТАЕТ");
-            stateUnSuccess.setId((long) 2);
+            stateUnSuccess.setStateCode("UN_SUCCESS");
+            stateRepository.save(stateUnSuccess);
+//            stateUnSuccess.setId((long) 2);
+            System.out.println("stateUnSuccess");
 
             StateEntity stateSuccess = new StateEntity();
             stateSuccess.setStateName("РАБОТАЕТ");
-            stateSuccess.setId((long) 1);
+            stateSuccess.setStateCode("SUCCESS");
+            stateRepository.save(stateSuccess);
+//            stateSuccess.setId((long) 1);
+            System.out.println("stateSuccess");
 
             StateEntity stateOffline = new StateEntity();
             stateOffline.setStateName("НЕТ КОМПЛЕКСА");
-            stateOffline.setId((long) 0);
-
-            stateRepository.save(stateUnSuccess);
-            stateRepository.save(stateSuccess);
+            stateOffline.setStateCode("NO_COMPLEX");
             stateRepository.save(stateOffline);
+//            stateOffline.setId((long) 3);
+
+            System.out.println("stateOffline");
+
             //
 
             UserRoleEntity adminRole = new UserRoleEntity();
@@ -97,96 +106,134 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userRepository.save(userEntity1);
 
             //Добавление СМИСа для тестов
-            final SmisEntity smisNSUKS = new SmisEntity();
+            SmisEntity smisNSUKS = new SmisEntity();
             smisNSUKS.setName("НЦУКС");
             smisNSUKS.setDateRegistration(new Date());
             smisNSUKS.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisNSUKS.setState(stateSuccess);
             smisNSUKS.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisNSUKS);
+            System.out.println("smisNSUKS");
 
-            final SmisEntity smisSUKS1 = new SmisEntity();
+            SmisEntity smisSUKS1 = new SmisEntity();
             smisSUKS1.setName("ЦУКС1");
             smisSUKS1.setParentSmis(smisNSUKS);
             smisSUKS1.setDateRegistration(new Date());
             smisSUKS1.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisSUKS1.setState(stateSuccess);
             smisSUKS1.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisSUKS1);
+            System.out.println("smisSUKS1");
 
-
-            final SmisEntity smisSUKS2 = new SmisEntity();
+            SmisEntity smisSUKS2 = new SmisEntity();
             smisSUKS2.setName("ЦУКС2");
             smisSUKS2.setParentSmis(smisNSUKS);
             smisSUKS2.setDateRegistration(new Date());
             smisSUKS2.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisSUKS2.setState(stateSuccess);
             smisSUKS2.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisSUKS2);
+            System.out.println("smisSUKS2");
 
-            final SmisEntity smisEDDS1 = new SmisEntity();
+            SmisEntity smisEDDS1 = new SmisEntity();
             smisEDDS1.setName("ЕДДС1");
             smisEDDS1.setParentSmis(smisSUKS1);
             smisEDDS1.setDateRegistration(new Date());
             smisEDDS1.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisEDDS1.setState(stateSuccess);
             smisEDDS1.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisEDDS1);
+            System.out.println("smisEDDS1");
 
-            final SmisEntity smisEDDS2 = new SmisEntity();
+            SmisEntity smisEDDS2 = new SmisEntity();
             smisEDDS2.setName("ЕДДС2");
             smisEDDS2.setParentSmis(smisSUKS1);
             smisEDDS2.setDateRegistration(new Date());
             smisEDDS2.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisEDDS2.setState(stateSuccess);
             smisEDDS2.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisEDDS2);
+            System.out.println("smisEDDS2");
 
-            final SmisEntity smisEDDS3 = new SmisEntity();
+            SmisEntity smisEDDS3 = new SmisEntity();
             smisEDDS3.setName("ЕДДС3");
             smisEDDS3.setParentSmis(smisSUKS1);
             smisEDDS3.setDateRegistration(new Date());
             smisEDDS3.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisEDDS3.setState(stateSuccess);
             smisEDDS3.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisEDDS3);
+            System.out.println("smisEDDS3");
 
-            final SmisEntity smisEDDS4 = new SmisEntity();
+            SmisEntity smisEDDS4 = new SmisEntity();
             smisEDDS4.setName("ЕДДС4");
             smisEDDS4.setParentSmis(smisSUKS2);
             smisEDDS4.setDateRegistration(new Date());
             smisEDDS4.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisEDDS4.setState(stateSuccess);
             smisEDDS4.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smises.save(smisEDDS4);
+            System.out.println("smisEDDS4");
 
+            RegionEntity regionEntity = new RegionEntity("Центральный");
+            regionRepository.save(regionEntity);
             //
-            final SmisEntity smisEDDS5 = new SmisEntity();
-
-                    Set contacts = new HashSet<ContactEntity>(){{
-                        add(new ContactEntity(smisEDDS5, "Петр Петрович", "главный главный", "8(191)0000000"));
-                        add(new ContactEntity(smisEDDS5, "Петр Василич", "не главный", "8(191)02342"));
-                        add(new ContactEntity(smisEDDS5, "Петр Игорь", "забавный", "8(191)9898989"));
-                    }};
-
-                   smisEDDS5.setContacts(contacts);
-
+            SmisEntity smisEDDS5 = new SmisEntity();
             smisEDDS5.setName("ЕДДС5");
             smisEDDS5.setParentSmis(smisSUKS2);
             smisEDDS5.setDateRegistration(new Date());
             smisEDDS5.setAgreement("соглашение");
-            smisNSUKS.setState(stateRepository.findById((long) 1).get());
+            smisEDDS5.setState(stateSuccess);
             smisEDDS5.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisEDDS5.setRegion(regionEntity);
+            Set contacts = new HashSet<ContactEntity>(){{
+                add(new ContactEntity(smisEDDS5, "Петр Петрович", "главный главный", "8(191)0000000"));
+                add(new ContactEntity(smisEDDS5, "Петр Василич", "не главный", "8(191)02342"));
+                add(new ContactEntity(smisEDDS5, "Петр Игорь", "забавный", "8(191)9898989"));
+            }};
+            smisEDDS5.setContacts(contacts);
+            smises.save(smisEDDS5);
+            System.out.println("smisEDDS5");
 
-            final Set<SmisEntity> setSmises = new HashSet<SmisEntity>();
-            setSmises.add(smisNSUKS);
-            setSmises.add(smisSUKS1);
-            setSmises.add(smisSUKS2);
-            setSmises.add(smisEDDS1);
-            setSmises.add(smisEDDS2);
-            setSmises.add(smisEDDS3);
-            setSmises.add(smisEDDS4);
-            setSmises.add(smisEDDS5);
+//            ContactEntity contact1 = new ContactEntity();
+//            contact1.setSmis(smisEDDS5);
+//            contact1.setFonNumber("8(191)0000000");
+//            contact1.setName("Петр Петрович1");
+//            contact1.setPosition("пидр1");
+//            smisEDDS5.getContacts().add(contact1);
+//            contactsRepository.save(contact1);
 
-            for (SmisEntity smis: setSmises
-                 ) {
-                smises.save(smis);
-            }
+//            ContactEntity contact2 = new ContactEntity();
+//            contact2.setSmis(smisEDDS5);
+//            contact2.setFonNumber("8(191)0000000");
+//            contact2.setName("Петр Петрович2");
+//            contact2.setPosition("пидр2");
+//            contactsRepository.save(contact2);
+//
+//            ContactEntity contact3 = new ContactEntity();
+//            contact3.setSmis(smisEDDS5);
+//            contact3.setFonNumber("8(191)0000000");
+//            contact3.setName("Петр Петрович3");
+//            contact3.setPosition("пидр3");
+//            contactsRepository.save(contact3);
 
-            smisService.init();
+//            ContactEntity contact1 = new ContactEntity(smisEDDS5, "Петр Петрович1", "главный главный1", "8(191)0000000");
+//            contactsRepository.save(contact1);
+//            ContactEntity contact2 = new ContactEntity(smisEDDS5, "Петр Петрович2", "главный главный2", "8(191)0000000");
+//            contactsRepository.save(contact2);
+//            ContactEntity contact3 = new ContactEntity(smisEDDS5, "Петр Петрович3", "главный главный3", "8(191)0000000");
+//            contactsRepository.save(contact3);
+
+
+
+
+
+
+
+
+
+
+//            smisService.init();
 
             //
 
