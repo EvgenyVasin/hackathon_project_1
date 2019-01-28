@@ -38,7 +38,7 @@ public class SmisEntity extends CustomEntity {
 
     //регион
     @ManyToOne
-    @JoinColumn(name = "region_id")
+    @JoinColumn(name = "region_id", nullable = false)
     private RegionEntity region;
 
     //коментарий

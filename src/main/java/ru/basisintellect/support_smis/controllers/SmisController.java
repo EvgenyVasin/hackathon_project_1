@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
+import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.services.SmisService;
 
 import java.util.ArrayList;
@@ -21,65 +22,66 @@ import java.util.List;
  * Created by vasin.e on 17.01.2019.
  */
 
-//@Controller
+@Controller
 public class SmisController {
     @Autowired
-    SmisService smisService;
+    SmisRepository smisRepository;
 
     //добавление ПК ИВ СМИС
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
-        /*if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
-            return null;*/
-        smisService.addSmis(name, agreement, validity, contacts, url, parent_id);
-        return viewListSmises(model);
-    }
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+//    @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
+//    public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
+//        /*if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
+//            return null;*/
+//        smisService.addSmis(name, agreement, validity, contacts, url, parent_id);
+//        return viewListSmises(model);
+//    }
 
     //получение ПК ИВ СМИС
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
-    public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
-        model.addAttribute("smis", smisService.findSmisById(smisId));
-        return "smises/smis_details";
-    }
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+//    @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
+//    public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
+//        model.addAttribute("smis", smisService.findSmisById(smisId));
+//        return "smises/smis_details";
+//    }
 
     //редактирование ПК ИВ СМИС
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    @RequestMapping(value = "/smis_details", method = RequestMethod.POST)
-    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, SmisEntity parent, Model model) {
-        model.addAttribute("smis", smisService.editSmis(smisId, region, agreement, validity, contacts, url, parent));
-        return "smises/smis_details";
-    }
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+//    @RequestMapping(value = "/smis_details", method = RequestMethod.POST)
+//    public String editSmis(Long smisId, String region, String agreement, String validity, String contacts, String url, SmisEntity parent, Model model) {
+//        model.addAttribute("smis", smisService.editSmis(smisId, region, agreement, validity, contacts, url, parent));
+//        return "smises/smis_details";
+//    }
 
     //генерация страницы со смисами
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    @RequestMapping(value = "/smises_table")
-    public String viewSmises(Model model) {
-        model.addAttribute("smisesList", smisService.getAllSmises());
-        return "smises/smises_table";
-    }
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+//    @RequestMapping(value = "/smises_table")
+//    public String viewSmises(Model model) {
+//        model.addAttribute("smisesList", smisService.getAllSmises());
+//        return "smises/smises_table";
+//    }
 
     //генерация листа со смисами для страницы добавления
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
-    @RequestMapping(value = "/add_smis")
-    public String viewSmisesAdd(Model model) {
-        model.addAttribute("smisesList", smisService.getAllSmises());
-        return "smises/add_smis";
-    }
+//    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+//    @RequestMapping(value = "/add_smis")
+//    public String viewSmisesAdd(Model model) {
+//        model.addAttribute("smisesList", smisService.getAllSmises());
+//        return "smises/add_smis";
+//    }
 
     //генерация страницы со смисами2
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();
-        List<SmisEntity> list = smisService.getAllSmises();
+        List<SmisEntity> list = (List<SmisEntity>) smisRepository.findAll();
 
         for (SmisEntity entity : list) {
             SmisEntity parentSMIS = entity.getParentSmis();
             JSONObject obj = new JSONObject();
             obj.put("itemId", entity.getId());
             obj.put("itemName", entity.getName());
+            obj.put("regionName", entity.getRegion().getName());
             if(parentSMIS != null)
                 obj.put("itemParentId", entity.getParentSmis().getId());
             else
