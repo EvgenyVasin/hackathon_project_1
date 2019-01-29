@@ -47,10 +47,10 @@ public class SmisEntity extends CustomEntity {
 
     //контакты
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<ContactEntity> contacts;
+    private  Set<ContactEntity> contacts = new HashSet<>();
 
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<FileEntity> files;
+    private  Set<FileEntity> files = new HashSet<>();
 
         //сеттеры параметров
     /**

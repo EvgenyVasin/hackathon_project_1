@@ -58,7 +58,7 @@
                                 <th th:text="#{complex.name}"></th>
                                 <th th:text="#{complex.region}"></th>
                                 <th th:text="#{complex.dateReg}"></th>
-                                <th th:text="#{complex.agreement}"></th>
+                                <th th:text="#{complex.documents}"></th>
                                 <th th:text="#{complex.validity}"></th>
                                 <th th:text="#{complex.contacts}"></th>
                                 <th th:text="#{complex.url}"></th>
@@ -69,17 +69,21 @@
                     <tbody  class="table table-striped">
                         <tr  th:each="smis : ${smisesList}">
                                 <!--напонение таблицы-->
-                                <th th:text="${smis.name}"></th>
-                                <th th:text="${smis.region}"></th>
-                                <th th:text="${smis.dateRegistration}"></th>
-                                <th><a th:text="${smis.agreement}"
-                                       th:href="${smis.agreement}"
-                                       type="application/file"></a></th>
-                                <th th:text="${smis.validity}"></a></th>
-                                <th th:text="${smis.contacts}"></th>
-                                <th th:text="${smis.url}"></th>
-                                <th th:text="${smis.enabled}"></th>
-                                <th th:text="${smis.description}"></th>
+                                <td th:text="${smis.name}"></td>
+                                <td th:text="${smis.region.name}"></td>
+                                <td th:text="${smis.dateRegistration}"></td>
+                                <td th:text="${smis.files}"></td>
+                                <td th:text="${smis.agreement}"></td>
+                                <td>
+                                    <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
+
+                                    <p class="contacts-cell" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
+
+                                    </div>
+                                </td>
+                                <td th:text="${smis.url}"></td>
+                                <td th:text="${smis.state.stateName}"></td>
+                                <td th:text="${smis.description}"></td>
                         </tr>
                     </tbody>
                 </table>

@@ -24,7 +24,7 @@ public class SmisService {
         @Autowired
         StateRepository repository;
 
-        List<StateEntity> states = (List)repository.findAll();
+        List<StateEntity> states = (List<StateEntity>)repository.findAll();
 
         public void setCancelled(boolean cancelled) {
             this.cancelled = cancelled;

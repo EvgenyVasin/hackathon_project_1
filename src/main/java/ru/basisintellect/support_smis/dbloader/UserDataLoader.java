@@ -195,7 +195,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS5.setState(stateSuccess);
             smisEDDS5.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
             smisEDDS5.setRegion(regionEntity);
-            Set contacts = new HashSet<ContactEntity>(){{
+            Set<ContactEntity> contacts = new HashSet<ContactEntity>(){{
                 add(new ContactEntity(smisEDDS5, "Петр Петрович", "главный главный", "8(191)0000000"));
                 add(new ContactEntity(smisEDDS5, "Петр Василич", "не главный", "8(191)02342"));
                 add(new ContactEntity(smisEDDS5, "Петр Игорь", "забавный", "8(191)9898989"));

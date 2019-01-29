@@ -17,7 +17,7 @@ public class ContactEntity extends CustomEntity {
     String name;
     @Column (name = "position", length = 128)
     String position;
-    @Column(name = "fone_number", length = 128)
+    @Column(name = "pfone_number", length = 128)
     String fonNumber;
 
     public ContactEntity() {

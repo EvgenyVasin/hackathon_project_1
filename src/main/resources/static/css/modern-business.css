@@ -6140,7 +6140,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    width: auto;
 }
 
 .panel-body {
@@ -6342,7 +6343,9 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 }
 
 .panel-primary {
-    border-color: #337ab7
+    border-color: #337ab7;
+    position: absolute;
+    margin-left: 10px !important;
 }
 
 .panel-primary > .panel-heading {
@@ -7481,4 +7484,10 @@ button.close {
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+
+.contacts-cell{
+    white-space: nowrap;
+    word-wrap: break-word;
+}
 
