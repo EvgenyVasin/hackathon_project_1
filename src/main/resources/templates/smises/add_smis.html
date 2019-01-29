@@ -7,11 +7,11 @@
 
     <style>
 
-        .btn-fix{
+        /*.btn-fix{
 
             margin-left: 275px !important;
             margin-top: -125px !important;
-        }
+        }*/
 
         /*.btn-remove-fix {
             margin-left: -280px !important;
@@ -115,43 +115,39 @@
                                     </div>
 
                                     <!--добавление контактов-->
-                                    <div class="input-group input-contact form-fix">
+                                    <div class="input-group input-contacts form-fix">
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-file"></span></span>
                                         <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.name}"/>
                                         <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.position}"/>
                                         <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.phone}"/>
-                                        <span><button type="button" class="btn btn-success btn-add btn-fix btn-new">✚</button></span>
-                                        <script>
-                                            $(document).on('click', '.btn-new', function(event) {
-                                                event.preventDefault();
-
-                                                var field = $(this).closest('.input-contact');
-                                                var field_new = field.clone();
-
-                                                $(this)
-                                                    .toggleClass('btn-success')
-                                                    .toggleClass('btn-add')
-                                                    .toggleClass('btn-danger')
-                                                    .toggleClass('btn-remove')
-                                                    .toggleClass('btn-remove-new')
-                                                    .toggleClass('btn-remove-fix')
-                                                    .html('✖');
-
-                                                field_new.find('input').val('');
-                                                field_new.insertAfter(field);
-                                            });
-
-                                            $(document).on('click', '.btn-remove', function(event) {
-                                                event.preventDefault();
-                                                $(this).closest('.input-contact').remove();
-                                            });
-                                        </script>
-
+                                        <span><button type="button" class="btn btn-success btn-add btn-add-contacts">✚</button></span>
                                     </div>
 
+                                    <script>
+                                        $(document).on('click', '.btn-add-contacts', function(event) {
+                                            event.preventDefault();
 
+                                            var field = $(this).closest('.input-contacts');
+                                            var field_new = field.clone();
 
+                                            $(this)
+                                                .toggleClass('btn-success')
+                                                .toggleClass('btn-add')
+                                                .toggleClass('btn-danger')
+                                                .toggleClass('btn-remove')
+                                                .toggleClass('btn-remove-contacts')
+                                                .html('✖');
+
+                                            field_new.find('input').val('');
+                                            field_new.insertAfter(field);
+                                        });
+
+                                        $(document).on('click', '.btn-remove-contacts', function(event) {
+                                            event.preventDefault();
+                                            $(this).closest('.input-contacts').remove();
+                                        });
+                                    </script>
 
                                 </td>
                                 <td>
@@ -160,12 +156,12 @@
                                     <div class="input-group input-file form-fix">
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-file"></span></span>
-                                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix" type="file" name="files[]">
-                                        <span><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span>
+                                        <input type="text" name="multiple[]" class="form-control form-fix" th:placeholder="#{file.name}"> <input class="form-control form-fix" type="file" name="files[]">
+                                        <span><button type="button" class="btn btn-success btn-add btn-add-file">✚</button></span>
                                     </div>
 
                                     <script>
-                                        $(document).on('click', '.btn-add', function(event) {
+                                        $(document).on('click', '.btn-add-file', function(event) {
                                             event.preventDefault();
 
                                             var field = $(this).closest('.input-file');
@@ -177,7 +173,6 @@
                                                 .toggleClass('btn-danger')
                                                 .toggleClass('btn-remove')
                                                 .toggleClass('btn-remove-file')
-                                                .toggleClass('btn-remove-fix')
                                                 .html('✖');
 
                                             field_new.find('input').val('');
