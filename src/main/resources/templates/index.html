@@ -10,7 +10,7 @@
 <body>
 
 <h2 style="color: #ff0000">Страница в разработке!</h2>
-<p><button type="button" onclick="btnClick();">добавить файл</button></p>
+<!--<p><button type="button" onclick="btnClick();">добавить файл</button></p>
 <form role="form" th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
     <p>Загрузите ваши файлы на сервер</p>
 
@@ -28,6 +28,46 @@
         files.appendChild(p);
     }
 
+</script>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6">
+            <form>
+                <div class="form-group">
+                    <label>Добавить INPUT</label>
+                    <div class="form-group input-group">
+                        <input type="text" name="multiple[]" class="form-control"> <input class="form-control" type="file" name="files[]">
+                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('click', '.btn-add', function(event) {
+        event.preventDefault();
+
+        var field = $(this).closest('.form-group');
+        var field_new = field.clone();
+
+        $(this)
+            .toggleClass('btn-success')
+            .toggleClass('btn-add')
+            .toggleClass('btn-danger')
+            .toggleClass('btn-remove')
+            .html('✖');
+
+        field_new.find('input').val('');
+        field_new.insertAfter(field);
+    });
+
+    $(document).on('click', '.btn-remove', function(event) {
+        event.preventDefault();
+        $(this).closest('.form-group').remove();
+    });
 </script>
+
 </body>
 </html>
