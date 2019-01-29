@@ -30,4 +30,12 @@ public class FileEntity extends CustomEntity{
     public void setLink(String link) {
         this.link = link;
     }
+
+    public FileEntity() {
+    }
+
+    public FileEntity(String name, String link) {
+        this.name = name;
+        this.link = link;
+    }
 }

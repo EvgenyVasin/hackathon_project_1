@@ -29,4 +29,12 @@ public class StateEntity extends CustomEntity {
     public void setStateCode(String stateCode) {
         this.stateCode = stateCode;
     }
+
+    public StateEntity() {
+    }
+
+    public StateEntity(String stateName, String stateCode) {
+        this.stateName = stateName;
+        this.stateCode = stateCode;
+    }
 }

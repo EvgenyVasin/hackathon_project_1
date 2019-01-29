@@ -28,4 +28,12 @@ public class EquipmentEntity extends CustomEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public EquipmentEntity() {
+    }
+
+    public EquipmentEntity(SmisEntity smis, String name) {
+        this.smis = smis;
+        this.name = name;
+    }
 }

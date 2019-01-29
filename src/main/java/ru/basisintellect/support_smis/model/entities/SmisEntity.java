@@ -185,6 +185,23 @@ public class SmisEntity extends CustomEntity {
     //конец блока геттеров
 
 
+    public SmisEntity() {
+    }
+
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, String url, StateEntity state, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, Set<EquipmentEntity> equipments) {
+        this.parentSmis = parentSmis;
+        this.name = name;
+        this.dateRegistration = dateRegistration;
+        this.agreement = agreement;
+        this.url = url;
+        this.state = state;
+        this.region = region;
+        this.description = description;
+        this.contacts = contacts;
+        this.files = files;
+        this.equipments = equipments;
+    }
+
     //текстовое представление объекта для отладки
     @Override
     public String toString() {

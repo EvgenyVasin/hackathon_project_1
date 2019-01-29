@@ -21,4 +21,13 @@ public class ImageEntity extends CustomEntity{
     public void setImgLink(String imgLink) {
         this.imgLink = imgLink;
     }
+
+    public ImageEntity() {
+    }
+
+    public ImageEntity(String imgLink) {
+        this.imgLink = imgLink;
+    }
+
+
 }

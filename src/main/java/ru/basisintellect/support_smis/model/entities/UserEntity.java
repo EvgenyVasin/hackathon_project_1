@@ -144,6 +144,19 @@ public class UserEntity extends CustomImgEntity{
     }
 
 
+    public UserEntity() {
+    }
+
+    public UserEntity(String password, String mail, String firstName, String lastName, boolean enabled, UserRoleEntity userRole, Date dateRegistration, Date lastDate) {
+        this.password = password;
+        this.mail = mail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enabled = enabled;
+        this.userRole = userRole;
+        this.dateRegistration = dateRegistration;
+        this.lastDate = lastDate;
+    }
 
     /* (non-Javadoc)
                  * @see java.lang.Object#toString()
