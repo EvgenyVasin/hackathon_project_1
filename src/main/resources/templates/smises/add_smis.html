@@ -3,6 +3,7 @@
 <head>
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
+
 </head>
 <body>
 <div class="container">
@@ -16,78 +17,161 @@
                 </div>
                 <form role="form" th:action="@{/addSmis}" method="post">
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6 login-box">
 
-                                <!--группа инпутов для добавления нового СМИСа-->
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="name"
-                                           th:placeholder="#{complex.name}" required="True" autofocus="True"/>
-                                </div>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="region"
-                                           th:placeholder="#{complex.region}" autofocus="True"/>
-                                </div>
+                            </tr>
+                            </thead>
+                        </table>
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="agreement"
-                                           th:placeholder="#{complex.agreement}"/>
-                                </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-xs-6 col-sm-6 col-md-6 login-box">-->
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="validity"
-                                           th:placeholder="#{complex.validity}"/>
-                                </div>
+                                <!--&lt;!&ndash;группа инпутов для добавления нового СМИСа&ndash;&gt;-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="name"-->
+                                           <!--th:placeholder="#{complex.name}" required="True" autofocus="True"/>-->
+                                <!--</div>-->
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="contacts"
-                                           th:placeholder="#{complex.contacts}"/>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="url"
-                                           th:placeholder="#{complex.url}"/>
-                                </div>
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="region"-->
+                                           <!--th:placeholder="#{complex.region}" autofocus="True"/>-->
+                                <!--</div>-->
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="description"
-                                           th:placeholder="#{complex.description}" autofocus="True"/>
-                                </div>
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="agreement"-->
+                                           <!--th:placeholder="#{complex.agreement}"/>-->
+                                <!--</div>-->
 
-                                <!---->
-                                <!--выпадающий список для выбора родителя-->
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <select class="form-control" name="parent_id">
-                                        <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
-                                        <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
-                                    </select>
-                                </div>
-                                <!---->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="validity"-->
+                                           <!--th:placeholder="#{complex.validity}"/>-->
+                                <!--</div>-->
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="file" class="form-control" multiple="multiple" name="files" autofocus="True"/>
-                                </div>
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="contacts"-->
+                                           <!--th:placeholder="#{complex.contacts}"/>-->
+                                <!--</div>-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="url"-->
+                                           <!--th:placeholder="#{complex.url}"/>-->
+                                <!--</div>-->
 
-                            </div>
-                        </div>
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="description"-->
+                                           <!--th:placeholder="#{complex.description}" autofocus="True"/>-->
+                                <!--</div>-->
+
+                                <!--&lt;!&ndash;&ndash;&gt;-->
+                                <!--&lt;!&ndash;выпадающий список для выбора родителя&ndash;&gt;-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<select class="form-control" name="parent_id">-->
+                                        <!--<option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>-->
+                                        <!--<option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;&ndash;&gt;-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="file" class="form-control" multiple="multiple" name="files" autofocus="True"/>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                            <!--<div class="col-xs-6 col-sm-6 col-md-6 login-box">-->
+
+                                <!--&lt;!&ndash;группа инпутов для добавления нового СМИСа&ndash;&gt;-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="name"-->
+                                           <!--th:placeholder="#{complex.name}" required="True" autofocus="True"/>-->
+                                <!--</div>-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="region"-->
+                                           <!--th:placeholder="#{complex.region}" autofocus="True"/>-->
+                                <!--</div>-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="agreement"-->
+                                           <!--th:placeholder="#{complex.agreement}"/>-->
+                                <!--</div>-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="validity"-->
+                                           <!--th:placeholder="#{complex.validity}"/>-->
+                                <!--</div>-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="contacts"-->
+                                           <!--th:placeholder="#{complex.contacts}"/>-->
+                                <!--</div>-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="url"-->
+                                           <!--th:placeholder="#{complex.url}"/>-->
+                                <!--</div>-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="description"-->
+                                           <!--th:placeholder="#{complex.description}" autofocus="True"/>-->
+                                <!--</div>-->
+
+                                <!--&lt;!&ndash;&ndash;&gt;-->
+                                <!--&lt;!&ndash;выпадающий список для выбора родителя&ndash;&gt;-->
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<select class="form-control" name="parent_id">-->
+                                        <!--<option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>-->
+                                        <!--<option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;&ndash;&gt;-->
+
+                                <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                            <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="file" class="form-control" multiple="multiple" name="files" autofocus="True"/>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
                     </div>
                     <div class="panel-footer">
                         <div class="row">

@@ -7,9 +7,10 @@
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
-    <script src="/webjars/jquery/jquery.min.js"></script>
+
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
 
 
     <style>
@@ -181,7 +182,7 @@
                     var li = $('<li>').append(
                         $('<div>').addClass('state')
                         ).append(
-                        $('<div>').html(el.itemName +" "+ el.regionName).attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
+                        $('<div>').html(el.itemName +" "+ el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
                         ),
                         nestedTree = createTree(data, el.itemId);
 

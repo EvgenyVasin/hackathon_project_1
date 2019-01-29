@@ -41,16 +41,23 @@ public class SmisEntity extends CustomEntity {
     @JoinColumn(name = "region_id", nullable = false)
     private RegionEntity region;
 
+
+
     //коментарий
     @Column(name="description", length = 512)
     private String description;
 
     //контакты
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<ContactEntity> contacts = new HashSet<>();
+    private  Set<ContactEntity> contacts;
 
+    //файлы
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<FileEntity> files = new HashSet<>();
+    private  Set<SmisFileEntity> files;
+
+    //оборудование
+    @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private  Set<EquipmentEntity> equipments;
 
         //сеттеры параметров
     /**
@@ -102,9 +109,14 @@ public class SmisEntity extends CustomEntity {
         this.contacts = contacts;
     }
 
-    public void setFiles( Set<FileEntity> files) {
+    public void setFiles( Set<SmisFileEntity> files) {
         this.files = files;
     }
+
+    public void setEquipments(Set<EquipmentEntity> equipments) {
+        this.equipments = equipments;
+    }
+
     //конец блока сеттеров
 
 
@@ -162,8 +174,12 @@ public class SmisEntity extends CustomEntity {
     }
 
 
-    public Collection<FileEntity> getFiles() {
+    public Collection<SmisFileEntity> getFiles() {
         return files;
+    }
+
+    public Set<EquipmentEntity> getEquipments() {
+        return equipments;
     }
 
     //конец блока геттеров
