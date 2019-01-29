@@ -6344,8 +6344,6 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 
 .panel-primary {
     border-color: #337ab7;
-    position: absolute;
-    margin-left: 10px !important;
 }
 
 .panel-primary > .panel-heading {
@@ -7489,5 +7487,11 @@ button.close {
 .contacts-cell{
     white-space: nowrap;
     word-wrap: break-word;
+}
+
+.pannel-table{
+    position: absolute;
+    display: block;
+    margin-left: -15% !important;
 }
 
