@@ -30,6 +30,12 @@ public class UserRoleEntity extends CustomEntity{
     }
 
 
+    public UserRoleEntity() {
+    }
+
+    public UserRoleEntity(String userRoleName) {
+        this.userRoleName = userRoleName;
+    }
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

@@ -28,4 +28,12 @@ public class SmisFileEntity extends CustomEntity{
     public void setFile(FileEntity file) {
         this.file = file;
     }
+
+    public SmisFileEntity() {
+    }
+
+    public SmisFileEntity(SmisEntity smis, FileEntity file) {
+        this.smis = smis;
+        this.file = file;
+    }
 }

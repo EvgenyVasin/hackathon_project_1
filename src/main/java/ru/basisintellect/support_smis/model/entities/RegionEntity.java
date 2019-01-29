@@ -13,8 +13,7 @@ public class RegionEntity extends CustomEntity {
     @Column(name = "name", length = 128)
     String name;
 
-    public RegionEntity() {
-    }
+
 
     public RegionEntity(String name) {
         this.name = name;
@@ -33,6 +32,14 @@ public class RegionEntity extends CustomEntity {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public RegionEntity() {
+    }
+
+    public RegionEntity(Set<SmisEntity> smises, String name) {
+        this.smises = smises;
         this.name = name;
     }
 }
