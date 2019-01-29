@@ -4,6 +4,35 @@
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
 
+
+    <style>
+
+        .btn-fix{
+
+            margin-left: 275px !important;
+            margin-top: -125px !important;
+        }
+
+        /*.btn-remove-fix {
+            margin-left: -280px !important;
+        }*/
+
+        .form-fix {
+            height: 20px !important;
+            width: 250px !important;
+        }
+
+        .input-group{
+            margin-bottom: 10px !important;
+            margin-right: 15px !important;
+        }
+
+
+
+
+
+    </style>
+
 </head>
 <body>
 <div class="container">
@@ -84,37 +113,78 @@
                                     <input type="text" class="form-control" name="contacts"
                                     th:placeholder="#{complex.contacts}"/>
                                     </div>
+
+                                    <!--добавление файлов-->
+                                    <div class="input-group input-file form-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-file"></span></span>
+                                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix" type="file" name="files[]">
+                                        <button type="button" class="btn btn-success btn-add btn-fix">✚</button>
+                                    </div>
+
+                                    <script>
+                                        $(document).on('click', '.btn-add', function(event) {
+                                            event.preventDefault();
+
+                                            var field = $(this).closest('.input-file');
+                                            var field_new = field.clone();
+
+                                            $(this)
+                                                .toggleClass('btn-success')
+                                                .toggleClass('btn-add')
+                                                .toggleClass('btn-danger')
+                                                .toggleClass('btn-remove')
+                                                .toggleClass('btn-remove-fix')
+                                                .html('✖');
+
+                                            field_new.find('input').val('');
+                                            field_new.insertAfter(field);
+                                        });
+
+                                        $(document).on('click', '.btn-remove', function(event) {
+                                            event.preventDefault();
+                                            $(this).closest('.input-file').remove();
+                                        });
+                                    </script>
+
+
                                 </td>
                                 <td>
 
                                     <!--добавление файлов-->
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-
-                                    <input type="file" class="form-control" multiple="multiple" name="files" autofocus="True"/>
-
-                                        <button type="button" onclick="btnClick();" class="form-control">добавить файл</button>
-                                        <form role="form" th:action="@{/uploadFile}" method="post" enctype="multipart/form-data">
-
-
-                                            <p id="files"></p>
-
-                                            <input type="submit" value="Отправить" class="form-control"></p>
-                                        </form>
-                                        <script>
-
-                                            function btnClick() {
-                                                var files = document.getElementById('files');
-                                                var p = document.createElement('p');
-                                                p.style.wordWrap = 'break-word';
-                                                p.innerHTML = '<input type="file" class="form-control" name="files" multiple/>';
-                                                files.appendChild(p);
-                                            }
-
-                                        </script>
-
+                                    <div class="input-group input-file form-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-file"></span></span>
+                                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix" type="file" name="files[]">
+                                        <button type="button" class="btn btn-success btn-add btn-fix">✚</button>
                                     </div>
+
+                                    <script>
+                                        $(document).on('click', '.btn-add', function(event) {
+                                            event.preventDefault();
+
+                                            var field = $(this).closest('.input-file');
+                                            var field_new = field.clone();
+
+                                            $(this)
+                                                .toggleClass('btn-success')
+                                                .toggleClass('btn-add')
+                                                .toggleClass('btn-danger')
+                                                .toggleClass('btn-remove')
+                                                .toggleClass('btn-remove-fix')
+                                                .html('✖');
+
+                                            field_new.find('input').val('');
+                                            field_new.insertAfter(field);
+                                        });
+
+                                        $(document).on('click', '.btn-remove', function(event) {
+                                            event.preventDefault();
+                                            $(this).closest('.input-file').remove();
+                                        });
+                                    </script>
+
+
                                 </td>
                                 <td>
                                     <div class="input-group">

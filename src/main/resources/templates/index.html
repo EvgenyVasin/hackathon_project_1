@@ -6,6 +6,28 @@
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
+
+    <style>
+
+        .btn-fix{
+/*
+            margin-left: -89px !important;
+*/
+            margin-top: -35px !important;
+        }
+
+        .btn-remove-fix {
+            margin-left: -70px !important;
+        }
+
+        .form-fix {
+            height: 20px !important;
+            width: 500px !important;
+        }
+
+
+    </style>
+
 </head>
 <body>
 
@@ -37,8 +59,8 @@
                 <div class="form-group">
                     <label>Добавить INPUT</label>
                     <div class="form-group input-group">
-                        <input type="text" name="multiple[]" class="form-control"> <input class="form-control" type="file" name="files[]">
-                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span>
+                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix btn" type="file" name="files[]">
+                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span>
                     </div>
                 </div>
             </form>
@@ -57,6 +79,7 @@
             .toggleClass('btn-add')
             .toggleClass('btn-danger')
             .toggleClass('btn-remove')
+            .toggleClass('btn-remove-fix')
             .html('✖');
 
         field_new.find('input').val('');
