@@ -115,75 +115,37 @@
                                     </div>
 
                                     <!--добавление контактов-->
-                                    <div class="input-group input-contacts form-fix">
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-file"></span></span>
-                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.name}"/>
-                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.position}"/>
-                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.phone}"/>
-                                        <span><button type="button" class="btn btn-success btn-add btn-add-contacts">✚</button></span>
+                                    <label>Добавить контакты</label>
+                                    <div class="form_group">
+                                        <table>
+                                            <tr>
+                                                <td><input type="text" name="fones[]" ></td>
+                                                <td><input type="text" name="names[]" ></td>
+                                                <td><input type="text" name="positions[]" ></td>
+                                                <td><button type="button" class="btn_add">✚</button></td>
+                                            </tr>
+                                        </table>
                                     </div>
 
-                                    <script>
-                                        $(document).on('click', '.btn-add-contacts', function(event) {
-                                            event.preventDefault();
-
-                                            var field = $(this).closest('.input-contacts');
-                                            var field_new = field.clone();
-
-                                            $(this)
-                                                .toggleClass('btn-success')
-                                                .toggleClass('btn-add')
-                                                .toggleClass('btn-danger')
-                                                .toggleClass('btn-remove')
-                                                .toggleClass('btn-remove-contacts')
-                                                .html('✖');
-
-                                            field_new.find('input').val('');
-                                            field_new.insertAfter(field);
-                                        });
-
-                                        $(document).on('click', '.btn-remove-contacts', function(event) {
-                                            event.preventDefault();
-                                            $(this).closest('.input-contacts').remove();
-                                        });
-                                    </script>
 
                                 </td>
                                 <td>
 
                                     <!--добавление файлов-->
-                                    <div class="input-group input-file form-fix">
-                                        <span class="input-group-addon"><span
-                                                class="glyphicon glyphicon-file"></span></span>
-                                        <input type="text" name="multiple[]" class="form-control form-fix" th:placeholder="#{file.name}"> <input class="form-control form-fix" type="file" name="files[]">
-                                        <span><button type="button" class="btn btn-success btn-add btn-add-file">✚</button></span>
+                                    <label>Добавить файлы</label>
+                                    <div class="form_group">
+
+
+                                        <table>
+                                            <tr>
+                                                <td><input type="text" name="fileNames[]" ></td>
+                                                <td><input type="file" name="files[]"></td>
+                                                <td><button type="button" class="btn_add">✚</button></td>
+                                            </tr>
+                                        </table>
                                     </div>
 
-                                    <script>
-                                        $(document).on('click', '.btn-add-file', function(event) {
-                                            event.preventDefault();
 
-                                            var field = $(this).closest('.input-file');
-                                            var field_new = field.clone();
-
-                                            $(this)
-                                                .toggleClass('btn-success')
-                                                .toggleClass('btn-add')
-                                                .toggleClass('btn-danger')
-                                                .toggleClass('btn-remove')
-                                                .toggleClass('btn-remove-file')
-                                                .html('✖');
-
-                                            field_new.find('input').val('');
-                                            field_new.insertAfter(field);
-                                        });
-
-                                        $(document).on('click', '.btn-remove-file', function(event) {
-                                            event.preventDefault();
-                                            $(this).closest('.input-file').remove();
-                                        });
-                                    </script>
 
 
                                 </td>
@@ -199,6 +161,30 @@
                             </tbody>
 
                         </table>
+                        <script>
+                            $(document).on('click', '.btn_add', function(event) {
+                                event.preventDefault();
+
+                                var field = $(this).closest('.form_group');
+                                var field_new = field.clone();
+
+                                $(this)
+                                // .toggleClass('btn-success')
+                                    .toggleClass('btn_add')
+                                    // .toggleClass('btn-danger')
+                                    .toggleClass('btn_remove')
+                                    // .toggleClass('btn-remove-fix')
+                                    .html('✖');
+
+                                field_new.find('input').val('');
+                                field_new.insertAfter(field);
+                            });
+
+                            $(document).on('click', '.btn_remove', function(event) {
+                                event.preventDefault();
+                                $(this).closest('.form_group').remove();
+                            });
+                        </script>
 
                         <!--<div class="row">-->
                             <!--<div class="col-xs-6 col-sm-6 col-md-6 login-box">-->
