@@ -114,38 +114,43 @@
                                     th:placeholder="#{complex.contacts}"/>
                                     </div>
 
-                                    <!--добавление файлов-->
-                                    <div class="input-group input-file form-fix">
+                                    <!--добавление контактов-->
+                                    <div class="input-group input-contact form-fix">
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-file"></span></span>
-                                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix" type="file" name="files[]">
-                                        <button type="button" class="btn btn-success btn-add btn-fix">✚</button>
+                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.name}"/>
+                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.position}"/>
+                                        <input type="text" class="form-control" name="contacts" th:placeholder="#{complex.contacts.phone}"/>
+                                        <span><button type="button" class="btn btn-success btn-add btn-fix btn-new">✚</button></span>
+                                        <script>
+                                            $(document).on('click', '.btn-new', function(event) {
+                                                event.preventDefault();
+
+                                                var field = $(this).closest('.input-contact');
+                                                var field_new = field.clone();
+
+                                                $(this)
+                                                    .toggleClass('btn-success')
+                                                    .toggleClass('btn-add')
+                                                    .toggleClass('btn-danger')
+                                                    .toggleClass('btn-remove')
+                                                    .toggleClass('btn-remove-new')
+                                                    .toggleClass('btn-remove-fix')
+                                                    .html('✖');
+
+                                                field_new.find('input').val('');
+                                                field_new.insertAfter(field);
+                                            });
+
+                                            $(document).on('click', '.btn-remove', function(event) {
+                                                event.preventDefault();
+                                                $(this).closest('.input-contact').remove();
+                                            });
+                                        </script>
+
                                     </div>
 
-                                    <script>
-                                        $(document).on('click', '.btn-add', function(event) {
-                                            event.preventDefault();
 
-                                            var field = $(this).closest('.input-file');
-                                            var field_new = field.clone();
-
-                                            $(this)
-                                                .toggleClass('btn-success')
-                                                .toggleClass('btn-add')
-                                                .toggleClass('btn-danger')
-                                                .toggleClass('btn-remove')
-                                                .toggleClass('btn-remove-fix')
-                                                .html('✖');
-
-                                            field_new.find('input').val('');
-                                            field_new.insertAfter(field);
-                                        });
-
-                                        $(document).on('click', '.btn-remove', function(event) {
-                                            event.preventDefault();
-                                            $(this).closest('.input-file').remove();
-                                        });
-                                    </script>
 
 
                                 </td>
@@ -156,7 +161,7 @@
                                         <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-file"></span></span>
                                         <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix" type="file" name="files[]">
-                                        <button type="button" class="btn btn-success btn-add btn-fix">✚</button>
+                                        <span><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span>
                                     </div>
 
                                     <script>
@@ -171,6 +176,7 @@
                                                 .toggleClass('btn-add')
                                                 .toggleClass('btn-danger')
                                                 .toggleClass('btn-remove')
+                                                .toggleClass('btn-remove-file')
                                                 .toggleClass('btn-remove-fix')
                                                 .html('✖');
 
@@ -178,7 +184,7 @@
                                             field_new.insertAfter(field);
                                         });
 
-                                        $(document).on('click', '.btn-remove', function(event) {
+                                        $(document).on('click', '.btn-remove-file', function(event) {
                                             event.preventDefault();
                                             $(this).closest('.input-file').remove();
                                         });
