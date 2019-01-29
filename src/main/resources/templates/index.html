@@ -55,40 +55,47 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
+            <label>Добавить контакты</label>
             <form>
-                <div class="form-group">
-                    <label>Добавить INPUT</label>
-                    <div class="form-group input-group">
-                        <input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix btn" type="file" name="files[]">
-                        <span class="input-group-btn"><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span>
-                    </div>
+                <div class="form_group">
+
+
+                        <table>
+                            <tr>
+                                <td><input type="text" name="fones[]" ></td>
+                                <td><input type="text" name="names[]" ></td>
+                                <td><input type="text" name="positions[]" ></td>
+                                <td><button type="button" class="btn_add">✚</button></td>
+                            </tr>
+                        </table>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
 <script>
-    $(document).on('click', '.btn-add', function(event) {
+    $(document).on('click', '.btn_add', function(event) {
         event.preventDefault();
 
-        var field = $(this).closest('.form-group');
+        var field = $(this).closest('.form_group');
         var field_new = field.clone();
 
         $(this)
-            .toggleClass('btn-success')
-            .toggleClass('btn-add')
-            .toggleClass('btn-danger')
-            .toggleClass('btn-remove')
-            .toggleClass('btn-remove-fix')
+            // .toggleClass('btn-success')
+            .toggleClass('btn_add')
+            // .toggleClass('btn-danger')
+            .toggleClass('btn_remove')
+            // .toggleClass('btn-remove-fix')
             .html('✖');
 
         field_new.find('input').val('');
         field_new.insertAfter(field);
     });
 
-    $(document).on('click', '.btn-remove', function(event) {
+    $(document).on('click', '.btn_remove', function(event) {
         event.preventDefault();
-        $(this).closest('.form-group').remove();
+        $(this).closest('.form_group').remove();
     });
 </script>
 
