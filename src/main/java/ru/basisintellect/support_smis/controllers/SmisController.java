@@ -81,17 +81,18 @@ public class SmisController {
     }*/
 
     //генерация страницы со смисами2
-    /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();
-        List<SmisEntity> list = smisService.getAllSmises();
+        List<SmisEntity> list = (List<SmisEntity>) smisRepository.findAll();
 
         for (SmisEntity entity : list) {
             SmisEntity parentSMIS = entity.getParentSmis();
             JSONObject obj = new JSONObject();
             obj.put("itemId", entity.getId());
             obj.put("itemName", entity.getName());
+            obj.put("regionName", entity.getRegion().getName());
             if(parentSMIS != null)
                 obj.put("itemParentId", entity.getParentSmis().getId());
             else
@@ -100,5 +101,5 @@ public class SmisController {
         }
         model.addAttribute("data", data);
         return "smises/smises_list";
-    }*/
+    }
 }

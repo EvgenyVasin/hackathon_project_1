@@ -57,11 +57,12 @@
                                 <!--заголовки таблицы-->
                                 <th th:text="#{complex.name}"></th>
                                 <th th:text="#{complex.region}"></th>
-                                <th th:text="#{complex.dateReg}"></th>
-                                <th th:text="#{complex.documents}"></th>
-                                <th th:text="#{complex.validity}"></th>
+                                <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
+                                <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
+                                <th th:text="#{complex.agreementNumber}"></th>
+                                <th th:text="#{complex.agreementDate}"></th>
                                 <th th:text="#{complex.contacts}"></th>
-                                <th th:text="#{complex.url}"></th>
+                                <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
                                 <th th:text="#{complex.enabled}"></th>
                                 <th th:text="#{complex.description}"></th>
                         </tr>
@@ -71,9 +72,10 @@
                                 <!--напонение таблицы-->
                                 <td th:text="${smis.name}"></td>
                                 <td th:text="${smis.region.name}"></td>
-                                <td th:text="${smis.dateRegistration}"></td>
-                                <td th:text="${smis.files}"></td>
+                                <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
+                                <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
                                 <td th:text="${smis.agreement}"></td>
+                                <td ></td>  <!--вернуть в Entity срок соглашения-->
                                 <td>
                                     <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
 
@@ -81,7 +83,7 @@
 
                                     </div>
                                 </td>
-                                <td th:text="${smis.url}"></td>
+                                <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->
                                 <td th:text="${smis.state.stateName}"></td>
                                 <td th:text="${smis.description}"></td>
                         </tr>

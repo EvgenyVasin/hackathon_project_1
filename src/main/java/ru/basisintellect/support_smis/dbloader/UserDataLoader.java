@@ -110,6 +110,14 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             regionRepository.save(regionEntity);
 
             SmisEntity smisNSUKS = new SmisEntity();
+
+            Set<ContactEntity> contactsNSUKS = new HashSet<ContactEntity>(){{
+                add(new ContactEntity(smisNSUKS, "Иван Васильевич", "ЦАРЬ", "палаты Кремля"));
+                add(new ContactEntity(smisNSUKS, "Игорь Игорь", "в честь олимпийских игр", "8(191)023-42-89"));
+                add(new ContactEntity(smisNSUKS, "Петр I", "император", "Зимний Дворец"));
+            }};
+            smisNSUKS.setContacts(contactsNSUKS);
+
             smisNSUKS.setName("НЦУКС");
             smisNSUKS.setDateRegistration(new Date());
             smisNSUKS.setAgreement("соглашение");
@@ -120,6 +128,14 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             System.out.println("smisNSUKS");
 
             SmisEntity smisSUKS1 = new SmisEntity();
+
+            Set<ContactEntity> contactsSUKS1 = new HashSet<ContactEntity>(){{
+                add(new ContactEntity(smisSUKS1, "Владимир Путин", "президент", "8(919)-000-00-00"));
+                add(new ContactEntity(smisSUKS1, "Дмитрий Медведев", "премьер министр", "8(191)023-42-89"));
+                add(new ContactEntity(smisSUKS1, "Алексей Навальный", "видео блоггер", "8(919)-888-88-88"));
+            }};
+            smisSUKS1.setContacts(contactsSUKS1);
+
             smisSUKS1.setName("ЦУКС1");
             smisSUKS1.setParentSmis(smisNSUKS);
             smisSUKS1.setDateRegistration(new Date());
@@ -153,6 +169,19 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             System.out.println("smisEDDS1");
 
             SmisEntity smisEDDS2 = new SmisEntity();
+
+            Set<ContactEntity> contactsEDDS2 = new HashSet<ContactEntity>(){{
+                add(new ContactEntity(smisEDDS2, "Иван Васильевич", "ЦАРЬ", "палаты Кремля"));
+                add(new ContactEntity(smisEDDS2, "Игорь Игорь", "в честь олимпийских игр", "8(191)023-42-89"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+                add(new ContactEntity(smisEDDS2, "Петр I", "император", "Зимний Дворец"));
+            }};
+            smisEDDS2.setContacts(contactsEDDS2);
+
             smisEDDS2.setName("ЕДДС2");
             smisEDDS2.setParentSmis(smisSUKS1);
             smisEDDS2.setDateRegistration(new Date());
