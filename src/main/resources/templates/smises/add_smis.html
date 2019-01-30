@@ -9,66 +9,46 @@
 
 
 
-
-        /*.input-group{
-            margin-bottom: 10px !important;
-            margin-right: 15px !important;
-        }*/
-
-
-        .btn_remove {
-            background-color: #d9534f !important;
-        }
-
-        .btn_add {
-            background-color: #5cb85c !important;
-        }
-
-        .panel-heading {
-            background-color: #3700b3 !important;
-        }
-
-
     </style>
 
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div >
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="text-center">
-                        <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
-                    </div>
-                </div>
-                <form role="form" th:action="@{/addSmis}" method="post">
-                    <div class="panel-body">
+    <!--<div class="row">-->
+        <!--<div >-->
+            <!--<div class="panel panel-primary">-->
+                <!--<div class="panel-heading">-->
+                    <!--<div class="text-center">-->
+                        <!--<strong class="panel-title" th:text="#{complex.addSmis}"></strong>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<form role="form" th:action="@{/addSmis}" method="post">-->
+                    <!--<div class="panel-body" >-->
 
                         <table >
-                            <tbody>
+
                             <tr>
                                 <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    <div class="input-group ">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-list-alt"></span></span>
                                     <input type="text" class="form-control" name="name"
                                     th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="agreement"
+                                    <div class="input-group ">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control"   name="agreement"
                                     th:placeholder="#{complex.agreementNumber}"/>
                                     </div>
                                 </td>
                                 <td>
                                     <!--выпадающий список для выбора родителя-->
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    <div class="input-group ">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-list-alt"></span></span>
                                     <select class="form-control" name="parent_id">
                                     <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
                                     <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
@@ -77,80 +57,80 @@
                                     <!---->
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="region"
-                                    th:placeholder="#{complex.region}" autofocus="True"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="validity"
-                                    th:placeholder="#{complex.agreementDate}"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="url"
-                                    th:placeholder="#{complex.url}"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--<div class="input-group input-group-sm mb-3">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="region"  aria-label="Small"-->
+                                    <!--th:placeholder="#{complex.region}" autofocus="True"/>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<div class="input-group input-group-sm mb-3">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="validity"  aria-label="Small"-->
+                                    <!--th:placeholder="#{complex.agreementDate}"/>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<div class="input-group input-group-sm mb-3">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="url"  aria-label="Small"-->
+                                    <!--th:placeholder="#{complex.url}"/>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                                <!--<td>-->
 
-                                    <!--добавление контактов-->
-                                    <label>Добавить контакты</label>
-                                    <div class="form_group">
-                                        <table>
-                                            <tr>
-                                                <td><input type="text" name="fones[]" ></td>
-                                                <td><input type="text" name="names[]" ></td>
-                                                <td><input type="text" name="positions[]" ></td>
-                                                <td><button type="button" class="btn_add">✚</button></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-
-
-                                </td>
-                                <td>
-
-                                    <!--добавление файлов-->
-                                    <label>Добавить файлы</label>
-                                    <div class="form_group">
+                                    <!--&lt;!&ndash;добавление контактов&ndash;&gt;-->
+                                    <!--<label>Добавить контакты</label>-->
+                                    <!--<div class="form_group">-->
+                                        <!--<table>-->
+                                            <!--<tr>-->
+                                                <!--<td><input type="text" name="fones[]" ></td>-->
+                                                <!--<td><input type="text" name="names[]" ></td>-->
+                                                <!--<td><input type="text" name="positions[]" ></td>-->
+                                                <!--<td><button type="button" class="btn_add">✚</button></td>-->
+                                            <!--</tr>-->
+                                        <!--</table>-->
+                                    <!--</div>-->
 
 
-                                        <table>
-                                            <tr>
-                                                <td><input type="text" name="fileNames[]" ></td>
-                                                <td><input type="file" name="files[]"></td>
-                                                <td><button type="button" class="btn_add">✚</button></td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                <!--</td>-->
+                                <!--<td>-->
+
+                                    <!--&lt;!&ndash;добавление файлов&ndash;&gt;-->
+                                    <!--<label>Добавить файлы</label>-->
+                                    <!--<div class="form_group">-->
+
+
+                                        <!--<table>-->
+                                            <!--<tr>-->
+                                                <!--<td><input type="text" name="fileNames[]" ></td>-->
+                                                <!--<td><input type="file" name="files[]"></td>-->
+                                                <!--<td><button type="button" class="btn_add">✚</button></td>-->
+                                            <!--</tr>-->
+                                        <!--</table>-->
+                                    <!--</div>-->
 
 
 
 
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="description"
-                                    th:placeholder="#{complex.description}" autofocus="True"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<div class="input-group">-->
+                                    <!--<span class="input-group-addon"><span-->
+                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
+                                    <!--<input type="text" class="form-control" name="description"-->
+                                    <!--th:placeholder="#{complex.description}" autofocus="True"/>-->
+                                    <!--</div>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+
 
                         </table>
                         <script>
@@ -322,29 +302,29 @@
                             <!--</div>-->
 
                         <!--</div>-->
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-6">
-                                <button type="submit" class="btn btn-labeled btn-success">
-                                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
-                                        th:text="OK"/></button>
-                                <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
-                                    <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
-                                        th:text="#{users.exit}"/></button>
-                            </div>
-                        </div>
-                    </div>
+                    <!--</div>-->
+                    <!--<div class="panel-footer">-->
+                        <!--<div class="row">-->
+                            <!--&lt;!&ndash;<div class="col-xs-6 col-sm-6 col-md-6">&ndash;&gt;-->
+                                <!--<button type="submit" class="btn btn-labeled btn-success">-->
+                                    <!--<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span-->
+                                        <!--th:text="OK"/></button>-->
+                                <!--<button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">-->
+                                    <!--<span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span-->
+                                        <!--th:text="#{users.exit}"/></button>-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </form>
 
 
 
-            </div>
+            <!--</div>-->
 
 
 
-        </div>
-    </div>
+        <!--</div>-->
+    <!--</div>-->
 
 </div>
 
