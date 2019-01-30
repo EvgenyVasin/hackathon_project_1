@@ -10,6 +10,6 @@ import ru.basisintellect.support_smis.model.entities.RegionEntity;
 @Repository
 @Qualifier(value = "regionRepository")
 public interface RegionRepository extends CrudRepository<RegionEntity, Long> {
-
+    RegionEntity findByName(String name);
 }
 

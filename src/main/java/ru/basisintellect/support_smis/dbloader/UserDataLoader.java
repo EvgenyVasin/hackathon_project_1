@@ -121,9 +121,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisNSUKS.setName("НЦУКС");
             smisNSUKS.setDateRegistration(new Date());
             smisNSUKS.setAgreement("соглашение");
-            smisNSUKS.setState(stateSuccess);
             smisNSUKS.setRegion(regionEntity);
-            smisNSUKS.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisNSUKS.setValidity(new Date());
             smises.save(smisNSUKS);
             System.out.println("smisNSUKS");
 
@@ -140,9 +139,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisSUKS1.setParentSmis(smisNSUKS);
             smisSUKS1.setDateRegistration(new Date());
             smisSUKS1.setAgreement("соглашение");
-            smisSUKS1.setState(stateSuccess);
             smisSUKS1.setRegion(regionEntity);
-            smisSUKS1.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisSUKS1.setValidity(new Date());
             smises.save(smisSUKS1);
             System.out.println("smisSUKS1");
 
@@ -151,9 +149,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisSUKS2.setParentSmis(smisNSUKS);
             smisSUKS2.setDateRegistration(new Date());
             smisSUKS2.setAgreement("соглашение");
-            smisSUKS2.setState(stateSuccess);
             smisSUKS2.setRegion(regionEntity);
-            smisSUKS2.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisSUKS2.setValidity(new Date());
             smises.save(smisSUKS2);
             System.out.println("smisSUKS2");
 
@@ -162,9 +159,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS1.setParentSmis(smisSUKS1);
             smisEDDS1.setDateRegistration(new Date());
             smisEDDS1.setAgreement("соглашение");
-            smisEDDS1.setState(stateSuccess);
             smisEDDS1.setRegion(regionEntity);
-            smisEDDS1.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisEDDS1.setValidity(new Date());
             smises.save(smisEDDS1);
             System.out.println("smisEDDS1");
 
@@ -186,9 +182,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS2.setParentSmis(smisSUKS1);
             smisEDDS2.setDateRegistration(new Date());
             smisEDDS2.setAgreement("соглашение");
-            smisEDDS2.setState(stateSuccess);
             smisEDDS2.setRegion(regionEntity);
-            smisEDDS2.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisEDDS2.setValidity(new Date());
             smises.save(smisEDDS2);
             System.out.println("smisEDDS2");
 
@@ -197,9 +192,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS3.setParentSmis(smisSUKS1);
             smisEDDS3.setDateRegistration(new Date());
             smisEDDS3.setAgreement("соглашение");
-            smisEDDS3.setState(stateSuccess);
             smisEDDS3.setRegion(regionEntity);
-            smisEDDS3.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisEDDS3.setValidity(new Date());
             smises.save(smisEDDS3);
             System.out.println("smisEDDS3");
 
@@ -208,9 +202,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS4.setParentSmis(smisSUKS2);
             smisEDDS4.setDateRegistration(new Date());
             smisEDDS4.setAgreement("соглашение");
-            smisEDDS4.setState(stateSuccess);
             smisEDDS4.setRegion(regionEntity);
-            smisEDDS4.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+            smisEDDS4.setValidity(new Date());
             smises.save(smisEDDS4);
             System.out.println("smisEDDS4");
 
@@ -221,8 +214,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS5.setParentSmis(smisSUKS2);
             smisEDDS5.setDateRegistration(new Date());
             smisEDDS5.setAgreement("соглашение");
-            smisEDDS5.setState(stateSuccess);
-            smisEDDS5.setUrl("http://10.1.103.34:8080/monitoring/node/dispatch");
+
             smisEDDS5.setRegion(regionEntity);
             Set<ContactEntity> contacts = new HashSet<ContactEntity>(){{
                 add(new ContactEntity(smisEDDS5, "Петр Петрович", "главный главный", "8(191)0000000"));
@@ -230,6 +222,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
                 add(new ContactEntity(smisEDDS5, "Петр Игорь", "забавный", "8(191)9898989"));
             }};
             smisEDDS5.setContacts(contacts);
+            smisEDDS5.setValidity(new Date());
             smises.save(smisEDDS5);
             System.out.println("smisEDDS5");
 

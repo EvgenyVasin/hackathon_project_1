@@ -96,7 +96,7 @@
                                     class="glyphicon glyphicon-home"></span></span>
                                         <select class="form-control" name="region" accesskey>
                                             <option th:text="#{complex.region}" disabled selected hidden value=""></option>
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                            <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
                                         </select>
                                     </div>
                                 </td>
@@ -114,7 +114,7 @@
                                     class="glyphicon glyphicon-object-align-vertical"></span></span>
                                         <select class="form-control" name="equipments">
                                             <option th:text="#{complex.equipment}" disabled selected hidden value=""></option>
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                            <option th:each="equipments : ${equipmentsList}" th:value="${equipments.name}" th:text="${equipments.name}"></option>
                                         </select>
                                     </div>
                                 </td>
