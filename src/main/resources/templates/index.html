@@ -57,16 +57,23 @@
         <div class="col-xs-offset-3 col-xs-6">
             <label>Добавить контакты</label>
             <form>
-                <div class="form_group">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+                    </div>
+                    <table>
+                        <tr>
+                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="fones[]" ></td>
+                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="names[]" ></td>
+                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="positions[]" ></td>
+                            <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span></td>
+                        </tr>
+                    </table>
 
-
-                        <table>
-                            <tr>
-                                <td><input type="text" name="fileNames[]" ></td>
-                                <td><input type="file" name="files[]"></td>
-                                <td><button type="button" class="btn_add">✚</button></td>
-                            </tr>
-                        </table>
+                    <!--<div class="form-group input-group">-->
+                        <!--<input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix btn" type="file" name="files[]">-->
+                        <!--<span class="input-group-btn"><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span>-->
+                    <!--</div>-->
                 </div>
 
             </form>
@@ -74,27 +81,27 @@
     </div>
 </div>
 <script>
-    $(document).on('click', '.btn_add', function(event) {
+    $$(document).on('click', '.btn-add', function(event) {
         event.preventDefault();
 
-        var field = $(this).closest('.form_group');
+        var field = $(this).closest('.input-group');
         var field_new = field.clone();
 
         $(this)
-            // .toggleClass('btn-success')
-            .toggleClass('btn_add')
-            // .toggleClass('btn-danger')
-            .toggleClass('btn_remove')
-            // .toggleClass('btn-remove-fix')
+            .toggleClass('btn-success')
+            .toggleClass('btn-add')
+            .toggleClass('btn-danger')
+            .toggleClass('btn-remove')
+            .toggleClass('btn-remove-fix')
             .html('✖');
 
         field_new.find('input').val('');
         field_new.insertAfter(field);
     });
 
-    $(document).on('click', '.btn_remove', function(event) {
+    $(document).on('click', '.btn-remove', function(event) {
         event.preventDefault();
-        $(this).closest('.form_group').remove();
+        $(this).closest('.input-group').remove();
     });
 </script>
 
