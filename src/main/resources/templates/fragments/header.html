@@ -53,15 +53,14 @@
             color:#00c4ff;
         }
 
-        .navbar-inverse .navbar-collapse{
+        .navbar-inverse {
             background-color: #3700b3 !important;
         }
-
-
-        .navbar-inverse{
-            background-color: #3700b3;
-            border-color: #3700b3;
+        .menu-link:hover {
+            background-color: #E8EAF6;
         }
+
+
 
     </style>
 
@@ -108,22 +107,21 @@
         </ul>
         <!--навигация по сайту-->
         <div id="menu">
-            <div class="container">
+                <nav class="navbar-inverse">
                 <ul>
                     <!--список ПК ИВ СМИС-->
-                    <li><a th:text="#{navMenu.SMISTable}" href="/smises_table"></a></li>
+                    <li class="menu-link"><a class="menu-link" th:text="#{navMenu.SMISTable}" href="/smises_table"></a></li>
                     <!--<li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>-->
                     <!--дерево СМИСов-->
-                    <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"
+                    <li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"
                            th:text="#{navMenu.ThreeSmis}"
                            href="/smises_list"></a>
                     </li>
                     <!--открыть БД в новой вкладке-->
-                    <li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.DB}"
+                    <li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.DB}"
                            href="/h2-console" target="_blank"></a></li>
-
                 </ul>
-            </div>
+                </nav>
         </div>
     </nav>
 <div class="under_header"></div>

@@ -105,8 +105,8 @@
             border: 2px solid black;
         }
 
-        a {
-            margin-left: 25px;
+        .a-add-smis {
+            padding-left: 25px;
         }
 
         .nav-table {
@@ -226,7 +226,7 @@
     <tr>
         <td><b>Контроль: &nbsp;</b></td>
         <td><div id = "statebar"></div></td>
-        <td><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
+        <td class="a-add-smis"><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
     </tr>
     </tbody>
 </table>
