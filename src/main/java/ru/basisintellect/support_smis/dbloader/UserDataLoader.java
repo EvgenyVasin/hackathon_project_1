@@ -48,7 +48,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        try {
+        /*try {
 
             //добавление состояний работоспособности СМИС
             StateEntity stateUnSuccess = new StateEntity();
@@ -277,7 +277,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         }  catch (final Exception err) {
             System.out.println(err);
-    }
+    }*/
 
     }
 }

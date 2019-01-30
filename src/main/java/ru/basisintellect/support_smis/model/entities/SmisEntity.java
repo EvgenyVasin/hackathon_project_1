@@ -35,8 +35,6 @@ public class SmisEntity extends CustomEntity {
     @JoinColumn(name = "region_id", nullable = false)
     private RegionEntity region;
 
-
-
     //коментарий
     @Column(name="description", length = 512)
     private String description;

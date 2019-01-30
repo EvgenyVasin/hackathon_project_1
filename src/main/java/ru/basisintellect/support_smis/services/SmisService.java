@@ -46,7 +46,7 @@ public class SmisService {
             while (!cancelled) {
                 for (SmisEntity smisEntity : smises) {
                     try {
-                        connectClient.setDefaultUri(smisEntity.getUrl());
+//                        connectClient.setDefaultUri(smisEntity.getUrl());
                         TestRequest request = new TestRequest();
                         TestResponse response = connectClient.testConnect(request);
                     } /* catch (SoapFaultClientException e) {
@@ -57,11 +57,11 @@ public class SmisService {
                     }*/ catch (Exception e) {
                         //ловим любое другое исключение - не работает
                             if (e instanceof SoapFaultClientException) {
-                                smisEntity.setState(states.get(1));
+//                                smisEntity.setState(states.get(1));
                                 smisService.onChangeState(smisEntity.getId(), true);
 
                             }else{
-                                smisEntity.setState(states.get(2));
+//                                smisEntity.setState(states.get(2));
                                 smisService.onChangeState(smisEntity.getId(), false);
                             }
                     }
@@ -135,7 +135,7 @@ public class SmisService {
         smisEntity.setAgreement(agreement);
 //        smisEntity.setValidity(validity);
 //        smisEntity.setContacts(contacts);
-        smisEntity.setUrl(url);
+//        smisEntity.setUrl(url);
         if (parent_id != null) {
             smisEntity.setParentSmis(smisesRepo.findById(parent_id).get());
         }
@@ -155,7 +155,7 @@ public class SmisService {
         smisEntity.setAgreement(agreement);
 //        smisEntity.setValidity(validity);
 //        smisEntity.setContacts(contacts);
-        smisEntity.setUrl(url);
+//        smisEntity.setUrl(url);
         smisEntity.setParentSmis(parent);
         smisesRepo.save(smisEntity);
         return smisEntity;
