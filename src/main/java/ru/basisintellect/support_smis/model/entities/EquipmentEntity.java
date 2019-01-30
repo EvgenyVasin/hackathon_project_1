@@ -36,4 +36,5 @@ public class EquipmentEntity extends CustomEntity {
         this.smis = smis;
         this.name = name;
     }
+
 }

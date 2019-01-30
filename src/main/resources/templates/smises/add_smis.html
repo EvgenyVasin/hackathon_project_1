@@ -13,6 +13,10 @@
             padding-bottom: 5px !important;
         }
 
+        .form-control-fix{
+            min-width: 430px !important;
+
+        }
 
         .panel-primary{
             position: absolute !important;
@@ -87,7 +91,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-magnet"></span></span>
-                                    <select class="form-control" name="parent_id">
+                                    <select class="form-control" name="parent_smis_id">
                                     <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
                                     <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
                                     </select>
@@ -101,7 +105,7 @@
                                     <span class="input-group-addon"><span
                                     class="glyphicon glyphicon-home"></span></span>
                                         <input type=text list=regions th:placeholder="#{complex.region}" class="form-control" required="True">
-                                        <datalist name="region" id="regions">
+                                        <datalist name="region_name" id="regions">
                                             <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
 
                                         </datalist>
@@ -115,16 +119,13 @@
                                     th:placeholder="#{complex.agreementDate}" required="True"/>
                                     </div>
                                 </td>
+
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-object-align-vertical"></span></span>
-                                        <input type=text list=equipments th:placeholder="#{complex.equipment}" class="form-control">
-                                        <datalist name="equipments" id=equipments>
-                                            <option th:each="equipment : ${equipmentList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                        </datalist>
+                                            class="glyphicon glyphicon-comment"></span></span>
+                                        <textarea type="text" class="form-control" name="description"
+                                                  th:placeholder="#{complex.description}" autofocus="True"></textarea>
                                     </div>
                                 </td>
                             </tr>
@@ -135,13 +136,10 @@
 
                                     <!--добавление контактов-->
                                     <div class="input-group input-group-sm clone input-group-fix">
-
                                         <span class="input-group-addon glyphicon glyphicon-user "></span>
-
                                         <table>
                                             <tr>
-
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fones" placeholder="телефон или mail"></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="phones" placeholder="телефон или mail"></td>
                                                 <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="contactNames" placeholder="Ф.И.О." ></td>
                                                 <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions" placeholder="должность"></td>
                                                 <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
@@ -169,23 +167,28 @@
                                                 <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
                                             </tr>
                                         </table>
-
-
-
                                     </div>
-
-
-
-
                                 </td>
                                 <td>
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-comment"></span></span>
-                                    <textarea type="text" class="form-control" name="description"
-                                              th:placeholder="#{complex.description}" autofocus="True"></textarea>
+                                    <div class="input-group input-group-sm clone input-group-fix">
+                                        <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
+                                        <table>
+                                            <tr>
+                                                <td><input type=text list=equipments th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
+                                                    <datalist name="equipments" id=equipments >
+                                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                    </datalist></td>
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+                                        </table>
                                     </div>
+
+
+
                                 </td>
+
                             </tr>
 
 
