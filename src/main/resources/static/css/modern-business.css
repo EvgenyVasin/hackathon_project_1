@@ -7442,12 +7442,19 @@ button.close {
 }
 
 
-
-
-
 */
 
 
 .panel-fix{
     background-color: #3700b3 !important;
+}
+
+.glyphicon-ok {
+    padding-top: 5px !important;
+    padding-right: 5px !important;
+}
+
+.glyphicon-remove{
+    padding-top: 5px !important;
+    padding-right: 5px !important;
 }
