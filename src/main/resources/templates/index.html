@@ -93,6 +93,15 @@
             </form>
         </div>
     </div>
+
+    <input type=text list=browsers >
+    <datalist id=browsers >
+        <option> Google
+        <option> IE9
+    </datalist>
+
+
+
 </div>
 <script>
     $(document).on('click', '.btn-add', function(event) {
@@ -117,6 +126,8 @@
         $(this).closest('.clone').remove();
     });
 </script>
+
+
 
 </body>
 </html>

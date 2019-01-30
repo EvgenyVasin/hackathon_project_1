@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.basisintellect.support_smis.model.entities.*;
 import ru.basisintellect.support_smis.repositories.*;
-import ru.basisintellect.support_smis.services.SmisService;
+//import ru.basisintellect.support_smis.services.SmisService;
 
 
 import java.util.Date;
@@ -48,7 +48,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        /*try {
+        try {
 
             //добавление состояний работоспособности СМИС
             StateEntity stateUnSuccess = new StateEntity();
@@ -105,7 +105,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userEntity1.setDateRegistration(new Date());
             userRepository.save(userEntity1);
 
-            //Добавление СМИСа для тестов
+            /*//Добавление СМИСа для тестов
             RegionEntity regionEntity = new RegionEntity("Центральный");
             regionRepository.save(regionEntity);
 
@@ -224,7 +224,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS5.setContacts(contacts);
             smisEDDS5.setValidity(new Date());
             smises.save(smisEDDS5);
-            System.out.println("smisEDDS5");
+            System.out.println("smisEDDS5");*/
 
 //            ContactEntity contact1 = new ContactEntity();
 //            contact1.setSmis(smisEDDS5);
@@ -270,7 +270,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         }  catch (final Exception err) {
             System.out.println(err);
-    }*/
+    }
 
     }
 }
