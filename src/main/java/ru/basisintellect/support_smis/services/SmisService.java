@@ -17,7 +17,7 @@ import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
 import java.util.*;
 
-//@Service
+@Service
 public class SmisService {
 
 

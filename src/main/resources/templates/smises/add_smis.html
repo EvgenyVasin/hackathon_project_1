@@ -97,10 +97,8 @@
                                     class="glyphicon glyphicon-home"></span></span>
                                         <input type=text list=regions th:placeholder="#{complex.region}" class="form-control" required="True">
                                         <datalist name="region" id="regions">
-                                            <!--<option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>-->
-                                            <option>123</option>
-                                            <option>1234</option>
-                                            <option>12345</option>
+                                            <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
+
                                         </datalist>
                                     </div>
                                 </td>
@@ -116,14 +114,10 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                     class="glyphicon glyphicon-object-align-vertical"></span></span>
-
-                                        <input type=text list=equipments th:placeholder="#{complex.equipment}" class="form-control">
-                                        <datalist name="equipments" id=equipments>
-                                            <!--<option th:each="equipments : ${equipmentsList}" th:value="${equipments.name}" th:text="${equipments.name}"></option>-->
-                                            <option>123</option>
-                                            <option>1234</option>
-                                            <option>12345</option>
-                                        </datalist>
+                                        <select class="form-control" name="equipments">
+                                            <option th:text="#{complex.equipment}" disabled selected hidden value=""></option>
+                                            <option th:each="equipment : ${equipmentList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>

@@ -31,11 +31,11 @@ import java.util.List;
 @Controller
 public class SmisController {
 
-    @Autowired
-    SmisRepository smisRepository;
+//    @Autowired
+//    SmisRepository smisRepository;
 
-    /*@Autowired
-    SmisService smisService;*/
+    @Autowired
+    SmisService smisService;
 
     //добавление ПК ИВ СМИС
     /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
@@ -67,25 +67,27 @@ public class SmisController {
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_table")
     public String viewSmises(Model model) {
-        List<SmisEntity> smisesList = (List<SmisEntity>) smisRepository.findAll();
+        List<SmisEntity> smisesList = smisService.getAllSmises();
         model.addAttribute("smisesList", smisesList);
         return "smises/smises_table";
     }
 
     //генерация листа со смисами для страницы добавления
-    /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/add_smis")
     public String viewSmisesAdd(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
+        model.addAttribute("regionList", smisService.getAllRegions());
+        model.addAttribute("equipmentList", smisService.getAllEquipments());
         return "smises/add_smis";
-    }*/
+    }
 
     //генерация страницы со смисами2
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();
-        List<SmisEntity> list = (List<SmisEntity>) smisRepository.findAll();
+        List<SmisEntity> list = (List<SmisEntity>) smisService.getAllSmises();
 
         for (SmisEntity entity : list) {
             SmisEntity parentSMIS = entity.getParentSmis();

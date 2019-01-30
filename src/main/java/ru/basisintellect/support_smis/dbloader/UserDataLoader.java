@@ -105,7 +105,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userEntity1.setDateRegistration(new Date());
             userRepository.save(userEntity1);
 
-            /*//Добавление СМИСа для тестов
+            //Добавление СМИСа для тестов
             RegionEntity regionEntity = new RegionEntity("Центральный");
             regionRepository.save(regionEntity);
 
@@ -224,36 +224,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisEDDS5.setContacts(contacts);
             smisEDDS5.setValidity(new Date());
             smises.save(smisEDDS5);
-            System.out.println("smisEDDS5");*/
-
-//            ContactEntity contact1 = new ContactEntity();
-//            contact1.setSmis(smisEDDS5);
-//            contact1.setFonNumber("8(191)0000000");
-//            contact1.setName("Петр Петрович1");
-//            contact1.setPosition("пидр1");
-//            smisEDDS5.getContacts().add(contact1);
-//            contactsRepository.save(contact1);
-
-//            ContactEntity contact2 = new ContactEntity();
-//            contact2.setSmis(smisEDDS5);
-//            contact2.setFonNumber("8(191)0000000");
-//            contact2.setName("Петр Петрович2");
-//            contact2.setPosition("пидр2");
-//            contactsRepository.save(contact2);
-//
-//            ContactEntity contact3 = new ContactEntity();
-//            contact3.setSmis(smisEDDS5);
-//            contact3.setFonNumber("8(191)0000000");
-//            contact3.setName("Петр Петрович3");
-//            contact3.setPosition("пидр3");
-//            contactsRepository.save(contact3);
-
-//            ContactEntity contact1 = new ContactEntity(smisEDDS5, "Петр Петрович1", "главный главный1", "8(191)0000000");
-//            contactsRepository.save(contact1);
-//            ContactEntity contact2 = new ContactEntity(smisEDDS5, "Петр Петрович2", "главный главный2", "8(191)0000000");
-//            contactsRepository.save(contact2);
-//            ContactEntity contact3 = new ContactEntity(smisEDDS5, "Петр Петрович3", "главный главный3", "8(191)0000000");
-//            contactsRepository.save(contact3);
+            System.out.println("smisEDDS5");
 
 
 
