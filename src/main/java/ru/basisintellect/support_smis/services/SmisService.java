@@ -7,10 +7,7 @@ import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
 import ru.basisintellect.support_smis.model.SmisStateMsg;
 import ru.basisintellect.support_smis.model.entities.*;
-import ru.basisintellect.support_smis.repositories.EquipmentRepository;
-import ru.basisintellect.support_smis.repositories.RegionRepository;
-import ru.basisintellect.support_smis.repositories.SmisRepository;
-import ru.basisintellect.support_smis.repositories.StateRepository;
+import ru.basisintellect.support_smis.repositories.*;
 import ru.basisintellect.support_smis.soap_client.TestConnectClient;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
 import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
@@ -36,34 +33,38 @@ public class SmisService {
     @Autowired
     SmisController smisController;
 
+    @Autowired
+    SmisEquipmentRepository smisEquipmentRepo;
+
+
+
 
 
     public SmisEntity addSmis(SmisEntity parentSmis, String name, String agreement, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, Set<EquipmentEntity> equipments) {
-        SmisEntity smisEntity = new SmisEntity();
-        smisEntity.setName(name);
-        smisEntity.setDateRegistration(new Date());
-        smisEntity.setAgreement(agreement);
-        smisEntity.setRegion(region);
-        smisEntity.setDescription(description);
-        smisEntity.setParentSmis(parentSmis);
-        smisEntity.setValidity(validity);
-        smisEntity.setContacts(contacts);
-        smisEntity.setEquipments(equipments);
-        smisEntity.setFiles(files);
-//        smisEntity.setValidity(validity);
-//        smisEntity.setContacts(contacts);
-//        smisEntity.setUrl(url);
-
-        smisesRepo.save(smisEntity);
-        return smisEntity;
+        return smisesRepo.save(new SmisEntity(parentSmis, name, new Date(), agreement, validity, region, description,  contacts,  files));
     }
 
     public RegionEntity getRegionByNameOrCreate(String regionName){
         RegionEntity regionEntity = regionsRepo.findByName(regionName);
-        if(regionEntity == null)
+        if(regionEntity == null) {
             regionEntity = new RegionEntity(regionName);
+            regionsRepo.save(regionEntity);
+        }
         return regionEntity;
-    };
+    }
+
+    public EquipmentEntity getEquipmentByNameOrCreate(String equipmentName){
+        EquipmentEntity equipmentEntity = equipmentRepo.findByName(equipmentName);
+        if(equipmentEntity == null) {
+            equipmentEntity = new EquipmentEntity(equipmentName);
+            equipmentRepo.save(equipmentEntity);
+        }
+        return equipmentEntity;
+    }
+
+    public SmisEquipmentEntity addSmisEquipment(SmisEntity smis, EquipmentEntity equipment){
+        return smisEquipmentRepo.save(new SmisEquipmentEntity(smis,equipment));
+    }
 
     public List<SmisEntity> getAllSmises() {
         return (List<SmisEntity>) smisesRepo.findAll();

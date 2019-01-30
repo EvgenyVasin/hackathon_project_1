@@ -10,19 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.basisintellect.support_smis.model.entities.RegionEntity;
-import ru.basisintellect.support_smis.model.entities.SmisEntity;
-import ru.basisintellect.support_smis.model.entities.StateEntity;
+import ru.basisintellect.support_smis.model.entities.*;
 import ru.basisintellect.support_smis.repositories.RegionRepository;
 import ru.basisintellect.support_smis.repositories.SmisRepository;
 import ru.basisintellect.support_smis.repositories.StateRepository;
 import ru.basisintellect.support_smis.services.SmisService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by vasin.e on 17.01.2019.
@@ -38,14 +36,46 @@ public class SmisController {
     SmisService smisService;
 
     //добавление ПК ИВ СМИС
-    /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public String addSmis(String name, String agreement, String validity, String contacts, String url, Long parent_id, Model model) {
-        *//*if (name.isEmpty() || agreement.isEmpty() || validity.isEmpty() || contacts.isEmpty())
-            return null;*//*
-        smisService.addSmis(name, agreement, validity, contacts, url, parent_id);
+    public @ResponseBody String addSmis(
+                                        //файлы
+                                        MultipartFile[] files,
+                                        String[] fileNames,
+                                        //контакты
+                                        String[] phones,
+                                        String[] contactNames,
+                                        String[] positions,
+                                        //оборудование
+                                        String[] equipments,
+
+                                        //комплекс
+                                        String name,
+                                        String agreement,
+                                        Long parent_id,
+                                        String region_name,
+                                        String validity,
+                                        String description,
+                                        Model model) {
+
+        Set<SmisFileEntity> fileEntities = new HashSet<>();
+
+        Set<ContactEntity> contactEntities = new HashSet<>();
+
+
+        File folder = new File("smis_files/" + region_name + "_" + name);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+//        for (MultipartFile file:files) {
+//
+//        }
+
+
         return viewListSmises(model);
-    }*/
+    }
 
     //получение ПК ИВ СМИС
     /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")

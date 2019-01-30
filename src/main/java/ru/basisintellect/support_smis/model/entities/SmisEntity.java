@@ -47,9 +47,6 @@ public class SmisEntity extends CustomEntity {
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private  Set<SmisFileEntity> files;
 
-    //оборудование
-    @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<EquipmentEntity> equipments;
 
         //сеттеры параметров
     /**
@@ -96,9 +93,6 @@ public class SmisEntity extends CustomEntity {
         this.files = files;
     }
 
-    public void setEquipments(Set<EquipmentEntity> equipments) {
-        this.equipments = equipments;
-    }
 
     public void setValidity(Date validity) {
         this.validity = validity;
@@ -157,9 +151,6 @@ public class SmisEntity extends CustomEntity {
         return files;
     }
 
-    public Set<EquipmentEntity> getEquipments() {
-        return equipments;
-    }
 
     public Date getValidity() {
         return validity;
@@ -171,7 +162,7 @@ public class SmisEntity extends CustomEntity {
     public SmisEntity() {
     }
 
-    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, Set<EquipmentEntity> equipments) {
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files) {
         this.parentSmis = parentSmis;
         this.name = name;
         this.dateRegistration = dateRegistration;
@@ -181,7 +172,6 @@ public class SmisEntity extends CustomEntity {
         this.description = description;
         this.contacts = contacts;
         this.files = files;
-        this.equipments = equipments;
     }
 
     //текстовое представление объекта для отладки

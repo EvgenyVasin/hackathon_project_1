@@ -3,15 +3,37 @@ package ru.basisintellect.support_smis.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="smis_file")
+@Table(name="file")
 public class SmisFileEntity extends CustomEntity{
-    @ManyToOne(fetch = FetchType.LAZY)
+
+
+    @Column(name = "name", length = 128)
+    String name;
+
+    @Column(name = "link", length = 128)
+    String link;
+
+    @ManyToOne
     @JoinColumn(name = "smis_id", nullable = false)
     SmisEntity smis;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "file_id", nullable = false)
-    FileEntity file;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public SmisEntity getSmis() {
         return smis;
@@ -21,19 +43,12 @@ public class SmisFileEntity extends CustomEntity{
         this.smis = smis;
     }
 
-    public FileEntity getFile() {
-        return file;
-    }
-
-    public void setFile(FileEntity file) {
-        this.file = file;
-    }
-
     public SmisFileEntity() {
     }
 
-    public SmisFileEntity(SmisEntity smis, FileEntity file) {
+    public SmisFileEntity(String name, String link, SmisEntity smis) {
+        this.name = name;
+        this.link = link;
         this.smis = smis;
-        this.file = file;
     }
 }
