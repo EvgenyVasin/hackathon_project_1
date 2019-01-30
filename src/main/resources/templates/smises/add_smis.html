@@ -43,6 +43,11 @@
             margin-left: 25px !important;
         }
 
+        .glyphicon {
+            top: 0px !important;
+        }
+
+
     </style>
 
 </head>
@@ -114,10 +119,12 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                     class="glyphicon glyphicon-object-align-vertical"></span></span>
-                                        <select class="form-control" name="equipments">
-                                            <option th:text="#{complex.equipment}" disabled selected hidden value=""></option>
+                                        <input type=text list=equipments th:placeholder="#{complex.equipment}" class="form-control">
+                                        <datalist name="equipments" id=equipments>
                                             <option th:each="equipment : ${equipmentList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
-                                        </select>
+                                            <option>1</option>
+                                            <option>2</option>
+                                        </datalist>
                                     </div>
                                 </td>
                             </tr>
@@ -134,9 +141,9 @@
                                         <table>
                                             <tr>
 
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="tel" name="fones[]" placeholder="телефон"></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="names[]" placeholder="Ф.И.О." ></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions[]" placeholder="должность"></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="tel" name="fones" placeholder="телефон"></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="names" placeholder="Ф.И.О." ></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions" placeholder="должность"></td>
                                                 <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
                                             </tr>
                                         </table>
@@ -152,14 +159,13 @@
                                     <!--добавление файлов-->
                                     <div class="input-group input-group-sm clone input-group-fix">
 
-                                        <span class="input-group-addon glyphicon glyphicon-save-file " ></span>
+                                        <span class="input-group-addon glyphicon glyphicon-save-file" ></span>
 
                                         <table>
                                             <tr>
 
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="filNames[]" placeholder = "Понятное имя файла"></td>
-                                                <td><input class="form-control" type="file" name="files[]"></td>
-
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="filNames" placeholder = "Понятное имя файла"></td>
+                                                <td><input class="form-control" type="file" name="files"></td>
                                                 <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
                                             </tr>
                                         </table>
