@@ -7,46 +7,64 @@
 
     <style>
 
+        /*.td-style-fix{
+            width: 5000px !important;
+        }*/
 
+        .input-group-fix {
+            min-width: 500px !important;
+            margin-right: 15px !important;
+            margin-left: 15px !important;
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+
+
+        .panel-primary{
+            position: absolute !important;
+        }
+
+        .row-fix {
+            margin-left: -250px !important;
+        }
 
     </style>
 
 </head>
 <body>
 <div class="container">
-    <!--<div class="row">-->
-        <!--<div >-->
-            <!--<div class="panel panel-primary">-->
-                <!--<div class="panel-heading">-->
-                    <!--<div class="text-center">-->
-                        <!--<strong class="panel-title" th:text="#{complex.addSmis}"></strong>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<form role="form" th:action="@{/addSmis}" method="post">-->
-                    <!--<div class="panel-body" >-->
+    <div class="row ">
+        <div class="col-xs-offset-3 col-xs-6 row-fix">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-fix">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
+                    </div>
+                </div>
+                <form role="form" th:action="@{/addSmis}" method="post">
+                    <div class="panel-body">
 
                         <table >
-
-                            <tr>
-                                <td>
-                                    <div class="input-group ">
+                            <tr class="td-style-fix">
+                                <td class="td-style-fix">
+                                    <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-list-alt"></span></span>
                                     <input type="text" class="form-control" name="name"
                                     th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="input-group ">
+                                <td class="td-style-fix">
+                                    <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-list-alt"></span></span>
                                     <input type="text" class="form-control"   name="agreement"
                                     th:placeholder="#{complex.agreementNumber}"/>
                                     </div>
                                 </td>
-                                <td>
+                                <td class="td-style-fix">
                                     <!--выпадающий список для выбора родителя-->
-                                    <div class="input-group ">
+                                    <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-list-alt"></span></span>
                                     <select class="form-control" name="parent_id">
@@ -57,104 +75,119 @@
                                     <!---->
                                 </td>
                             </tr>
-                            <!--<tr>-->
-                                <!--<td>-->
-                                    <!--<div class="input-group input-group-sm mb-3">-->
-                                    <!--<span class="input-group-addon"><span-->
-                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
-                                    <!--<input type="text" class="form-control" name="region"  aria-label="Small"-->
-                                    <!--th:placeholder="#{complex.region}" autofocus="True"/>-->
-                                    <!--</div>-->
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<div class="input-group input-group-sm mb-3">-->
-                                    <!--<span class="input-group-addon"><span-->
-                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
-                                    <!--<input type="text" class="form-control" name="validity"  aria-label="Small"-->
-                                    <!--th:placeholder="#{complex.agreementDate}"/>-->
-                                    <!--</div>-->
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<div class="input-group input-group-sm mb-3">-->
-                                    <!--<span class="input-group-addon"><span-->
-                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
-                                    <!--<input type="text" class="form-control" name="url"  aria-label="Small"-->
-                                    <!--th:placeholder="#{complex.url}"/>-->
-                                    <!--</div>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>-->
-
-                                    <!--&lt;!&ndash;добавление контактов&ndash;&gt;-->
-                                    <!--<label>Добавить контакты</label>-->
-                                    <!--<div class="form_group">-->
-                                        <!--<table>-->
-                                            <!--<tr>-->
-                                                <!--<td><input type="text" name="fones[]" ></td>-->
-                                                <!--<td><input type="text" name="names[]" ></td>-->
-                                                <!--<td><input type="text" name="positions[]" ></td>-->
-                                                <!--<td><button type="button" class="btn_add">✚</button></td>-->
-                                            <!--</tr>-->
-                                        <!--</table>-->
-                                    <!--</div>-->
+                            <tr>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="region">
+                                            <option th:text="#{complex.region}" disabled selected hidden value=""></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                        </select>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    <input type="text" class="form-control" name="validity"
+                                    th:placeholder="#{complex.agreementDate}"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="equipments">
+                                            <option th:text="#{complex.equipment}" disabled selected hidden value=""></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
 
 
-                                <!--</td>-->
-                                <!--<td>-->
+                                <td>
 
-                                    <!--&lt;!&ndash;добавление файлов&ndash;&gt;-->
-                                    <!--<label>Добавить файлы</label>-->
-                                    <!--<div class="form_group">-->
+                                    <!--добавление контактов-->
+                                    <div class="input-group input-group-sm clone input-group-fix">
 
+                                        <span class="input-group-addon glyphicon glyphicon-user "></span>
 
-                                        <!--<table>-->
-                                            <!--<tr>-->
-                                                <!--<td><input type="text" name="fileNames[]" ></td>-->
-                                                <!--<td><input type="file" name="files[]"></td>-->
-                                                <!--<td><button type="button" class="btn_add">✚</button></td>-->
-                                            <!--</tr>-->
-                                        <!--</table>-->
-                                    <!--</div>-->
+                                        <table>
+                                            <tr>
+
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="tel" name="fones[]" placeholder="телефон"></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="names[]" placeholder="Ф.И.О." ></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions[]" placeholder="должность"></td>
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+                                        </table>
 
 
 
+                                    </div>
 
-                                <!--</td>-->
-                                <!--<td>-->
-                                    <!--<div class="input-group">-->
-                                    <!--<span class="input-group-addon"><span-->
-                                    <!--class="glyphicon glyphicon-list-alt"></span></span>-->
-                                    <!--<input type="text" class="form-control" name="description"-->
-                                    <!--th:placeholder="#{complex.description}" autofocus="True"/>-->
-                                    <!--</div>-->
-                                <!--</td>-->
-                            <!--</tr>-->
+
+                                </td>
+                                <td>
+
+                                    <!--добавление файлов-->
+                                    <div class="input-group input-group-sm clone input-group-fix">
+
+                                        <span class="input-group-addon glyphicon glyphicon-save-file " ></span>
+
+                                        <table>
+                                            <tr>
+
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="filNames[]" placeholder = "Понятное имя файла"></td>
+                                                <td><input class="form-control" type="file" name="files[]"></td>
+
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+                                        </table>
+
+
+
+                                    </div>
+
+
+
+
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    <textarea type="text" class="form-control" name="description"
+                                              th:placeholder="#{complex.description}" autofocus="True"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
 
 
                         </table>
                         <script>
-                            $(document).on('click', '.btn_add', function(event) {
+                            $(document).on('click', '.btn-add', function(event) {
                                 event.preventDefault();
 
-                                var field = $(this).closest('.form_group');
+                                var field = $(this).closest('.clone');
                                 var field_new = field.clone();
 
                                 $(this)
-                                // .toggleClass('btn-success')
-                                    .toggleClass('btn_add')
-                                    // .toggleClass('btn-danger')
-                                    .toggleClass('btn_remove')
-                                    // .toggleClass('btn-remove-fix')
+                                    .toggleClass('btn-success')
+                                    .toggleClass('btn-add')
+                                    .toggleClass('btn-danger')
+                                    .toggleClass('btn-remove')
                                     .html('✖');
 
                                 field_new.find('input').val('');
                                 field_new.insertAfter(field);
                             });
 
-                            $(document).on('click', '.btn_remove', function(event) {
+                            $(document).on('click', '.btn-remove', function(event) {
                                 event.preventDefault();
-                                $(this).closest('.form_group').remove();
+                                $(this).closest('.clone').remove();
                             });
                         </script>
 
@@ -319,12 +352,12 @@
 
 
 
-            <!--</div>-->
+            </div>
 
 
 
-        <!--</div>-->
-    <!--</div>-->
+        </div>
+    </div>
 
 </div>
 
