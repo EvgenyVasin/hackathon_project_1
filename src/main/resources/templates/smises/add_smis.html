@@ -28,6 +28,7 @@
             margin-left: -250px !important;
         }
 
+
     </style>
 
 </head>
@@ -49,7 +50,7 @@
                                 <td class="td-style-fix">
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-list-alt"></span></span>
+                                    <span class="glyphicon glyphicon-text-color"></span></span>
                                     <input type="text" class="form-control" name="name"
                                     th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
@@ -57,7 +58,7 @@
                                 <td class="td-style-fix">
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-list-alt"></span></span>
+                                    <span class="glyphicon glyphicon-paperclip"></span></span>
                                     <input type="text" class="form-control"   name="agreement"
                                     th:placeholder="#{complex.agreementNumber}"/>
                                     </div>
@@ -66,7 +67,7 @@
                                     <!--выпадающий список для выбора родителя-->
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-list-alt"></span></span>
+                                    <span class="glyphicon glyphicon-magnet"></span></span>
                                     <select class="form-control" name="parent_id">
                                     <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
                                     <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
@@ -79,8 +80,8 @@
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                        <select class="form-control" name="region">
+                                    class="glyphicon glyphicon-home"></span></span>
+                                        <select class="form-control" name="region" accesskey>
                                             <option th:text="#{complex.region}" disabled selected hidden value=""></option>
                                             <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
                                         </select>
@@ -88,15 +89,15 @@
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="validity"
+                                    class="glyphicon glyphicon-calendar"></span></span>
+                                    <input type="date" class="form-control" name="validity"
                                     th:placeholder="#{complex.agreementDate}"/>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    class="glyphicon glyphicon-object-align-vertical"></span></span>
                                         <select class="form-control" name="equipments">
                                             <option th:text="#{complex.equipment}" disabled selected hidden value=""></option>
                                             <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
@@ -158,7 +159,7 @@
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
+                                    class="glyphicon glyphicon-comment"></span></span>
                                     <textarea type="text" class="form-control" name="description"
                                               th:placeholder="#{complex.description}" autofocus="True"></textarea>
                                     </div>
