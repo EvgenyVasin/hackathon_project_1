@@ -7,28 +7,26 @@
 
     <style>
 
-        /*.btn-fix{
 
-            margin-left: 275px !important;
-            margin-top: -125px !important;
-        }*/
 
-        /*.btn-remove-fix {
-            margin-left: -280px !important;
-        }*/
 
-        .form-fix {
-            height: 20px !important;
-            width: 250px !important;
-        }
-
-        .input-group{
+        /*.input-group{
             margin-bottom: 10px !important;
             margin-right: 15px !important;
+        }*/
+
+
+        .btn_remove {
+            background-color: #d9534f !important;
         }
 
+        .btn_add {
+            background-color: #5cb85c !important;
+        }
 
-
+        .panel-heading {
+            background-color: #3700b3 !important;
+        }
 
 
     </style>
@@ -47,7 +45,7 @@
                 <form role="form" th:action="@{/addSmis}" method="post">
                     <div class="panel-body">
 
-                        <table class="table table-striped">
+                        <table >
                             <tbody>
                             <tr>
                                 <td>
@@ -107,12 +105,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="input-group">
-                                    <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-list-alt"></span></span>
-                                    <input type="text" class="form-control" name="contacts"
-                                    th:placeholder="#{complex.contacts}"/>
-                                    </div>
 
                                     <!--добавление контактов-->
                                     <label>Добавить контакты</label>

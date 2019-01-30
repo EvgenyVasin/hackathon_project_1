@@ -2,6 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="header">
+
+    <style>
+        .under_header{
+            margin-bottom: 180px;
+        }
+
+        #menu {
+            /*  position:static;
+                height: 25px; */
+            text-align:  right;
+            float: left;
+            width: 100%;
+            background-color: #FFFFFF;
+            color: #3B1A91;
+
+            font-size:14px;
+            font-family:Verdana,Arial,sans-serif;
+        }
+
+        #menu ul {
+            list-style: none;
+            margin: 0;
+            z-index: 5;
+        }
+
+        #menu li {
+
+            /*position: relative;*/
+            display: inline;
+            float: left;
+        }
+
+        #menu a {
+            display: block;
+            padding: 5px 12px 5px;
+            text-decoration: none;
+            color: #122b40;
+        }
+
+        #menu a:hover {
+            background: transparent;
+            color:#1C005A;
+        }
+
+        #menu a:active {
+        }
+
+        #menu a.active {
+            color:#00c4ff;
+        }
+
+        .navbar-inverse .navbar-collapse{
+            background-color: #3700b3 !important;
+        }
+
+
+        .navbar-inverse{
+            background-color: #3700b3;
+            border-color: #3700b3;
+        }
+
+    </style>
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">

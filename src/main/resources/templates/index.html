@@ -9,12 +9,6 @@
 
     <style>
 
-        .btn-fix{
-/*
-            margin-left: -89px !important;
-*/
-            margin-top: -35px !important;
-        }
 
         .btn-remove-fix {
             margin-left: -70px !important;
@@ -53,22 +47,27 @@
 </script>-->
 
 <div class="container">
+
+
+
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
             <label>Добавить контакты</label>
             <form>
-                <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
-                    </div>
+                <div class="input-group input-group-sm clone">
+
+                    <span class="input-group-addon" id="sizing-addon3">@</span>
+
                     <table>
                         <tr>
-                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="fones[]" ></td>
-                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="names[]" ></td>
-                            <td><input class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" type="text" name="positions[]" ></td>
-                            <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add btn-fix">✚</button></span></td>
+
+                            <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fones[]" ></td>
+                            <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="names[]" ></td>
+                            <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions[]" ></td>
+                            <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
                         </tr>
                     </table>
+
 
                     <!--<div class="form-group input-group">-->
                         <!--<input type="text" name="multiple[]" class="form-control form-fix"> <input class="form-control form-fix btn" type="file" name="files[]">-->
@@ -81,10 +80,10 @@
     </div>
 </div>
 <script>
-    $$(document).on('click', '.btn-add', function(event) {
+    $(document).on('click', '.btn-add', function(event) {
         event.preventDefault();
 
-        var field = $(this).closest('.input-group');
+        var field = $(this).closest('.clone');
         var field_new = field.clone();
 
         $(this)
@@ -92,7 +91,6 @@
             .toggleClass('btn-add')
             .toggleClass('btn-danger')
             .toggleClass('btn-remove')
-            .toggleClass('btn-remove-fix')
             .html('✖');
 
         field_new.find('input').val('');
@@ -101,7 +99,7 @@
 
     $(document).on('click', '.btn-remove', function(event) {
         event.preventDefault();
-        $(this).closest('.input-group').remove();
+        $(this).closest('.clone').remove();
     });
 </script>
 
