@@ -27,14 +27,8 @@ public class SmisEntity extends CustomEntity {
     @Column(name="agreement", length = 512)
     private String agreement;
 
-    //точка доступа к серверу для опроса
-    @Column(name="url", length = 512)
-    private String url;
-
-    //(не)работоспособность
-    @ManyToOne
-    @JoinColumn(name = "state_id")
-    private StateEntity state;
+    @Column(name="validity", length = 512)
+    private Date validity;
 
     //регион
     @ManyToOne
@@ -81,12 +75,6 @@ public class SmisEntity extends CustomEntity {
         this.agreement = agreement;
     }
 
-    /**
-     * @param url the username to set
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
 
     public void setParentSmis(SmisEntity parentSmis) {
@@ -101,9 +89,6 @@ public class SmisEntity extends CustomEntity {
         this.description = description;
     }
 
-    public void setState(StateEntity state) {
-        this.state = state;
-    }
 
     public void setContacts( Set<ContactEntity> contacts) {
         this.contacts = contacts;
@@ -115,6 +100,10 @@ public class SmisEntity extends CustomEntity {
 
     public void setEquipments(Set<EquipmentEntity> equipments) {
         this.equipments = equipments;
+    }
+
+    public void setValidity(Date validity) {
+        this.validity = validity;
     }
 
     //конец блока сеттеров
@@ -143,12 +132,7 @@ public class SmisEntity extends CustomEntity {
         return agreement;
     }
 
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        return url;
-    }
+
 
 
     public SmisEntity getParentSmis() {
@@ -164,9 +148,6 @@ public class SmisEntity extends CustomEntity {
         return description;
     }
 
-    public StateEntity getState() {
-        return state;
-    }
 
 
     public  Collection<ContactEntity> getContacts() {
@@ -182,19 +163,22 @@ public class SmisEntity extends CustomEntity {
         return equipments;
     }
 
+    public Date getValidity() {
+        return validity;
+    }
+
     //конец блока геттеров
 
 
     public SmisEntity() {
     }
 
-    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, String url, StateEntity state, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, Set<EquipmentEntity> equipments) {
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, Set<EquipmentEntity> equipments) {
         this.parentSmis = parentSmis;
         this.name = name;
         this.dateRegistration = dateRegistration;
         this.agreement = agreement;
-        this.url = url;
-        this.state = state;
+        this.validity = validity;
         this.region = region;
         this.description = description;
         this.contacts = contacts;
@@ -208,7 +192,6 @@ public class SmisEntity extends CustomEntity {
         return "SMIS [SmisID = " + getId() + ", region = " + name
                 + ", date_registration = " + dateRegistration
                 + ", agreement = " + agreement
-                + ", URL = " + url
                 + ", region = " + region
                 + ", description = " + description;
     }
