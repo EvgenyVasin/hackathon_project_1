@@ -2,6 +2,8 @@ package ru.basisintellect.support_smis.dbloader;
 
 
 
+import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -12,6 +14,7 @@ import ru.basisintellect.support_smis.repositories.*;
 //import ru.basisintellect.support_smis.services.SmisService;
 
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -106,6 +109,10 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             userRepository.save(userEntity1);
 
             //Добавление СМИСа для тестов
+
+            //удаление папки с файлами НА ВРЕМЯ ОТЛАДКИ
+            FileUtils.deleteDirectory(new File("smis_files"));
+
             RegionEntity regionEntity = new RegionEntity("Центральный");
             regionRepository.save(regionEntity);
 
