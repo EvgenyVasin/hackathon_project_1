@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.basisintellect.support_smis.model.entities.*;
@@ -40,6 +37,7 @@ public class SmisController {
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public @ResponseBody String addSmis(
                                         //файлы
+                                        @RequestParam("files")
                                         MultipartFile[] files,
                                         String[] fileNames,
                                         //контакты
@@ -52,7 +50,7 @@ public class SmisController {
                                         //комплекс
                                         String name,
                                         String agreement,
-                                        Long parent_id,
+                                        Long parent_smis_id,
                                         String region_name,
                                         String validity,
                                         String description,
