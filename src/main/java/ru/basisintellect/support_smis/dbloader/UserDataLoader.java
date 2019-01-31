@@ -113,6 +113,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             //удаление папки с файлами НА ВРЕМЯ ОТЛАДКИ
             FileUtils.deleteDirectory(new File("smis_files"));
 
+
             RegionEntity regionEntity = new RegionEntity("Центральный");
             regionRepository.save(regionEntity);
 
@@ -130,7 +131,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smisNSUKS.setAgreement("соглашение");
             smisNSUKS.setRegion(regionEntity);
             smisNSUKS.setValidity(new Date());
-            /*smisNSUKS.setDescription("aaaaaaaaaaaaaaaaaaaaaaa" +
+            smisNSUKS.setDescription("aaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
@@ -189,7 +190,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");*/
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             smises.save(smisNSUKS);
             System.out.println("smisNSUKS");
 

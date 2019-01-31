@@ -1,73 +1,269 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${smis.name}"/>
-
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
-
     <style>
 
-        .pannel-fix {
-            position: absolute;
-            margin-left: -250px !important;
-            margin-right: 50px !important;
+        .input-group-fix {
+            min-width: 500px !important;
+            margin-right: 15px !important;
+            margin-left: 15px !important;
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
         }
 
-        .description-fix {
-            max-width: 500px !important;
-            min-width: 300px !important;
-            word-wrap: break-word !important;
+        .form-control-fix{
+            min-width: 430px !important;
+
         }
+
+        .panel-primary{
+            position: absolute !important;
+        }
+
+        .row-fix {
+            margin-left: -250px !important;
+        }
+
+        .btn-add {
+            background-color: #3700b3;
+        }
+
+        .btn-add:hover {
+            background-color: #3949AB;
+        }
+
+        .btn-success {
+            background-color: #3700b3;
+            border-color: #3700b3;
+        }
+
+        .btn-success:hover {
+            background-color: #3949AB;
+        }
+
+        .btn-success-fix {
+            margin-left: 25px !important;
+        }
+
+        .glyphicon {
+            top: 0px !important;
+        }
+
+        td {
+            vertical-align: top !important;
+        }
+
+        .form-control-fix{
+            min-height: 34px !important;
+        }
+
 
     </style>
 
 </head>
 <body>
-
 <div class="container">
-    <div class="row">
-        <div class="panel panel-primary pannel-fix">
-            <div class="pannel-heading">
-                <div class="text-center">
-                    <strong class="panel-title" th:text="${smis.name}"></strong>
+    <div class="row ">
+        <div class="col-xs-offset-3 col-xs-6 row-fix">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-fix">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="${smis.name}"></strong>
+                    </div>
                 </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <!--заголовки таблицы-->
-                    <th th:text="#{complex.name}"></th>
-                    <th th:text="#{complex.region}"></th>
-                    <th th:text="#{complex.dateReg}"></th>
-                    <th th:text="#{complex.agreementNumber}"></th>
-                    <th th:text="#{complex.agreementDate}"></th>
-                    <th th:text="#{complex.contacts}"></th>
-                    <th th:text="#{complex.description}"></th>
-                    <!--<th th:text="#{complex.url}"></th>
-                    <th th:text="#{complex.enabled}"></th>-->
-                </tr>
-                </thead>
-                <tbody class="table table-striped">
-                <tr >
-                    <!--напонение таблицы-->
-                    <td th:text="${smis.name}"></td>
-                    <td th:text="${smis.region.name}"></td>
-                    <td th:text="${smis.dateRegistration}"></td>
-                    <td th:text="${smis.agreement}"></td>
-                    <td th:text="${smis.validity}"></td>
-                    <td class="description-fix">
-                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
-                            <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
-                        </div>
-                    </td>
+                <form role="form" th:action="@{/}" enctype="multipart/form-data" method="post"> <!--добавить action editSmis-->
+                    <div class="panel-body">
 
-                    <td class="description-fix" th:text="${smis.description}"></td>
-                    <!--<td th:text="${}"></td>
-                    <td th:text="${}"></td>-->
-                </tr>
-                </tbody>
-            </table>
+                        <table >
+                            <tr class="td-style-fix">
+                                <td class="td-style-fix">
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-text-color"></span></span>
+                                        <input type="text" class="form-control" name="name"
+                                               th:value="${smis.name}" required="True" autofocus="True"/>
+                                    </div>
+                                </td>
+                                <td class="td-style-fix">
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-paperclip" ></span></span>
+                                        <input type="text" class="form-control"   name="agreement" required="True"
+                                               th:value="${smis.agreement}"/>
+                                    </div>
+                                </td>
+                                <td class="td-style-fix">
+                                    <!--выпадающий список для выбора родителя-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-magnet"></span></span>
+                                        <input type="text" list="parents" th:if="${not #lists.isEmpty(smis.parentSmis)}" th:value="${smis.parentSmis.name}" class="form-control" name="parent_smis_id">
+                                        <datalist id="parents">
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option> <!--надо передать на эту форму smisesList-->
+                                        </datalist>
+                                    </div>
+                                    <!---->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-home"></span></span>
+                                        <input type=text list="regions" name="region_name"  th:value="${smis.region.name}" class="form-control" required="True">
+                                        <datalist id = "regions">
+                                            <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
+                                        </datalist>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                        <input type="text" class="form-control" name="validity" onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:value="${smis.agreement}" required="True"/>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-comment"></span></span>
+                                        <textarea type="text" class="form-control form-control-fix" name="description"
+                                                  th:text="${smis.description}" autofocus="True"></textarea>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+
+
+                                <td>
+
+                                    <!--добавление контактов-->
+                                    <div class="input-group input-group-sm clone input-group-fix">
+                                        <span class="input-group-addon glyphicon glyphicon-user"></span>
+                                        <table th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
+                                            <tr>
+                                                <td><input class="form-control"
+                                                           aria-describedby="sizing-addon3"
+                                                           type="text"
+                                                           name="phones"
+                                                           th:value="${contact.fonNumber}"></td>
+                                                <td><input class="form-control"
+                                                           aria-describedby="sizing-addon3"
+                                                           type="text"
+                                                           name="contactNames"
+                                                           th:value="${contact.name}"></td>
+                                                <td><input class="form-control"
+                                                           aria-describedby="sizing-addon3"
+                                                           type="text" name="positions"
+                                                           th:value="${contact.position}"></td>
+                                            </tr>
+
+
+
+                                        </table>
+
+                                        <table>
+
+                                            <tr>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="phones" placeholder="телефон или mail"></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="contactNames" placeholder="Ф.И.О." ></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions" placeholder="должность"></td>
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </td>
+                                <td>
+                                    <!--отображение файлов-->
+                                    <div class="input-group input-group-sm clone input-group-fix">
+                                        <span class="input-group-addon glyphicon glyphicon-save-file" ></span>
+                                        <table>
+                                            <tr th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}">
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fileNames"
+                                                           th:value="${file.name}"></td>
+                                                <td><input class="form-control" type="text" name="files"  th:value="${file.link}"></td>
+                                            </tr>
+
+                                                <!--добавление файлов-->
+
+
+
+
+
+                                        </table>
+                                        <table>
+                                            <tr>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fileNames" placeholder = "Понятное имя файла"></td>
+                                                <td><input class="form-control" type="file" name="files"  multiple></td>
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm clone input-group-fix">
+                                        <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
+                                        <table>
+                                            <tr>
+                                                <td><input type=text list=equipmentslist name="equipments"
+                                                           th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
+                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <datalist name="equipmentslist" id=equipmentslist >
+                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </datalist></td>
+                                </td>
+                            </tr>
+                        </table>
+                        <script>
+                            $(document).on('click', '.btn-add', function(event) {
+                                event.preventDefault();
+
+                                var field = $(this).closest('.clone');
+                                var field_new = field.clone();
+
+                                $(this)
+                                    .toggleClass('btn-success')
+                                    .toggleClass('btn-add')
+                                    .toggleClass('btn-danger')
+                                    .toggleClass('btn-remove')
+                                    .html('✖');
+
+                                field_new.find('input').val('');
+                                field_new.insertAfter(field);
+                            });
+
+                            $(document).on('click', '.btn-remove', function(event) {
+                                event.preventDefault();
+                                $(this).closest('.clone').remove();
+                            });
+                        </script>
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                                <button type="submit" class="btn btn-labeled btn-success btn-success-fix">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                        th:text="OK"/></button>
+                                <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                        th:text="#{users.exit}"/></button>
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -99,10 +99,10 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-magnet"></span></span>
-                                    <select class="form-control" name="parent_smis_id">
-                                    <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
-                                    <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
-                                    </select>
+                                    <input type="text" list="parents" th:placeholder="#{complex.parentSmis}" class="form-control" name="parent_smis_id">
+                                        <datalist id="parents">
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                        </datalist>
                                     </div>
                                     <!---->
                                 </td>
