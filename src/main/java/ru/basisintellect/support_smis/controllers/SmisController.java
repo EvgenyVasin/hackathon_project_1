@@ -17,6 +17,9 @@ import ru.basisintellect.support_smis.repositories.StateRepository;
 import ru.basisintellect.support_smis.services.SmisService;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -37,7 +40,7 @@ public class SmisController {
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public @ResponseBody String addSmis(
                                         //файлы
-                                        @RequestParam("files")
+//                                        @RequestParam("files")
                                         MultipartFile[] files,
                                         String[] fileNames,
                                         //контакты
@@ -56,20 +59,29 @@ public class SmisController {
                                         String description,
                                         Model model) {
 
-        Set<SmisFileEntity> fileEntities = new HashSet<>();
 
-        Set<ContactEntity> contactEntities = new HashSet<>();
+        try {
+            smisService.addSmis(
+                                    files,
+                                    fileNames,
 
+                                    phones,
+                                    contactNames,
+                                    positions,
 
-        File folder = new File("smis_files/" + region_name + "_" + name);
+                                    equipments,
 
-        if (!folder.exists()) {
-            folder.mkdir();
+                                    name,
+                                    agreement,
+                                    parent_smis_id,
+                                    region_name,
+                    new SimpleDateFormat("yyyy-MM-dd").parse(validity),
+                                    description);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
-//        for (MultipartFile file:files) {
-//
-//        }
 
 
         return viewListSmises(model);
