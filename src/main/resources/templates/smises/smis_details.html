@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{navMenu.ThreeSmis}"/>
+    <title th:text="${smis.name}"/>
 
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
+
+    <style>
+
+        .pannel-fix {
+            position: absolute;
+            margin-left: -250px !important;
+            margin-right: 50px !important;
+        }
+
+        .description-fix {
+            max-width: 500px !important;
+            min-width: 300px !important;
+            word-wrap: break-word !important;
+        }
+
+    </style>
+
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="panel panel-primary">
+        <div class="panel panel-primary pannel-fix">
             <div class="pannel-heading">
                 <div class="text-center">
-                    <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
+                    <strong class="panel-title" th:text="${smis.name}"></strong>
                 </div>
             </div>
             <table class="table table-striped">
@@ -23,26 +40,30 @@
                     <th th:text="#{complex.name}"></th>
                     <th th:text="#{complex.region}"></th>
                     <th th:text="#{complex.dateReg}"></th>
-                    <th th:text="#{complex.agreement}"></th>
-                    <th th:text="#{complex.validity}"></th>
+                    <th th:text="#{complex.agreementNumber}"></th>
+                    <th th:text="#{complex.agreementDate}"></th>
                     <th th:text="#{complex.contacts}"></th>
-                    <th th:text="#{complex.url}"></th>
-                    <th th:text="#{complex.enabled}"></th>
+                    <!--<th th:text="#{complex.url}"></th>
+                    <th th:text="#{complex.enabled}"></th>-->
                     <th th:text="#{complex.description}"></th>
                 </tr>
                 </thead>
                 <tbody class="table table-striped">
                 <tr >
                     <!--напонение таблицы-->
-                    <th th:text="${smis.name}"></th>
-                    <th th:text="${smis.region}"></th>
-                    <th th:text="${smis.dateRegistration}"></th>
-                    <th th:text="${smis.agreement}"></th>
-                    <th th:text="${smis.validity}"></th>
-                    <th th:text="${smis.contacts}"></th>
-                    <th th:text="${smis.url}"></th>
-                    <th th:text="${smis.enabled}"></th>
-                    <th th:text="${smis.description}"></th>
+                    <td th:text="${smis.name}"></td>
+                    <td th:text="${smis.region.name}"></td>
+                    <td th:text="${smis.dateRegistration}"></td>
+                    <td th:text="${smis.agreement}"></td>
+                    <td th:text="${smis.validity}"></td>
+                    <td class="description-fix">
+                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
+                            <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
+                        </div>
+                    </td>
+                    <!--<th th:text="${smis.url}"></th>
+                    <th th:text="${smis.enabled}"></th>-->
+                    <td th:text="${smis.description}"></td>
                 </tr>
                 </tbody>
             </table>

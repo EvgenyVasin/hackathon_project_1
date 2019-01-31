@@ -36,7 +36,7 @@ public class SmisEntity extends CustomEntity {
     private RegionEntity region;
 
     //коментарий
-    @Column(name="description", length = 512)
+    @Column(name="description", length = 65536)
     private String description;
 
     //контакты
