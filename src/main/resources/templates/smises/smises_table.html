@@ -21,7 +21,14 @@
 
         .description-fix {
             max-width: 500px !important;
+            min-width: 300px !important;
             word-wrap: break-word !important;
+        }
+
+        .pannel-fix {
+            position: absolute;
+            margin-left: -250px !important;
+            margin-right: 50px !important;
         }
 
 
@@ -32,7 +39,7 @@
 <body onload="detectBr()">
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary pannel-table">
+            <div class="panel panel-primary pannel-table pannel-fix">
                 <div class="pannel-heading">
                     <div class="text-center">
                         <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
@@ -98,9 +105,9 @@
                                 <td th:text="${smis.agreement}"></td>
                                 <td ></td>  <!--вернуть в Entity срок соглашения-->
                                 <td class="description-fix">
-                                    <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
+                                    <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
 
-                                    <p class="contacts-cell" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
+                                    <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
 
                                     </div>
                                 </td>
