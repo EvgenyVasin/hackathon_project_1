@@ -15,7 +15,6 @@ import ru.basisintellect.support_smis.model.entities.UserEntity;
 import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.UserRoleRepository;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
-import ru.basisintellect.support_smis.utils.ImgWorker;
 
 
 import java.util.*;
@@ -31,8 +30,6 @@ public class UsersController {
     BCryptPasswordEncoder bcryptEncoder;
     @Autowired
     UserRoleRepository roles;
-    @Autowired
-    ImgWorker images;
 
 
 //    @PreAuthorize("hasRole('ADMIN')")
@@ -126,10 +123,9 @@ public class UsersController {
 
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
-    public String editUser(Long userId, @RequestParam("img")MultipartFile img, String first_name, String last_name, String email, Model model)
+    public String editUser(Long userId, String first_name, String last_name, String email, Model model)
     {
         UserEntity user = users.findById(userId).get();
-        images.setImg(user, img);
         user.setFirstName(first_name);
         user.setLastName(last_name);
         user.setMail(email);

@@ -38,7 +38,7 @@ public class SmisController {
     //добавление ПК ИВ СМИС
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
-    public @ResponseBody String addSmis(
+    public String addSmis(
                                         //файлы
 //                                        @RequestParam("files")
                                         MultipartFile[] files,

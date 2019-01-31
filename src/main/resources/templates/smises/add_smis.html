@@ -55,6 +55,10 @@
             vertical-align: top !important;
         }
 
+        .form-control-fix{
+            min-height: 34px !important;
+        }
+
 
     </style>
 
@@ -127,7 +131,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
-                                        <textarea type="text" class="form-control" name="description"
+                                        <textarea type="text" class="form-control form-control-fix" name="description"
                                                   th:placeholder="#{complex.description}" autofocus="True"></textarea>
                                     </div>
                                 </td>

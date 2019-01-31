@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="users")
-public class UserEntity extends CustomImgEntity{
+public class UserEntity extends CustomEntity{
 
     @Column(name = "password", length = 256, nullable = false)
     private String password;

@@ -76,6 +76,7 @@ public class SmisService {
         smisEntity.setRegion(getRegionByNameOrAdd(region_name));
         smisEntity.setValidity(validity);
         smisEntity.setDescription(description);
+        smisEntity.setDateRegistration(new Date());
 
         for (int i = 0; i < fileNames.length; i++) {
 
