@@ -77,6 +77,18 @@ public class SmisService {
         return (List<EquipmentEntity>) equipmentRepo.findAll();
     }
 
+    public SmisEntity findSmisById(Long id) {
+        SmisEntity result = null;
+        List<SmisEntity> smises = (List<SmisEntity>) smisesRepo.findAll();
+        for (SmisEntity smisEntity : smises) {
+            if (id == smisEntity.getId()) {
+                result = smisEntity;
+                break;
+            }
+        }
+        return result;
+    }
+
 
 
     }

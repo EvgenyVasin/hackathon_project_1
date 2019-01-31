@@ -76,12 +76,12 @@ public class SmisController {
     }
 
     //получение ПК ИВ СМИС
-    /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
     public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
         model.addAttribute("smis", smisService.findSmisById(smisId));
         return "smises/smis_details";
-    }*/
+    }
 
     //редактирование ПК ИВ СМИС
     /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
