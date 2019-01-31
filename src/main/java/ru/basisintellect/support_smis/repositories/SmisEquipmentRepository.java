@@ -12,4 +12,6 @@ import ru.basisintellect.support_smis.model.entities.SmisEquipmentEntity;
 public interface SmisEquipmentRepository extends CrudRepository<SmisEquipmentEntity, Long> {
 
     SmisEntity findAllById(Long parent_smis_id);
+
+    Iterable<? extends SmisEquipmentEntity> findAllBySmisId(Long smisId);
 }

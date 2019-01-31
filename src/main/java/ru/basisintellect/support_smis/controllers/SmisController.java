@@ -94,6 +94,17 @@ public class SmisController {
         return "smises/smis_details";
     }
 
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    @RequestMapping(value = "delete_smis/{smisId}", method = RequestMethod.GET)
+    public String delSmis(@PathVariable("smisId") Long smisId, Model model) {
+        try {
+            smisService.deleteSmis(smisId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/smises_list";
+    }
+
     //редактирование ПК ИВ СМИС
     /*@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smis_details", method = RequestMethod.POST)

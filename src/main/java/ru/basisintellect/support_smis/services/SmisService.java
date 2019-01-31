@@ -1,5 +1,6 @@
 package ru.basisintellect.support_smis.services;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,12 @@ public class SmisService {
 
     @Autowired
     SmisEquipmentRepository smisEquipmentRepo;
+
+    @Autowired
+    SmisFileRepository smisFileRepo;
+
+    @Autowired
+    ContactsRepository contactsRepo;
 
 
 
@@ -105,6 +112,31 @@ public class SmisService {
         }
 
         return smisEntity;
+    }
+
+    public void deleteSmis(Long smisId) throws IOException {
+        SmisEntity smis = smisesRepo.findById(smisId).get();
+
+        List<SmisEntity> childs = smisesRepo.findAllByParentSmis(smis);
+        for (SmisEntity child:childs) {
+            child.setParentSmis(null);
+        }
+
+        smisesRepo.saveAll(childs);
+
+        smisFileRepo.deleteAll(smis.getFiles());
+        contactsRepo.deleteAll(smis.getContacts());
+
+        smisEquipmentRepo.deleteAll(smisEquipmentRepo.findAllBySmisId(smisId));
+
+        File folderSmis = new File("smis_files/" + smis.getName() + '_' + smis.getRegion().getName());
+        if (folderSmis.exists()) {
+            FileUtils.deleteDirectory(folderSmis);
+        }
+
+        smisesRepo.delete(smis);
+
+
     }
 
     public RegionEntity getRegionByNameOrAdd(String regionName){

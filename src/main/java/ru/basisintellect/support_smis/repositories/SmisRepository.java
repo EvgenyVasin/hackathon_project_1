@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,4 +19,5 @@ import java.util.Optional;
 public interface SmisRepository extends CrudRepository<SmisEntity, Long> {
     Optional<SmisEntity> findById(Long id);
 
+    List<SmisEntity> findAllByParentSmis(SmisEntity parent);
 }
