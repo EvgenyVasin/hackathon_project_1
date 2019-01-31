@@ -115,7 +115,7 @@ public class SmisController {
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();
-        List<SmisEntity> list = (List<SmisEntity>) smisService.getAllSmises();
+        List<SmisEntity> list = smisService.getAllSmises();
 
         for (SmisEntity entity : list) {
             SmisEntity parentSMIS = entity.getParentSmis();

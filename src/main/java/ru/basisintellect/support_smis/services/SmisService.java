@@ -72,6 +72,7 @@ public class SmisService {
     public List<RegionEntity> getAllRegions() {
         return (List<RegionEntity>) regionsRepo.findAll();
     }
+
     public List<EquipmentEntity> getAllEquipments() {
         return (List<EquipmentEntity>) equipmentRepo.findAll();
     }

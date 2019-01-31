@@ -226,15 +226,6 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             smises.save(smisEDDS5);
             System.out.println("smisEDDS5");
 
-
-
-
-
-
-
-
-
-
 //            smisService.init();
 
             //

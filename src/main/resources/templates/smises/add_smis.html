@@ -111,7 +111,6 @@
                                         <input type=text list="regions" name="region_name"  th:placeholder="#{complex.region}" class="form-control" required="True">
                                         <datalist id = "regions">
                                             <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
-
                                         </datalist>
                                     </div>
                                 </td>
@@ -178,24 +177,18 @@
                                         <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
                                         <table>
                                             <tr>
-                                                <td><input type=text list=equipmentslist name = equipments th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
-
+                                                <td><input type=text list=equipmentslist name="equipments" th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
                                                 <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
                                             </tr>
                                         </table>
                                     </div>
-
                                     <datalist name="equipmentslist" id=equipmentslist >
                                         <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
                                         <option>1</option>
                                         <option>2</option>
                                     </datalist></td>
-
                                 </td>
-
                             </tr>
-
-
                         </table>
                         <script>
                             $(document).on('click', '.btn-add', function(event) {
