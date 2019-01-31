@@ -19,6 +19,11 @@
             color: #fff;
         }
 
+        .description-fix {
+            max-width: 500px !important;
+            word-wrap: break-word !important;
+        }
+
 
 
     </style>
@@ -79,7 +84,7 @@
                                 <th th:text="#{complex.agreementDate}"></th>
                                 <th th:text="#{complex.contacts}"></th>
                                 <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
-                                <th th:text="#{complex.enabled}"></th>
+                                <!--<th th:text="#{complex.enabled}"></th>-->
                                 <th th:text="#{complex.description}"></th>
                         </tr>
                     </thead>
@@ -92,7 +97,7 @@
                                 <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
                                 <td th:text="${smis.agreement}"></td>
                                 <td ></td>  <!--вернуть в Entity срок соглашения-->
-                                <td>
+                                <td class="description-fix">
                                     <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
 
                                     <p class="contacts-cell" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
@@ -101,7 +106,7 @@
                                 </td>
                                 <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->
                                 <!--<td th:text="${smis.state.stateName}"></td>-->
-                                <td th:text="${smis.description}"></td>
+                                <td th:text="${smis.description}" class="description-fix"></td>
                         </tr>
                     </tbody>
                 </table>
