@@ -82,9 +82,8 @@ public class SmisController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-        return viewListSmises(model);
+        viewListSmises(model);
+        return "redirect:/smises_list";
     }
 
     //получение ПК ИВ СМИС
