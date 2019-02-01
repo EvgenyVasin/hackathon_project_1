@@ -219,15 +219,15 @@
 
         $('#treeCSS').append(tree)
             .on('click', '.btn_del', function(){
-                if(confirm("Вы уверены, что хотите удалить?")){document.location.href = "delete_smis/" + this.id;}
+                if(confirm("Вы уверены, что хотите удалить данный объект?")){
+                    document.location.href = "delete_smis/" + this.id;
+                }
             });
 
         $('#treeCSS').append(tree)
             .on('click', '.item',function(){
                      document.location.href = "smis_details/" + this.id;
             });
-
-
     }
 </script>
 
