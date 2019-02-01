@@ -121,6 +121,16 @@
             color: #c9302c;
         }
 
+        .btn-add {
+            background-color: #3700b3;
+            color: #fff;
+        }
+
+        .btn-add:hover {
+            background-color: #3949AB;
+            color: #fff;
+        }
+
     </style>
 <script type="text/javascript" th:inline="javascript">
 
@@ -237,9 +247,28 @@
 <table class="nav-table">
     <tbody>
     <tr>
-        <td><b>Контроль: &nbsp;</b></td>
-        <td><div id = "statebar"></div></td>
-        <td class="a-add-smis" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
+
+        <!--контроль веб сокета-->
+        <!--<td><b>Контроль: &nbsp;</b></td>
+        <td><div id = "statebar"></div></td>-->
+        <td class="a-add-smis" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
+            <!--<a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>-->
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <button class="btn btn-labeled btn-add" onclick="onClickAdd();">
+                            <span class="btn-label">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                    <a th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
+                </button>
+            </div>
+            <script>
+                function onClickAdd() {
+                    document.location.href ="add_smis";
+                }
+            </script>
+
+        </td>
     </tr>
     </tbody>
 </table>

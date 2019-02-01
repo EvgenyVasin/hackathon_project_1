@@ -8,6 +8,14 @@
     <th:block th:include="fragments/headerinc :: head"></th:block>
     <th:block th:include="fragments/header :: header"></th:block>
 
+    <style>
+
+        .panel-primary-fix{
+            background-color: #3700b3 !important;
+        }
+
+    </style>
+
 
 </head>
 <body>
@@ -15,8 +23,8 @@
 <div class="container">
     <div class="row">
         <div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
+            <div class="panel panel-primary panel-primary-fix">
+                <div class="panel-heading panel-primary-fix">
                     <div class="text-center">
                         <strong class="panel-title" th:text="#{users.profile}"></strong>
                     </div>
@@ -85,13 +93,14 @@
                         <input type="email" class="form-control rounded" name="email"
                                th:placeholder="#{users.eMail}" th:value="${user.mail}"/>
                     </div>
-                    <div class="checkbox">
+                    <!--подписка на рассылку-->
+                    <!--<div class="checkbox">
                         <label>
                             <input type="checkbox" id="subscription"
                                    name="subscription"
                                    th:text="#{users.subscription}"/>
                         </label>
-                    </div>
+                    </div>-->
 
 
                 </div>
