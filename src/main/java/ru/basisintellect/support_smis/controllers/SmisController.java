@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -126,6 +129,23 @@ public class SmisController {
         model.addAttribute("regionList", smisService.getAllRegions());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         return "smises/add_smis";
+    }
+
+    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
+    public StreamingResponseBody getSteamingFile(@PathVariable("id") Long fileId, HttpServletResponse response) throws IOException {
+        File file = smisService.getFileById(fileId);
+        response.setContentType("text/html;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=\""+file.getName()+"\"");
+        InputStream inputStream = new FileInputStream(file);
+
+        return outputStream -> {
+            int nRead;
+            byte[] data = new byte[1024];
+            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                outputStream.write(data, 0, nRead);
+            }
+            inputStream.close();
+        };
     }
 
     //генерация страницы со смисами2

@@ -32,6 +32,8 @@ dependencies {
 //	implementation 'org.springframework:spring-messaging'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+//	implementation 'postgresql:postgresql:9.1-901.jdbc4'
+//	runtimeOnly('org.postgresql:postgresql')
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
