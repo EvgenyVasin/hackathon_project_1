@@ -95,7 +95,7 @@ public class SmisService {
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
             stream.write(fileBytes);
             stream.close();
-            String link = rootPath + files[i].getOriginalFilename();
+            String link = newFile.getAbsolutePath();
             smisEntity.getFiles().add(new SmisFileEntity(fileNames[i], link, smisEntity));
 
         }
