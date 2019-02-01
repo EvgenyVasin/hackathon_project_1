@@ -15,6 +15,8 @@ import ru.basisintellect.support_smis.repositories.*;
 
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -305,4 +307,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     }
 
     }
+
+
+
 }
