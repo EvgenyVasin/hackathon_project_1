@@ -13,7 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
