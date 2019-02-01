@@ -13,12 +13,12 @@
             padding-bottom: 5px !important;
         }
 
-        .form-control-fix{
+        .form-control-fix {
             min-width: 430px !important;
 
         }
 
-        .panel-primary{
+        .panel-primary {
             position: absolute !important;
         }
 
@@ -55,7 +55,7 @@
             vertical-align: top !important;
         }
 
-        .form-control-fix{
+        .form-control-fix {
             min-height: 34px !important;
         }
 
@@ -76,22 +76,22 @@
                 <form role="form" th:action="@{/addSmis}" enctype="multipart/form-data" method="post">
                     <div class="panel-body">
 
-                        <table >
+                        <table>
                             <tr class="td-style-fix">
                                 <td class="td-style-fix">
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
-                                    <input type="text" class="form-control" name="name"
-                                    th:placeholder="#{complex.name}" required="True" autofocus="True"/>
+                                        <input type="text" class="form-control" name="name"
+                                               th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
                                 </td>
                                 <td class="td-style-fix">
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-paperclip" ></span></span>
-                                    <input type="text" class="form-control"   name="agreement" required="True"
-                                    th:placeholder="#{complex.agreementNumber}"/>
+                                    <span class="glyphicon glyphicon-paperclip"></span></span>
+                                        <input type="text" class="form-control" name="agreement" required="True"
+                                               th:placeholder="#{complex.agreementNumber}"/>
                                     </div>
                                 </td>
                                 <td class="td-style-fix">
@@ -99,9 +99,11 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-magnet"></span></span>
-                                    <input type="text" list="parents" th:placeholder="#{complex.parentSmis}" class="form-control" name="parent_smis_id">
+                                        <input type="text" list="parents" th:placeholder="#{complex.parentSmis}"
+                                               class="form-control" name="parent_smis_id">
                                         <datalist id="parents">
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}"
+                                                    th:text="${smis.name}"></option>
                                         </datalist>
                                     </div>
                                     <!---->
@@ -111,19 +113,22 @@
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-home"></span></span>
-                                        <input type=text list="regions" name="region_name"  th:placeholder="#{complex.region}" class="form-control" required="True">
-                                        <datalist id = "regions">
-                                            <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
+                                            class="glyphicon glyphicon-home"></span></span>
+                                        <input type=text list="regions" name="region_name"
+                                               th:placeholder="#{complex.region}" class="form-control" required="True">
+                                        <datalist id="regions">
+                                            <option th:each="region : ${regionList}" th:value="${region.name}"
+                                                    th:text="${region.name}"></option>
                                         </datalist>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                    class="glyphicon glyphicon-calendar"></span></span>
-                                    <input type="text" class="form-control" name="validity" onfocus="(this.type='date')" onblur="this.type='text'"
-                                    th:placeholder="#{complex.agreementDate}" required="True"/>
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                        <input type="text" class="form-control" name="validity"
+                                               onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:placeholder="#{complex.agreementDate}" required="True"/>
                                     </div>
                                 </td>
 
@@ -146,13 +151,18 @@
                                         <span class="input-group-addon glyphicon glyphicon-user "></span>
                                         <table>
                                             <tr>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="phones" placeholder="телефон или mail"></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="contactNames" placeholder="Ф.И.О." ></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions" placeholder="должность"></td>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="phones" placeholder="телефон или mail">
+                                                </td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="contactNames" placeholder="Ф.И.О."></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="positions" placeholder="должность"></td>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
                                             </tr>
                                         </table>
-
 
 
                                     </div>
@@ -164,14 +174,18 @@
                                     <!--добавление файлов-->
                                     <div class="input-group input-group-sm clone input-group-fix">
 
-                                        <span class="input-group-addon glyphicon glyphicon-save-file" ></span>
+                                        <span class="input-group-addon glyphicon glyphicon-save-file"></span>
 
                                         <table>
                                             <tr>
 
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fileNames" placeholder = "Понятное имя файла"></td>
-                                                <td><input class="form-control" type="file" name="files"  multiple></td>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="fileNames"
+                                                           placeholder="Понятное имя файла"></td>
+                                                <td><input class="form-control" type="file" name="files" multiple></td>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -181,21 +195,27 @@
                                         <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
                                         <table>
                                             <tr>
-                                                <td><input type=text list=equipmentslist name="equipments" th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                                <td><input type=text list=equipmentslist name="equipments"
+                                                           th:placeholder="#{complex.equipment}"
+                                                           class="form-control form-control-fix" multiple>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <datalist name="equipmentslist" id=equipmentslist >
-                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
+                                    <datalist name="equipmentslist" id=equipmentslist>
+                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}"
+                                                th:text="${equipment.name}"></option>
                                         <option>1</option>
                                         <option>2</option>
-                                    </datalist></td>
+                                    </datalist>
+                                </td>
                                 </td>
                             </tr>
                         </table>
                         <script>
-                            $(document).on('click', '.btn-add', function(event) {
+                            $(document).on('click', '.btn-add', function (event) {
                                 event.preventDefault();
 
                                 var field = $(this).closest('.clone');
@@ -212,31 +232,29 @@
                                 field_new.insertAfter(field);
                             });
 
-                            $(document).on('click', '.btn-remove', function(event) {
+                            $(document).on('click', '.btn-remove', function (event) {
                                 event.preventDefault();
                                 $(this).closest('.clone').remove();
                             });
                         </script>
 
-                    <div class="panel-footer">
-                        <div class="row">
-                            <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                        <div class="panel-footer">
+                            <div class="row">
+                                <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
                                 <button type="submit" class="btn btn-labeled btn-success btn-success-fix">
                                     <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
                                         th:text="OK"/></button>
                                 <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
                                     <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
                                         th:text="#{users.exit}"/></button>
-                            <!--</div>-->
+                                <!--</div>-->
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </form>
 
 
-
             </div>
-
 
 
         </div>

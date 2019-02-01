@@ -9,11 +9,11 @@ public class ObjectFactory {
     }
 
 
-    TestRequest createTestReqest(){
+    TestRequest createTestReqest() {
         return new TestRequest();
     }
 
-    TestResponse createTestResponse(){
+    TestResponse createTestResponse() {
         return new TestResponse();
     }
 }

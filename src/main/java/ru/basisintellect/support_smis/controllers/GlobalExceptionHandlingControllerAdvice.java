@@ -1,8 +1,6 @@
 package ru.basisintellect.support_smis.controllers;
 
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,7 +13,7 @@ public class GlobalExceptionHandlingControllerAdvice {
 
     public static final String DEFAULT_ERROR_VIEW = "error/error";
 
-//    @ExceptionHandler(value = Exception.class)
+    //    @ExceptionHandler(value = Exception.class)
     public ModelAndView
     defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         // If the exception is annotated with @ResponseStatus rethrow it and let

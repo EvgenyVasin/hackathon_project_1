@@ -45,7 +45,7 @@
                 </tr>
                 </thead>
                 <tbody class="table table-striped">
-                <tr >
+                <tr>
                     <!--напонение таблицы-->
                     <td th:text="${smis.name}"></td>
                     <td th:text="${smis.region.name}"></td>
@@ -53,8 +53,10 @@
                     <td th:text="${smis.agreement}"></td>
                     <td th:text="${smis.validity}"></td>
                     <td class="description-fix">
-                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
-                            <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
+                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}"
+                             class="description-fix">
+                            <p class="contacts-cell description-fix"
+                               th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
                         </div>
                     </td>
                     <!--<th th:text="${smis.url}"></th>

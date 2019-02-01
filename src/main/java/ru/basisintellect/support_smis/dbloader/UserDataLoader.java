@@ -1,18 +1,20 @@
 package ru.basisintellect.support_smis.dbloader;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.basisintellect.support_smis.model.entities.*;
+import ru.basisintellect.support_smis.model.entities.RegionEntity;
+import ru.basisintellect.support_smis.model.entities.StateEntity;
+import ru.basisintellect.support_smis.model.entities.UserEntity;
+import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.*;
-//import ru.basisintellect.support_smis.services.SmisService;
-
 
 import java.util.Date;
+
+//import ru.basisintellect.support_smis.services.SmisService;
 
 
 /**
@@ -47,7 +49,6 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
-
 
 
             //добавление состояний работоспособности СМИС
@@ -235,12 +236,11 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
             //
 
-        }  catch (final Exception err) {
+        } catch (final Exception err) {
             System.out.println(err);
-    }
+        }
 
     }
-
 
 
 }

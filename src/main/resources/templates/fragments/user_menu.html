@@ -7,14 +7,19 @@
 <body>
 <div th:fragment="user_menu">
     <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">-->
-    <nav id="sidebar"  role="navigation" th:if="${#authorization.expression('isAuthenticated()')}">
+    <nav id="sidebar" role="navigation" th:if="${#authorization.expression('isAuthenticated()')}">
 
-        <div class="text-center" id="author" >
+        <div class="text-center" id="author">
             <br/>
-            <img style="width: 150px;position:relative; left: 19%; " src="#" th:src="${'/imgUser=' + session.currentUserEntity.id}"  class="img-circle img-responsive" />
+            <img style="width: 150px;position:relative; left: 19%; " src="#"
+                 th:src="${'/imgUser=' + session.currentUserEntity.id}" class="img-circle img-responsive"/>
             <h3 th:text="${session.currentUserEntity.firstName + ' ' + session.currentUserEntity.lastName}"></h3>
-            <small class="label label-warning" th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_ADMIN'}" th:text="#{users.roleAdmin}"/>
-            <small class="label label-warning" th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_USER'}" th:text="#{users.roleUser}"/>
+            <small class="label label-warning"
+                   th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_ADMIN'}"
+                   th:text="#{users.roleAdmin}"/>
+            <small class="label label-warning"
+                   th:if="${session.currentUserEntity.userRoleEntity.userRoleName=='ROLE_USER'}"
+                   th:text="#{users.roleUser}"/>
         </div>
         <ul>
             <li><a href="#">Главная</a></li>

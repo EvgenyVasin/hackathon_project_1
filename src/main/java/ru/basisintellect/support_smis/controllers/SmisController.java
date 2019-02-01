@@ -1,26 +1,22 @@
 package ru.basisintellect.support_smis.controllers;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import ru.basisintellect.support_smis.model.entities.*;
-import ru.basisintellect.support_smis.repositories.RegionRepository;
-import ru.basisintellect.support_smis.repositories.SmisRepository;
-import ru.basisintellect.support_smis.repositories.StateRepository;
+import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vasin.e on 17.01.2019.
@@ -39,44 +35,44 @@ public class SmisController {
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public String addSmis(
-                                        //файлы
+            //файлы
 //                                        @RequestParam("files")
-                                        MultipartFile[] files,
-                                        String[] fileNames,
-                                        //контакты
-                                        String[] phones,
-                                        String[] contactNames,
-                                        String[] positions,
-                                        //оборудование
-                                        String[] equipments,
+            MultipartFile[] files,
+            String[] fileNames,
+            //контакты
+            String[] phones,
+            String[] contactNames,
+            String[] positions,
+            //оборудование
+            String[] equipments,
 
-                                        //комплекс
-                                        String name,
-                                        String agreement,
-                                        Long parent_smis_id,
-                                        String region_name,
-                                        String validity,
-                                        String description,
-                                        Model model) {
+            //комплекс
+            String name,
+            String agreement,
+            Long parent_smis_id,
+            String region_name,
+            String validity,
+            String description,
+            Model model) {
 
 
         try {
             smisService.addSmis(
-                                    files,
-                                    fileNames,
+                    files,
+                    fileNames,
 
-                                    phones,
-                                    contactNames,
-                                    positions,
+                    phones,
+                    contactNames,
+                    positions,
 
-                                    equipments,
+                    equipments,
 
-                                    name,
-                                    agreement,
-                                    parent_smis_id,
-                                    region_name,
+                    name,
+                    agreement,
+                    parent_smis_id,
+                    region_name,
                     new SimpleDateFormat("yyyy-MM-dd").parse(validity),
-                                    description);
+                    description);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -145,7 +141,7 @@ public class SmisController {
             obj.put("itemId", entity.getId());
             obj.put("itemName", entity.getName());
             obj.put("regionName", entity.getRegion().getName());
-            if(parentSMIS != null)
+            if (parentSMIS != null)
                 obj.put("itemParentId", entity.getParentSmis().getId());
             else
                 obj.put("itemParentId", null);

@@ -9,12 +9,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
-import java.util.Properties;
 
 /**
  * Created by safin.v on 19.10.2016.
@@ -23,7 +21,8 @@ import java.util.Properties;
 public class MvcConfig extends WebMvcConfigurerAdapter {
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/static/", "classpath:/public/"};
+
     /**
      * <mvc:resources mapping="/resources/**" location="/resources/" />
      */
@@ -67,7 +66,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     *  <mvc:interceptors>
+     * <mvc:interceptors>
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -82,7 +81,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     *  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+     * <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
      */
     @Bean(name = "localeResolver")
     public CookieLocaleResolver getLocaleResolver() {

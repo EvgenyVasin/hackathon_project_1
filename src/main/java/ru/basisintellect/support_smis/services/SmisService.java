@@ -2,23 +2,18 @@ package ru.basisintellect.support_smis.services;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
-import ru.basisintellect.support_smis.model.SmisStateMsg;
 import ru.basisintellect.support_smis.model.entities.*;
 import ru.basisintellect.support_smis.repositories.*;
-import ru.basisintellect.support_smis.soap_client.TestConnectClient;
-import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
-import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class SmisService {
@@ -49,8 +44,6 @@ public class SmisService {
     ContactsRepository contactsRepo;
 
 
-
-
     public SmisEntity addSmis(MultipartFile[] files,
                               String[] fileNames,
                               //контакты
@@ -77,7 +70,7 @@ public class SmisService {
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         smisEntity.setAgreement(agreement);
-        if(parent_smis_id != null)
+        if (parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
         smisEntity.setRegion(getRegionByNameOrAdd(region_name));
@@ -89,8 +82,8 @@ public class SmisService {
 
             byte[] fileBytes = files[i].getBytes();
             new File("smis_files/" + name + '_' + region_name).mkdir();
-            String rootPath ="smis_files/"  + name + '_' + region_name + '/';
-                    System.out.println("File content type: " + files[i].getContentType());
+            String rootPath = "smis_files/" + name + '_' + region_name + '/';
+            System.out.println("File content type: " + files[i].getContentType());
             File newFile = new File(rootPath + files[i].getOriginalFilename());
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
             stream.write(fileBytes);
@@ -118,7 +111,7 @@ public class SmisService {
         SmisEntity smis = smisesRepo.findById(smisId).get();
 
         List<SmisEntity> childs = smisesRepo.findAllByParentSmis(smis);
-        for (SmisEntity child:childs) {
+        for (SmisEntity child : childs) {
             child.setParentSmis(null);
         }
 
@@ -139,31 +132,32 @@ public class SmisService {
 
     }
 
-    public RegionEntity getRegionByNameOrAdd(String regionName){
+    public RegionEntity getRegionByNameOrAdd(String regionName) {
         RegionEntity regionEntity = regionsRepo.findByName(regionName);
-        if(regionEntity == null) {
+        if (regionEntity == null) {
             regionEntity = new RegionEntity(regionName);
             regionsRepo.save(regionEntity);
         }
         return regionEntity;
     }
 
-    public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName){
+    public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName) {
         EquipmentEntity equipmentEntity = equipmentRepo.findByName(equipmentName);
-        if(equipmentEntity == null) {
+        if (equipmentEntity == null) {
             equipmentEntity = new EquipmentEntity(equipmentName);
             equipmentRepo.save(equipmentEntity);
         }
         return equipmentEntity;
     }
 
-    public SmisEquipmentEntity addSmisEquipment(SmisEntity smis, EquipmentEntity equipment){
-        return smisEquipmentRepo.save(new SmisEquipmentEntity(smis,equipment));
+    public SmisEquipmentEntity addSmisEquipment(SmisEntity smis, EquipmentEntity equipment) {
+        return smisEquipmentRepo.save(new SmisEquipmentEntity(smis, equipment));
     }
 
     public List<SmisEntity> getAllSmises() {
         return (List<SmisEntity>) smisesRepo.findAll();
     }
+
     public List<RegionEntity> getAllRegions() {
         return (List<RegionEntity>) regionsRepo.findAll();
     }
@@ -185,5 +179,4 @@ public class SmisService {
     }
 
 
-
-    }
+}

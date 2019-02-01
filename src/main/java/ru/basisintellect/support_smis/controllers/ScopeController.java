@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.basisintellect.support_smis.model.entities.UserEntity;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

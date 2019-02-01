@@ -10,26 +10,27 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadFilesController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(@RequestParam("files") MultipartFile[] files) {
+    public @ResponseBody
+    String handleFileUpload(@RequestParam("files") MultipartFile[] files) {
 
 //        if (files.length ==0) {
 
-            try {
-        for (MultipartFile file:files) {
+        try {
+            for (MultipartFile file : files) {
 
 
-            byte[] fileBytes = file.getBytes();
-            String rootPath = System.getProperty("catalina.home");
-            System.out.println("Server rootPath: " + rootPath);
-            System.out.println("File original name: " + file.getOriginalFilename());
-            System.out.println("File content type: " + file.getContentType());
-        }
-
-        return null;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "File upload is failed: " + e.getMessage();
+                byte[] fileBytes = file.getBytes();
+                String rootPath = System.getProperty("catalina.home");
+                System.out.println("Server rootPath: " + rootPath);
+                System.out.println("File original name: " + file.getOriginalFilename());
+                System.out.println("File content type: " + file.getContentType());
             }
+
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "File upload is failed: " + e.getMessage();
+        }
 //        } else {
 //            return "File upload is failed: File is empty";
 //        }

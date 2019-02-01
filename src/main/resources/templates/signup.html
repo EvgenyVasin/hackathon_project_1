@@ -7,74 +7,74 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div >
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="text-center">
-                            <strong class="panel-title" th:text="#{navMenu.signup}"></strong>
-                        </div>
+<div class="container">
+    <div class="row">
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center">
+                        <strong class="panel-title" th:text="#{navMenu.signup}"></strong>
                     </div>
-                    <form role="form" th:action="@{/addUser}" method="post">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 login-box">
+                </div>
+                <form role="form" th:action="@{/addUser}" method="post">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 login-box">
 
-                                    <div class="input-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-envelope"></span></span>
-                                        <input type="text" class="form-control" name="e_mail"
-                                               th:placeholder="#{users.eMail}" required="True" autofocus="True"/>
-                                    </div>
+                                    <input type="text" class="form-control" name="e_mail"
+                                           th:placeholder="#{users.eMail}" required="True" autofocus="True"/>
+                                </div>
 
-                                    <div class="input-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" name="firstname"
-                                               th:placeholder="#{users.firstName}" required="True"/>
-                                    </div>
-                                    <div class="input-group">
+                                    <input type="text" class="form-control" name="firstname"
+                                           th:placeholder="#{users.firstName}" required="True"/>
+                                </div>
+                                <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" name="lastname"
-                                               th:placeholder="#{users.lastName}" required="True"/>
-                                    </div>
+                                    <input type="text" class="form-control" name="lastname"
+                                           th:placeholder="#{users.lastName}" required="True"/>
+                                </div>
 
-                                    <div class="input-group">
+                                <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" name="password"
-                                               th:placeholder="#{users.password}" required="True"/>
-                                    </div>
-                                    <div class="input-group">
+                                    <input type="text" class="form-control" name="password"
+                                           th:placeholder="#{users.password}" required="True"/>
+                                </div>
+                                <div class="input-group">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-lock"></span></span>
-                                        <input type="text" class="form-control" name="password_confirm"
-                                               th:placeholder="#{users.passConf}" required="True"/>
-                                    </div>
+                                    <input type="text" class="form-control" name="password_confirm"
+                                           th:placeholder="#{users.passConf}" required="True"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <button type="submit" class="btn btn-labeled btn-success">
-                                        <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
-                                            th:text="OK"/></button>
-                                    <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
-                                        <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
-                                            th:text="#{users.exit}"/></button>
-                                </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <button type="submit" class="btn btn-labeled btn-success">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
+                                        th:text="OK"/></button>
+                                <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
+                                    <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
+                                        th:text="#{users.exit}"/></button>
                             </div>
                         </div>
-                    </form>
-
-                </div>
+                    </div>
+                </form>
 
             </div>
-        </div>
 
+        </div>
     </div>
+
+</div>
 </body>
 </html>

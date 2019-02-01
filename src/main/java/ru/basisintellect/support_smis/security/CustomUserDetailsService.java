@@ -9,11 +9,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.basisintellect.support_smis.model.entities.UserEntity;
 import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.UsersRepository;
-
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +53,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(0);
 
-            authorities.add(new SimpleGrantedAuthority(userRoleEntity.getUserRoleName()));
+        authorities.add(new SimpleGrantedAuthority(userRoleEntity.getUserRoleName()));
 
 
         return authorities;

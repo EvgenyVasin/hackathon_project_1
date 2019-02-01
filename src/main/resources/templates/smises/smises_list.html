@@ -12,7 +12,6 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
 
-
     <style>
         .treeCSS,
         .treeCSS ul {
@@ -23,8 +22,8 @@
             line-height: normal;
             text-align: center;
 
-
         }
+
         .treeCSS li {
             position: relative;
             display: table-cell;
@@ -57,30 +56,35 @@
             height: 26px;
             border-right: 1px solid #999;
         }
+
         .treeCSS ul:before {
             top: -25px;
         }
+
         .treeCSS ul li:not(:only-child):before {
             border-top: 1px solid #999;
         }
+
         .treeCSS ul li:not(:only-child):first-child:before {
             right: 0;
             left: auto;
             border-left: 1px solid #999;
             border-right: none;
         }
+
         .treeCSS ul li:not(:only-child):first-child:before,
         .treeCSS ul li:not(:only-child):last-child:before { /* необязательно, 0.5 взят из свойства padding в селекторе .treeCSS li:not(:only-child) */
-            width: calc(50% + .5em/2);
+            width: calc(50% + .5em / 2);
         }
+
         .treeCSS ul li:after {
             border: none;
         }
+
         .treeCSS ul li:not(:last-child):not(:first-child):after {
             width: 100%;
             border-top: 1px solid #999;
         }
-
 
         /*рамки*/
         .item {
@@ -113,7 +117,7 @@
             margin-left: 100px;
         }
 
-        .btn_del{
+        .btn_del {
             position: absolute;
             margin: 2px;
             border: none;
@@ -132,114 +136,114 @@
         }
 
     </style>
-<script type="text/javascript" th:inline="javascript">
+    <script type="text/javascript" th:inline="javascript">
 
 
-    var stompClient = null;
+        var stompClient = null;
 
-    function setConnected(connected) {
-        if (connected) {
-            document.getElementById("statebar").style["background-color"] = "Lime";
+        function setConnected(connected) {
+            if (connected) {
+                document.getElementById("statebar").style["background-color"] = "Lime";
+            }
+            else {
+                document.getElementById("statebar").style["background-color"] = "Red";
+            }
         }
-        else {
-            document.getElementById("statebar").style["background-color"] = "Red";
-        }
-    }
 
-    function connect() {
+        function connect() {
 
-        var socket = new SockJS('/gs-guide-websocket');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            init();
-            setConnected(true);
-            console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/changestate', function (greeting) {
-                changeState(greeting.body);
+            var socket = new SockJS('/gs-guide-websocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                init();
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/changestate', function (greeting) {
+                    changeState(greeting.body);
+                });
             });
-        });
-    }
-
-    function disconnect() {
-        if (stompClient !== null) {
-            stompClient.disconnect();
         }
-        setConnected(false);
-        console.log("Disconnected");
-    }
 
-
-    function changeState(message) {
-        var msg = JSON.parse(message);
-        // var id = message.id;
-        // var state = message.state;
-        var item = document.getElementById(msg.id);
-        if (msg.active == false){
-            item.style["background-color"] = "#ff8c95";
-        }else{
-            item.style["background-color"] = "White";
+        function disconnect() {
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
         }
-    }
 
 
+        function changeState(message) {
+            var msg = JSON.parse(message);
+            // var id = message.id;
+            // var state = message.state;
+            var item = document.getElementById(msg.id);
+            if (msg.active == false) {
+                item.style["background-color"] = "#ff8c95";
+            } else {
+                item.style["background-color"] = "White";
+            }
+        }
 
-    var listCategories;
-    function createTree(data, parentId) {
 
-        parentId = parentId || null;
-        var items = data.filter(function(el) {
-            return el.itemParentId == parentId;
-        });
+        var listCategories;
 
-        if (items.length == 0) return null;
+        function createTree(data, parentId) {
 
-        var tree = $('<ul>').addClass('treeCSS');
-        tree.append(
-            items.map(
-                function(el) {
-                    var li = $('<li>').append(
-                        $('<div>').addClass('state')
-                        ).append(
-                        $('<button>').html("✖").attr('id', el.itemId).addClass('btn_del')
-                        ).append(
-                        $('<div>').html(el.itemName +('<br/>')+ el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
-                        ),
-                        nestedTree = createTree(data, el.itemId);
+            parentId = parentId || null;
+            var items = data.filter(function (el) {
+                return el.itemParentId == parentId;
+            });
 
-                    if (nestedTree !== null) {
-                        li.append(nestedTree)
-                            .addClass('collapse')
+            if (items.length == 0) return null;
+
+            var tree = $('<ul>').addClass('treeCSS');
+            tree.append(
+                items.map(
+                    function (el) {
+                        var li = $('<li>').append(
+                            $('<div>').addClass('state')
+                            ).append(
+                            $('<button>').html("✖").attr('id', el.itemId).addClass('btn_del')
+                            ).append(
+                            $('<div>').html(el.itemName + ('<br/>') + el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/' + el.itemId).addClass('item')
+                            ),
+                            nestedTree = createTree(data, el.itemId);
+
+                        if (nestedTree !== null) {
+                            li.append(nestedTree)
+                                .addClass('collapse')
+                        }
+                        return li;
                     }
-                    return li;
-                }
-            )
-        );
-        return tree;
-    }
+                )
+            );
+            return tree;
+        }
 
-    function init() {
-        /*<![CDATA[*/
+        function init() {
+            /*<![CDATA[*/
 
-        listCategories = /*[[${data}]]*/ 'data';
+            listCategories = /*[[${data}]]*/ 'data';
 
-        /*]]>*/
+            /*]]>*/
 
 
-        var tree = createTree(listCategories);
+            var tree = createTree(listCategories);
 
-        $('#treeCSS').append(tree)
-            .on('click', '.btn_del', function(){
-                if(confirm("Вы уверены, что хотите удалить данный объект?")){
-                    document.location.href = "delete_smis/" + this.id;
-                }
-            });
+            $('#treeCSS').append(tree)
+                .on('click', '.btn_del', function () {
+                    if (confirm("Вы уверены, что хотите удалить данный объект?")) {
+                        document.location.href = "delete_smis/" + this.id;
+                    }
+                });
 
-        /*$('#treeCSS').append(tree)
-            .on('click', '.item',function(){
-                     document.location.href = "smis_details/" + this.id;
-            });*/
-    }
-</script>
+            /*$('#treeCSS').append(tree)
+                .on('click', '.item',function(){
+                         document.location.href = "smis_details/" + this.id;
+                });*/
+        }
+    </script>
 
 </head>
 <body onload="connect();">
@@ -251,7 +255,8 @@
         <!--контроль веб сокета-->
         <!--<td><b>Контроль: &nbsp;</b></td>
         <td><div id = "statebar"></div></td>-->
-        <td class="a-add-smis" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
+        <td class="a-add-smis"
+            th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
             <!--<a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a>-->
 
             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -264,7 +269,7 @@
             </div>
             <script>
                 function onClickAdd() {
-                    document.location.href ="add_smis";
+                    document.location.href = "add_smis";
                 }
             </script>
 
@@ -274,7 +279,6 @@
 </table>
 
 <div class="container">
-
 
 
     <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер
