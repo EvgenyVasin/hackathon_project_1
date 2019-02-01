@@ -183,6 +183,8 @@
                         $('<div>').addClass('state')
                         ).append(
                         $('<div>').html(el.itemName +('<br/>')+ el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
+                        ).append(
+                        $('<button>').html("удалить").attr('id', el.itemId).addClass('btn_del')
                         ),
                         nestedTree = createTree(data, el.itemId);
 
@@ -208,9 +210,16 @@
         var tree = createTree(listCategories);
 
         $('#treeCSS').append(tree)
-            .on('click', '.item',function(){
+            .on('click', '.btn_del',function(){
 
                 document.location.href ="delete_smis/"+this.id;
+
+            })
+
+        $('#treeCSS').append(tree)
+            .on('click', '.item',function(){
+
+                document.location.href ="smis_details/"+this.id;
 
             })
 

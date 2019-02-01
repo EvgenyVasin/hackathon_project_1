@@ -13,7 +13,6 @@ import java.io.File;
 public class SupportSmisApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SupportSmisApplication.class, args);
-
 	}
 }
 
