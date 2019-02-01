@@ -117,7 +117,6 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             //удаление папки с файлами НА ВРЕМЯ ОТЛАДКИ
             FileUtils.deleteDirectory(new File("smis_files"));
 
-
             RegionEntity regionEntity = new RegionEntity("Центральный");
             regionRepository.save(regionEntity);
 

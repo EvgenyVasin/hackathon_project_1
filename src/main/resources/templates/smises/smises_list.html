@@ -113,6 +113,14 @@
             margin-left: 100px;
         }
 
+        .btn_del{
+            position: absolute;
+            margin: 2px;
+            border: none;
+            background-color: transparent;
+            color: #c9302c;
+        }
+
     </style>
 <script type="text/javascript" th:inline="javascript">
 
@@ -182,9 +190,9 @@
                     var li = $('<li>').append(
                         $('<div>').addClass('state')
                         ).append(
-                        $('<div>').html(el.itemName +('<br/>')+ el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
+                        $('<button>').html("✖").attr('id', el.itemId).addClass('btn_del')
                         ).append(
-                        $('<button>').html("удалить").attr('id', el.itemId).addClass('btn_del')
+                        $('<div>').html(el.itemName +('<br/>')+ el.regionName + " регион").attr('id', el.itemId).attr('href', 'smis_details/'+el.itemId).addClass('item')
                         ),
                         nestedTree = createTree(data, el.itemId);
 
@@ -210,18 +218,14 @@
         var tree = createTree(listCategories);
 
         $('#treeCSS').append(tree)
-            .on('click', '.btn_del',function(){
-
-                document.location.href ="delete_smis/"+this.id;
-
-            })
+            .on('click', '.btn_del', function(){
+                if(confirm("Вы уверены, что хотите удалить?")){document.location.href = "delete_smis/" + this.id;}
+            });
 
         $('#treeCSS').append(tree)
             .on('click', '.item',function(){
-
-                document.location.href ="smis_details/"+this.id;
-
-            })
+                     document.location.href = "smis_details/" + this.id;
+            });
 
 
     }
