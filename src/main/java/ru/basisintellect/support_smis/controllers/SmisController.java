@@ -87,7 +87,7 @@ public class SmisController {
     }
 
     //получение ПК ИВ СМИС
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    //@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
     public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
         model.addAttribute("smis", smisService.findSmisById(smisId));
@@ -114,7 +114,7 @@ public class SmisController {
     }*/
 
     //генерация страницы со смисами
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    //@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_table")
     public String viewSmises(Model model) {
         List<SmisEntity> smisesList = smisService.getAllSmises();
@@ -133,7 +133,7 @@ public class SmisController {
     }
 
     //генерация страницы со смисами2
-    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
+    //@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/smises_list")
     public String viewListSmises(Model model) {
         List<JSONObject> data = new ArrayList<>();

@@ -239,7 +239,7 @@
     <tr>
         <td><b>Контроль: &nbsp;</b></td>
         <td><div id = "statebar"></div></td>
-        <td class="a-add-smis"><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
+        <td class="a-add-smis" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"><a th:href="${'/add_smis'}" th:text="#{complex.addSmis}"></a></td>
     </tr>
     </tbody>
 </table>

@@ -118,9 +118,10 @@
                     <li class="menu-link"><a class="menu-link" th:text="#{navMenu.SMISTable}" href="/smises_table"></a></li>
                     <!--<li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>-->
                     <!--дерево СМИСов-->
-                    <li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"
+                    <li class="menu-link"><a class="menu-link"
                            th:text="#{navMenu.ThreeSmis}"
                            href="/smises_list"></a>
+                        <!--th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"-->
                     </li>
                     <!--открыть БД в новой вкладке-->
                     <li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.DB}"
