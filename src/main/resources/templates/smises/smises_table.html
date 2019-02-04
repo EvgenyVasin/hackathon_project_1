@@ -93,6 +93,7 @@
                                 <th th:text="#{complex.agreementDate}"></th>
                                 <th th:text="#{complex.contacts}"></th>
                                 <th th:text="#{complex.documents}"></th>
+                                 <th th:text="#{complex.equipment}"></th>
                                 <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
                                 <!--<th th:text="#{complex.enabled}"></th>-->
                                 <th th:text="#{complex.description}"></th>
@@ -115,6 +116,11 @@
                             <td class="description-fix">
                                 <div th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}" class="description-fix">
                                     <p class="contacts-cell description-fix"><a th:href="${'/download/' +  file.id}" th:text ="${file.name}" type="application/file"></a></p>
+                                </div>
+                            </td>
+                            <td class="description-fix">
+                                <div th:if="${not #lists.isEmpty(smis.equipments)}" th:each="smis_equipment : ${smis.equipments}" class="description-fix">
+                                    <p class="contacts-cell description-fix" th:text="${smis_equipment.equipment.name}"></p>
                                 </div>
                             </td>
                                 <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->

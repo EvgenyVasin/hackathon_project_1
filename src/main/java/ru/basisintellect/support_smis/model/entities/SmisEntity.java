@@ -47,6 +47,10 @@ public class SmisEntity extends CustomEntity {
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private  Set<SmisFileEntity> files = new HashSet<>();
 
+    //файлы
+    @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private  Set<SmisEquipmentEntity> equipments = new HashSet<>();
+
         //сеттеры параметров
     /**
      * @param name the username to set
@@ -92,6 +96,9 @@ public class SmisEntity extends CustomEntity {
         this.files = files;
     }
 
+    public void setEquipments(Set<SmisEquipmentEntity> equipments) {
+        this.equipments = equipments;
+    }
 
     public void setValidity(Date validity) {
         this.validity = validity;
@@ -150,6 +157,9 @@ public class SmisEntity extends CustomEntity {
         return files;
     }
 
+    public Set<SmisEquipmentEntity> getEquipments() {
+        return equipments;
+    }
 
     public Date getValidity() {
         return validity;
