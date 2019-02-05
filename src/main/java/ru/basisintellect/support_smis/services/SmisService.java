@@ -206,8 +206,8 @@ public class SmisService {
     }
 
 
-    public SmisFileEntity getFileAsset(String hash) {
-        return assetService.getFileAsset(hash);
+    public SmisFileEntity getFileAsset(Long id) {
+        return assetService.getFileAsset(id);
     }
 
 

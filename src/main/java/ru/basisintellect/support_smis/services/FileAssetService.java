@@ -24,19 +24,30 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
 
     public SmisFileEntity createFileAsset(SmisFileEntity fileAsset, File content) {
 
-        return fileAssetRepository.findByHash(getFileHash(content)).orElseGet(() -> {
-            validateFileAsset(fileAsset);
-            validateFileContent(content);
+        validateFileAsset(fileAsset);
+        validateFileContent(content);
 
-            File savedContent = fileStorageProvider.uploadFile(content);
+        File savedContent = fileStorageProvider.uploadFile(content);
 
-            try {
-                return persist(fileAsset, savedContent);
-            } catch (RuntimeException ex) {
-                fileStorageProvider.deleteFile(savedContent);
-                throw ex;
-            }
-        });
+        try {
+            return persist(fileAsset, savedContent);
+        } catch (RuntimeException ex) {
+            fileStorageProvider.deleteFile(savedContent);
+            throw ex;
+        }
+//        return fileAssetRepository.findByFileName(getFileHash(content)).orElseGet(() -> {
+//            validateFileAsset(fileAsset);
+//            validateFileContent(content);
+//
+//            File savedContent = fileStorageProvider.uploadFile(content);
+//
+//            try {
+//                return persist(fileAsset, savedContent);
+//            } catch (RuntimeException ex) {
+//                fileStorageProvider.deleteFile(savedContent);
+//                throw ex;
+//            }
+//        });
 
     }
 

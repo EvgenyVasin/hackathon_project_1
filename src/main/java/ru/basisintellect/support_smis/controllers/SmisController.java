@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -139,13 +140,14 @@ public class SmisController {
         return "smises/add_smis";
     }
 
-    @RequestMapping(value = "/download/{hash}", method = RequestMethod.GET)
-    public HttpEntity<byte[]> downloadFile(@PathVariable String hash) throws IOException {
-        SmisFileEntity asset = smisService.getFileAsset(hash);
+    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> downloadFile(@PathVariable Long id) throws IOException {
+        SmisFileEntity asset = smisService.getFileAsset(id);
         File content = smisService.getFile(asset.getFileName());
 
 
         HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.valueOf("text/html; charset=utf-8"));
         httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=" + asset.getName().replace(" ", "_")
         );
