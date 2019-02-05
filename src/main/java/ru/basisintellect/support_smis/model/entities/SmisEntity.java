@@ -148,12 +148,12 @@ public class SmisEntity extends CustomEntity {
 
 
 
-    public  Collection<ContactEntity> getContacts() {
+    public  Set<ContactEntity> getContacts() {
         return contacts;
     }
 
 
-    public Collection<SmisFileEntity> getFiles() {
+    public Set<SmisFileEntity> getFiles() {
         return files;
     }
 

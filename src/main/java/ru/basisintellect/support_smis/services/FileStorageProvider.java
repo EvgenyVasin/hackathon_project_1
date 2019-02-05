@@ -37,7 +37,7 @@ public class FileStorageProvider {
         return Arrays.asList(getUploadFolder().listFiles());
     }
     public File getFile(String fileName) {
-        String filePath = getUploadFolder() + File.separator + fileName;
+        String filePath =  getUploadFolder() + File.separator + fileName;
         return new File(filePath);
     }
     public void deleteFile(File file) {

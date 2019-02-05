@@ -139,8 +139,8 @@ public class SmisService {
         }
 
         smisesRepo.saveAll(childs);
-
-        smisFileRepo.deleteAll(smis.getFiles());
+        assetService.deleteFileAssets(smis.getFiles());
+//        smisFileRepo.deleteAll(smis.getFiles());
         contactsRepo.deleteAll(smis.getContacts());
 
         smisEquipmentRepo.deleteAll(smisEquipmentRepo.findAllBySmisId(smisId));

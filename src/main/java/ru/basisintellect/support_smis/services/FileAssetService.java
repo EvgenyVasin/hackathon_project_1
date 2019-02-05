@@ -10,6 +10,7 @@ import ru.basisintellect.support_smis.utils.EncryptionUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 import static ru.basisintellect.support_smis.utils.EncryptionUtils.getFileHash;
 
@@ -30,24 +31,13 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
         File savedContent = fileStorageProvider.uploadFile(content);
 
         try {
-            return persist(fileAsset, savedContent);
+            SmisFileEntity result = persist(fileAsset, savedContent);
+            savedContent = null;
+            return result;
         } catch (RuntimeException ex) {
             fileStorageProvider.deleteFile(savedContent);
             throw ex;
         }
-//        return fileAssetRepository.findByFileName(getFileHash(content)).orElseGet(() -> {
-//            validateFileAsset(fileAsset);
-//            validateFileContent(content);
-//
-//            File savedContent = fileStorageProvider.uploadFile(content);
-//
-//            try {
-//                return persist(fileAsset, savedContent);
-//            } catch (RuntimeException ex) {
-//                fileStorageProvider.deleteFile(savedContent);
-//                throw ex;
-//            }
-//        });
 
     }
 
@@ -63,32 +53,29 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
 
 
 
-    public void deleteFileAssets(List<SmisFileEntity> assets) {
-        fileAssetRepository.deleteAll(assets);
+
+    public void deleteFileAssets(Set<SmisFileEntity> assets) {
+        for (SmisFileEntity asset:assets) {
+            deleteFileAsset(asset);
+        }
     }
 
     public SmisFileEntity getFileAsset(Long id) {
         return fileAssetRepository
-                .findById(id)
-                .filter(fileAsset -> fileAsset
-                        .getHash()
-                        .equalsIgnoreCase(EncryptionUtils.getFileHash(fileStorageProvider.getFile(fileAsset.getFileName()))))
-                .orElseThrow(() -> new EntityNotFoundException(SmisFileEntity.class));
+                .findById(id).get();
     }
 
     public SmisFileEntity getFileAsset(String hash) {
         return fileAssetRepository
-                .findByHash(hash)
-                .filter((SmisFileEntity fileAsset) -> {
-                    return fileAsset
-                            .getHash()
-                            .equalsIgnoreCase(EncryptionUtils.getFileHash(fileStorageProvider.getFile(fileAsset.getFileName())));
-                })
-                .orElseThrow(() -> new EntityNotFoundException(SmisFileEntity.class));
+                .findByHash(hash).get();
     }
 
     public void deleteFileAsset(Long id) {
         SmisFileEntity fileAsset = getFileAsset(id);
+        deleteFileAsset(fileAsset);
+    }
+
+    public void deleteFileAsset(SmisFileEntity fileAsset) {
         fileStorageProvider.deleteFile(fileStorageProvider.getFile(fileAsset.getFileName()));
         fileAssetRepository.delete(fileAsset);
     }
