@@ -1,7 +1,10 @@
 package ru.basisintellect.support_smis.controllers;
 
 import net.minidev.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import ru.basisintellect.support_smis.model.entities.SmisEntity;
+import ru.basisintellect.support_smis.model.entities.SmisFileEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -133,21 +139,20 @@ public class SmisController {
         return "smises/add_smis";
     }
 
-    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
-    public StreamingResponseBody getSteamingFile(@PathVariable("id") Long fileId, HttpServletResponse response) throws IOException {
-        File file = smisService.getFileById(fileId);
-        response.setContentType("text/html;charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment; filename=\""+file.getName()+"\"");
-        InputStream inputStream = new FileInputStream(file);
+    @RequestMapping(value = "/download/{hash}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> downloadFile(@PathVariable String hash) throws IOException {
+        SmisFileEntity asset = smisService.getFileAsset(hash);
+        File content = smisService.getFile(asset.getFileName());
 
-        return outputStream -> {
-            int nRead;
-            byte[] data = new byte[1024];
-            while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
-                outputStream.write(data, 0, nRead);
-            }
-            inputStream.close();
-        };
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=" + asset.getName().replace(" ", "_")
+        );
+
+        httpHeaders.setContentLength(content.length());
+        return new HttpEntity<>(FileUtils.readFileToByteArray(content), httpHeaders);
+
     }
 
     //генерация страницы со смисами2

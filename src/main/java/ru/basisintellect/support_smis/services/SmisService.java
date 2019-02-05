@@ -18,6 +18,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 @Service
@@ -47,6 +48,10 @@ public class SmisService {
 
     @Autowired
     ContactsRepository contactsRepo;
+
+    @Autowired
+    FileAssetService assetService;
+
 
 
 
@@ -85,18 +90,29 @@ public class SmisService {
         smisEntity.setDescription(description);
         smisEntity.setDateRegistration(new Date());
 
+        smisesRepo.save(smisEntity);
+
         for (int i = 0; i < fileNames.length; i++) {
 
-            byte[] fileBytes = files[i].getBytes();
-            new File("smis_files/" + name + '_' + region_name).mkdir();
-            String rootPath ="smis_files/"  + name + '_' + region_name + '/';
-                    System.out.println("File content type: " + files[i].getContentType());
-            File newFile = new File(rootPath + files[i].getOriginalFilename());
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
-            stream.write(fileBytes);
-            stream.close();
-            String link = newFile.getAbsolutePath();
-            smisEntity.getFiles().add(new SmisFileEntity(fileNames[i], link, smisEntity));
+            SmisFileEntity asset = new SmisFileEntity();
+            asset.setSmis(smisEntity);
+            asset.setCustomName(fileNames[i]);
+            asset.setName(files[i].getOriginalFilename());
+            File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
+            files[i].transferTo(tempFile);
+
+            smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
+
+//            byte[] fileBytes = files[i].getBytes();
+//            new File("smis_files/" + smisEntity.getId()).mkdir();
+//            String rootPath ="smis_files/"  + smisEntity.getId() + '/';
+//                    System.out.println("File content type: " + files[i].getContentType());
+//            File newFile = new File(rootPath + files[i].getOriginalFilename());
+//            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
+//            stream.write(fileBytes);
+//            stream.close();
+//            String link = newFile.getAbsolutePath();
+//            smisEntity.getFiles().add(new SmisFileEntity(fileNames[i], link, smisEntity));
 
         }
 
@@ -139,9 +155,9 @@ public class SmisService {
 
     }
 
-    public File getFileById(Long fileId){
-        return new File(smisFileRepo.findById(fileId).get().getLink());
-    }
+//    public File getFileById(Long fileId){
+//        return new File(smisFileRepo.findById(fileId).get().getLink());
+//    }
 
 
     public RegionEntity getRegionByNameOrAdd(String regionName){
@@ -190,5 +206,13 @@ public class SmisService {
     }
 
 
-
+    public SmisFileEntity getFileAsset(String hash) {
+        return assetService.getFileAsset(hash);
     }
+
+
+    public File getFile(String fileName) {
+
+        return assetService.getFile(fileName);
+    }
+}

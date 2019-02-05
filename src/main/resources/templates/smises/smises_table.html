@@ -115,7 +115,7 @@
                                 </td>
                             <td class="description-fix">
                                 <div th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}" class="description-fix">
-                                    <p class="contacts-cell description-fix"><a th:href="${'/download/' +  file.id}" th:text ="${file.name}" type="application/file"></a></p>
+                                    <p class="contacts-cell description-fix"><a th:href="${'/download/' +  file.hash}" th:text ="${file.customName}" type="application/file"></a></p>
                                 </div>
                             </td>
                             <td class="description-fix">

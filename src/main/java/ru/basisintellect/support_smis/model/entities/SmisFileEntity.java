@@ -7,11 +7,17 @@ import javax.persistence.*;
 public class SmisFileEntity extends CustomEntity{
 
 
-    @Column(name = "name", length = 128)
+    @Column(name = "name", length = 256)
     String name;
 
-    @Column(name = "link", length = 128)
-    String link;
+    @Column(name = "file_name", length = 256)
+    private String fileName;
+
+    @Column(name = "hash", length = 512)
+    private String hash;
+
+    @Column(name = "custom_name", length = 1024)
+    String customName;
 
     @ManyToOne
     @JoinColumn(name = "smis_id", nullable = false)
@@ -27,12 +33,28 @@ public class SmisFileEntity extends CustomEntity{
         this.name = name;
     }
 
-    public String getLink() {
-        return link;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public String getCustomName() {
+        return customName;
+    }
+
+    public void setCustomName(String link) {
+        this.customName = link;
     }
 
     public SmisEntity getSmis() {
@@ -46,9 +68,5 @@ public class SmisFileEntity extends CustomEntity{
     public SmisFileEntity() {
     }
 
-    public SmisFileEntity(String name, String link, SmisEntity smis) {
-        this.name = name;
-        this.link = link;
-        this.smis = smis;
-    }
+
 }
