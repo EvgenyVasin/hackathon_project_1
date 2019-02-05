@@ -210,9 +210,15 @@ public class SmisService {
         return assetService.getFileAsset(id);
     }
 
+    public SmisFileEntity getFileAsset(String fileName) {
+        return assetService.getFileAsset(fileName);
+    }
+
 
     public File getFile(String fileName) {
 
         return assetService.getFile(fileName);
     }
+
+
 }

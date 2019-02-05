@@ -15,12 +15,12 @@ import java.util.Set;
 import static ru.basisintellect.support_smis.utils.EncryptionUtils.getFileHash;
 
 @Service
-public class FileAssetService  implements FileStorageService<SmisFileEntity> {
+public class FileAssetService implements FileStorageService<SmisFileEntity> {
 
     @Autowired
-    private  SmisFileRepository fileAssetRepository;
+    private SmisFileRepository fileAssetRepository;
     @Autowired
-    private  FileStorageProvider fileStorageProvider;
+    private FileStorageProvider fileStorageProvider;
 
 
     public SmisFileEntity createFileAsset(SmisFileEntity fileAsset, File content) {
@@ -51,10 +51,8 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
     }
 
 
-
-
     public void deleteFileAssets(Set<SmisFileEntity> assets) {
-        for (SmisFileEntity asset:assets) {
+        for (SmisFileEntity asset : assets) {
             deleteFileAsset(asset);
         }
     }
@@ -62,6 +60,10 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
     public SmisFileEntity getFileAsset(Long id) {
         return fileAssetRepository
                 .findById(id).get();
+    }
+
+    public SmisFileEntity getFileAsset(String fileName) {
+        return fileAssetRepository.findByFileName(fileName).get();
     }
 
 
@@ -84,13 +86,6 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
         entity.setFileName(savedFile.getName());
         return entity;
     }
-
-
-
-
-
-
-
 
 
     private void validateFileAsset(SmisFileEntity asset) {
@@ -116,6 +111,8 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
 
 
     public File getFile(String fileName) {
-       return fileStorageProvider.getFile(fileName);
+        return fileStorageProvider.getFile(fileName);
     }
+
+
 }

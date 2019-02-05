@@ -140,10 +140,10 @@ public class SmisController {
         return "smises/add_smis";
     }
 
-    @RequestMapping(value = "/download/{id}", method = RequestMethod.GET)
-    public HttpEntity<byte[]> downloadFile(@PathVariable Long id) throws IOException {
-        SmisFileEntity asset = smisService.getFileAsset(id);
-        File content = smisService.getFile(asset.getFileName());
+    @RequestMapping(value = "/download/{fileName}", method = RequestMethod.GET)
+    public HttpEntity<byte[]> downloadFile(@PathVariable String fileName) throws IOException {
+        SmisFileEntity asset = smisService.getFileAsset(fileName);
+        File content = smisService.getFile(fileName);
 
 
         HttpHeaders httpHeaders = new HttpHeaders();
