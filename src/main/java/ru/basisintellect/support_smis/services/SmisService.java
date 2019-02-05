@@ -74,11 +74,11 @@ public class SmisService {
                               String description) throws IOException {
 
 
-        File folder = new File("smis_files");
-
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
+//        File folder = new File("smis_files");
+//
+//        if (!folder.exists()) {
+//            folder.mkdir();
+//        }
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         smisEntity.setAgreement(agreement);

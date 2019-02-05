@@ -11,7 +11,6 @@ import java.util.Optional;
 @Qualifier(value = "smisFileRepository")
 public interface SmisFileRepository extends CrudRepository <SmisFileEntity, Long>{
 
-    Optional<SmisFileEntity> findByHash(String hash);
 
     Optional<SmisFileEntity> findById(Long id);
 

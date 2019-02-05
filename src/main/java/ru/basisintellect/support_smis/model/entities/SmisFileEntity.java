@@ -13,8 +13,6 @@ public class SmisFileEntity extends CustomEntity{
     @Column(name = "file_name", length = 256)
     private String fileName;
 
-    @Column(name = "hash", length = 512)
-    private String hash;
 
     @Column(name = "custom_name", length = 1024)
     String customName;
@@ -41,13 +39,6 @@ public class SmisFileEntity extends CustomEntity{
         this.fileName = fileName;
     }
 
-    public String getHash() {
-        return hash;
-    }
-
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
 
     public String getCustomName() {
         return customName;

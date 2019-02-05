@@ -31,9 +31,8 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
         File savedContent = fileStorageProvider.uploadFile(content);
 
         try {
-            SmisFileEntity result = persist(fileAsset, savedContent);
-            savedContent = null;
-            return result;
+
+            return persist(fileAsset, savedContent);
         } catch (RuntimeException ex) {
             fileStorageProvider.deleteFile(savedContent);
             throw ex;
@@ -65,10 +64,6 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
                 .findById(id).get();
     }
 
-    public SmisFileEntity getFileAsset(String hash) {
-        return fileAssetRepository
-                .findByHash(hash).get();
-    }
 
     public void deleteFileAsset(Long id) {
         SmisFileEntity fileAsset = getFileAsset(id);
@@ -81,8 +76,6 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
     }
 
     private SmisFileEntity persist(SmisFileEntity entity, File savedFile) {
-
-        entity = setHash(entity, savedFile);
         entity = setFileName(entity, savedFile);
         return fileAssetRepository.save(entity);
     }
@@ -92,10 +85,7 @@ public class FileAssetService  implements FileStorageService<SmisFileEntity> {
         return entity;
     }
 
-    private SmisFileEntity setHash(SmisFileEntity entity, File savedFile) {
-        entity.setHash(getFileHash(savedFile));
-        return entity;
-    }
+
 
 
 
