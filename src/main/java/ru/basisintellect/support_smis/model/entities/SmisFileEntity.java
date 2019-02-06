@@ -14,8 +14,11 @@ public class SmisFileEntity extends CustomEntity{
     private String fileName;
 
 
-    @Column(name = "custom_name", length = 1024)
+    @Column(name = "custom_name", length =  256)
     String customName;
+
+    @Column(name = "description", length = 1024)
+    String description;
 
     @ManyToOne
     @JoinColumn(name = "smis_id", nullable = false)
@@ -54,6 +57,14 @@ public class SmisFileEntity extends CustomEntity{
 
     public void setSmis(SmisEntity smis) {
         this.smis = smis;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public SmisFileEntity() {

@@ -14,6 +14,9 @@ import ru.basisintellect.support_smis.model.entities.UserRoleEntity;
 import ru.basisintellect.support_smis.repositories.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 //import ru.basisintellect.support_smis.services.SmisService;
 
@@ -75,7 +78,96 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
             System.out.println("stateOffline");
 
-            //
+            Set<RegionEntity> regions = new HashSet<>();
+
+            regions.add(new RegionEntity(1, "Республика Адыгея (Адыгкя)"));
+            regions.add(new RegionEntity(2, "Республика Башкортостан"));
+            regions.add(new RegionEntity(3, "Республика Бурятия"));
+            regions.add(new RegionEntity(4, "Республика Алтай"));
+            regions.add(new RegionEntity(5, "Республика Дагестан"));
+            regions.add(new RegionEntity(6, "Республика Ингушетия"));
+            regions.add(new RegionEntity(7, "Кабардино-Балкарская Республика"));
+            regions.add(new RegionEntity(8, "Республика Калмыкия"));
+            regions.add(new RegionEntity(9, "Карачаево-Черкесская Республика"));
+            regions.add(new RegionEntity(10, "Республика Карелия"));
+            regions.add(new RegionEntity(11, "Республика Коми"));
+            regions.add(new RegionEntity(12, "Республика Марий Эл"));
+            regions.add(new RegionEntity(13, "Республика Мордовия"));
+            regions.add(new RegionEntity(14, "Республика Саха (Якутия)"));
+            regions.add(new RegionEntity(15, "Республика Северная Осетия - Алания"));
+            regions.add(new RegionEntity(16, "Республика Татарстан (Татарстан)"));
+            regions.add(new RegionEntity(17, "Республика Тыва"));
+            regions.add(new RegionEntity(18, "Удмуртская Республика"));
+            regions.add(new RegionEntity(19, "Республика Хакасия"));
+            regions.add(new RegionEntity(20, "Чеченская Республика"));
+            regions.add(new RegionEntity(21, "Чувашская Республика - Чувашия"));
+            regions.add(new RegionEntity(22, "Алтайский край"));
+            regions.add(new RegionEntity(23, "Краснодарский край"));
+            regions.add(new RegionEntity(24, "Красноярский край"));
+            regions.add(new RegionEntity(25, "Приморский край"));
+            regions.add(new RegionEntity(26, "Ставропольский край"));
+            regions.add(new RegionEntity(27, "Хабаровский край"));
+            regions.add(new RegionEntity(28, "Амурская область"));
+            regions.add(new RegionEntity(29, "Архангельская область"));
+            regions.add(new RegionEntity(30, "Астраханская область"));
+            regions.add(new RegionEntity(31, "Белгородская область"));
+            regions.add(new RegionEntity(32, "Брянская область"));
+            regions.add(new RegionEntity(33, "Владимирская область"));
+            regions.add(new RegionEntity(34, "Волгоградская область"));
+            regions.add(new RegionEntity(35, "Вологодская область"));
+            regions.add(new RegionEntity(36, "Воронежская область"));
+            regions.add(new RegionEntity(37, "Ивановская область"));
+            regions.add(new RegionEntity(38, "Иркутская область"));
+            regions.add(new RegionEntity(39, "Калининградская область"));
+            regions.add(new RegionEntity(40, "Калужская область"));
+            regions.add(new RegionEntity(41, "Камчатский край"));
+            regions.add(new RegionEntity(42, "Кемеровская область"));
+            regions.add(new RegionEntity(43, "Кировская область"));
+            regions.add(new RegionEntity(44, "Костромская область"));
+            regions.add(new RegionEntity(45, "Курганская область"));
+            regions.add(new RegionEntity(46, "Курская область"));
+            regions.add(new RegionEntity(47, "Ленинградская область"));
+            regions.add(new RegionEntity(48, "Липецкая область"));
+            regions.add(new RegionEntity(49, "Магаданская область"));
+            regions.add(new RegionEntity(50, "Московская область"));
+            regions.add(new RegionEntity(51, "Мурманская область"));
+            regions.add(new RegionEntity(52, "Нижегородская область"));
+            regions.add(new RegionEntity(53, "Новгородская область"));
+            regions.add(new RegionEntity(54, "Новосибирская область"));
+            regions.add(new RegionEntity(55, "Омская область"));
+            regions.add(new RegionEntity(56, "Оренбургская область"));
+            regions.add(new RegionEntity(57, "Орловская область"));
+            regions.add(new RegionEntity(58, "Пензенская область"));
+            regions.add(new RegionEntity(59, "Пермский край"));
+            regions.add(new RegionEntity(60, "Псковская область"));
+            regions.add(new RegionEntity(61, "Ростовская область"));
+            regions.add(new RegionEntity(62, "Рязанская область"));
+            regions.add(new RegionEntity(63, "Самарская область"));
+            regions.add(new RegionEntity(64, "Саратовская область"));
+            regions.add(new RegionEntity(65, "Сахалинская область"));
+            regions.add(new RegionEntity(66, "Свердловская область"));
+            regions.add(new RegionEntity(67, "Смоленская область"));
+            regions.add(new RegionEntity(68, "Тамбовская область"));
+            regions.add(new RegionEntity(69, "Тверская область"));
+            regions.add(new RegionEntity(70, "Томская область"));
+            regions.add(new RegionEntity(71, "Тульская область"));
+            regions.add(new RegionEntity(72, "Тюменская область"));
+            regions.add(new RegionEntity(73, "Ульяновская область"));
+            regions.add(new RegionEntity(74, "Челябинская область"));
+            regions.add(new RegionEntity(75, "Забайкальский край"));
+            regions.add(new RegionEntity(76, "Ярославская область"));
+            regions.add(new RegionEntity(77, "г.Москва"));
+            regions.add(new RegionEntity(78, "Санкт - Петербург"));
+            regions.add(new RegionEntity(79, "Еврейская автономная область"));
+            regions.add(new RegionEntity(83, "Ненецкий автономный округ"));
+            regions.add(new RegionEntity(86, "Ханты - Мансийский автономный округ -Югра"));
+            regions.add(new RegionEntity(87, "Чукотский автономный округ"));
+            regions.add(new RegionEntity(89, "Ямало - Ненецкий автономный округ"));
+            regions.add(new RegionEntity(91, "Республика Крым"));
+            regions.add(new RegionEntity(92, "Севастополь"));
+            regions.add(new RegionEntity(99, "Иные территории, включая город и космодром Байконур"));
+
+            regionRepository.saveAll(regions);
 
             UserRoleEntity adminRole = new UserRoleEntity();
             adminRole.setUserRoleName("ROLE_ADMIN");

@@ -32,105 +32,118 @@
         }
 
 
-
-
-
     </style>
 
 </head>
 <body onload="detectBr()">
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-primary pannel-table pannel-fix">
-                <div class="pannel-heading">
-                    <div class="text-center">
-                        <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-primary pannel-table pannel-fix">
+            <div class="pannel-heading">
+                <div class="text-center">
+                    <strong class="panel-title" th:text="#{navMenu.SMISTable}"></strong>
                 </div>
-                <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
+            </div>
+            <div th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}">
 
-                    <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер-->
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <button class="btn btn-labeled btn-add" onclick="onClickAdd();">
+                <!--кнопка для добавления нового СМИСа в системы, которую видит только админ и юзер-->
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <button class="btn btn-labeled btn-add" onclick="onClickAdd();">
                             <span class="btn-label">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </span>
-                            <a th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
-                        </button>
-                    </div>
-                    <script>
-                        function onClickAdd() {
-                            document.location.href ="add_smis";
-                        }
-                    </script>
-                    <!---->
+                        <a th:text="#{complex.addSmis}" style="text-decoration: none; color: white"></a>
+                    </button>
                 </div>
-                <!--пустой див для добавления кнопки в браузере Chrome-->
-                <div class="col-xs-6 col-sm-6 col-md-6 btn-right" id="ChromeDetector"></div>
-                <!--определение версии браузера, отображение ссылки на плагин для Хрома, если открыто в Хроме-->
                 <script>
-                    function detectBr() {
-                        var brType = (detect.parse(navigator.userAgent)).browser.family;
-                        if (brType.toString() === "Chrome") {
-                            var btnChrome = document.getElementById("ChromeDetector");
-                            btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
-                                '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
-                                '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
-                                'target="_blank"style="text-decoration: none; color: white">' +
-                                'Установить плагин для ссылок</a></button>';
-                        }
+                    function onClickAdd() {
+                        document.location.href = "add_smis";
                     }
                 </script>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                                <!--заголовки таблицы-->
-                                <th th:text="#{complex.name}"></th>
-                                <th th:text="#{complex.region}"></th>
-                                <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
-                                <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
-                                <th th:text="#{complex.agreementNumber}"></th>
-                                <th th:text="#{complex.agreementDate}"></th>
-                                <th th:text="#{complex.contacts}"></th>
-                                <th th:text="#{complex.documents}"></th>
-                                 <th th:text="#{complex.equipment}"></th>
-                                <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
-                                <!--<th th:text="#{complex.enabled}"></th>-->
-                                <th th:text="#{complex.description}"></th>
-                        </tr>
-                    </thead>
-                    <tbody  class="table table-striped">
-                        <tr  th:each="smis : ${smisesList}">
-                                <!--напонение таблицы-->
-                                <td th:text="${smis.name}"></td>
-                                <td th:text="${smis.region.name}"></td>
-                                <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
-                                <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
-                                <td th:text="${smis.agreement}"></td>
-                                <td th:text="${smis.validity}"></td>  <!--вернуть в Entity срок соглашения-->
-                                <td class="description-fix">
-                                    <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
-                                    <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
-                                    </div>
-                                </td>
-                            <td class="description-fix">
-                                <div th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}" class="description-fix">
-                                    <p class="contacts-cell description-fix"><a th:href="${'/download/' +  file.fileName}" th:text ="${file.customName}" type="application/file"></a></p>
-                                </div>
-                            </td>
-                            <td class="description-fix">
-                                <div th:if="${not #lists.isEmpty(smis.equipments)}" th:each="smis_equipment : ${smis.equipments}" class="description-fix">
-                                    <p class="contacts-cell description-fix" th:text="${smis_equipment.equipment.name}"></p>
-                                </div>
-                            </td>
-                                <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->
-                                <!--<td th:text="${smis.state.stateName}"></td>-->
-                                <td th:text="${smis.description}" class="description-fix"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!---->
             </div>
+            <!--пустой див для добавления кнопки в браузере Chrome-->
+            <div class="col-xs-6 col-sm-6 col-md-6 btn-right" id="ChromeDetector"></div>
+            <!--определение версии браузера, отображение ссылки на плагин для Хрома, если открыто в Хроме-->
+            <script>
+                function detectBr() {
+                    var brType = (detect.parse(navigator.userAgent)).browser.family;
+                    if (brType.toString() === "Chrome") {
+                        var btnChrome = document.getElementById("ChromeDetector");
+                        btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
+                            '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
+                            '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
+                            'target="_blank"style="text-decoration: none; color: white">' +
+                            'Установить плагин для ссылок</a></button>';
+                    }
+                }
+            </script>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <!--заголовки таблицы-->
+                    <th th:text="#{complex.name}"></th>
+                    <th th:text="#{complex.region}"></th>
+                    <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
+                    <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
+                    <!--<th th:text="#{complex.agreementNumber}"></th>-->
+                    <th th:text="#{complex.agreementDate}"></th>
+                    <th th:text="#{complex.contacts}"></th>
+                    <th th:text="#{complex.documents}"></th>
+                    <th th:text="#{complex.equipment}"></th>
+                    <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
+                    <!--<th th:text="#{complex.enabled}"></th>-->
+                    <th th:text="#{complex.description}"></th>
+                </tr>
+                </thead>
+                <tbody class="table table-striped">
+                <tr th:each="smis : ${smisesList}">
+                    <!--напонение таблицы-->
+                    <td th:text="${smis.name}"></td>
+                    <td th:text="${smis.region.name}"></td>
+                    <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
+                    <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
+                    <!--<td th:text="${smis.agreement}"></td>-->
+                    <td th:text="${smis.validity}"></td>  <!--вернуть в Entity срок соглашения-->
+                    <td class="description-fix">
+                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}"
+                             class="description-fix">
+                            <p class="contacts-cell description-fix"
+                               th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
+                        </div>
+                    </td>
+                    <td class="description-fix">
+                        <div th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}"
+                             class="description-fix">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>
+                                        <p class="contacts-cell description-fix"><a
+                                                th:href="${'/download/' +  file.fileName}" th:text="${file.customName}"
+                                                type="application/file"></a></p>
+                                    </td>
+                                    <td th:text="${file.description}">
+
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </td>
+                    <td class="description-fix">
+                        <div th:if="${not #lists.isEmpty(smis.equipments)}"
+                             th:each="smis_equipment : ${smis.equipments}" class="description-fix">
+                            <p class="contacts-cell description-fix" th:text="${smis_equipment.equipment.name}"></p>
+                        </div>
+                    </td>
+                    <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->
+                    <!--<td th:text="${smis.state.stateName}"></td>-->
+                    <td th:text="${smis.description}" class="description-fix"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package ru.basisintellect.support_smis.services;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,6 +59,7 @@ public class SmisService {
 
     public SmisEntity addSmis(MultipartFile[] files,
                               String[] fileNames,
+                              String[] fileDescriptions,
                               //контакты
                               String[] phones,
                               String[] contactNames,
@@ -67,7 +69,6 @@ public class SmisService {
 
                               //комплекс
                               String name,
-                              String agreement,
                               Long parent_smis_id,
                               String region_name,
                               Date validity,
@@ -81,7 +82,6 @@ public class SmisService {
 //        }
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
-        smisEntity.setAgreement(agreement);
         if(parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
@@ -97,6 +97,7 @@ public class SmisService {
             SmisFileEntity asset = new SmisFileEntity();
             asset.setSmis(smisEntity);
             asset.setCustomName(fileNames[i]);
+            asset.setDescription(fileDescriptions[i]);
             asset.setName(files[i].getOriginalFilename());
             File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
             files[i].transferTo(tempFile);
@@ -167,6 +168,10 @@ public class SmisService {
             regionsRepo.save(regionEntity);
         }
         return regionEntity;
+    }
+
+    public List<RegionEntity> getAllRegionsSort(){
+        return regionsRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
     public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName){

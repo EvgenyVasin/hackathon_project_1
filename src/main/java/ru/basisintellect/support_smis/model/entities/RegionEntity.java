@@ -8,10 +8,13 @@ import java.util.Set;
 @Table(name = "region")
 public class RegionEntity extends CustomEntity {
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    Set<SmisEntity> smises;
+    Set<SmisEntity> smises = new HashSet<>();
 
     @Column(name = "name", length = 128)
     String name;
+
+    @Column(name = "code")
+    Integer code;
 
 
 
@@ -35,11 +38,19 @@ public class RegionEntity extends CustomEntity {
         this.name = name;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
     public RegionEntity() {
     }
 
-    public RegionEntity(Set<SmisEntity> smises, String name) {
-        this.smises = smises;
+    public RegionEntity(Integer code, String name) {
         this.name = name;
+        this.code = code;
     }
 }

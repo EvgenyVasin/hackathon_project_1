@@ -52,6 +52,7 @@ public class SmisController {
 //                                        @RequestParam("files")
             MultipartFile[] files,
             String[] fileNames,
+            String[] fileDescriptions,
             //контакты
             String[] phones,
             String[] contactNames,
@@ -61,7 +62,6 @@ public class SmisController {
 
             //комплекс
             String name,
-            String agreement,
             Long parent_smis_id,
             String region_name,
             String validity,
@@ -73,6 +73,7 @@ public class SmisController {
             smisService.addSmis(
                     files,
                     fileNames,
+                    fileDescriptions,
 
                     phones,
                     contactNames,
@@ -81,7 +82,6 @@ public class SmisController {
                     equipments,
 
                     name,
-                    agreement,
                     parent_smis_id,
                     region_name,
                     new SimpleDateFormat("yyyy-MM-dd").parse(validity),
@@ -136,7 +136,7 @@ public class SmisController {
     @RequestMapping(value = "/add_smis")
     public String viewSmisesAdd(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
-        model.addAttribute("regionList", smisService.getAllRegions());
+        model.addAttribute("regionList", smisService.getAllRegionsSort());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         return "smises/add_smis";
     }

@@ -23,11 +23,8 @@ public class SmisEntity extends CustomEntity {
     @Column(name = "date_registration")
     private Date dateRegistration;
 
-    //номер соглашения
-    @Column(name="agreement", length = 512)
-    private String agreement;
 
-    @Column(name="validity", length = 512)
+    @Column(name="validity")
     private Date validity;
 
     //регион
@@ -66,12 +63,6 @@ public class SmisEntity extends CustomEntity {
         this.dateRegistration = dateRegistration;
     }
 
-    /**
-     * @param agreement the username to set
-     */
-    public void setAgreement(String agreement) {
-        this.agreement = agreement;
-    }
 
 
 
@@ -123,12 +114,6 @@ public class SmisEntity extends CustomEntity {
         return dateRegistration;
     }
 
-    /**
-     * @return the agreement
-     */
-    public String getAgreement() {
-        return agreement;
-    }
 
 
 
@@ -171,11 +156,10 @@ public class SmisEntity extends CustomEntity {
     public SmisEntity() {
     }
 
-    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, String agreement, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files) {
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration,  Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files) {
         this.parentSmis = parentSmis;
         this.name = name;
         this.dateRegistration = dateRegistration;
-        this.agreement = agreement;
         this.validity = validity;
         this.region = region;
         this.description = description;
@@ -188,7 +172,6 @@ public class SmisEntity extends CustomEntity {
     public String toString() {
         return "SMIS [SmisID = " + getId() + ", region = " + name
                 + ", date_registration = " + dateRegistration
-                + ", agreement = " + agreement
                 + ", region = " + region
                 + ", description = " + description;
     }
