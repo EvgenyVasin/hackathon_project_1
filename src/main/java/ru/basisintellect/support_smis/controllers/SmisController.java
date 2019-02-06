@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
@@ -147,9 +148,10 @@ public class SmisController {
 
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.valueOf("text/html; charset=utf-8"));
+        String URLEncodedFileName = URLEncoder.encode(asset.getName(), "UTF-8");
+        String ResultFileName = URLEncodedFileName.replace('+', ' ');
         httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=" + asset.getName().replace(" ", "_")
+                "attachment; filename*=\"utf8'ru-ru'" + ResultFileName.replace(" ", "_")
         );
 
         httpHeaders.setContentLength(content.length());
