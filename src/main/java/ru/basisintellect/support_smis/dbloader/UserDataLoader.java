@@ -55,6 +55,12 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
         try {
 
 
+            /*while(true){
+
+
+            }*/
+
+
             //добавление состояний работоспособности СМИС
             StateEntity stateUnSuccess = new StateEntity();
             stateUnSuccess.setStateName("НЕ РАБОТАЕТ");

@@ -59,6 +59,12 @@
             min-height: 34px !important;
         }
 
+        .empty-cell{
+            height: 0px !important;
+        }
+
+
+
 
     </style>
 
@@ -87,13 +93,14 @@
                                     </div>
                                 </td>
                                 <td class="td-style-fix">
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity"
-                                               onfocus="(this.type='date')" onblur="this.type='text'"
-                                               th:placeholder="#{complex.agreementDate}" required="False"/>
+                                            class="glyphicon glyphicon-comment"></span></span>
+                                        <textarea type="text" class="form-control form-control-fix" name="description"
+                                                  th:placeholder="#{complex.description}" autofocus="True"></textarea>
                                     </div>
+
                                 </td>
                                 <td class="td-style-fix">
                                     <!--выпадающий список для выбора родителя-->
@@ -121,17 +128,19 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td>
-
-                                </td>
+                                <td></td>
 
                                 <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-comment"></span></span>
-                                        <textarea type="text" class="form-control form-control-fix" name="description"
-                                                  th:placeholder="#{complex.description}" autofocus="True"></textarea>
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                        <input type="text" class="form-control" name="validity"
+                                               onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:placeholder="#{complex.agreementDate}" required="False"/>
                                     </div>
+
+
+
                                 </td>
                             </tr>
                             <tr>

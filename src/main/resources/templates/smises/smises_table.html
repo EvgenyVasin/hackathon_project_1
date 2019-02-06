@@ -21,7 +21,7 @@
 
         .description-fix {
             max-width: 500px !important;
-            min-width: 300px !important;
+            min-width: 50px !important;
             word-wrap: break-word !important;
         }
 
@@ -63,21 +63,21 @@
                 <!---->
             </div>
             <!--пустой див для добавления кнопки в браузере Chrome-->
-            <div class="col-xs-6 col-sm-6 col-md-6 btn-right" id="ChromeDetector"></div>
-            <!--определение версии браузера, отображение ссылки на плагин для Хрома, если открыто в Хроме-->
+            <!--<div class="col-xs-6 col-sm-6 col-md-6 btn-right" id="ChromeDetector"></div>
+            &lt;!&ndash;определение версии браузера, отображение ссылки на плагин для Хрома, если открыто в Хроме&ndash;&gt;
             <script>
                 function detectBr() {
                     var brType = (detect.parse(navigator.userAgent)).browser.family;
                     if (brType.toString() === "Chrome") {
                         var btnChrome = document.getElementById("ChromeDetector");
-                        btnChrome.innerHTML = '<button class="btn btn-labeled btn-add">' +
+                        btnChrome.innerHTML = '<!--<button class="btn btn-labeled btn-add">' +
                             '<span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>' +
                             '<a href="https://chrome.google.com/webstore/detail/enable-local-file-links/nikfmfgobenbhmocjaaboihbeocackld/related"' +
                             'target="_blank"style="text-decoration: none; color: white">' +
-                            'Установить плагин для ссылок</a></button>';
+                            'Установить плагин для ссылок</a></button>--><!--';
                     }
-                }
-            </script>
+                }-->
+            <!--</script>&ndash;&gt;-->
             <table class="table table-striped">
                 <thead>
                 <tr>

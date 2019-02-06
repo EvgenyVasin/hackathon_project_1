@@ -125,9 +125,9 @@
                         <!--th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"-->
                     </li>
                     <!--открыть БД в новой вкладке-->
-                    <li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"
+                    <!--<li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"
                                              th:text="#{navMenu.DB}"
-                                             href="/h2-console" target="_blank"></a></li>
+                                             href="/h2-console" target="_blank"></a></li>-->
                 </ul>
             </nav>
         </div>
