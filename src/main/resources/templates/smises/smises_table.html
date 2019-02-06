@@ -107,7 +107,7 @@
                                 <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
                                 <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
                                 <td th:text="${smis.agreement}"></td>
-                                <td ></td>  <!--вернуть в Entity срок соглашения-->
+                                <td th:text="${smis.validity}"></td>  <!--вернуть в Entity срок соглашения-->
                                 <td class="description-fix">
                                     <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}" class="description-fix">
                                     <p class="contacts-cell description-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
