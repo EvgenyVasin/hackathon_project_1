@@ -31,6 +31,10 @@
             margin-right: 50px !important;
         }
 
+        .file-description-fix{
+            word-break: break-word !important;
+        }
+
 
     </style>
 
@@ -82,29 +86,29 @@
                 <thead>
                 <tr>
                     <!--заголовки таблицы-->
-                    <th th:text="#{complex.name}"></th>
-                    <th th:text="#{complex.region}"></th>
+                    <th class="description-fix" th:text="#{complex.name}"></th>
+                    <th class="description-fix" th:text="#{complex.region}"></th>
                     <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.agreementNumber}"></th>-->
-                    <th th:text="#{complex.agreementDate}"></th>
-                    <th th:text="#{complex.contacts}"></th>
-                    <th th:text="#{complex.documents}"></th>
-                    <th th:text="#{complex.equipment}"></th>
+                    <th class="description-fix" th:text="#{complex.agreementDate}"></th>
+                    <th class="description-fix" th:text="#{complex.contacts}"></th>
+                    <th class="description-fix" th:text="#{complex.documents}"></th>
+                    <th class="description-fix" th:text="#{complex.equipment}"></th>
                     <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.enabled}"></th>-->
-                    <th th:text="#{complex.description}"></th>
+                    <th class="description-fix" th:text="#{complex.description}"></th>
                 </tr>
                 </thead>
                 <tbody class="table table-striped">
                 <tr th:each="smis : ${smisesList}">
                     <!--напонение таблицы-->
-                    <td th:text="${smis.name}"></td>
-                    <td th:text="${smis.region.name}"></td>
+                    <td class="description-fix" th:text="${smis.name}"></td>
+                    <td class="description-fix" th:text="${smis.region.name}"></td>
                     <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
                     <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
                     <!--<td th:text="${smis.agreement}"></td>-->
-                    <td th:text="${smis.validity}"></td>  <!--вернуть в Entity срок соглашения-->
+                    <td class="description-fix" th:text="${smis.validity}"></td>  <!--вернуть в Entity срок соглашения-->
                     <td class="description-fix">
                         <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}"
                              class="description-fix">
@@ -122,7 +126,7 @@
                                                 th:href="${'/download/' +  file.fileName}" th:text="${file.customName}"
                                                 type="application/file"></a></p>
                                     </td>
-                                    <td class="description-fix" th:text="${file.description}">
+                                    <td class="file-description-fix" th:text="${file.description}">
 
                                     </td>
                                 </tr>
