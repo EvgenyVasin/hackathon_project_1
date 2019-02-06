@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -71,8 +73,8 @@ public class SmisService {
                               String name,
                               Long parent_smis_id,
                               String region_name,
-                              Date validity,
-                              String description) throws IOException {
+                              String validity,
+                              String description) throws IOException, ParseException {
 
 
 //        File folder = new File("smis_files");
@@ -85,8 +87,12 @@ public class SmisService {
         if(parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
-        smisEntity.setRegion(getRegionByNameOrAdd(region_name));
-        smisEntity.setValidity(validity);
+        smisEntity.setRegion(getRegionByName(region_name));
+
+            if(!validity.isEmpty())
+                smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
+
+//        smisEntity.setValidity(validity);
         smisEntity.setDescription(description);
         smisEntity.setDateRegistration(new Date());
 
@@ -162,13 +168,19 @@ public class SmisService {
 
 
     public RegionEntity getRegionByNameOrAdd(String regionName){
-        RegionEntity regionEntity = regionsRepo.findByName(regionName);
+        RegionEntity regionEntity = regionsRepo.findByName(regionName).get();
         if(regionEntity == null) {
             regionEntity = new RegionEntity(regionName);
             regionsRepo.save(regionEntity);
         }
         return regionEntity;
     }
+
+    public RegionEntity getRegionByName(String regionName){
+        return regionsRepo.findByName(regionName).get();
+    }
+
+
 
     public List<RegionEntity> getAllRegionsSort(){
         return regionsRepo.findAll(new Sort(Sort.Direction.ASC, "name"));

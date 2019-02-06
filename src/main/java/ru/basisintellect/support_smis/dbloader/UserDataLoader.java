@@ -169,10 +169,13 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             regions.add(new RegionEntity(86, "Ханты - Мансийский автономный округ -Югра"));
             regions.add(new RegionEntity(87, "Чукотский автономный округ"));
             regions.add(new RegionEntity(89, "Ямало - Ненецкий автономный округ"));
-            regions.add(new RegionEntity(91, "Республика Крым"));
+            regions.add(new RegionEntity(91, "Республика Крым(Симферополь)"));
             regions.add(new RegionEntity(92, "Севастополь"));
             regions.add(new RegionEntity(99, "Иные территории, включая город и космодром Байконур"));
 
+//            for (RegionEntity entity:regions) {
+//                regionRepository.save(entity);
+//            }
             regionRepository.saveAll(regions);
 
             UserRoleEntity adminRole = new UserRoleEntity();
@@ -210,8 +213,8 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             //удаление папки с файлами НА ВРЕМЯ ОТЛАДКИ
             //FileUtils.deleteDirectory(new File("smis_files"));
 
-            RegionEntity regionEntity = new RegionEntity("Центральный");
-            regionRepository.save(regionEntity);
+
+
 
             /*SmisEntity smisNSUKS = new SmisEntity();
 

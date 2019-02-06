@@ -84,7 +84,7 @@ public class SmisController {
                     name,
                     parent_smis_id,
                     region_name,
-                    new SimpleDateFormat("yyyy-MM-dd").parse(validity),
+                    validity,
                     description);
         } catch (IOException e) {
             e.printStackTrace();

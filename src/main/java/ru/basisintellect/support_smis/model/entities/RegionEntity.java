@@ -10,11 +10,11 @@ public class RegionEntity extends CustomEntity {
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     Set<SmisEntity> smises = new HashSet<>();
 
-    @Column(name = "name", length = 128)
+    @Column(name = "name", length = 256, unique = true)
     String name;
 
-    @Column(name = "code")
-    Integer code;
+    @Column(name = "code", unique = true)
+    int code;
 
 
 
@@ -38,18 +38,18 @@ public class RegionEntity extends CustomEntity {
         this.name = name;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
     public RegionEntity() {
     }
 
-    public RegionEntity(Integer code, String name) {
+    public RegionEntity(int code, String name) {
         this.name = name;
         this.code = code;
     }

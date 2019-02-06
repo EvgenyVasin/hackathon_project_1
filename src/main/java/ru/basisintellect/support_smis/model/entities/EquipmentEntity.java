@@ -8,7 +8,7 @@ import java.util.Set;
 public class EquipmentEntity extends CustomEntity {
 
 
-    @Column(name = "name", length = 128)
+    @Column(name = "name", length = 128, unique = true)
     String name;
 
 
