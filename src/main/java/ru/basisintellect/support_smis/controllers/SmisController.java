@@ -151,7 +151,7 @@ public class SmisController {
         String URLEncodedFileName = URLEncoder.encode(asset.getName(), "UTF-8");
         String ResultFileName = URLEncodedFileName.replace('+', ' ');
         httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename*=\"utf8'ru-ru'" + ResultFileName.replace(" ", "_")
+                "attachment; filename*=\"utf8'ru-ru'" + ResultFileName
         );
 
         httpHeaders.setContentLength(content.length());
