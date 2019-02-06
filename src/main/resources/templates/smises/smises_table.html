@@ -20,7 +20,7 @@
         }
 
         .description-fix {
-            max-width: 500px !important;
+            max-width: 450px !important;
             min-width: 50px !important;
             word-wrap: break-word !important;
         }
@@ -122,7 +122,7 @@
                                                 th:href="${'/download/' +  file.fileName}" th:text="${file.customName}"
                                                 type="application/file"></a></p>
                                     </td>
-                                    <td th:text="${file.description}">
+                                    <td class="description-fix" th:text="${file.description}">
 
                                     </td>
                                 </tr>
