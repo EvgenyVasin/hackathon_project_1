@@ -13,6 +13,9 @@ public class DistrictEntity extends CustomEntity{
     @Column(name = "name", length = 256, unique = true)
     String name;
 
+    public DistrictEntity(){
+    }
+
     public Set<RegionEntity> getRegions() {
         return regions;
     }

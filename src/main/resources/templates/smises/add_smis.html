@@ -63,6 +63,10 @@
             height: 0px !important;
         }
 
+        .comment-trick{
+            min-height: 80px !important;
+        }
+
 
 
 
@@ -91,68 +95,17 @@
                                         <input type="text" class="form-control" name="name"
                                                th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
-                                </td>
-                                <td class="td-style-fix">
 
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-comment"></span></span>
-                                        <textarea type="text" class="form-control form-control-fix" name="description"
-                                                  th:placeholder="#{complex.description}" autofocus="True"></textarea>
-                                    </div>
-
-                                </td>
-                                <td class="td-style-fix">
-                                    <!--выпадающий список для выбора родителя-->
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                        <select class="form-control" name="parent_smis_id" >
-                                            <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
-                                        </select>
-                                    </div>
-                                    <!---->
-                                </td>
-                            </tr>
-                            <tr>
-
-
-
-                                <td>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-home"></span></span>
                                         <select list="regions" name="region_name"
-                                               th:placeholder="#{complex.region}" class="form-control">
+                                                th:placeholder="#{complex.region}" class="form-control">
 
                                             <option th:each="region : ${regionList}" th:value="${region.name}"
                                                     th:text="${region.name}"></option>
                                         </select>
                                     </div>
-                                </td>
-                                <td></td>
-
-                                <td>
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity"
-                                               onfocus="(this.type='date')" onblur="this.type='text'"
-                                               th:placeholder="#{complex.agreementDate}"/>
-                                    </div>
-
-
-
-                                </td>
-
-
-
-                            </tr>
-                            <tr>
-
-
-                                <td>
 
                                     <!--добавление контактов-->
                                     <label>Добавить контакты</label>
@@ -178,7 +131,14 @@
 
 
                                 </td>
-                                <td>
+                                <td class="td-style-fix">
+
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-comment"></span></span>
+                                        <textarea type="text" class="form-control form-control-fix comment-trick" name="description"
+                                                  th:placeholder="#{complex.description}" autofocus="True"></textarea>
+                                    </div>
 
                                     <!--добавление файлов-->
                                     <label>Добавить файлы</label>
@@ -203,8 +163,28 @@
                                             </tr>
                                         </table>
                                     </div>
+
                                 </td>
-                                <td>
+                                <td class="td-style-fix">
+                                    <!--выпадающий список для выбора родителя-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="parent_smis_id" >
+                                            <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                        </select>
+                                    </div>
+                                    <!---->
+
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                        <input type="text" class="form-control" name="validity"
+                                               onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:placeholder="#{complex.agreementDate}"/>
+                                    </div>
+
                                     <label>Добавить оборудование</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
@@ -224,6 +204,48 @@
                                                 th:text="${equipment.name}"></option>
 
                                     </datalist>
+
+                                </td>
+                            </tr>
+                            <tr>
+
+
+
+                                <td>
+
+
+                                </td>
+                                <td>
+
+
+
+                                </td>
+
+                                <td>
+
+
+
+
+                                </td>
+
+
+
+                            </tr>
+                            <tr>
+
+
+                                <td>
+
+
+
+
+                                </td>
+                                <td>
+
+
+                                </td>
+                                <td>
+
                                 </td>
                                 </td>
                             </tr>
