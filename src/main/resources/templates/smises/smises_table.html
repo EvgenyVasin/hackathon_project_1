@@ -119,14 +119,14 @@
                     <td class="description-fix">
                         <div th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}"
                              class="description-fix">
-                            <table class="table table-striped">
-                                <tr>
-                                    <td>
+                            <table class="table table-striped" style="background-color: inherit !important;">
+                                <tr style="background-color: inherit !important;">
+                                    <td style="background-color: inherit !important;">
                                         <p class="contacts-cell description-fix"><a
                                                 th:href="${'/download/' +  file.fileName}" th:text="${file.customName}"
                                                 type="application/file"></a></p>
                                     </td>
-                                    <td class="file-description-fix" th:text="${file.description}">
+                                    <td class="file-description-fix" style="background-color: inherit !important;" th:text="${file.description}">
 
                                     </td>
                                 </tr>
