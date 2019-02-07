@@ -35,6 +35,14 @@
             word-break: break-word !important;
         }
 
+        .file-comment-fix{
+            min-width: 200px !important;
+            max-width: 200px !important;
+            word-break: break-word !important;
+
+
+        }
+
 
     </style>
 
@@ -91,7 +99,7 @@
                     <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.agreementNumber}"></th>-->
-                    <th class="description-fix" th:text="#{complex.agreementDate}"></th>
+                    <th class="description-fix" th:text="#{complex.agreementDate}" title="установить дату напоминания об окончании срока соглашения"></th>
                     <th class="description-fix" th:text="#{complex.contacts}"></th>
                     <th class="description-fix" th:text="#{complex.documents}"></th>
                     <th class="description-fix" th:text="#{complex.equipment}"></th>
@@ -122,11 +130,11 @@
                             <table class="table table-striped" style="background-color: inherit !important;">
                                 <tr style="background-color: inherit !important;">
                                     <td style="background-color: inherit !important;">
-                                        <p class="contacts-cell description-fix"><a
+                                        <p class="contacts-cell description-fix file-comment-fix"><a
                                                 th:href="${'/download/' +  file.fileName}" th:text="${file.customName}"
                                                 type="application/file"></a></p>
                                     </td>
-                                    <td class="file-description-fix" style="background-color: inherit !important;" th:text="${file.description}">
+                                    <td class="file-description-fix file-comment-fix" style="background-color: inherit !important;" th:text="${file.description}">
 
                                     </td>
                                 </tr>

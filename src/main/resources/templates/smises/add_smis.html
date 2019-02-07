@@ -149,7 +149,7 @@
                                         <table>
                                             <tr>
                                                 <textarea type="text" class="form-control form-control-fix" name="fileDescriptions"
-                                                          th:placeholder="#{complex.description}" autofocus="True"></textarea>
+                                                          th:placeholder="#{complex.description}" autofocus="True" title="указать сроки действия документов"></textarea>
                                             </tr>
                                             <tr>
 
@@ -180,7 +180,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity"
+                                        <input type="text" class="form-control" name="validity" title="установить дату напоминания об окончании срока соглашения"
                                                onfocus="(this.type='date')" onblur="this.type='text'"
                                                th:placeholder="#{complex.agreementDate}"/>
                                     </div>
