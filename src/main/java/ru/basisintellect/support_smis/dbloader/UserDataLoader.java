@@ -110,7 +110,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
             district = new DistrictEntity("Южный");
             regions = district.getRegions();
-            regions.add(new RegionEntity(1, "Республика Адыгея (Адыгкя)", district));
+            regions.add(new RegionEntity(1, "Республика Адыгея (Адыгея)", district));
             regions.add(new RegionEntity(8, "Республика Калмыкия", district));
             regions.add(new RegionEntity(23, "Краснодарский край", district));
             regions.add(new RegionEntity(30, "Астраханская область", district));

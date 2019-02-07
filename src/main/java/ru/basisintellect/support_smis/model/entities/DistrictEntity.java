@@ -35,4 +35,5 @@ public class DistrictEntity extends CustomEntity{
     public DistrictEntity(String name) {
         this.name = name;
     }
+
 }
