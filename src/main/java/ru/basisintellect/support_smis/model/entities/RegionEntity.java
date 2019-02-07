@@ -10,6 +10,10 @@ public class RegionEntity extends CustomEntity {
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     Set<SmisEntity> smises = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "district_id", nullable = false)
+    DistrictEntity district;
+
     @Column(name = "name", length = 256, unique = true)
     String name;
 
@@ -46,7 +50,21 @@ public class RegionEntity extends CustomEntity {
         this.code = code;
     }
 
+    public DistrictEntity getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(DistrictEntity district) {
+        this.district = district;
+    }
+
     public RegionEntity() {
+    }
+
+    public RegionEntity( int code, String name, DistrictEntity district) {
+        this.district = district;
+        this.name = name;
+        this.code = code;
     }
 
     public RegionEntity(int code, String name) {
