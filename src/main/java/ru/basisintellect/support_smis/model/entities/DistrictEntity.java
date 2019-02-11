@@ -13,6 +13,11 @@ public class DistrictEntity extends CustomEntity{
     @Column(name = "name", length = 256, unique = true)
     String name;
 
+    @ManyToOne
+    @JoinColumn(name = "country_id", nullable = false)
+    СountryEntity country;
+
+
     public DistrictEntity(){
     }
 
@@ -32,8 +37,19 @@ public class DistrictEntity extends CustomEntity{
         this.name = name;
     }
 
-    public DistrictEntity(String name) {
+    public СountryEntity getCountry() {
+        return country;
+    }
+
+    public void setCountry(СountryEntity country) {
+        this.country = country;
+    }
+
+
+
+    public DistrictEntity(String name, СountryEntity country) {
         this.name = name;
+        this.country = country;
     }
 
 }

@@ -137,6 +137,8 @@ public class SmisController {
     public String viewSmisesAdd(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
         model.addAttribute("regionList", smisService.getAllRegionsSort());
+        model.addAttribute("districtsList", smisService.getAllDistrictsSort());
+        model.addAttribute("countryesList",smisService.getAllCountryesSort());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         return "smises/add_smis";
     }

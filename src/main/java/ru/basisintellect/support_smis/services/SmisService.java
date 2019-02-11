@@ -38,6 +38,12 @@ public class SmisService {
     RegionRepository regionsRepo;
 
     @Autowired
+    DistrictRepository districtRepo;
+
+    @Autowired
+    CountryRepository countryRepo;
+
+    @Autowired
     EquipmentRepository equipmentRepo;
 
     @Autowired
@@ -184,6 +190,14 @@ public class SmisService {
 
     public List<RegionEntity> getAllRegionsSort(){
         return regionsRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
+    }
+
+    public List<DistrictEntity> getAllDistrictsSort(){
+        return districtRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
+    }
+
+    public List<СountryEntity> getAllCountryesSort(){
+        return countryRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
     public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName){
