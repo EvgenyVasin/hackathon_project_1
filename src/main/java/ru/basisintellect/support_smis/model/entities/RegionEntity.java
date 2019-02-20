@@ -7,6 +7,10 @@ import java.util.Set;
 @Entity
 @Table(name = "region")
 public class RegionEntity extends CustomEntity {
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    Set<CityEntity> cities = new HashSet<>();
+
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     Set<SmisEntity> smises = new HashSet<>();
 
@@ -61,7 +65,15 @@ public class RegionEntity extends CustomEntity {
     public RegionEntity() {
     }
 
-    public RegionEntity( int code, String name, DistrictEntity district) {
+    public Set<CityEntity> getCities() {
+        return cities;
+    }
+
+    public void setCities(Set<CityEntity> cities) {
+        this.cities = cities;
+    }
+
+    public RegionEntity(int code, String name, DistrictEntity district) {
         this.district = district;
         this.name = name;
         this.code = code;
