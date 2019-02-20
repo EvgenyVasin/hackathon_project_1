@@ -13,7 +13,6 @@ import java.io.IOException;
 @EnableAutoConfiguration
 @ComponentScan
 public class SupportSmisApplication {
-
 	public static void main(String[] args) {
         try{
 		SpringApplication.run(SupportSmisApplication.class, args);

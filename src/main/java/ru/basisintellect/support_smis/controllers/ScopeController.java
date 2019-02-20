@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Скоп контроллер, возвращающий пользователю ложный пароль и перенаправляющий на другую страницу с полем <b>user</b>
  * Created by safin.v on 30.11.2016.
  */
 @Controller
 public class ScopeController {
+
     @Autowired
     UsersRepository users;
+
 
     @RequestMapping(value = "/scopeSession", method = RequestMethod.POST)
     public String scopeExample(HttpServletRequest request, HttpSession session) {

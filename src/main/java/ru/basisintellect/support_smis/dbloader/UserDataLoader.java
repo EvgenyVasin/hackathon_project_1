@@ -58,6 +58,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
         try {
 
 
+
+
+
             /*while(true){
 
 
@@ -87,7 +90,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
             System.out.println("stateOffline");
 
-            СountryEntity country;
+            /*СountryEntity country;
             DistrictEntity district;
             Set<RegionEntity> regions;
 
@@ -213,7 +216,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             regions = district.getRegions();
             regions.add(new RegionEntity(91, "Республика Крым(Симферополь)", district));
             regions.add(new RegionEntity(92, "Севастополь", district));
-            districtRepository.save(district);
+            districtRepository.save(district);*/
 
 
 

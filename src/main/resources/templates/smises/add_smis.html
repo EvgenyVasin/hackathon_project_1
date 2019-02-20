@@ -99,7 +99,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-home"></span></span>
-                                        <!--<select list="regions" name="region_name"
+                                        <select list="regions" name="region_name"
                                                 th:placeholder="#{complex.region}" class="form-control">
 
                                             <option th:each="region : ${regionList}" th:value="${region.name}"
@@ -107,25 +107,9 @@
 
 
                                             </option>
-                                        </select>-->
-
-                                        <select list="regions" name="region_name"
-                                                th:placeholder="#{complex.region}" class="form-control">
-                                            <option th:each="country : ${countryesList}" th:value="${country.name}"
-                                                    th:text="${country.name}"></option>
-                                                    <optgroup th:each="district : ${districtsList}" th:value="${district.name}"
-                                                            th:label="${district.name}">
-                                                        <option th:each="district : ${districtsList}" th:value="${district.regions.name}"
-                                                                th:text="${district.regions.name}">
-                                                        </option>
-                                                    </optgroup>
-
-
-
-
-
-
                                         </select>
+
+
 
 
 

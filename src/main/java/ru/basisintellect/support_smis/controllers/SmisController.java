@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Контроллер для работы с данными по СМИСам с полем <b>smisService</b>
  * Created by vasin.e on 17.01.2019.
  */
 
@@ -41,15 +42,24 @@ public class SmisController {
 //    @Autowired
 //    SmisRepository smisRepository;
 
+    /**
+     * Поле <b>smisService</b>
+     * @param smisService
+     */
     @Autowired
     SmisService smisService;
 
+
+    /**
+     * Метод добавления нового <a>Smis</a> только для авторизованных пользователей с ролями <b>Admin</b> или <b>User</b>
+     * @return возвращает перенаправление на таблицу со всеми объектами <a>Smis</a>
+     */
     //добавление ПК ИВ СМИС
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
     public String addSmis(
             //файлы
-//                                        @RequestParam("files")
+//          @RequestParam("files")
             MultipartFile[] files,
             String[] fileNames,
             String[] fileDescriptions,
@@ -59,7 +69,6 @@ public class SmisController {
             String[] positions,
             //оборудование
             String[] equipments,
-
             //комплекс
             String name,
             Long parent_smis_id,
@@ -69,31 +78,33 @@ public class SmisController {
             Model model) {
 
 
+        //пробуем добавить новый СМИС и делаем перенаправление на страницу с таблицей
         try {
-            smisService.addSmis(
-                    files,
-                    fileNames,
-                    fileDescriptions,
+                smisService.addSmis(
+                        files,
+                        fileNames,
+                        fileDescriptions,
 
-                    phones,
-                    contactNames,
-                    positions,
+                        phones,
+                        contactNames,
+                        positions,
 
-                    equipments,
+                        equipments,
 
-                    name,
-                    parent_smis_id,
-                    region_name,
-                    validity,
-                    description);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        viewListSmises(model);
+                        name,
+                        parent_smis_id,
+                        region_name,
+                        validity,
+                        description);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            viewListSmises(model);
         return "redirect:/smises_list";
     }
+
 
     //получение ПК ИВ СМИС
     //@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")

@@ -7,7 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-
+/**
+ * На данный момент отключенный отловщик ошибок
+ */
 //@ControllerAdvice
 public class GlobalExceptionHandlingControllerAdvice {
 

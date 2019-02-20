@@ -14,7 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 /**
+ * Настройка конфигурации безопасноти с полем <b>customUserDetailsService</b>
  * Created by safin.v on 17.10.2016.
+ * @author Created by safin.v on 19.10.2016.
+ * @version 0.1
  */
 @Configuration
 @EnableWebSecurity
@@ -22,7 +25,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Поле пользовательского сервиса
+     */
+    @Autowired
+    @Qualifier("customUserDetailsService")
+    private UserDetailsService customUserDetailsService;
 
+
+    /**
+     * Метод для конфигурации безопасности, добавление ключа шифрования паролей, страницы логина пользователя, время сессии
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -51,11 +64,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-
-    @Autowired
-    @Qualifier("customUserDetailsService")
-    private UserDetailsService customUserDetailsService;
-
+    /**
+     * Конфигурация пользовательского сервиса
+     * @param auth
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -63,6 +75,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(getBCryptPasswordEncoder());
     }
 
+    /**
+     * Раскодировщик паролей
+     */
     @Bean(name = "bcryptEncoder")
     public BCryptPasswordEncoder getBCryptPasswordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

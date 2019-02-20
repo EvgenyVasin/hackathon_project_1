@@ -50,7 +50,7 @@ public class SmisEntity extends CustomEntity {
 
         //сеттеры параметров
     /**
-     * @param name the username to set
+     * @param name сет имя смис
      */
     public void setName (String name){
         this.name = name;

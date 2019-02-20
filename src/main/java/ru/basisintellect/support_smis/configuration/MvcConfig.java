@@ -15,16 +15,22 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import java.util.Locale;
 
 /**
- * Created by safin.v on 19.10.2016.
+ * Конфигурация и настройка html компонентов из папки проекта <b>templates</b> с константой <b>CLASSPATH_RESOURCE_LOCATIONS</b>
+ * @author Created by safin.v on 19.10.2016.
+ * @version 0.1
  */
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
+
+    /**
+     * Константа путь расположения ресурсов
+     */
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
             "classpath:/static/", "classpath:/public/"};
 
     /**
-     * <mvc:resources mapping="/resources/**" location="/resources/" />
+     * Добавление ресурсов из <b>CLASSPATH_RESOURCE_LOCATIONS</b>
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -38,7 +44,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 //    public SimpleMappingExceptionResolver
 //    createSimpleMappingExceptionResolver() {
 //        SimpleMappingExceptionResolver r =
-//                new SimpleMappingExceptionResolver();
+//            new SimpleMappingExceptionResolver();
 //
 //        Properties mappings = new Properties();
 //        mappings.setProperty("/error", "error/error");
@@ -51,6 +57,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 //        return r;
 //    }
 
+    /**
+     * Регистрация в контроллере страниц из <b>templates</b>
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
@@ -66,13 +75,16 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * <mvc:interceptors>
+     * <mvc:interceptors> Добавление <b>Interceptor</b>
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getLocaleChangeInterceptor()).addPathPatterns("/*");
     }
 
+    /**
+     * <mvc:interceptors> Получение <b>Interceptor</b>
+     */
     @Bean(name = "localeChangeInterceptor")
     public LocaleChangeInterceptor getLocaleChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -91,6 +103,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return cookieLocaleResolver;
     }
 
+    /**
+     * Подключение кодировки UTF-8
+     */
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
@@ -103,6 +118,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     /**
      * <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+     * Настройка Spring класса ReloadableResourceBundleMessageSource
      */
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource getMessageSource() {
