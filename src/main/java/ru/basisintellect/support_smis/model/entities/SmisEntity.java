@@ -1,14 +1,16 @@
 package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by vasin.e on 17.01.2019.
  */
 
 @Entity
-@Table(name="smis")
+@Table(name = "smis")
 public class SmisEntity extends CustomEntity {
 
     @ManyToOne
@@ -16,7 +18,7 @@ public class SmisEntity extends CustomEntity {
     private SmisEntity parentSmis;
 
     //название
-    @Column(name="name", length = 512)
+    @Column(name = "name", length = 512)
     private String name;
 
     //дата регистрации ПК ИВ в системе
@@ -24,87 +26,90 @@ public class SmisEntity extends CustomEntity {
     private Date dateRegistration;
 
 
-    @Column(name="validity")
+    @Column(name = "validity")
     private Date validity;
 
     //регион
     @ManyToOne
-    @JoinColumn(name = "region_id", nullable = false)
-    private RegionEntity region;
+    @JoinColumn(name = "city_id", nullable = false)
+    private CityEntity city;
+
+    @ManyToOne
+    @JoinColumn(name = "state_area_id", nullable = false)
+    private StateAreaEntity stateArea;
+
+    @Column(name = "address")
+    private String address;
+
 
     //коментарий
-    @Column(name="description", length = 65536)
+    @Column(name = "description", length = 65536)
     private String description;
 
     //контакты
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<ContactEntity> contacts = new HashSet<>();
+    private Set<ContactEntity> contacts = new HashSet<>();
 
     //файлы
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<SmisFileEntity> files = new HashSet<>();
+    private Set<SmisFileEntity> files = new HashSet<>();
 
     //файлы
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private  Set<SmisEquipmentEntity> equipments = new HashSet<>();
+    private Set<SmisEquipmentEntity> equipments = new HashSet<>();
 
-        //сеттеры параметров
-    /**
-     * @param name сет имя смис
-     */
-    public void setName (String name){
-        this.name = name;
+    //сеттеры параметров
+
+    public SmisEntity() {
     }
 
-    /**
-     * @param dateRegistration the username to set
-     */
-    public void setDateRegistration(Date dateRegistration) {
-        this.dateRegistration = dateRegistration;
-    }
-
-
-
-
-    public void setParentSmis(SmisEntity parentSmis) {
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, CityEntity city) {
         this.parentSmis = parentSmis;
-    }
-
-    public void setRegion(RegionEntity region) {
-        this.region = region;
-    }
-
-    public void setDescription(String description) {
+        this.name = name;
+        this.dateRegistration = dateRegistration;
+        this.validity = validity;
+        this.city = city;
         this.description = description;
-    }
-
-
-    public void setContacts( Set<ContactEntity> contacts) {
         this.contacts = contacts;
-    }
-
-    public void setFiles( Set<SmisFileEntity> files) {
         this.files = files;
     }
 
-    public void setEquipments(Set<SmisEquipmentEntity> equipments) {
-        this.equipments = equipments;
+    public CityEntity getCity() {
+        return city;
     }
 
-    public void setValidity(Date validity) {
-        this.validity = validity;
+    public void setCity(CityEntity city) {
+        this.city = city;
     }
 
-    //конец блока сеттеров
+    public StateAreaEntity getStateArea() {
+        return stateArea;
+    }
 
+    public void setStateArea(StateAreaEntity stateArea) {
+        this.stateArea = stateArea;
+    }
 
+    public String getAddress() {
+        return address;
+    }
 
-    //геттеры параметров
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     /**
      * @return the region
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @param name сет имя смис
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -114,57 +119,65 @@ public class SmisEntity extends CustomEntity {
         return dateRegistration;
     }
 
-
-
-
+    /**
+     * @param dateRegistration the username to set
+     */
+    public void setDateRegistration(Date dateRegistration) {
+        this.dateRegistration = dateRegistration;
+    }
 
     public SmisEntity getParentSmis() {
         return parentSmis;
     }
 
-
-    public RegionEntity getRegion() {
-        return region;
+    public void setParentSmis(SmisEntity parentSmis) {
+        this.parentSmis = parentSmis;
     }
+
+    //конец блока сеттеров
+
+    //геттеры параметров
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-
-    public  Set<ContactEntity> getContacts() {
+    public Set<ContactEntity> getContacts() {
         return contacts;
     }
 
+    public void setContacts(Set<ContactEntity> contacts) {
+        this.contacts = contacts;
+    }
 
     public Set<SmisFileEntity> getFiles() {
         return files;
+    }
+
+    public void setFiles(Set<SmisFileEntity> files) {
+        this.files = files;
     }
 
     public Set<SmisEquipmentEntity> getEquipments() {
         return equipments;
     }
 
-    public Date getValidity() {
-        return validity;
+    public void setEquipments(Set<SmisEquipmentEntity> equipments) {
+        this.equipments = equipments;
     }
 
     //конец блока геттеров
 
-
-    public SmisEntity() {
+    public Date getValidity() {
+        return validity;
     }
 
-    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration,  Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files) {
-        this.parentSmis = parentSmis;
-        this.name = name;
-        this.dateRegistration = dateRegistration;
+    public void setValidity(Date validity) {
         this.validity = validity;
-        this.region = region;
-        this.description = description;
-        this.contacts = contacts;
-        this.files = files;
     }
 
     //текстовое представление объекта для отладки
@@ -172,7 +185,7 @@ public class SmisEntity extends CustomEntity {
     public String toString() {
         return "SMIS [SmisID = " + getId() + ", region = " + name
                 + ", date_registration = " + dateRegistration
-                + ", region = " + region
+                + ", region = " + city
                 + ", description = " + description;
     }
 }
