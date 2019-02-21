@@ -8,11 +8,8 @@ import java.util.Set;
 @Table(name = "region")
 public class RegionEntity extends CustomEntity {
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    Set<CityEntity> cities = new HashSet<>();
-
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    Set<SmisEntity> smises = new HashSet<>();
+    Set<CityEntity> cities = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "district_id", nullable = false)
@@ -30,13 +27,7 @@ public class RegionEntity extends CustomEntity {
         this.name = name;
     }
 
-    public Set<SmisEntity> getSmises() {
-        return smises;
-    }
 
-    public void setSmises(Set<SmisEntity> smises) {
-        this.smises = smises;
-    }
 
     public String getName() {
         return name;
