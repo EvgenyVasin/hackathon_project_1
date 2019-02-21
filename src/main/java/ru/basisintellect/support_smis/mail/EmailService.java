@@ -1,34 +1,36 @@
-/*
+
 package ru.basisintellect.support_smis.mail;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 @Service
-class EmailService {
+public class EmailService {
+    @Autowired
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    public EmailService(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-        this.sendMail("evgvasin1990@gmail.com", "test", "test");
-        System.out.println("sended");
-    }
+//    @Autowired
+//    public EmailService(JavaMailSender javaMailSender) {
+//        this.javaMailSender = javaMailSender;
+//
+//
+//    }
 
     public void sendMail(String toEmail, String subject, String message) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-        mailMessage.setFrom("admin@admin.com");
+        mailMessage.setFrom("safin.v@basis-ic.ru");
+
+
         javaMailSender.send(mailMessage);
     }
 
 
 
 }
-*/
+

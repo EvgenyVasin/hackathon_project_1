@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.basisintellect.support_smis.model.entities.DistrictEntity;
 import ru.basisintellect.support_smis.model.entities.RegionEntity;
 import ru.basisintellect.support_smis.services.SmisService;
+import ru.basisintellect.support_smis.mail.*;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class Test {
 
     @Autowired
     SmisService smisService;
+
+    @Autowired
+    EmailService emailService;
+
     @RequestMapping(value = "/test")
     public String test(Model model){
 
@@ -27,6 +32,14 @@ public class Test {
 
     List<RegionEntity> getRegions(Long id){
 
+        return null;
+    }
+
+    @RequestMapping(value = "/mail")
+    public String mail(Model model) {
+//        emailService.sendMail("evgvasin1990@gmail.com", "test", "test");
+        emailService.sendMail("safin.v@basis-intellect.ru", "test", "test");
+        System.out.println("sended");
         return null;
     }
 
