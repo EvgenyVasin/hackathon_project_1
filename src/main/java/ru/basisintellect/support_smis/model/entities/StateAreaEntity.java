@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "area")
-public class StateAreaEntity {
+public class StateAreaEntity extends CustomEntity {
 
     @Column(name="name")
     String name;

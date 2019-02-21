@@ -184,7 +184,7 @@ public class SmisController {
             JSONObject obj = new JSONObject();
             obj.put("itemId", entity.getId());
             obj.put("itemName", entity.getName());
-            obj.put("regionName", entity.getRegion().getName());
+            obj.put("regionName", entity.getCity().getName());
             if (parentSMIS != null)
                 obj.put("itemParentId", entity.getParentSmis().getId());
             else

@@ -41,7 +41,6 @@ public class SmisEntity extends CustomEntity {
     @Column(name = "address")
     private String address;
 
-
     //коментарий
     @Column(name = "description", length = 65536)
     private String description;

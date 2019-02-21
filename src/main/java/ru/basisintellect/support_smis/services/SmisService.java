@@ -3,21 +3,13 @@ package ru.basisintellect.support_smis.services;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.ws.soap.client.SoapFaultClientException;
 import ru.basisintellect.support_smis.controllers.SmisController;
-import ru.basisintellect.support_smis.model.SmisStateMsg;
 import ru.basisintellect.support_smis.model.entities.*;
 import ru.basisintellect.support_smis.repositories.*;
-import ru.basisintellect.support_smis.soap_client.TestConnectClient;
-import ru.basisintellect.support_smis.soap_client.wsdl.node.TestRequest;
-import ru.basisintellect.support_smis.soap_client.wsdl.node.TestResponse;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
@@ -36,6 +28,9 @@ public class SmisService {
 
     @Autowired
     RegionRepository regionsRepo;
+
+    @Autowired
+    CityRepository cityRepo;
 
     @Autowired
     DistrictRepository districtRepo;
@@ -78,7 +73,7 @@ public class SmisService {
                               //комплекс
                               String name,
                               Long parent_smis_id,
-                              String region_name,
+                              String city_name,
                               String validity,
                               String description) throws IOException, ParseException {
 
@@ -93,7 +88,7 @@ public class SmisService {
         if(parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
-        smisEntity.setRegion(getRegionByName(region_name));
+        smisEntity.setCity(getCityByName(city_name));
 
             if(!validity.isEmpty())
                 smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
@@ -158,7 +153,7 @@ public class SmisService {
 
         smisEquipmentRepo.deleteAll(smisEquipmentRepo.findAllBySmisId(smisId));
 
-        File folderSmis = new File("smis_files/" + smis.getName() + '_' + smis.getRegion().getName());
+        File folderSmis = new File("smis_files/" + smis.getName() + '_' + smis.getCity().getName());
         if (folderSmis.exists()) {
             FileUtils.deleteDirectory(folderSmis);
         }
@@ -182,8 +177,8 @@ public class SmisService {
         return regionEntity;
     }
 
-    public RegionEntity getRegionByName(String regionName){
-        return regionsRepo.findByName(regionName).get();
+    public CityEntity getCityByName(String cityName){
+        return cityRepo.findByName(cityName).get();
     }
 
 

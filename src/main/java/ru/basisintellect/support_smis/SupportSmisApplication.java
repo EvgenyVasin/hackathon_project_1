@@ -19,7 +19,6 @@ public class SupportSmisApplication {
         } catch (Exception e) {
             e.getCause();
             e.printStackTrace();
-
         }
 	}
 }
