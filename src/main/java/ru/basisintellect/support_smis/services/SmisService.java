@@ -191,7 +191,7 @@ public class SmisService {
         return districtRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
-    public List<СountryEntity> getAllCountryesSort(){
+    public List<CountryEntity> getAllCountryesSort(){
         return countryRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
@@ -208,6 +208,10 @@ public class SmisService {
         return smisEquipmentRepo.save(new SmisEquipmentEntity(smis,equipment));
     }
 
+    public List<DistrictEntity>getDistricsByCountryId(Long cantryId){
+
+        return districtRepo.findByCountry(countryRepo.findById(cantryId).get());
+    }
     public List<SmisEntity> getAllSmises() {
         return (List<SmisEntity>) smisesRepo.findAll();
     }
@@ -247,4 +251,7 @@ public class SmisService {
     }
 
 
+    public CountryEntity getCountryById(Long cantryId) {
+       return countryRepo.findById(cantryId).get();
+    }
 }

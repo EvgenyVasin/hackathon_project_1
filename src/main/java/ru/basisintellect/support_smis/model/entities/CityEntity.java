@@ -7,9 +7,9 @@ import java.util.Set;
 @Entity
 @Table(name = "city")
 public class CityEntity extends CustomEntity {
-
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    Set<SmisEntity> smises = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//    Set<SmisEntity> smises = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "region_id", nullable = false)
