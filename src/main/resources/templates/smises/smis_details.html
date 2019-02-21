@@ -69,7 +69,7 @@
     </div>
 </div>
 </body>
-<!--<body>
+<body>
 <div class="container">
     <div class="row ">
         <div class="col-xs-offset-3 col-xs-6 row-fix">
@@ -79,7 +79,7 @@
                         <strong class="panel-title" th:text="${smis.name}"></strong>
                     </div>
                 </div>
-                <form role="form" th:action="@{/}" enctype="multipart/form-data" method="post"> &lt;!&ndash;добавить action editSmis&ndash;&gt;
+                <form role="form" th:action="@{/}" enctype="multipart/form-data" method="post"> <!--добавить action editSmis-->
                     <div class="panel-body">
 
                         <table >
@@ -101,16 +101,16 @@
                                     </div>
                                 </td>
                                 <td class="td-style-fix">
-                                    &lt;!&ndash;выпадающий список для выбора родителя&ndash;&gt;
+                                    <!--выпадающий список для выбора родителя-->
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-magnet"></span></span>
                                         <input type="text" list="parents" th:if="${not #lists.isEmpty(smis.parentSmis)}" th:value="${smis.parentSmis.name}" class="form-control" name="parent_smis_id">
                                         <datalist id="parents">
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option> &lt;!&ndash;надо передать на эту форму smisesList&ndash;&gt;
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option> <!--надо передать на эту форму smisesList-->
                                         </datalist>
                                     </div>
-                                    &lt;!&ndash;&ndash;&gt;
+                                    <!---->
                                 </td>
                             </tr>
                             <tr>
@@ -147,7 +147,7 @@
 
                                 <td>
 
-                                    &lt;!&ndash;добавление контактов&ndash;&gt;
+                                    <!--добавление контактов-->
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-user"></span>
                                         <table th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
@@ -185,7 +185,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    &lt;!&ndash;отображение файлов&ndash;&gt;
+                                    <!--отображение файлов-->
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-save-file" ></span>
                                         <table>
@@ -195,7 +195,7 @@
                                                 <td><input class="form-control" type="text" name="files"  th:value="${file.link}"></td>
                                             </tr>
 
-                                                &lt;!&ndash;добавление файлов&ndash;&gt;
+                                                <!--добавление файлов-->
 
 
 
@@ -257,16 +257,16 @@
 
                         <div class="panel-footer">
                             <div class="row">
-                                &lt;!&ndash;<div class="col-xs-6 col-sm-6 col-md-6">&ndash;&gt;
-                                &lt;!&ndash;<button type="submit" class="btn btn-labeled btn-success btn-success-fix">
+                                <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                                <!--<button type="submit" class="btn btn-labeled btn-success btn-success-fix">
                                     <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
-                                        th:text="OK"/></button>&ndash;&gt;
+                                        th:text="OK"/></button>-->
                                 <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
                                     <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
                                         th:text="#{users.exit}"/></button>
-                                &lt;!&ndash;&ndash;&gt;
+                                <!---->
                             </div>
-                                &lt;!&ndash;</div>&ndash;&gt;
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -275,5 +275,5 @@
         </div>
     </div>
 </div>
-</body>-->
+</body>
 </html>

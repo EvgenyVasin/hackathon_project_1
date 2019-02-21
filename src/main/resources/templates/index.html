@@ -71,6 +71,10 @@
             min-height: 80px !important;
         }
 
+        .hide-class {
+            display: none;
+        }
+
 
 
 
@@ -92,61 +96,72 @@
 
                         <table>
                             <tr class="td-style-fix">
-                                <td class="td-style-fix">
-
-
-
-                                </td>
-                                <td class="td-style-fix">
-
-
-
-                                </td>
-                                <td class="td-style-fix">
-
-
-                                </td>
+                                <td class="td-style-fix">                                </td>
+                                <td class="td-style-fix">                                </td>
+                                <td class="td-style-fix">                                </td>
                             </tr>
+
+
+
+
+                            <td>
+                                <tr>
+                                    <div class="input-group input-group-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-home"></span></span>
+                                        <select list="countries" name="region_name"
+                                                th:placeholder="#{complex.country}" class="form-control">
+                                            <option th:each="country : ${countryList}" th:value="${country.name}"
+                                                    th:text="${country.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="input-group input-group-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-home hide-class"></span></span>
+                                        <select list="districts" name="region_name"
+                                                th:placeholder="#{complex.district}" class="form-control">
+                                            <option th:each="district : ${districtsList}" th:value="${district.name}"
+                                                    th:text="${district.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="input-group input-group-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-home"></span></span>
+                                        <select list="regions" name="region_name"
+                                                th:placeholder="#{complex.region}" class="form-control">
+                                            <option th:each="region : ${regionsList}" th:value="${region.name}"
+                                                    th:text="${region.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="input-group input-group-fix">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-home"></span></span>
+                                        <select list="regions" name="region_name"
+                                                th:placeholder="#{complex.city}" class="form-control">
+                                            <option th:each="city : ${citiesList}" th:value="${city.name}"
+                                                    th:text="${city.name}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                </tr>
+                            </td>
+
+
+
+
                             <tr>
-
-
-
-                                <td>
-
-
-                                </td>
-                                <td>
-
-
-
-                                </td>
-
-                                <td>
-
-
-
-
-                                </td>
-
-
-
-                            </tr>
-                            <tr>
-
-
-                                <td>
-
-
-
-
-                                </td>
-                                <td>
-
-
-                                </td>
-                                <td>
-
-                                </td>
+                                <td>                                </td>
+                                <td>                                </td>
+                                <td>                                </td>
                                 </td>
                             </tr>
                         </table>

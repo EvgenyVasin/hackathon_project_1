@@ -18,8 +18,8 @@ public class TestRest {
 
     @RequestMapping(value = "/districts", method = RequestMethod.POST)
     List<DistrictEntity> getDistricts(Long cantryId){
-        List<DistrictEntity> districtsList = smisService.getDistricsByCountryId(cantryId);
-        return districtsList;
+
+        return smisService.getDistricsByCountryId(cantryId);
     }
 
     @RequestMapping(value = "/districts", method = RequestMethod.GET)
