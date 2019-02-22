@@ -70,10 +70,15 @@ public class SmisService {
                               //оборудование
                               String[] equipments,
 
+                              //место расположения
+                              Long region_id,
+                              String city_name,
+                              String street,
+                              String number,
+
                               //комплекс
                               String name,
                               Long parent_smis_id,
-                              String city_name,
                               String validity,
                               String description) throws IOException, ParseException {
 
@@ -83,17 +88,18 @@ public class SmisService {
 //        if (!folder.exists()) {
 //            folder.mkdir();
 //        }
+
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         if(parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
-        smisEntity.setCity(getCityByName(city_name));
+        smisEntity.setCity(getCityByNameOrCreate(city_name, region_id));
 
             if(!validity.isEmpty())
                 smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
 
-//        smisEntity.setValidity(validity);
+
         smisEntity.setDescription(description);
         smisEntity.setDateRegistration(new Date());
 
@@ -138,6 +144,15 @@ public class SmisService {
         return smisEntity;
     }
 
+    private CityEntity getCityByNameOrCreate(String city_name, Long region_id) {
+        CityEntity cityEntity = cityRepo.findByName(city_name);
+        if(cityEntity == null) {
+            cityEntity = new CityEntity(city_name, regionsRepo.findById(region_id).get());
+            cityRepo.save(cityEntity);
+        }
+        return cityEntity;
+    }
+
     public void deleteSmis(Long smisId) throws IOException {
         SmisEntity smis = smisesRepo.findById(smisId).get();
 
@@ -178,7 +193,7 @@ public class SmisService {
     }
 
     public CityEntity getCityByName(String cityName){
-        return cityRepo.findByName(cityName).get();
+        return cityRepo.findByName(cityName);
     }
 
 

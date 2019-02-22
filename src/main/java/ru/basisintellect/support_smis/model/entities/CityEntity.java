@@ -33,4 +33,12 @@ public class CityEntity extends CustomEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CityEntity() {
+    }
+
+    public CityEntity(String name, RegionEntity region) {
+        this.region = region;
+        this.name = name;
+    }
 }

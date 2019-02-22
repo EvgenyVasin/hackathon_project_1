@@ -71,7 +71,7 @@ public class SmisController {
             String[] equipments,
             //место расположения
             Long regions,
-            String sities,
+            String cities,
             String street,
             String number,
             //комплекс
@@ -96,9 +96,14 @@ public class SmisController {
 
                         equipments,
 
+                        //место расположения
+                        regions,
+                        cities,
+                        street,
+                        number,
+
                         name,
                         parent_smis_id,
-                        region_name,
                         validity,
                         description);
             } catch (IOException e) {
