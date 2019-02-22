@@ -53,6 +53,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     CountryRepository countryRepository;
 
+    @Autowired
+    AreaStateRepository areaStateRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
@@ -93,6 +96,18 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             CountryEntity country;
             DistrictEntity district;
             Set<RegionEntity> regions;
+
+
+
+            Set<AreaStateEntity> areaStateList = new HashSet<>();
+            areaStateList.add(new AreaStateEntity("Федеральный"));
+            areaStateList.add(new AreaStateEntity("Окружной"));
+            areaStateList.add(new AreaStateEntity("Региональный"));
+            areaStateList.add(new AreaStateEntity("Городской"));
+            areaStateRepository.saveAll(areaStateList);
+
+
+
 
             country = new CountryEntity("Российская Федерация");
             countryRepository.save(country);

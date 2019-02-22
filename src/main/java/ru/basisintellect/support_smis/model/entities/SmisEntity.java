@@ -34,9 +34,7 @@ public class SmisEntity extends CustomEntity {
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity city;
 
-    @ManyToOne
-    @JoinColumn(name = "state_area_id", nullable = false)
-    private StateAreaEntity stateArea;
+
 
     @Column(name = "address")
     private String address;
@@ -56,6 +54,10 @@ public class SmisEntity extends CustomEntity {
     //файлы
     @OneToMany(mappedBy = "smis", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<SmisEquipmentEntity> equipments = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "area_state_id")
+    private AreaStateEntity areaState;
 
     //сеттеры параметров
 
@@ -81,13 +83,7 @@ public class SmisEntity extends CustomEntity {
         this.city = city;
     }
 
-    public StateAreaEntity getStateArea() {
-        return stateArea;
-    }
 
-    public void setStateArea(StateAreaEntity stateArea) {
-        this.stateArea = stateArea;
-    }
 
     public String getAddress() {
         return address;
@@ -109,6 +105,10 @@ public class SmisEntity extends CustomEntity {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAreaStateEntity(AreaStateEntity areaStateEntity) {
+        this.areaState = areaStateEntity;
     }
 
     /**
@@ -167,6 +167,10 @@ public class SmisEntity extends CustomEntity {
 
     public void setEquipments(Set<SmisEquipmentEntity> equipments) {
         this.equipments = equipments;
+    }
+
+    public AreaStateEntity getAreaStateEntity() {
+        return areaState;
     }
 
     //конец блока геттеров

@@ -21,13 +21,9 @@ public class RegionEntity extends CustomEntity {
     @Column(name = "code", unique = true)
     int code;
 
-
-
     public RegionEntity(String name) {
         this.name = name;
     }
-
-
 
     public String getName() {
         return name;

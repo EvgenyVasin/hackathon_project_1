@@ -56,6 +56,9 @@ public class SmisService {
     @Autowired
     FileAssetService assetService;
 
+    @Autowired
+    AreaStateRepository areaStateRepository;
+
 
 
 
@@ -79,8 +82,10 @@ public class SmisService {
                               //комплекс
                               String name,
                               Long parent_smis_id,
+
                               String validity,
-                              String description) throws IOException, ParseException {
+                              String description,
+                              String areaState) throws IOException, ParseException {
 
 
 //        File folder = new File("smis_files");
@@ -88,7 +93,6 @@ public class SmisService {
 //        if (!folder.exists()) {
 //            folder.mkdir();
 //        }
-
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
         if(parent_smis_id != null)
@@ -280,5 +284,7 @@ public class SmisService {
     }
 
 
-
+    public List<AreaStateEntity> getAllAreaStateSort() {
+        return (List<AreaStateEntity>) areaStateRepository.findAll();
+    }
 }

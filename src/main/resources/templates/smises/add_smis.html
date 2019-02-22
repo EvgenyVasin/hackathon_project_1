@@ -117,6 +117,17 @@
                                     </div>
                                     <!---->
 
+                                    <!--выпадающий список для выбора региональной принадлежности-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="area_state_id" >
+                                            <option th:text="#{complex.areaState}" disabled selected hidden value=""></option>
+                                            <option th:each="areaState : ${areaStateList}" th:value="${areaState.id}" th:text="${areaState.name}"></option>
+                                        </select>
+                                    </div>
+                                    <!---->
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
@@ -423,7 +434,7 @@
                                                     text += "<option value='" +cities[i].name + "'></option>";
                                                 }
                                                 document.getElementById('cities_').style.visibility = 'visible';
-                                                document.myform.cities.value = 'Выберите город';
+                                                document.myform.cities.placeholder = 'Выберите город';
                                                 document.getElementById('sityList').innerHTML = text; // Устанавливаем options в select
                                             }
                                         }

@@ -54,6 +54,7 @@ public class SmisController {
      * Метод добавления нового <a>Smis</a> только для авторизованных пользователей с ролями <b>Admin</b> или <b>User</b>
      * @return возвращает перенаправление на таблицу со всеми объектами <a>Smis</a>
      */
+
     //добавление ПК ИВ СМИС
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "/addSmis", method = RequestMethod.POST)
@@ -80,6 +81,7 @@ public class SmisController {
             String region_name,
             String validity,
             String description,
+            String areaState,
             Model model) {
 
 
@@ -105,7 +107,8 @@ public class SmisController {
                         name,
                         parent_smis_id,
                         validity,
-                        description);
+                        description,
+                        areaState);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ParseException e) {
@@ -162,6 +165,7 @@ public class SmisController {
         model.addAttribute("countryesList",smisService.getAllCountryesSort());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         model.addAttribute("cantryList", smisService.getAllCountryesSort());
+        model.addAttribute("areaStateList", smisService.getAllAreaStateSort());
         return "smises/add_smis";
     }
 
