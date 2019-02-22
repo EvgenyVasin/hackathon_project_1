@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .invisible{
+        .invisible {
             display: none;
         }
     </style>
@@ -25,100 +25,150 @@
                 xmlhttp = false;
             }
         }
-        if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+        if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
             xmlhttp = new XMLHttpRequest();
         }
         return xmlhttp;
     }
-    function changeCountry(id) {
 
-        xmlhttp.open('POST', '/districts', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("cantryId=" + encodeURIComponent(id)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
-            if (xmlhttp.readyState == 4) { // Ответ пришёл
-                if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
-                    var districts = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
-                    var text = "<option value=''>Выберите округ</option>"; // Начинаем создавать элементы в select
-                    for (var i in districts) {
-                        /* Перебираем все элемены и создаём набор options */
-                        text += "<option value='" + districts[i].id + "'>" + districts[i].name + "</option>";
+    function changeCountry(id) {
+        if (id != '') {
+            xmlhttp.open('POST', '/districts', true); // Открываем асинхронное соединение
+            xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+            xmlhttp.send("cantryId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+            xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                if (xmlhttp.readyState == 4) { // Ответ пришёл
+                    if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                        var districts = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                        var text = "<option value=''>Выберите округ</option>"; // Начинаем создавать элементы в select
+                        for (var i in districts) {
+                            /* Перебираем все элемены и создаём набор options */
+                            text += "<option value='" + districts[i].id + "'>" + districts[i].name + "</option>";
+                        }
+                        document.getElementById('districts_').style.visibility = 'visible';
+                        document.myform.districts.innerHTML = text; // Устанавливаем options в select
                     }
-                    document.myform.districts.style.visibility = 'visible';
-                    document.myform.districts.innerHTML = text; // Устанавливаем options в select
                 }
-            }
-        };
+            };
+        } else {
+            document.getElementById('districts_').style.visibility = 'hidden';
+            document.getElementById('regions_').style.visibility = 'hidden';
+            document.getElementById('cities_').style.visibility = 'hidden';
+            document.getElementById('street_').style.visibility = 'hidden';
+            document.getElementById('number_').style.visibility = 'hidden';
+        }
     }
 
     function changeDistrict(id) {
-
+        if (id != '') {
         xmlhttp.open('POST', '/regions', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("districtId=" + encodeURIComponent(id)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
             if (xmlhttp.readyState == 4) { // Ответ пришёл
-                if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
                     var regions = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
                     var text = "<option value=''>Выберите регион</option>"; // Начинаем создавать элементы в select
                     for (var i in regions) {
                         /* Перебираем все элемены и создаём набор options */
                         text += "<option value='" + regions[i].id + "'>" + regions[i].name + "</option>";
                     }
-                    document.myform.regions.style.visibility = 'visible';
+                    document.getElementById('regions_').style.visibility = 'visible';
                     document.myform.regions.innerHTML = text; // Устанавливаем options в select
                 }
             }
         };
+        } else {
+            document.getElementById('regions_').style.visibility = 'hidden';
+            document.getElementById('cities_').style.visibility = 'hidden';
+            document.getElementById('street_').style.visibility = 'hidden';
+            document.getElementById('number_').style.visibility = 'hidden';
+        }
     }
 
     function changeRegion(id) {
-
+        if (id != '') {
         xmlhttp.open('POST', '/cities', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("regionId=" + encodeURIComponent(id)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
             if (xmlhttp.readyState == 4) { // Ответ пришёл
-                if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
                     var cities = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
                     var text = "<option value=''>Выберите город</option>"; // Начинаем создавать элементы в select
                     for (var i in cities) {
                         /* Перебираем все элемены и создаём набор options */
                         text += "<option value='" + cities[i].id + "'>" + cities[i].name + "</option>";
                     }
-                    document.myform.cities.style.visibility = 'visible';
-                    document.myform.cities.innerHTML = text; // Устанавливаем options в select
+                    document.getElementById('cities_').style.visibility = 'visible';
+                    document.getElementById('sityList').innerHTML = text; // Устанавливаем options в select
                 }
             }
         };
+        } else {
+
+            document.getElementById('cities_').style.visibility = 'hidden';
+            document.getElementById('street_').style.visibility = 'hidden';
+            document.getElementById('number_').style.visibility = 'hidden';
+        }
+    }
+
+    function changeCity(id) {
+        if (id != '') {
+            document.getElementById('street_').style.visibility = 'visible';
+            document.getElementById('number_').style.visibility  = 'visible';
+        } else {
+
+            document.getElementById('street_').style.visibility = 'hidden';
+            document.getElementById('number_').style.visibility = 'hidden';
+        }
     }
 </script>
 <form name="myform" action="#" method="post">
     <div>
+        <label>Выберите страну</label>
         <select name="countries" onchange="changeCountry(this.value)">
             <option value="">Выберите страну</option>
             <option th:each="cantry : ${cantryList}" th:value="${cantry.id}" th:text="${cantry.name}"></option>
 
         </select>
     </div>
-    <br />
-    <div >
-        <select name="districts" onchange="changeDistrict(this.value)" style="visibility: hidden">
+    <br/>
+    <div id="districts_"  style="visibility: hidden">
+        <label>Выберите округ</label>
+        <select name="districts" onchange="changeDistrict(this.value)">
             <option value="">Выберите округ</option>
         </select>
     </div>
-    <br />
-    <div >
-        <select name="regions" onchange="changeRegions(this.value)" style="visibility: hidden">
+    <br/>
+    <div id="regions_" style="visibility: hidden">
+        <label>Выберите регион</label>
+        <select name="regions" onchange="changeRegion(this.value)" >
             <option value="">Выберите регион</option>
         </select>
     </div>
-    <br />
-    <!--<div>-->
-        <!--<select name="cities">-->
-            <!--<option value="">Выберите город</option>-->
-        <!--</select>-->
-    <!--</div>-->
+    <br/>
+    <div id="cities_" style="visibility: hidden">
+        <label>Выберите город</label>
+    <input type=text list = citylist onchange="changeCity(this.value)" name="cities" >
+        <datalist name="citylist" id=cityList>
+
+
+        </datalist>
+    </input>
+    </div>
+    <br/>
+    <div  id="street_" style="visibility: hidden">
+        <label>Добавить улицу</label>
+        <input type=text name="street" >
+        </input>
+    </div>
+    <br/>
+    <div id="number_"  style="visibility: hidden">
+        <label>Добавить номер дома</label>
+        <input type=text name="number" >
+        </input>
+    </div>
 </form>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import ru.basisintellect.support_smis.model.entities.CityEntity;
 import ru.basisintellect.support_smis.model.entities.DistrictEntity;
 import ru.basisintellect.support_smis.model.entities.RegionEntity;
 import ru.basisintellect.support_smis.services.SmisService;
@@ -27,6 +28,12 @@ public class SmisRestController {
     List<RegionEntity> getRegions(Long districtId){
 
         return smisService.getRegionsByDistrictId(districtId);
+    }
+
+    @RequestMapping(value = "/cities", method = RequestMethod.POST)
+    List<CityEntity> getCities(Long regionId){
+
+        return smisService.getCytiesByRegionId(regionId);
     }
 
     @RequestMapping(value = "/districts", method = RequestMethod.GET)

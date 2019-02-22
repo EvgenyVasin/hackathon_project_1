@@ -15,5 +15,6 @@ import java.util.Optional;
 @Qualifier(value = "cityRepository")
 public interface CityRepository extends CrudRepository<CityEntity, Long> {
     List<CityEntity> findAll(Sort sort);
+    List<CityEntity> findByRegion(RegionEntity regionEntity);
     Optional<CityEntity> findByName(String name);
 }

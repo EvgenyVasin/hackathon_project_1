@@ -217,6 +217,10 @@ public class SmisService {
         return regionsRepo.findByDistrict(districtRepo.findById(districtId).get());
     }
 
+    public List<CityEntity> getCytiesByRegionId(Long regionId) {
+        return cityRepo.findByRegion(regionsRepo.findById(regionId).get());
+    }
+
     public List<SmisEntity> getAllSmises() {
         return (List<SmisEntity>) smisesRepo.findAll();
     }
@@ -259,6 +263,7 @@ public class SmisService {
     public CountryEntity getCountryById(Long cantryId) {
        return countryRepo.findById(cantryId).get();
     }
+
 
 
 }

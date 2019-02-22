@@ -24,7 +24,7 @@ public class EmailService {
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-        mailMessage.setFrom("safin.v@basis-ic.ru");
+        mailMessage.setFrom("robot@basis-ic.ru");
 
 
         javaMailSender.send(mailMessage);
