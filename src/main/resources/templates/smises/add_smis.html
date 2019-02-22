@@ -121,9 +121,9 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
-                                        <select class="form-control" name="areaState_id" >
+                                        <select class="form-control" name="areaState_id" required="True">
                                             <option th:text="#{complex.areaState}" disabled selected hidden value=""></option>
-                                            <option th:each="areaState : ${areaStateList}" th:value="${areaState.id}" th:text="${areaState.name}" required="True"></option>
+                                            <option th:each="areaState : ${areaStateList}" th:value="${areaState.id}" th:text="${areaState.name}" ></option>
                                         </select>
                                     </div>
                                     <!---->
