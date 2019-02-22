@@ -33,11 +33,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	runtimeOnly('org.postgresql:postgresql')
-//	runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	// https://mvnrepository.com/artifact/net.minidev/json-smart
+	//https://mvnrepository.com/artifact/net.minidev/json-smart
 	implementation group: 'net.minidev', name: 'json-smart', version: '1.0.9'
 	implementation 'org.webjars:webjars-locator-core'
 	implementation 'org.webjars:sockjs-client:1.0.2'

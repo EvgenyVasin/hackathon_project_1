@@ -151,6 +151,7 @@ public class SmisController {
         model.addAttribute("districtsList", smisService.getAllDistrictsSort());
         model.addAttribute("countryesList",smisService.getAllCountryesSort());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
+        model.addAttribute("cantryList", smisService.getAllCountryesSort());
         return "smises/add_smis";
     }
 

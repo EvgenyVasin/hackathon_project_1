@@ -83,12 +83,13 @@
                         <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
                     </div>
                 </div>
-                <form role="form" th:action="@{/addSmis}" enctype="multipart/form-data" method="post">
+                <form name="myform" role="form" th:action="@{/addSmis}" enctype="multipart/form-data" method="post">
                     <div class="panel-body">
 
                         <table>
                             <tr class="td-style-fix">
                                 <td class="td-style-fix">
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
@@ -98,46 +99,22 @@
 
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-home"></span></span>
-                                        <select list="regions" name="region_name"
-                                                th:placeholder="#{complex.region}" class="form-control">
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                        <input type="text" class="form-control" name="validity" title="установить дату напоминания об окончании срока соглашения"
+                                               onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:placeholder="#{complex.agreementDate}"/>
+                                    </div>
 
-                                            <option th:each="region : ${regionList}" th:value="${region.name}"
-                                                    th:text="${region.name}">
-                                            </option>
+                                    <!--выпадающий список для выбора родителя-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="parent_smis_id" >
+                                            <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
                                         </select>
-
-
-
-
-
                                     </div>
-
-                                    <!--добавление контактов-->
-                                    <label>Добавить контакты</label>
-                                    <div class="input-group input-group-sm clone input-group-fix">
-                                        <span class="input-group-addon glyphicon glyphicon-user "></span>
-                                        <table>
-                                            <tr>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3"
-                                                           type="text" name="phones" placeholder="телефон или mail">
-                                                </td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3"
-                                                           type="text" name="contactNames" placeholder="Ф.И.О."></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3"
-                                                           type="text" name="positions" placeholder="должность"></td>
-                                                <td><span class="input-group-btn"><button type="button"
-                                                                                          class="btn btn-success btn-add">✚</button></span>
-                                                </td>
-                                            </tr>
-                                        </table>
-
-
-                                    </div>
-
-
-                                </td>
-                                <td class="td-style-fix">
+                                    <!---->
 
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
@@ -145,6 +122,57 @@
                                         <textarea type="text" class="form-control form-control-fix comment-trick" name="description"
                                                   th:placeholder="#{complex.description}" autofocus="True"></textarea>
                                     </div>
+
+
+                                </td>
+                                <td class="td-style-fix">
+
+                                        <label>Выберите страну</label>
+                                        <select name="countries" onchange="changeCountry(this.value)">
+                                            <option value="">Выберите страну</option>
+                                            <option th:each="cantry : ${cantryList}" th:value="${cantry.id}" th:text="${cantry.name}"></option>
+
+                                        </select>
+
+                                        <br/>
+                                        <div id="districts_"  style="visibility: hidden">
+                                            <label>Выберите округ</label>
+                                            <select name="districts" onchange="changeDistrict(this.value)">
+                                                <option value="">Выберите округ</option>
+                                            </select>
+                                        </div>
+                                        <br/>
+                                        <div id="regions_" style="visibility: hidden">
+                                            <label>Выберите регион</label>
+                                            <select name="regions" onchange="changeRegion(this.value)" >
+                                                <option value="">Выберите регион</option>
+                                            </select>
+                                        </div>
+                                        <br/>
+                                        <div id="cities_" style="visibility: hidden">
+                                            <label>Выберите город</label>
+                                            <input type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+                                            <datalist name="citylist" id=cityList>
+
+
+                                            </datalist>
+                                            </input>
+                                        </div>
+                                        <br/>
+                                        <div  id="street_" style="visibility: hidden">
+                                            <label>Добавить улицу</label>
+                                            <input type=text name="street" >
+                                            </input>
+                                        </div>
+                                        <br/>
+                                        <div id="number_"  style="visibility: hidden">
+                                            <label>Добавить номер дома</label>
+                                            <input type=text name="number" >
+                                            </input>
+                                        </div>
+                                </td>
+                                <td class="td-style-fix">
+
 
                                     <!--добавление файлов-->
                                     <label>Добавить файлы</label>
@@ -170,26 +198,30 @@
                                         </table>
                                     </div>
 
-                                </td>
-                                <td class="td-style-fix">
-                                    <!--выпадающий список для выбора родителя-->
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-list-alt"></span></span>
-                                        <select class="form-control" name="parent_smis_id" >
-                                            <option th:text="#{complex.parentSmis}" disabled selected hidden value=""></option>
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
-                                        </select>
-                                    </div>
-                                    <!---->
+                                    <!--добавление контактов-->
+                                    <label>Добавить контакты</label>
+                                    <div class="input-group input-group-sm clone input-group-fix">
+                                        <span class="input-group-addon glyphicon glyphicon-user "></span>
+                                        <table>
+                                            <tr>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="phones" placeholder="телефон или mail">
+                                                </td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="contactNames" placeholder="Ф.И.О."></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="positions" placeholder="должность"></td>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
+                                            </tr>
+                                        </table>
 
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity" title="установить дату напоминания об окончании срока соглашения"
-                                               onfocus="(this.type='date')" onblur="this.type='text'"
-                                               th:placeholder="#{complex.agreementDate}"/>
+
                                     </div>
+
+
+
 
                                     <label>Добавить оборудование</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
@@ -256,7 +288,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <script>
+                        <script type="text/javascript">
                             $(document).on('click', '.btn-add', function (event) {
                                 event.preventDefault();
 
@@ -279,6 +311,133 @@
                                 event.preventDefault();
                                 $(this).closest('.clone').remove();
                             });
+
+                            ///////////////////////////////////
+
+                            var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+
+                            function getXmlHttp() {
+                                var xmlhttp;
+                                try {
+                                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                                } catch (e) {
+                                    try {
+                                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                    } catch (E) {
+                                        xmlhttp = false;
+                                    }
+                                }
+                                if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+                                    xmlhttp = new XMLHttpRequest();
+                                }
+                                return xmlhttp;
+                            }
+
+                            function changeCountry(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/districts', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("cantryId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var districts = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value=''>Выберите округ</option>"; // Начинаем создавать элементы в select
+                                                for (var i in districts) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" + districts[i].id + "'>" + districts[i].name + "</option>";
+                                                }
+                                                document.getElementById('districts_').style.visibility = 'visible';
+                                                document.myform.districts.innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+                                    document.getElementById('districts_').style.visibility = 'hidden';
+                                    document.getElementById('regions_').style.visibility = 'hidden';
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeDistrict(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/regions', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("districtId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var regions = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value=''>Выберите регион</option>"; // Начинаем создавать элементы в select
+                                                for (var i in regions) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" + regions[i].id + "'>" + regions[i].name + "</option>";
+                                                }
+                                                document.getElementById('regions_').style.visibility = 'visible';
+                                                document.myform.regions.innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+                                    document.getElementById('regions_').style.visibility = 'hidden';
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeRegion(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/cities', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("regionId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var cities = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value=''>Выберите город</option>"; // Начинаем создавать элементы в select
+                                                for (var i in cities) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" + cities[i].id + "'>" + cities[i].name + "</option>";
+                                                }
+                                                document.getElementById('cities_').style.visibility = 'visible';
+                                                document.getElementById('sityList').innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeCity(id) {
+                                if (id != '') {
+                                    document.getElementById('street_').style.visibility = 'visible';
+                                    document.getElementById('number_').style.visibility  = 'visible';
+                                } else {
+
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            //отключение сабмита по нажатию энтер в поле формы
+                            $(document).ready(function() {
+                                $(myform).keydown(function(event){
+                                    if(event.keyCode == 13) {
+                                        event.preventDefault();
+                                        return false;
+                                    }
+                                });
+                            });
+                            //
+
+
                         </script>
 
                         <div class="panel-footer">

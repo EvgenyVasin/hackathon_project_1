@@ -36,11 +36,10 @@ public class Test {
     }
 
     @RequestMapping(value = "/mail")
-    public String mail(Model model) {
+    public void mail(Model model) {
 //        emailService.sendMail("evgvasin1990@gmail.com", "test", "test");
-        emailService.sendMail("vasin.v@basis-intellect.ru", "test", "test");
+        emailService.sendMail("vasin.v@basis-ic.ru", "test", "test");
         System.out.println("sended");
-        return null;
     }
 
 }

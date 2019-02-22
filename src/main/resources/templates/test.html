@@ -37,9 +37,12 @@
             xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
             xmlhttp.send("cantryId=" + encodeURIComponent(id)); // Отправляем POST-запрос
             xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
-                if (xmlhttp.readyState == 4) { // Ответ пришёл
-                    if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                if (xmlhttp.readyState === 4) { // Ответ пришёл
+                    if (xmlhttp.status === 200) { // Сервер вернул код 200 (что хорошо)
                         var districts = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+
+
+
                         var text = "<option value=''>Выберите округ</option>"; // Начинаем создавать элементы в select
                         for (var i in districts) {
                             /* Перебираем все элемены и создаём набор options */
@@ -132,7 +135,7 @@
             <option th:each="cantry : ${cantryList}" th:value="${cantry.id}" th:text="${cantry.name}"></option>
 
         </select>
-    </div>
+
     <br/>
     <div id="districts_"  style="visibility: hidden">
         <label>Выберите округ</label>
