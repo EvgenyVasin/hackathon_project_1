@@ -69,6 +69,11 @@ public class SmisController {
             String[] positions,
             //оборудование
             String[] equipments,
+            //место расположения
+            Long regions,
+            String sities,
+            String street,
+            String number,
             //комплекс
             String name,
             Long parent_smis_id,

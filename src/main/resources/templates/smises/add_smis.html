@@ -151,7 +151,7 @@
                                         <br/>
                                         <div id="cities_" style="visibility: hidden">
                                             <label>Выберите город</label>
-                                            <input type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+                                            <input type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" value="Выберите город" >
                                             <datalist name="citylist" id=cityList>
 
 
@@ -402,6 +402,7 @@
                                                     /* Перебираем все элемены и создаём набор options */
                                                     text += "<option value='" + cities[i].id + "'>" + cities[i].name + "</option>";
                                                 }
+                                                document.myform.cities.value = "Выберите город";
                                                 document.getElementById('cities_').style.visibility = 'visible';
                                                 document.getElementById('sityList').innerHTML = text; // Устанавливаем options в select
                                             }
@@ -416,7 +417,7 @@
                             }
 
                             function changeCity(id) {
-                                if (id != '') {
+                                if (id != 'Выберите город' && id != '') {
                                     document.getElementById('street_').style.visibility = 'visible';
                                     document.getElementById('number_').style.visibility  = 'visible';
                                 } else {
