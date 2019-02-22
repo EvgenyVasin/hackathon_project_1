@@ -75,7 +75,7 @@ public class SmisService {
 
                               //место расположения
                               Long region_id,
-                              String city_name,
+                              String cities,
                               String street,
                               String number,
 
@@ -85,7 +85,7 @@ public class SmisService {
 
                               String validity,
                               String description,
-                              String areaState) throws IOException, ParseException {
+                              Long areaState_id) throws IOException, ParseException {
 
 
 //        File folder = new File("smis_files");
@@ -98,7 +98,9 @@ public class SmisService {
         if(parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
-        smisEntity.setCity(getCityByNameOrCreate(city_name, region_id));
+        smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
+        smisEntity.setAddress(street + " " + number);
+        smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
 
             if(!validity.isEmpty())
                 smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));

@@ -64,7 +64,7 @@ public class SmisEntity extends CustomEntity {
     public SmisEntity() {
     }
 
-    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, Date validity, RegionEntity region, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, CityEntity city) {
+    public SmisEntity(SmisEntity parentSmis, String name, Date dateRegistration, Date validity, String description, Set<ContactEntity> contacts, Set<SmisFileEntity> files, CityEntity city) {
         this.parentSmis = parentSmis;
         this.name = name;
         this.dateRegistration = dateRegistration;
@@ -107,8 +107,8 @@ public class SmisEntity extends CustomEntity {
         this.name = name;
     }
 
-    public void setAreaStateEntity(AreaStateEntity areaStateEntity) {
-        this.areaState = areaStateEntity;
+    public void setAreaState(AreaStateEntity areaState) {
+        this.areaState = areaState;
     }
 
     /**
@@ -169,7 +169,7 @@ public class SmisEntity extends CustomEntity {
         this.equipments = equipments;
     }
 
-    public AreaStateEntity getAreaStateEntity() {
+    public AreaStateEntity getAreaState() {
         return areaState;
     }
 
@@ -186,9 +186,9 @@ public class SmisEntity extends CustomEntity {
     //текстовое представление объекта для отладки
     @Override
     public String toString() {
-        return "SMIS [SmisID = " + getId() + ", region = " + name
+        return "SMIS [SmisID = " + getId() + ", name = " + name
                 + ", date_registration = " + dateRegistration
-                + ", region = " + city
+                + ", city = " + city
                 + ", description = " + description;
     }
 }

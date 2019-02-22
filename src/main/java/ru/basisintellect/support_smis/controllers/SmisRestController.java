@@ -1,14 +1,18 @@
 package ru.basisintellect.support_smis.controllers;
 
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.basisintellect.support_smis.model.entities.CityEntity;
 import ru.basisintellect.support_smis.model.entities.DistrictEntity;
 import ru.basisintellect.support_smis.model.entities.RegionEntity;
+import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -42,4 +46,7 @@ public class SmisRestController {
         List<DistrictEntity> districtsList = smisService.getAllDistrictsSort();
         return districtsList;
     }
+
+
+
 }

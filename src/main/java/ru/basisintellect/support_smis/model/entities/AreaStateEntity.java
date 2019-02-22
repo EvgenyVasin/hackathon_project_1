@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "areaState")
@@ -17,7 +18,7 @@ public class AreaStateEntity extends CustomEntity {
     }
 
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false, length = 128)
     private String name;
 
     public String getName() {

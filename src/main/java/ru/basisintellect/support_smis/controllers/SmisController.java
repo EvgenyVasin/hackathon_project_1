@@ -78,10 +78,9 @@ public class SmisController {
             //комплекс
             String name,
             Long parent_smis_id,
-            String region_name,
             String validity,
             String description,
-            String areaState,
+            Long areaState_id,
             Model model) {
 
 
@@ -108,13 +107,12 @@ public class SmisController {
                         parent_smis_id,
                         validity,
                         description,
-                        areaState);
+                        areaState_id);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            viewListSmises(model);
         return "redirect:/smises_list";
     }
 

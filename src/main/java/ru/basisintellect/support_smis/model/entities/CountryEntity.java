@@ -10,8 +10,8 @@ public class CountryEntity extends CustomEntity {
 //    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 //    Set<DistrictEntity> districts = new HashSet<>();
 
-    @Column(name = "name", length = 256, unique = true)
-    String name;
+    @Column(name = "name", length = 128, unique = true)
+    private String name;
 
     public CountryEntity(){
     }
