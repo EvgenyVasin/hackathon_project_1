@@ -95,7 +95,7 @@
                 <tr>
                     <!--заголовки таблицы-->
                     <th class="description-fix" th:text="#{complex.name}"></th>
-                    <th class="description-fix" th:text="#{complex.region}"></th>
+                    <th class="description-fix" th:text="#{complex.address}"></th>
                     <!--<th th:text="#{complex.dateReg}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.documents}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.agreementNumber}"></th>-->
@@ -106,13 +106,22 @@
                     <!--<th th:text="#{complex.url}"></th>-->  <!--перенести в детализацию-->
                     <!--<th th:text="#{complex.enabled}"></th>-->
                     <th class="description-fix" th:text="#{complex.description}"></th>
+                    <th class="description-fix" th:text="#{complex.stateArea}"></th>
                 </tr>
                 </thead>
                 <tbody class="table table-striped">
                 <tr th:each="smis : ${smisesList}">
                     <!--напонение таблицы-->
                     <td class="description-fix" th:text="${smis.name}"></td>
-                    <td class="description-fix" th:text="${smis.region.name}"></td>
+
+                    <td class="description-fix" >
+                    <p th:text="${smis.city.region.district.country.name}"></p>
+                    <p th:text="${smis.city.region.district.name}"></p>
+                    <p th:text="${smis.city.region.name}"></p>
+                    <p th:text="${smis.city.name}"></p>
+                    <p th:text="${smis.address}"></p>
+                    </td>
+
                     <!--<td th:text="${smis.dateRegistration}"></td>-->  <!--перенести в детализацию-->
                     <!--<td th:text="${smis.files}"></td>-->  <!--перенести в детализацию-->
                     <!--<td th:text="${smis.agreement}"></td>-->
@@ -151,6 +160,7 @@
                     <!--<td th:text="${smis.url}"></td>-->   <!--перенести в детализацию-->
                     <!--<td th:text="${smis.state.stateName}"></td>-->
                     <td th:text="${smis.description}" class="description-fix"></td>
+                    <td class="description-fix" th:text="${smis.areaState.name}"></td>
                 </tr>
                 </tbody>
             </table>

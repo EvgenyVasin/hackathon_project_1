@@ -150,6 +150,10 @@ public class SmisController {
     public String viewSmises(Model model) {
         List<SmisEntity> smisesList = smisService.getAllSmises();
         model.addAttribute("smisesList", smisesList);
+        /*model.addAttribute("regionList", smisService.getAllRegionsSort());
+        model.addAttribute("districtsList", smisService.getAllDistrictsSort());
+        model.addAttribute("countryesList",smisService.getAllCountryesSort());
+        model.addAttribute("areaStateList", smisService.getAllAreaStateSort());*/
         return "smises/smises_table";
     }
 

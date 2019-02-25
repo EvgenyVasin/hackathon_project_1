@@ -143,7 +143,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
-                                        <select class="form-control form-control-fix"  name="countries" onchange="changeCountry(this.value)">
+                                        <select class="form-control form-control-fix"  name="countries" onchange="changeCountry(this.value)" required="True">
                                             <option class="form-control form-control-fix" value="">Выберите страну</option>
                                             <option class="form-control form-control-fix" th:each="cantry : ${cantryList}" th:value="${cantry.id}" th:text="${cantry.name}"></option>
 
@@ -156,7 +156,7 @@
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                            <select  class="form-control" name="districts" onchange="changeDistrict(this.value)">
+                                            <select  class="form-control" name="districts" onchange="changeDistrict(this.value)" required="True">
 
                                                 <option class="form-control form-control-fix" value="">Выберите округ</option>
                                             </select>
@@ -168,7 +168,7 @@
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                            <select class="form-control" name="regions" onchange="changeRegion(this.value)" >
+                                            <select class="form-control" name="regions" onchange="changeRegion(this.value)" required="True" >
                                                 <option class="form-control form-control-fix" value="">Выберите регион</option>
                                             </select>
                                         </div>
@@ -177,7 +177,7 @@
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                            <input placeholder="Укажите город" class="form-control form-control-fix" type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+                                            <input required="True" placeholder="Укажите город" class="form-control form-control-fix" type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
                                             <datalist name="citylist" id=cityList>
 
 
@@ -186,8 +186,7 @@
                                         </div>
 
 
-                                    <div  id="street_" style="visibility: hidden" class="input-group input-group-fix">
-
+                                        <div  id="street_" style="visibility: hidden" class="input-group input-group-fix">
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
                                             <input placeholder="Укажите улицу" class="form-control form-control-fix" type=text name="street" >
