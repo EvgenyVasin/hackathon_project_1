@@ -67,7 +67,11 @@
             min-height: 80px !important;
         }
 
-
+        .title{
+            min-width: 200px !important;
+            max-width: 200px !important;
+            word-break: break-word !important;
+        }
 
 
     </style>
@@ -80,7 +84,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading panel-fix">
                     <div class="text-center">
-                        <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
+                        <strong class="panel-title" th:text="#{complex.editSmis}"></strong>
                     </div>
                 </div>
                 <form name="myform" role="form" th:action="@{/}" enctype="multipart/form-data" method="post">
@@ -205,6 +209,26 @@
 
                                     <!--добавление файлов-->
                                     <label>Добавить файлы</label>
+                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}">
+
+                                        <span class="input-group-addon glyphicon glyphicon-save-file"></span>
+
+                                        <table class="form-control">
+
+
+                                            <tr>
+                                                <td  th:title="${file.description}">
+                                                    <p  class="contacts-cell description-fix file-comment-fix"><a th:href="${'/download/' +  file.fileName}" th:text="${file.customName}" type="application/file"></a>
+                                                    </p>
+                                                </td>
+                                                <!--<textarea class="form-control form-control-fix" th:text="${file.description}"></textarea>-->
+                                            </tr>
+                                        </table>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                    </div>
+
+                                    <!--добавление файлов-->
+                                    <label>Добавить файлы</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
 
                                         <span class="input-group-addon glyphicon glyphicon-save-file"></span>
@@ -229,6 +253,25 @@
 
                                     <!--добавление контактов-->
                                     <label>Добавить контакты</label>
+                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
+
+                                        <span class="input-group-addon glyphicon glyphicon-user"></span>
+
+                                        <table class="form-control">
+
+
+                                            <tr>
+                                                <td>
+                                                    <p  class="contacts-cell description-fix file-comment-fix" th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}">
+                                                    </p>
+                                                </td>
+                                                <!--<textarea class="form-control form-control-fix" th:text="${file.description}"></textarea>-->
+                                            </tr>
+                                        </table>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                    </div>
+
+                                    <label>Добавить контакты</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-user "></span>
                                         <table>
@@ -246,11 +289,22 @@
                                             </tr>
                                         </table>
 
-
                                     </div>
 
+                                    <label>Оборудование</label>
+                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.equipments)}" th:each="equipment : ${smis.equipments}">
 
+                                        <span class="input-group-addon glyphicon glyphicon-user"></span>
 
+                                        <table class="form-control">
+                                            <tr >
+                                                <td >
+                                                    <p  class="contacts-cell description-fix file-comment-fix" th:text="${equipment.equipment.name}"></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                    </div>
 
                                     <label>Добавить оборудование</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
