@@ -121,7 +121,13 @@ public class SmisController {
     //@PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "smis_details/{smisId}", method = RequestMethod.GET)
     public String getSmis(@PathVariable("smisId") Long smisId, Model model) {
-        model.addAttribute("smis", smisService.findSmisById(smisId));
+        SmisEntity smisEntity = smisService.findSmisById(smisId);
+        model.addAttribute("smis", smisEntity);
+        model.addAttribute("cantryList", smisService.getAllCountryesSort());
+        model.addAttribute("districtsList", smisService.getDistricsByCountryId(smisEntity.getCity().getRegion().getDistrict().getCountry().getId()));
+        model.addAttribute("regionList", smisService.getRegionsByDistrictId(smisEntity.getCity().getRegion().getDistrict().getId()));
+        model.addAttribute("sitiesList", smisService.getCytiesByRegionId(smisEntity.getCity().getRegion().getId()));
+
         return "smises/smis_details";
     }
 
@@ -162,9 +168,8 @@ public class SmisController {
     @RequestMapping(value = "/add_smis")
     public String viewSmisesAdd(Model model) {
         model.addAttribute("smisesList", smisService.getAllSmises());
-        model.addAttribute("regionList", smisService.getAllRegionsSort());
-        model.addAttribute("districtsList", smisService.getAllDistrictsSort());
-        model.addAttribute("countryesList",smisService.getAllCountryesSort());
+        //model.addAttribute("regionList", smisService.getAllRegionsSort());
+        //model.addAttribute("districtsList", smisService.getAllDistrictsSort());
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         model.addAttribute("cantryList", smisService.getAllCountryesSort());
         model.addAttribute("areaStateList", smisService.getAllAreaStateSort());

@@ -5,70 +5,74 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <style>
 
-        .pannel-fix {
-            position: absolute;
-            margin-left: -250px !important;
-            margin-right: 50px !important;
+        .input-group-fix {
+            min-width: 500px !important;
+            margin-right: 15px !important;
+            margin-left: 15px !important;
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
         }
 
-        .description-fix {
-            max-width: 500px !important;
-            min-width: 300px !important;
-            word-wrap: break-word !important;
+        .form-control-fix {
+            min-width: 430px !important;
+
         }
+
+        .panel-primary {
+            position: absolute !important;
+        }
+
+        .row-fix {
+            margin-left: -250px !important;
+        }
+
+        .btn-add {
+            background-color: #3700b3;
+        }
+
+        .btn-add:hover {
+            background-color: #3949AB;
+        }
+
+        .btn-success {
+            background-color: #3700b3;
+            border-color: #3700b3;
+        }
+
+        .btn-success:hover {
+            background-color: #3949AB;
+        }
+
+        .btn-success-fix {
+            margin-left: 25px !important;
+        }
+
+        .glyphicon {
+            top: 0px !important;
+        }
+
+        td {
+            vertical-align: top !important;
+        }
+
+        .form-control-fix {
+            min-height: 34px !important;
+        }
+
+        .empty-cell{
+            height: 0px !important;
+        }
+
+        .comment-trick{
+            min-height: 80px !important;
+        }
+
+
+
 
     </style>
-</head>
-<body>
 
-<div class="container">
-    <div class="row">
-        <div class="panel panel-primary pannel-fix">
-            <div class="pannel-heading">
-                <div class="text-center">
-                    <strong class="panel-title" th:text="${smis.name}"></strong>
-                </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <!--заголовки таблицы-->
-                    <th th:text="#{complex.name}"></th>
-                    <th th:text="#{complex.region}"></th>
-                    <th th:text="#{complex.dateReg}"></th>
-                    <th th:text="#{complex.agreementNumber}"></th>
-                    <th th:text="#{complex.agreementDate}"></th>
-                    <th th:text="#{complex.contacts}"></th>
-                    <!--<th th:text="#{complex.url}"></th>
-                    <th th:text="#{complex.enabled}"></th>-->
-                    <th th:text="#{complex.description}"></th>
-                </tr>
-                </thead>
-                <tbody class="table table-striped">
-                <tr>
-                    <!--напонение таблицы-->
-                    <td th:text="${smis.name}"></td>
-                    <td th:text="${smis.region.name}"></td>
-                    <td th:text="${smis.dateRegistration}"></td>
-                    <td th:text="${smis.agreement}"></td>
-                    <td th:text="${smis.validity}"></td>
-                    <td class="description-fix">
-                        <div th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}"
-                             class="description-fix">
-                            <p class="contacts-cell description-fix"
-                               th:text="${contact.name + ' - ' + contact.position + ' - ' + contact.fonNumber}"></p>
-                        </div>
-                    </td>
-                    <!--<th th:text="${smis.url}"></th>
-                    <th th:text="${smis.enabled}"></th>-->
-                    <td th:text="${smis.description}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</body>
+</head>
 <body>
 <div class="container">
     <div class="row ">
@@ -76,163 +80,249 @@
             <div class="panel panel-primary">
                 <div class="panel-heading panel-fix">
                     <div class="text-center">
-                        <strong class="panel-title" th:text="${smis.name}"></strong>
+                        <strong class="panel-title" th:text="#{complex.addSmis}"></strong>
                     </div>
                 </div>
-                <form role="form" th:action="@{/}" enctype="multipart/form-data" method="post"> <!--добавить action editSmis-->
+                <form name="myform" role="form" th:action="@{/}" enctype="multipart/form-data" method="post">
                     <div class="panel-body">
 
-                        <table >
+                        <table>
                             <tr class="td-style-fix">
                                 <td class="td-style-fix">
+
+                                    <label>Введите общую информацию</label>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
                                         <input type="text" class="form-control" name="name"
                                                th:value="${smis.name}" required="True" autofocus="True"/>
                                     </div>
-                                </td>
-                                <td class="td-style-fix">
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-paperclip" ></span></span>
-                                        <input type="text" class="form-control"   name="agreement" required="True"
-                                               th:value="${smis.agreement}"/>
-                                    </div>
-                                </td>
-                                <td class="td-style-fix">
-                                    <!--выпадающий список для выбора родителя-->
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-magnet"></span></span>
-                                        <input type="text" list="parents" th:if="${not #lists.isEmpty(smis.parentSmis)}" th:value="${smis.parentSmis.name}" class="form-control" name="parent_smis_id">
-                                        <datalist id="parents">
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option> <!--надо передать на эту форму smisesList-->
-                                        </datalist>
-                                    </div>
-                                    <!---->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="input-group input-group-fix">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-home"></span></span>
-                                        <input type=text list="regions" name="region_name"  th:value="${smis.region.name}" class="form-control" required="True">
-                                        <datalist id = "regions">
-                                            <option th:each="region : ${regionList}" th:value="${region.name}" th:text="${region.name}"></option>
-                                        </datalist>
-                                    </div>
-                                </td>
-                                <td>
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity" onfocus="(this.type='date')" onblur="this.type='text'"
-                                               th:value="${smis.agreement}" required="True"/>
+                                        <input type="text" class="form-control" name="validity" title="установить дату напоминания об окончании срока соглашения"
+                                               onfocus="(this.type='date')" onblur="this.type='text'"
+                                               th:value="${smis.validity}"/>
                                     </div>
-                                </td>
 
-                                <td>
+                                    <!--выпадающий список для выбора родителя-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="parent_smis_id" >
+                                            <option th:text="${smis.parentSmis.name}" disabled selected hidden value=""></option>
+                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                        </select>
+                                    </div>
+                                    <!---->
+
+                                    <!--выпадающий список для выбора региональной принадлежности-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="areaState_id" required="True">
+                                            <option th:text="${smis.areaState.name}" disabled selected hidden value=""></option>
+                                            <option th:each="areaState : ${areaStateList}" th:value="${areaState.id}" th:text="${areaState.name}" ></option>
+                                        </select>
+                                    </div>
+                                    <!---->
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
-                                        <textarea type="text" class="form-control form-control-fix" name="description"
+                                        <textarea type="text" class="form-control form-control-fix comment-trick" name="description"
                                                   th:text="${smis.description}" autofocus="True"></textarea>
                                     </div>
+
+
                                 </td>
-                            </tr>
-                            <tr>
+                                <td class="td-style-fix">
+
+                                    <label>Укажите местоположение комплекса</label>
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-comment"></span></span>
+                                        <select class="form-control form-control-fix" name="countries"
+
+                                                onstart="changeCountry(this.value)" onchange="changeCountry(this.value)" required="True">
+                                            <!--<option class="form-control form-control-fix" th:text="${smis.city.region.district.country.name}"></option>-->
+                                            <option selected class="form-control form-control-fix" th:value="${smis.city.region.district.country.id}" th:text="${smis.city.region.district.country.name}"></option>
+                                            <option class="form-control form-control-fix" th:each="cantry : ${cantryList}" th:if="${smis.city.region.district.country != cantry}" th:value="${cantry.id}" th:text="${cantry.name}" value=""></option>
+
+                                        </select>
+                                    </div>
 
 
-                                <td>
+
+                                    <div id="districts_"  style="visibility: hidden" class="input-group input-group-fix">
+
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-comment"></span></span>
+                                        <select  class="form-control" name="districts" th:if="${smis.city.region.district != null}" th:value="${smis.city.region.district.id}" th:text="${smis.city.region.district.name}" onloadstart="changeDistrict(this.value)" required="True">
+
+                                            <option class="form-control form-control-fix" th:value="${smis.city.region.district.id}" th:text="${smis.city.region.district.name}"></option>
+                                        </select>
+                                    </div>
+
+
+
+                                    <div id="regions_" style="visibility: hidden" class="input-group input-group-fix">
+
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-comment"></span></span>
+                                        <select class="form-control" name="regions" onchange="changeRegion(this.value)" required="True" >
+                                            <option class="form-control form-control-fix" th:text="${smis.city.region.name}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div id="cities_" style="visibility: hidden" class="input-group input-group-fix">
+
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-comment"></span></span>
+                                        <input required="True" th:text="${smis.city.name}" class="form-control form-control-fix" type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+                                        <datalist name="citylist" id=cityList>
+
+
+                                        </datalist>
+                                        </input>
+                                    </div>
+
+
+                                    <div  id="street_" style="visibility: hidden" class="input-group input-group-fix">
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-comment"></span></span>
+                                        <input th:text="${smis.address}" class="form-control form-control-fix" type=text name="street" >
+                                        </input>
+                                    </div>
+
+                                    <div id="number_"  style="visibility: hidden" class="input-group input-group-fix">
+
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-comment"></span></span>
+                                        <input placeholder="Укажите дом" class="form-control form-control-fix" type=text name="number" >
+                                        </input>
+                                    </div>
+                                </td>
+                                <td class="td-style-fix">
+
+
+                                    <!--добавление файлов-->
+                                    <label>Добавить файлы</label>
+                                    <div class="input-group input-group-sm clone input-group-fix">
+
+                                        <span class="input-group-addon glyphicon glyphicon-save-file"></span>
+
+                                        <table>
+                                            <tr>
+                                                <textarea type="text" class="form-control form-control-fix" name="fileDescriptions"
+                                                          th:placeholder="#{complex.description}" autofocus="True" title="указать сроки действия документов"></textarea>
+                                            </tr>
+                                            <tr>
+
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="fileNames"
+                                                           placeholder="Понятное имя файла"></td>
+                                                <td><input class="form-control" type="file" name="files" multiple></td>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
 
                                     <!--добавление контактов-->
+                                    <label>Добавить контакты</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
-                                        <span class="input-group-addon glyphicon glyphicon-user"></span>
-                                        <table th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
-                                            <tr>
-                                                <td><input class="form-control"
-                                                           aria-describedby="sizing-addon3"
-                                                           type="text"
-                                                           name="phones"
-                                                           th:value="${contact.fonNumber}"></td>
-                                                <td><input class="form-control"
-                                                           aria-describedby="sizing-addon3"
-                                                           type="text"
-                                                           name="contactNames"
-                                                           th:value="${contact.name}"></td>
-                                                <td><input class="form-control"
-                                                           aria-describedby="sizing-addon3"
-                                                           type="text" name="positions"
-                                                           th:value="${contact.position}"></td>
-                                            </tr>
-
-
-
-                                        </table>
-
-                                        <table>
-
-                                            <tr>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="phones" placeholder="телефон или mail"></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="contactNames" placeholder="Ф.И.О." ></td>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="positions" placeholder="должность"></td>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
-                                            </tr>
-
-                                        </table>
-                                    </div>
-                                </td>
-                                <td>
-                                    <!--отображение файлов-->
-                                    <div class="input-group input-group-sm clone input-group-fix">
-                                        <span class="input-group-addon glyphicon glyphicon-save-file" ></span>
-                                        <table>
-                                            <tr th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}">
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fileNames"
-                                                           th:value="${file.name}"></td>
-                                                <td><input class="form-control" type="text" name="files"  th:value="${file.link}"></td>
-                                            </tr>
-
-                                                <!--добавление файлов-->
-
-
-
-
-
-                                        </table>
+                                        <span class="input-group-addon glyphicon glyphicon-user "></span>
                                         <table>
                                             <tr>
-                                                <td><input class="form-control" aria-describedby="sizing-addon3" type="text" name="fileNames" placeholder = "Понятное имя файла"></td>
-                                                <td><input class="form-control" type="file" name="files"  multiple></td>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="phones" placeholder="телефон или mail">
+                                                </td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="contactNames" placeholder="Ф.И.О."></td>
+                                                <td><input class="form-control" aria-describedby="sizing-addon3"
+                                                           type="text" name="positions" placeholder="должность"></td>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
                                             </tr>
                                         </table>
+
 
                                     </div>
-                                </td>
-                                <td>
+
+
+
+
+                                    <label>Добавить оборудование</label>
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
                                         <table>
                                             <tr>
                                                 <td><input type=text list=equipmentslist name="equipments"
-                                                           th:placeholder="#{complex.equipment}" class="form-control form-control-fix" multiple>
-                                                <td><span class="input-group-btn"><button type="button" class="btn btn-success btn-add">✚</button></span></td>
+                                                           th:placeholder="#{complex.equipment}"
+                                                           class="form-control form-control-fix" multiple>
+                                                <td><span class="input-group-btn"><button type="button"
+                                                                                          class="btn btn-success btn-add">✚</button></span>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <datalist name="equipmentslist" id=equipmentslist >
-                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}" th:text="${equipment.name}"></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                    </datalist></td>
+                                    <datalist name="equipmentslist" id=equipmentslist>
+                                        <option th:each="equipment : ${equipmentsList}" th:value="${equipment.name}"
+                                                th:text="${equipment.name}"></option>
+
+                                    </datalist>
+
+                                </td>
+                            </tr>
+                            <tr>
+
+
+
+                                <td>
+
+
+                                </td>
+                                <td>
+
+
+
+                                </td>
+
+                                <td>
+
+
+
+
+                                </td>
+
+
+
+                            </tr>
+                            <tr>
+
+
+                                <td>
+
+
+
+
+                                </td>
+                                <td>
+
+
+                                </td>
+                                <td>
+
+                                </td>
                                 </td>
                             </tr>
                         </table>
-                        <script>
-                            $(document).on('click', '.btn-add', function(event) {
+                        <script type="text/javascript">
+                            $(document).on('click', '.btn-add', function (event) {
                                 event.preventDefault();
 
                                 var field = $(this).closest('.clone');
@@ -245,35 +335,166 @@
                                     .toggleClass('btn-remove')
                                     .html('✖');
 
+                                field_new.find('textarea').val('');
                                 field_new.find('input').val('');
                                 field_new.insertAfter(field);
                             });
 
-                            $(document).on('click', '.btn-remove', function(event) {
+                            $(document).on('click', '.btn-remove', function (event) {
                                 event.preventDefault();
                                 $(this).closest('.clone').remove();
                             });
+
+                            ///////////////////////////////////
+
+                            var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+
+                            function getXmlHttp() {
+                                var xmlhttp;
+                                try {
+                                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                                } catch (e) {
+                                    try {
+                                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                    } catch (E) {
+                                        xmlhttp = false;
+                                    }
+                                }
+                                if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+                                    xmlhttp = new XMLHttpRequest();
+                                }
+                                return xmlhttp;
+                            }
+
+                            function changeCountry(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/districts', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("cantryId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var districts = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value=''>Выберите округ</option>"; // Начинаем создавать элементы в select
+                                                for (var i in districts) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" + districts[i].id + "'>" + districts[i].name + "</option>";
+                                                }
+                                                document.getElementById('districts_').style.visibility = 'visible';
+                                                document.myform.districts.innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+                                    document.getElementById('districts_').style.visibility = 'hidden';
+                                    document.getElementById('regions_').style.visibility = 'hidden';
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeDistrict(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/regions', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("districtId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var regions = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value=''>Выберите регион</option>"; // Начинаем создавать элементы в select
+                                                for (var i in regions) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" + regions[i].id + "'>" + regions[i].name + "</option>";
+                                                }
+                                                document.getElementById('regions_').style.visibility = 'visible';
+                                                document.myform.regions.innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+                                    document.getElementById('regions_').style.visibility = 'hidden';
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeRegion(id) {
+                                if (id != '') {
+                                    xmlhttp.open('POST', '/cities', true); // Открываем асинхронное соединение
+                                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+                                    xmlhttp.send("regionId=" + encodeURIComponent(id)); // Отправляем POST-запрос
+                                    xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
+                                        if (xmlhttp.readyState == 4) { // Ответ пришёл
+                                            if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+                                                var cities = JSON.parse(xmlhttp.responseText); // Преобразуем JSON-строку в массив
+                                                var text = "<option value='Выберите город'></option>"; // Начинаем создавать элементы в select
+                                                for (var i in cities) {
+                                                    /* Перебираем все элемены и создаём набор options */
+                                                    text += "<option value='" +cities[i].name + "'></option>";
+                                                }
+                                                document.getElementById('cities_').style.visibility = 'visible';
+                                                document.myform.cities.placeholder = 'Выберите город';
+                                                document.getElementById('sityList').innerHTML = text; // Устанавливаем options в select
+                                            }
+                                        }
+                                    };
+                                } else {
+
+                                    document.getElementById('cities_').style.visibility = 'hidden';
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            function changeCity(id) {
+                                if (id != '') {
+                                    document.getElementById('street_').style.visibility = 'visible';
+                                    document.getElementById('number_').style.visibility  = 'visible';
+                                } else {
+
+                                    document.getElementById('street_').style.visibility = 'hidden';
+                                    document.getElementById('number_').style.visibility = 'hidden';
+                                }
+                            }
+
+                            //отключение сабмита по нажатию энтер в поле формы
+                            $(document).ready(function() {
+                                $(myform).keydown(function(event){
+                                    if(event.keyCode == 13) {
+                                        event.preventDefault();
+                                        return false;
+                                    }
+                                });
+                            });
+                            //
                         </script>
 
                         <div class="panel-footer">
                             <div class="row">
                                 <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
-                                <!--<button type="submit" class="btn btn-labeled btn-success btn-success-fix">
+                                <button type="submit" class="btn btn-labeled btn-success btn-success-fix">
                                     <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span><span
-                                        th:text="OK"/></button>-->
+                                        th:text="OK"/></button>
                                 <button type="button" onclick="history.back();" class="btn btn-labeled btn-danger">
                                     <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span><span
                                         th:text="#{users.exit}"/></button>
-                                <!---->
-                            </div>
                                 <!--</div>-->
                             </div>
                         </div>
                     </div>
                 </form>
+
+
             </div>
+
+
         </div>
     </div>
+
 </div>
+
 </body>
 </html>

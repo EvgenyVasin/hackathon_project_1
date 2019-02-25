@@ -60,6 +60,9 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
 
+            CountryEntity country2 = new CountryEntity("Беларусь");
+            countryRepository.save(country2);
+
 
 
 
@@ -110,7 +113,10 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
 
             country = new CountryEntity("Российская Федерация");
+
             countryRepository.save(country);
+
+
 
             district = new DistrictEntity("Центральный", country);
             regions = new HashSet<>();
