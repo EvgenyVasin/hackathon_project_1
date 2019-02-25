@@ -145,7 +145,7 @@
                                             class="glyphicon glyphicon-comment"></span></span>
                                         <select class="form-control form-control-fix" name="countries"
 
-                                                onstart="changeCountry(this.value)" onchange="changeCountry(this.value)" required="True">
+                                                 onchange="changeCountry(this.value)" required="True">
                                             <!--<option class="form-control form-control-fix" th:text="${smis.city.region.district.country.name}"></option>-->
                                             <option selected class="form-control form-control-fix" th:value="${smis.city.region.district.country.id}" th:text="${smis.city.region.district.country.name}"></option>
                                             <option class="form-control form-control-fix" th:each="cantry : ${cantryList}" th:if="${smis.city.region.district.country != cantry}" th:value="${cantry.id}" th:text="${cantry.name}" value=""></option>
@@ -155,32 +155,34 @@
 
 
 
-                                    <div id="districts_"  style="visibility: hidden" class="input-group input-group-fix">
+                                    <div id="districts_"  class="input-group input-group-fix">
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                        <select  class="form-control" name="districts" th:if="${smis.city.region.district != null}" th:value="${smis.city.region.district.id}" th:text="${smis.city.region.district.name}" onloadstart="changeDistrict(this.value)" required="True">
-
-                                            <option class="form-control form-control-fix" th:value="${smis.city.region.district.id}" th:text="${smis.city.region.district.name}"></option>
+                                        <select  class="form-control" name="districts" onchange="changeDistrict(this.value)" required="True">
+                                            <option selected class="form-control form-control-fix" th:value="${smis.city.region.district.id}" th:text="${smis.city.region.district.name}"></option>
+                                            <option class="form-control form-control-fix" th:each="district : ${districtsList}" th:if="${smis.city.region.district != district}" th:value="${district.id}" th:text="${district.name}"></option>
                                         </select>
                                     </div>
 
 
 
-                                    <div id="regions_" style="visibility: hidden" class="input-group input-group-fix">
+                                    <div id="regions_" class="input-group input-group-fix">
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
                                         <select class="form-control" name="regions" onchange="changeRegion(this.value)" required="True" >
-                                            <option class="form-control form-control-fix" th:text="${smis.city.region.name}"></option>
+                                            <option selected class="form-control form-control-fix" th:value="${smis.city.region.id}" th:text="${smis.city.region.name}"></option>
+                                            <option class="form-control form-control-fix" th:each="region : ${regionList}" th:if="${smis.city.region != region}" th:value="${region.id}" th:text="${region.name}"></option>
                                         </select>
                                     </div>
 
-                                    <div id="cities_" style="visibility: hidden" class="input-group input-group-fix">
+                                    <div id="cities_" class="input-group input-group-fix">
 
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                        <input required="True" th:text="${smis.city.name}" class="form-control form-control-fix" type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+                                        <input required="True" th:value="${smis.city.name}" class="form-control form-control-fix" type=text list = citylist onkeypress="changeCity(this.value)" onchange="changeCity(this.value)" name="cities" >
+
                                         <datalist name="citylist" id=cityList>
 
 
@@ -189,20 +191,14 @@
                                     </div>
 
 
-                                    <div  id="street_" style="visibility: hidden" class="input-group input-group-fix">
+                                    <div  id="street_"  class="input-group input-group-fix">
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                        <input th:text="${smis.address}" class="form-control form-control-fix" type=text name="street" >
+                                        <input th:value="${smis.address}" class="form-control form-control-fix" type=text name="street" >
                                         </input>
                                     </div>
 
-                                    <div id="number_"  style="visibility: hidden" class="input-group input-group-fix">
 
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-comment"></span></span>
-                                        <input placeholder="Укажите дом" class="form-control form-control-fix" type=text name="number" >
-                                        </input>
-                                    </div>
                                 </td>
                                 <td class="td-style-fix">
 
