@@ -150,6 +150,9 @@ public class SmisController {
 
         //пробуем добавить новый СМИС и делаем перенаправление на страницу с таблицей
         try {
+
+
+
                 smisService.addSmis(
                         files,
                         fileNames,
@@ -172,11 +175,12 @@ public class SmisController {
                         validity,
                         description,
                         areaState_id);
-            } catch (IOException e) {
+            } catch(IOException e){
                 e.printStackTrace();
-            } catch (ParseException e) {
+            } catch(ParseException e){
                 e.printStackTrace();
             }
+
         return "redirect:/smises_list";
     }
 

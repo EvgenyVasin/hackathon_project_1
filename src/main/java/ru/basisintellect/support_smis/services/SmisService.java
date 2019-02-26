@@ -120,11 +120,12 @@ public class SmisService {
             SmisFileEntity asset = new SmisFileEntity();
             asset.setSmis(smisEntity);
 
-            if (fileNames[i].isEmpty()){
-                fileNames[i] = files[i].getOriginalFilename();
+            if (!fileNames[i].isEmpty()){
+                asset.setCustomName(fileNames[i]);
+            } else {
+                asset.setCustomName(files[i].getOriginalFilename());
             }
 
-            asset.setCustomName(fileNames[i]);
             if(!fileDescriptions[i].isEmpty())
                 asset.setDescription(fileDescriptions[i]);
             else
