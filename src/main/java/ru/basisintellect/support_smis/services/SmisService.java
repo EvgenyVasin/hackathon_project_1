@@ -113,7 +113,11 @@ public class SmisService {
             SmisFileEntity asset = new SmisFileEntity();
             asset.setSmis(smisEntity);
             asset.setCustomName(fileNames[i]);
-            asset.setDescription(fileDescriptions[i]);
+            if(!fileDescriptions[i].isEmpty())
+                asset.setDescription(fileDescriptions[i]);
+            else
+                asset.setDescription("");
+
             asset.setName(files[i].getOriginalFilename());
             File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
             files[i].transferTo(tempFile);
@@ -330,15 +334,8 @@ public class SmisService {
     }
 
     public SmisEntity findSmisById(Long id) {
-        SmisEntity result = null;
-        List<SmisEntity> smises = (List<SmisEntity>) smisesRepo.findAll();
-        for (SmisEntity smisEntity : smises) {
-            if (id == smisEntity.getId()) {
-                result = smisEntity;
-                break;
-            }
-        }
-        return result;
+
+        return smisesRepo.findById(id).get();
     }
 
 
