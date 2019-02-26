@@ -192,6 +192,8 @@ public class SmisController {
         model.addAttribute("districtsList", smisService.getDistricsByCountryId(smisEntity.getCity().getRegion().getDistrict().getCountry().getId()));
         model.addAttribute("regionList", smisService.getRegionsByDistrictId(smisEntity.getCity().getRegion().getDistrict().getId()));
         model.addAttribute("sitiesList", smisService.getCytiesByRegionId(smisEntity.getCity().getRegion().getId()));
+        model.addAttribute("areaStateList", smisService.getAllAreaStateSort());
+        model.addAttribute("smisesList", smisService.getAllSmises());
 
         return "smises/smis_details";
     }
