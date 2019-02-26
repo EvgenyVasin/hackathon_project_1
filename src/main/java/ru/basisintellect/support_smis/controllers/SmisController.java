@@ -48,7 +48,72 @@ public class SmisController {
      */
     @Autowired
     SmisService smisService;
+    @RequestMapping(value = "/editSmis", method = RequestMethod.POST)
+    public String editSmis(
+            //файлы
+//          @RequestParam("files")
+            MultipartFile[] files,
+            String[] fileNames,
+            String[] fileDescriptions,
+            Long[] deleted_files,
+            //контакты
+            String[] phones,
+            String[] contactNames,
+            String[] positions,
+            Long[] deleted_contacts,
+            //оборудование
+            String[] equipments,
+            Long[] deleted_equipments,
+            //место расположения
+            Long regions,
+            String cities,
+            String street,
+            String number,
+            //комплекс
+            Long smis_id,
+            String name,
+            Long parent_smis_id,
+            String validity,
+            String description,
+            Long areaState_id,
+            Model model) {
 
+        try {
+            smisService.editSmis(
+                    files,
+                    fileNames,
+                    fileDescriptions,
+                    deleted_files,
+
+                    phones,
+                    contactNames,
+                    positions,
+                    deleted_contacts,
+
+                    equipments,
+                    deleted_equipments,
+
+                    //место расположения
+                    regions,
+                    cities,
+                    street,
+                    number,
+
+                    smis_id,
+                    name,
+                    parent_smis_id,
+                    validity,
+                    description,
+                    areaState_id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/smises_list";
+
+    }
 
     /**
      * Метод добавления нового <a>Smis</a> только для авторизованных пользователей с ролями <b>Admin</b> или <b>User</b>

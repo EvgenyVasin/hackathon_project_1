@@ -123,16 +123,93 @@ public class SmisService {
 
             smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
 
-//            byte[] fileBytes = files[i].getBytes();
-//            new File("smis_files/" + smisEntity.getId()).mkdir();
-//            String rootPath ="smis_files/"  + smisEntity.getId() + '/';
-//                    System.out.println("File content type: " + files[i].getContentType());
-//            File newFile = new File(rootPath + files[i].getOriginalFilename());
-//            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(newFile));
-//            stream.write(fileBytes);
-//            stream.close();
-//            String link = newFile.getAbsolutePath();
-//            smisEntity.getFiles().add(new SmisFileEntity(fileNames[i], link, smisEntity));
+        }
+
+        for (int i = 0; i < phones.length; i++) {
+            smisEntity.getContacts().add(new ContactEntity(smisEntity, contactNames[i], positions[i], phones[i]));
+        }
+
+
+        smisesRepo.save(smisEntity);
+
+        for (int i = 0; i < equipments.length; i++) {
+            smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
+        }
+
+        return smisEntity;
+    }
+
+    public SmisEntity editSmis(MultipartFile[] files,
+                               String[] fileNames,
+                               String[] fileDescriptions,
+                               Long[] deleted_files,
+
+                               String[] phones,
+                               String[] contactNames,
+                               String[] positions,
+                               Long[] deleted_contacts,
+
+                               String[] equipments,
+                               Long[] deleted_equipments,
+
+                               Long region_id,
+                               String cities,
+                               String street,
+                               String number,
+
+                               Long smis_id,
+                               String name,
+                               Long parent_smis_id,
+                               String validity,
+                               String description,
+                               Long areaState_id)  throws IOException, ParseException {
+
+
+        Set<SmisFileEntity> fileList = new HashSet<>();
+        for (Long id :deleted_files) {
+            fileList.add(smisFileRepo.findById(id).get());
+        }
+        assetService.deleteFileAssets( fileList);
+
+        for (Long id : deleted_contacts) {
+            contactsRepo.delete(contactsRepo.findById(id).get());
+        }
+
+        for (Long id : deleted_equipments) {
+            smisEquipmentRepo.delete( smisEquipmentRepo.findById(id).get());
+        }
+
+        SmisEntity smisEntity = smisesRepo.findById(smis_id).get();
+
+        smisEntity.setName(name);
+        if(parent_smis_id != null)
+            smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
+
+        smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
+        smisEntity.setAddress(street + " " + number);
+        smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
+
+        if(!validity.isEmpty())
+            smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
+
+
+        smisEntity.setDescription(description);
+        smisEntity.setDateRegistration(new Date());
+
+        smisesRepo.save(smisEntity);
+
+        for (int i = 0; i < fileNames.length; i++) {
+
+            SmisFileEntity asset = new SmisFileEntity();
+            asset.setSmis(smisEntity);
+            asset.setCustomName(fileNames[i]);
+            asset.setDescription(fileDescriptions[i]);
+            asset.setName(files[i].getOriginalFilename());
+            File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
+            files[i].transferTo(tempFile);
+
+            smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
+
 
         }
 
@@ -148,6 +225,7 @@ public class SmisService {
         }
 
         return smisEntity;
+
     }
 
     private CityEntity getCityByNameOrCreate(String city_name, Long region_id) {
@@ -286,4 +364,6 @@ public class SmisService {
     public List<AreaStateEntity> getAllAreaStateSort() {
         return (List<AreaStateEntity>) areaStateRepository.findAll();
     }
+
+
 }

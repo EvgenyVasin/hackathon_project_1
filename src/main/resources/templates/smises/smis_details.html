@@ -87,15 +87,16 @@
                         <strong class="panel-title" th:text="#{complex.editSmis}"></strong>
                     </div>
                 </div>
-                <form name="myform" role="form" th:action="@{/}" enctype="multipart/form-data" method="post">
-                    <div type="hidden" name="d_files">
-                        <input type="hidden" name="deleted_files" class="delete_file">
+                <form name="myform" role="form" th:action="@{/editSmis}" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="smis_id" th:value="${smis.id}">
+                    <div type="hidden" id="d_files">
+
                     </div>
-                    <div type="hidden" name="d_contacts">
-                    <input type="hidden" name="deleted_contacts" class="delete_contact">
+                    <div type="hidden" id="d_contacts">
+
                     </div>
-                    <div type="hidden" name="d_equipments">
-                    <input type="hidden" name="deleted_equipments" class="delete_equipment">
+                    <div type="hidden" id="d_equipments">
+
                     </div>
 
                     <div class="panel-body">
@@ -234,7 +235,7 @@
                                                 <!--<textarea class="form-control form-control-fix" th:text="${file.description}"></textarea>-->
                                             </tr>
                                         </table>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove btn-remove-file" th:value="${file.id}" onclick="onClickDeleteFile(1)" >✖</button></span>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove btn-remove-file" th:id="${file.id}" onclick="onClickDeleteFile(this.id)" >✖</button></span>
                                     </div>
 
                                     <!--добавление файлов-->
@@ -278,7 +279,7 @@
                                                 <!--<textarea class="form-control form-control-fix" th:text="${file.description}"></textarea>-->
                                             </tr>
                                         </table>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove " th:id="${contact.id}" onclick="onClickDeleteContact(this.id)">✖</button></span>
                                     </div>
 
 
@@ -313,7 +314,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove" th:id="${equipment.id}" onclick="onClickDeleteEquipment(this.id)">✖</button></span>
                                     </div>
 
 
@@ -382,7 +383,7 @@
                             </tr>
                         </table>
                         <script type="text/javascript">
-                            /*$(document).on('click', '.btn-add', function (event) {
+                            $(document).on('click', '.btn-add', function (event) {
                                 event.preventDefault();
 
                                 var field = $(this).closest('.clone');
@@ -403,27 +404,40 @@
                             $(document).on('click', '.btn-remove', function (event) {
                                 event.preventDefault();
                                 $(this).closest('.clone').remove();
-                            });*/
+                            });
 
 
                             //удаление файлов!
                             function onClickDeleteFile(id) {
-                                var text = document.myform.d_files.innerText;
-                                text = text + "<input type ='hiden' name='deleted_files' value ='" + id + "'>"
-                                document.myform.d_files.innerText = text;
-                                // var field = document.getElementsByClassName("delete_file");
-                                // var field_new = field.clone();
-                                //
-                                // field_new.find('input').val('file.id');
-                                // field_new.insertAfter(field);
-
-                                var deleted_files;
+                                var element = document.getElementById("d_files");
+                                var text = element.innerHTML;
+                                text = text + "<input type ='hidden' name='deleted_files' value ='" + id + "'>"
+                                element.innerHTML = text;
 
 
-                                deleted_files.append(id);
-                                $(this).remove();
 
-                                alert("deleted_files");
+
+                            }
+
+                            function onClickDeleteContact(id) {
+                                var element = document.getElementById("d_contacts");
+                                var text = element.innerHTML;
+                                text = text + "<input type ='hidden' name='deleted_contacts' value ='" + id + "'>"
+                                element.innerHTML = text;
+
+
+
+
+                            }
+
+                            function onClickDeleteEquipment(id) {
+                                var element = document.getElementById("d_equipments");
+                                var text = element.innerHTML;
+                                text = text + "<input type ='hidden' name='deleted_equipments' value ='" + id + "'>"
+                                element.innerHTML = text;
+
+
+
 
                             }
 
