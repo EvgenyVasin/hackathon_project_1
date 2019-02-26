@@ -68,7 +68,7 @@ public class SmisController {
             Long regions,
             String cities,
             String street,
-            String number,
+
             //комплекс
             Long smis_id,
             String name,
@@ -97,7 +97,6 @@ public class SmisController {
                     regions,
                     cities,
                     street,
-                    number,
 
                     smis_id,
                     name,

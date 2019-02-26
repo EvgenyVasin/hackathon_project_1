@@ -60,9 +60,6 @@ public class SmisService {
     AreaStateRepository areaStateRepository;
 
 
-
-
-
     public SmisEntity addSmis(MultipartFile[] files,
                               String[] fileNames,
                               String[] fileDescriptions,
@@ -95,15 +92,15 @@ public class SmisService {
 //        }
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setName(name);
-        if(parent_smis_id != null)
+        if (parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
         smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
         smisEntity.setAddress(street + " " + number);
         smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
 
-            if(!validity.isEmpty())
-                smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
+        if (!validity.isEmpty())
+            smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
 
 
         smisEntity.setDescription(description);
@@ -155,41 +152,46 @@ public class SmisService {
                                Long region_id,
                                String cities,
                                String street,
-                               String number,
+
 
                                Long smis_id,
                                String name,
                                Long parent_smis_id,
                                String validity,
                                String description,
-                               Long areaState_id)  throws IOException, ParseException {
+                               Long areaState_id) throws IOException, ParseException {
 
-
-        Set<SmisFileEntity> fileList = new HashSet<>();
-        for (Long id :deleted_files) {
-            fileList.add(smisFileRepo.findById(id).get());
-        }
-        assetService.deleteFileAssets( fileList);
-
-        for (Long id : deleted_contacts) {
-            contactsRepo.delete(contactsRepo.findById(id).get());
+        if (deleted_files != null) {
+            Set<SmisFileEntity> fileList = new HashSet<>();
+            for (Long id : deleted_files) {
+                fileList.add(smisFileRepo.findById(id).get());
+            }
+            assetService.deleteFileAssets(fileList);
         }
 
-        for (Long id : deleted_equipments) {
-            smisEquipmentRepo.delete( smisEquipmentRepo.findById(id).get());
+        if (deleted_contacts != null) {
+            for (Long id : deleted_contacts) {
+                contactsRepo.delete(contactsRepo.findById(id).get());
+            }
+        }
+
+        if (deleted_equipments != null) {
+            for (Long id : deleted_equipments) {
+                smisEquipmentRepo.delete(smisEquipmentRepo.findById(id).get());
+            }
         }
 
         SmisEntity smisEntity = smisesRepo.findById(smis_id).get();
 
         smisEntity.setName(name);
-        if(parent_smis_id != null)
+        if (parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
         smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
-        smisEntity.setAddress(street + " " + number);
+        smisEntity.setAddress(street);
         smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
 
-        if(!validity.isEmpty())
+        if (!validity.isEmpty())
             smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
 
 
@@ -230,7 +232,7 @@ public class SmisService {
 
     private CityEntity getCityByNameOrCreate(String city_name, Long region_id) {
         CityEntity cityEntity = cityRepo.findByName(city_name);
-        if(cityEntity == null) {
+        if (cityEntity == null) {
             cityEntity = new CityEntity(city_name, regionsRepo.findById(region_id).get());
             cityRepo.save(cityEntity);
         }
@@ -241,7 +243,7 @@ public class SmisService {
         SmisEntity smis = smisesRepo.findById(smisId).get();
 
         List<SmisEntity> childs = smisesRepo.findAllByParentSmis(smis);
-        for (SmisEntity child:childs) {
+        for (SmisEntity child : childs) {
             child.setParentSmis(null);
         }
 
@@ -251,7 +253,6 @@ public class SmisService {
         contactsRepo.deleteAll(smis.getContacts());
 
         smisEquipmentRepo.deleteAll(smisEquipmentRepo.findAllBySmisId(smisId));
-
 
 
         smisesRepo.delete(smis);
@@ -264,47 +265,46 @@ public class SmisService {
 //    }
 
 
-    public RegionEntity getRegionByNameOrAdd(String regionName){
+    public RegionEntity getRegionByNameOrAdd(String regionName) {
         RegionEntity regionEntity = regionsRepo.findByName(regionName).get();
-        if(regionEntity == null) {
+        if (regionEntity == null) {
             regionEntity = new RegionEntity(regionName);
             regionsRepo.save(regionEntity);
         }
         return regionEntity;
     }
 
-    public CityEntity getCityByName(String cityName){
+    public CityEntity getCityByName(String cityName) {
         return cityRepo.findByName(cityName);
     }
 
 
-
-    public List<RegionEntity> getAllRegionsSort(){
+    public List<RegionEntity> getAllRegionsSort() {
         return regionsRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
-    public List<DistrictEntity> getAllDistrictsSort(){
+    public List<DistrictEntity> getAllDistrictsSort() {
         return districtRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
-    public List<CountryEntity> getAllCountryesSort(){
+    public List<CountryEntity> getAllCountryesSort() {
         return countryRepo.findAll(new Sort(Sort.Direction.ASC, "name"));
     }
 
-    public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName){
+    public EquipmentEntity getEquipmentByNameOrAdd(String equipmentName) {
         EquipmentEntity equipmentEntity = equipmentRepo.findByName(equipmentName);
-        if(equipmentEntity == null) {
+        if (equipmentEntity == null) {
             equipmentEntity = new EquipmentEntity(equipmentName);
             equipmentRepo.save(equipmentEntity);
         }
         return equipmentEntity;
     }
 
-    public SmisEquipmentEntity addSmisEquipment(SmisEntity smis, EquipmentEntity equipment){
-        return smisEquipmentRepo.save(new SmisEquipmentEntity(smis,equipment));
+    public SmisEquipmentEntity addSmisEquipment(SmisEntity smis, EquipmentEntity equipment) {
+        return smisEquipmentRepo.save(new SmisEquipmentEntity(smis, equipment));
     }
 
-    public List<DistrictEntity>getDistricsByCountryId(Long cantryId){
+    public List<DistrictEntity> getDistricsByCountryId(Long cantryId) {
 
         return districtRepo.findByCountry(countryRepo.findById(cantryId).get());
     }
@@ -320,6 +320,7 @@ public class SmisService {
     public List<SmisEntity> getAllSmises() {
         return (List<SmisEntity>) smisesRepo.findAll();
     }
+
     public List<RegionEntity> getAllRegions() {
         return (List<RegionEntity>) regionsRepo.findAll();
     }
@@ -357,7 +358,7 @@ public class SmisService {
 
 
     public CountryEntity getCountryById(Long cantryId) {
-       return countryRepo.findById(cantryId).get();
+        return countryRepo.findById(cantryId).get();
     }
 
 

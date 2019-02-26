@@ -126,8 +126,8 @@
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
                                         <select class="form-control" name="parent_smis_id" >
-                                            <option th:text="${smis.parentSmis.name}" disabled selected hidden value=""></option>
-                                            <option th:each="smis : ${smisesList}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                            <option selected class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.name}"></option>
+                                            <option th:each="smis : ${smisesList}" th:if="${smis.parentSmis != smis}"  th:value="${smis.id}" th:text="${smis.name}"></option>
                                         </select>
                                     </div>
                                     <!---->
@@ -137,8 +137,8 @@
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
                                         <select class="form-control" name="areaState_id" required="True">
-                                            <option th:text="${smis.areaState.name}" disabled selected hidden value=""></option>
-                                            <option th:each="areaState : ${areaStateList}" th:value="${areaState.id}" th:text="${areaState.name}" ></option>
+                                            <option selected class="form-control form-control-fix" th:value="${smis.areaState.id}" th:text="${smis.areaState.name}"></option>
+                                            <option th:each="areaState : ${areaStateList}"  th:if="${smis.areaState != areaState}" th:value="${areaState.id}" th:text="${areaState.name}" ></option>
                                         </select>
                                     </div>
                                     <!---->
@@ -163,7 +163,7 @@
                                                  onchange="changeCountry(this.value)" required="True">
                                             <!--<option class="form-control form-control-fix" th:text="${smis.city.region.district.country.name}"></option>-->
                                             <option selected class="form-control form-control-fix" th:value="${smis.city.region.district.country.id}" th:text="${smis.city.region.district.country.name}"></option>
-                                            <option class="form-control form-control-fix" th:each="cantry : ${cantryList}" th:if="${smis.city.region.district.country != cantry}" th:value="${cantry.id}" th:text="${cantry.name}" value=""></option>
+                                            <option class="form-control form-control-fix" th:each="cantry : ${cantryList}" th:if="${smis.city.region.district.country != cantry}" th:value="${cantry.id}" th:text="${cantry.name}"></option>
 
                                         </select>
                                     </div>
