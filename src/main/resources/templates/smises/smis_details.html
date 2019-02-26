@@ -88,10 +88,15 @@
                     </div>
                 </div>
                 <form name="myform" role="form" th:action="@{/}" enctype="multipart/form-data" method="post">
-
-                    <input type="hidden" name="deleted_files" class="delete_file">
+                    <div type="hidden" name="d_files">
+                        <input type="hidden" name="deleted_files" class="delete_file">
+                    </div>
+                    <div type="hidden" name="d_contacts">
                     <input type="hidden" name="deleted_contacts" class="delete_contact">
+                    </div>
+                    <div type="hidden" name="d_equipments">
                     <input type="hidden" name="deleted_equipments" class="delete_equipment">
+                    </div>
 
                     <div class="panel-body">
 
@@ -403,7 +408,9 @@
 
                             //удаление файлов!
                             function onClickDeleteFile(id) {
-
+                                var text = document.myform.d_files.innerText;
+                                text = text + "<input type ='hiden' name='deleted_files' value ='" + id + "'>"
+                                document.myform.d_files.innerText = text;
                                 // var field = document.getElementsByClassName("delete_file");
                                 // var field_new = field.clone();
                                 //

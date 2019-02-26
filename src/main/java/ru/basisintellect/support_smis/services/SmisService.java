@@ -174,10 +174,7 @@ public class SmisService {
 
         smisEquipmentRepo.deleteAll(smisEquipmentRepo.findAllBySmisId(smisId));
 
-        File folderSmis = new File("smis_files/" + smis.getName() + '_' + smis.getCity().getName());
-        if (folderSmis.exists()) {
-            FileUtils.deleteDirectory(folderSmis);
-        }
+
 
         smisesRepo.delete(smis);
 
