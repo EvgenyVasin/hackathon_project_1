@@ -91,7 +91,14 @@ public class SmisService {
 //            folder.mkdir();
 //        }
         SmisEntity smisEntity = new SmisEntity();
+
+
+
+
         smisEntity.setName(name);
+
+
+
         if (parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
@@ -108,10 +115,15 @@ public class SmisService {
 
         smisesRepo.save(smisEntity);
 
-        for (int i = 0; i < fileNames.length; i++) {
+        for (int i = 0; i < files.length; i++) {
 
             SmisFileEntity asset = new SmisFileEntity();
             asset.setSmis(smisEntity);
+
+            if (fileNames[i].isEmpty()){
+                fileNames[i] = files[i].getOriginalFilename();
+            }
+
             asset.setCustomName(fileNames[i]);
             if(!fileDescriptions[i].isEmpty())
                 asset.setDescription(fileDescriptions[i]);
