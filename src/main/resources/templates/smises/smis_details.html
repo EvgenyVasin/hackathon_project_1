@@ -88,13 +88,18 @@
                     </div>
                 </div>
                 <form name="myform" role="form" th:action="@{/}" enctype="multipart/form-data" method="post">
+
+                    <input type="hidden" name="deleted_files" class="delete_file">
+                    <input type="hidden" name="deleted_contacts" class="delete_contact">
+                    <input type="hidden" name="deleted_equipments" class="delete_equipment">
+
                     <div class="panel-body">
 
                         <table>
                             <tr class="td-style-fix">
                                 <td class="td-style-fix">
 
-                                    <label>Введите общую информацию</label>
+                                    <label>Общая информация</label>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
@@ -143,7 +148,7 @@
                                 </td>
                                 <td class="td-style-fix">
 
-                                    <label>Укажите местоположение комплекса</label>
+                                    <label>Адрес</label>
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
@@ -208,8 +213,8 @@
 
 
                                     <!--добавление файлов-->
-                                    <label>Добавить файлы</label>
-                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}">
+                                    <label>Файлы</label>
+                                    <div class="input-group input-group-sm deteling input-group-fix clone" th:if="${not #lists.isEmpty(smis.files)}" th:each="file : ${smis.files}">
 
                                         <span class="input-group-addon glyphicon glyphicon-save-file"></span>
 
@@ -218,17 +223,17 @@
 
                                             <tr>
                                                 <td  th:title="${file.description}">
-                                                    <p  class="contacts-cell description-fix file-comment-fix"><a th:href="${'/download/' +  file.fileName}" th:text="${file.customName}" type="application/file"></a>
+                                                    <p  class="contacts-cell description-fix file-comment-fix"><a th:href="${'/download/' +  file.fileName}" th:text="${file.customName}" th:value="${file.id}" type="application/file"></a>
                                                     </p>
                                                 </td>
                                                 <!--<textarea class="form-control form-control-fix" th:text="${file.description}"></textarea>-->
                                             </tr>
                                         </table>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove btn-remove-file" th:value="${file.id}" onclick="onClickDeleteFile(1)" >✖</button></span>
                                     </div>
 
                                     <!--добавление файлов-->
-                                    <label>Добавить файлы</label>
+
                                     <div class="input-group input-group-sm clone input-group-fix">
 
                                         <span class="input-group-addon glyphicon glyphicon-save-file"></span>
@@ -252,8 +257,8 @@
                                     </div>
 
                                     <!--добавление контактов-->
-                                    <label>Добавить контакты</label>
-                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
+                                    <label>Контакты</label>
+                                    <div class="input-group input-group-sm deteling input-group-fix clone" th:if="${not #lists.isEmpty(smis.contacts)}" th:each="contact : ${smis.contacts}">
 
                                         <span class="input-group-addon glyphicon glyphicon-user"></span>
 
@@ -271,7 +276,7 @@
                                         <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
                                     </div>
 
-                                    <label>Добавить контакты</label>
+
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-user "></span>
                                         <table>
@@ -292,7 +297,7 @@
                                     </div>
 
                                     <label>Оборудование</label>
-                                    <div class="input-group input-group-sm clone input-group-fix clone" th:if="${not #lists.isEmpty(smis.equipments)}" th:each="equipment : ${smis.equipments}">
+                                    <div class="input-group input-group-sm deteling input-group-fix clone" th:if="${not #lists.isEmpty(smis.equipments)}" th:each="equipment : ${smis.equipments}">
 
                                         <span class="input-group-addon glyphicon glyphicon-user"></span>
 
@@ -306,7 +311,7 @@
                                         <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">✖</button></span>
                                     </div>
 
-                                    <label>Добавить оборудование</label>
+
                                     <div class="input-group input-group-sm clone input-group-fix">
                                         <span class="input-group-addon glyphicon glyphicon-object-align-vertical"></span>
                                         <table>
@@ -372,7 +377,7 @@
                             </tr>
                         </table>
                         <script type="text/javascript">
-                            $(document).on('click', '.btn-add', function (event) {
+                            /*$(document).on('click', '.btn-add', function (event) {
                                 event.preventDefault();
 
                                 var field = $(this).closest('.clone');
@@ -393,7 +398,31 @@
                             $(document).on('click', '.btn-remove', function (event) {
                                 event.preventDefault();
                                 $(this).closest('.clone').remove();
-                            });
+                            });*/
+
+
+                            //удаление файлов!
+                            function onClickDeleteFile(id) {
+
+                                // var field = document.getElementsByClassName("delete_file");
+                                // var field_new = field.clone();
+                                //
+                                // field_new.find('input').val('file.id');
+                                // field_new.insertAfter(field);
+
+                                var deleted_files;
+
+
+                                deleted_files.append(id);
+                                $(this).remove();
+
+                                alert("deleted_files");
+
+                            }
+
+
+
+
 
                             ///////////////////////////////////
 
