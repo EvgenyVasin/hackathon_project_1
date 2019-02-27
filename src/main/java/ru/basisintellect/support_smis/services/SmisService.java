@@ -226,7 +226,7 @@ public class SmisService {
             for (int i = 0; i < files.length; i++) {
                 if(files[i]!=null) {
                     SmisFileEntity asset = new SmisFileEntity();
-                    asset.setSmis(smisEntity);
+                    asset.setSmis(smisEntity);//
                     if(fileNames[i]==null)
                         asset.setCustomName(files[i].getOriginalFilename());
                     else
