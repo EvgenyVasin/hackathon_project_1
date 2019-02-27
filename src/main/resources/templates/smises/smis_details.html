@@ -128,7 +128,7 @@
                                         <select class="form-control" name="parent_smis_id" >
                                             <option th:text="#{complex.parentSmis}" th:value="${null}"></option>
                                             <option th:if="${smis.parentSmis != null}" selected class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.name}"></option>
-                                            <option th:each="smis : ${smisesList}" th:if="${smis.parentSmis != smis}" th:value="${smis.id}" th:text="${smis.name}"></option>
+                                            <option th:each="oursmis : ${smisesList}" th:if="${smis.parentSmis != oursmis and oursmis != smis and oursmis.parentSmis != smis}" th:value="${oursmis.id}" th:text="${oursmis.name}"></option>
                                         </select>
                                     </div>
                                     <!---->

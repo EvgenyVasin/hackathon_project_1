@@ -3,9 +3,7 @@ package ru.basisintellect.support_smis.controllers;
 import net.minidev.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,7 @@ import ru.basisintellect.support_smis.model.entities.SmisEntity;
 import ru.basisintellect.support_smis.model.entities.SmisFileEntity;
 import ru.basisintellect.support_smis.services.SmisService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -204,13 +203,14 @@ public class SmisController {
 
     @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     @RequestMapping(value = "delete_smis/{smisId}", method = RequestMethod.GET)
-    public String delSmis(@PathVariable("smisId") Long smisId, Model model) {
+    public String delSmis(@PathVariable("smisId") Long smisId, Model model, HttpServletRequest request) {
         try {
             smisService.deleteSmis(smisId);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/smises_list";
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     //редактирование ПК ИВ СМИС

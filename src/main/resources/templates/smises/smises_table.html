@@ -161,7 +161,20 @@
                     <!--<td th:text="${smis.state.stateName}"></td>-->
                     <td th:text="${smis.description}" class="description-fix"></td>
                     <td class="description-fix" th:text="${smis.areaState.name}"></td>
+                    <td><span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove btn-remove-file" th:id="${smis.id}" onclick="delSmis(this.id)">✖</button></span></td>
                 </tr>
+
+                <script>
+
+                    function delSmis(id) {
+                        if (confirm("Вы уверены, что хотите удалить данный объект?")) {
+                            document.location.href = "delete_smis/" + id;
+                        }};
+
+
+                </script>
+
+
                 </tbody>
             </table>
         </div>
