@@ -91,12 +91,26 @@
                                 <td class="td-style-fix">
 
                                     <label>Введите общую информацию</label>
+
+                                    <!--выпадающий список для выбора ТИПА-->
+                                    <div class="input-group input-group-fix">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-list-alt"></span></span>
+                                        <select class="form-control" name="smis_type_id" required="True">
+                                            <option th:text="#{complex.type}" disabled selected hidden value="" ></option>
+                                            <option th:each="type : ${typesList}" th:text="${type.name}" th:value="${type.id}"></option>
+                                        </select>
+                                    </div>
+                                    <!---->
+
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
                                         <input type="text" class="form-control" name="name"
                                                th:placeholder="#{complex.name}" required="True" autofocus="True"/>
                                     </div>
+
+
 
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
@@ -105,6 +119,8 @@
                                                onfocus="(this.type='date')" onblur="this.type='text'"
                                                th:placeholder="#{complex.agreementDate}"/>
                                     </div>
+
+
 
                                     <!--выпадающий список для выбора родителя-->
                                     <div class="input-group input-group-fix">

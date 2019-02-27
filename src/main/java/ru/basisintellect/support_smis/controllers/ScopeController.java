@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Скоп контроллер, возвращающий пользователю ложный пароль и перенаправляющий на другую страницу с полем <b>user</b>
+ * Скоп контроллер, возвращающий пользователю ложный пароль в html код и перенаправляющий на другую страницу с полем <b>user</b>
  * Created by safin.v on 30.11.2016.
  */
 @Controller

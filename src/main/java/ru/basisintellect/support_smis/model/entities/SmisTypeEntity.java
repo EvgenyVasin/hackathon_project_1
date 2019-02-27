@@ -1,7 +1,11 @@
 package ru.basisintellect.support_smis.model.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="smis_type")
 public class SmisTypeEntity extends CustomEntity {
     @Column(name = "name", length = 128, unique = true)
     String name;

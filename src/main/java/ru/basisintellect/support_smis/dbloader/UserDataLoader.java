@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by safin.v on 24.10.2016.
  */
-//@Component
+@Component
 public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
