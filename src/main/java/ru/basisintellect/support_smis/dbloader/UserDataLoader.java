@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by safin.v on 24.10.2016.
  */
-@Component
+//@Component
 public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -118,7 +118,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
 
 
 
-            district = new DistrictEntity("Центральный", country);
+            district = new DistrictEntity("Центральный округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(31, "Белгородская область", district));
             regions.add(new RegionEntity(32, "Брянская область", district));
@@ -141,7 +141,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Южный", country);
+            district = new DistrictEntity("Южный округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(1, "Республика Адыгея (Адыгея)", district));
             regions.add(new RegionEntity(8, "Республика Калмыкия", district));
@@ -152,7 +152,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Северо-Западный", country);
+            district = new DistrictEntity("Северо-Западный округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(10, "Республика Карелия", district));
             regions.add(new RegionEntity(11, "Республика Коми", district));
@@ -168,7 +168,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Дальневосточный", country);
+            district = new DistrictEntity("Дальневосточный округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(14, "Республика Саха (Якутия)", district));
             regions.add(new RegionEntity(41, "Камчатский край", district));
@@ -182,7 +182,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Сибирский", country);
+            district = new DistrictEntity("Сибирский округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(4, "Республика Алтай", district));
             regions.add(new RegionEntity(3, "Республика Бурятия", district));
@@ -199,7 +199,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Уральский", country);
+            district = new DistrictEntity("Уральский округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(45, "Курганская область", district));
             regions.add(new RegionEntity(66, "Свердловская область", district));
@@ -210,7 +210,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Приволжский", country);
+            district = new DistrictEntity("Приволжский округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(2, "Республика Башкортостан", district));
             regions.add(new RegionEntity(12, "Республика Марий Эл", district));
@@ -229,7 +229,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Северо-Кавказский", country);
+            district = new DistrictEntity("Северо-Кавказский округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(5, "Республика Дагестан", district));
             regions.add(new RegionEntity(6, "Республика Ингушетия", district));
@@ -241,7 +241,7 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
             districtRepository.save(district);
             regionRepository.saveAll(regions);
 
-            district = new DistrictEntity("Крымский", country);
+            district = new DistrictEntity("Крымский округ", country);
             regions = new HashSet<>();
             regions.add(new RegionEntity(91, "Республика Крым(Симферополь)", district));
             regions.add(new RegionEntity(92, "Севастополь", district));
