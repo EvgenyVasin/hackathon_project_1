@@ -280,7 +280,7 @@ public class SmisService {
                 smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
         }
 
-        return smisEntity;jhghgjhgj
+        return smisEntity;1111
     }
 
     private CityEntity getCityByNameOrCreate(String city_name, Long region_id) {
