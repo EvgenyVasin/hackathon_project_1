@@ -56,15 +56,24 @@ public class UserDataLoader implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     AreaStateRepository areaStateRepository;
 
+    @Autowired
+    SmisTypeRepository smisTypeRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
 
-            CountryEntity country2 = new CountryEntity("Беларусь");
-            countryRepository.save(country2);
+
+            Set<SmisTypeEntity> smisTypes = new HashSet<>();
+            smisTypes.add(new SmisTypeEntity("НЦУКС"));
+            smisTypes.add(new SmisTypeEntity("РЦУКС"));
+            smisTypes.add(new SmisTypeEntity("ЦУКС"));
+            smisTypes.add(new SmisTypeEntity("ЦМПЧС"));
+            smisTypes.add(new SmisTypeEntity("ЕДДС"));
+            smisTypes.add(new SmisTypeEntity("ОБЪЕКТ"));
 
 
-
+            smisTypeRepository.saveAll(smisTypes);
 
 
             /*while(true){

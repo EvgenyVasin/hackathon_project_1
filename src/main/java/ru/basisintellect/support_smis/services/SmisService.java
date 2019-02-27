@@ -59,6 +59,8 @@ public class SmisService {
     @Autowired
     AreaStateRepository areaStateRepository;
 
+    @Autowired
+    SmisTypeRepository smisTypeRepo;
 
     public SmisEntity addSmis(MultipartFile[] files,
                               String[] fileNames,
@@ -79,6 +81,7 @@ public class SmisService {
                               //комплекс
                               String name,
                               Long parent_smis_id,
+                              Long smis_type_id,
 
                               String validity,
                               String description,
@@ -105,6 +108,7 @@ public class SmisService {
                 street + " " + number,
                 name,
                 parent_smis_id,
+                smis_type_id,
                 validity,
                 description,
                 areaState_id,
@@ -132,6 +136,7 @@ public class SmisService {
                                Long smis_id,
                                String name,
                                Long parent_smis_id,
+                               Long smis_type_id,
                                String validity,
                                String description,
                                Long areaState_id) throws IOException, ParseException {
@@ -171,6 +176,7 @@ public class SmisService {
                                 street,
                                 name,
                                 parent_smis_id,
+                                smis_type_id,
                                 validity,
                                 description,
                                 areaState_id,
@@ -196,11 +202,13 @@ public class SmisService {
             String address,
             String name,
             Long parent_smis_id,
+            Long smis_type_id,
             String validity,
             String description,
             Long areaState_id,
             SmisEntity smisEntity) throws ParseException, IOException {
 
+        smisEntity.setSmisType(smisTypeRepo.findById(smis_type_id).get());
         smisEntity.setName(name);
         if (parent_smis_id != null) {
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
@@ -412,4 +420,7 @@ public class SmisService {
     }
 
 
+    public List<SmisTypeEntity> getSmisTypes() {
+        return (List<SmisTypeEntity>) smisTypeRepo.findAll();
+    }
 }

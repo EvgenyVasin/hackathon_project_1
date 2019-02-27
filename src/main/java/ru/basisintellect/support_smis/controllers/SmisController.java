@@ -72,6 +72,7 @@ public class SmisController {
             Long smis_id,
             String name,
             Long parent_smis_id,
+            Long smis_type_id,
             String validity,
             String description,
             Long areaState_id,
@@ -100,6 +101,7 @@ public class SmisController {
                     smis_id,
                     name,
                     parent_smis_id,
+                    smis_type_id,
                     validity,
                     description,
                     areaState_id);
@@ -142,6 +144,7 @@ public class SmisController {
             //комплекс
             String name,
             Long parent_smis_id,
+            Long smis_type_id,
             String validity,
             String description,
             Long areaState_id,
@@ -172,6 +175,7 @@ public class SmisController {
 
                         name,
                         parent_smis_id,
+                        smis_type_id,
                         validity,
                         description,
                         areaState_id);
@@ -197,6 +201,7 @@ public class SmisController {
         model.addAttribute("sitiesList", smisService.getCytiesByRegionId(smisEntity.getCity().getRegion().getId()));
         model.addAttribute("areaStateList", smisService.getAllAreaStateSort());
         model.addAttribute("smisesList", smisService.getAllSmises());
+        model.addAttribute("typesList", smisService.getSmisTypes());
 
         return "smises/smis_details";
     }
@@ -244,6 +249,7 @@ public class SmisController {
         model.addAttribute("equipmentList", smisService.getAllEquipments());
         model.addAttribute("cantryList", smisService.getAllCountryesSort());
         model.addAttribute("areaStateList", smisService.getAllAreaStateSort());
+        model.addAttribute("typesList", smisService.getSmisTypes());
         return "smises/add_smis";
     }
 

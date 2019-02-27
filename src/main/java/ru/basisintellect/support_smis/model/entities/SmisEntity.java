@@ -17,6 +17,10 @@ public class SmisEntity extends CustomEntity {
     @JoinColumn(name = "parent_smis_id")
     private SmisEntity parentSmis;
 
+    @ManyToOne
+    @JoinColumn(name = "smis_type_id", nullable = false)
+    private SmisTypeEntity smisType;
+
     //название
     @Column(name = "name", length = 128)
     private String name;
@@ -73,6 +77,14 @@ public class SmisEntity extends CustomEntity {
         this.description = description;
         this.contacts = contacts;
         this.files = files;
+    }
+
+    public SmisTypeEntity getSmisType() {
+        return smisType;
+    }
+
+    public void setSmisType(SmisTypeEntity smisType) {
+        this.smisType = smisType;
     }
 
     public CityEntity getCity() {
