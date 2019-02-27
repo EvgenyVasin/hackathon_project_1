@@ -201,8 +201,11 @@ public class SmisService {
             Long areaState_id,
             SmisEntity smisEntity) throws ParseException, IOException {
         smisEntity.setName(name);
-        if (parent_smis_id != null)
+        if (parent_smis_id != null) {
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
+        }else{
+            smisEntity.setParentSmis(null);
+        }
 
         smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
         smisEntity.setAddress(address);
