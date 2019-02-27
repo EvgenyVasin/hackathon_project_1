@@ -221,20 +221,19 @@ public class SmisService {
         smisesRepo.save(smisEntity);
 
         if(files.length>0) {
-            if(fileNames.length<1)fileNames = new String[1];
-            if(fileDescriptions.length<1)fileDescriptions = new String[1];
+            if(fileNames.length<1)fileNames = new String[]{""};
+            if(fileDescriptions.length<1)fileDescriptions = new String[]{""};
             for (int i = 0; i < files.length; i++) {
-                if(files[i]!=null) {
+                if(!files[i].getOriginalFilename().isEmpty()) {
                     SmisFileEntity asset = new SmisFileEntity();
                     asset.setSmis(smisEntity);//
-                    if(fileNames[i]==null)
+                    if(fileNames[i].isEmpty())
                         asset.setCustomName(files[i].getOriginalFilename());
                     else
                         asset.setCustomName(fileNames[i]);
-                    if(fileDescriptions[i]==null)
-                        asset.setDescription("");
-                    else
-                        asset.setDescription(fileDescriptions[i]);
+
+
+                    asset.setDescription(fileDescriptions[i]);
 
                     asset.setName(files[i].getOriginalFilename());
                     File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
@@ -249,25 +248,25 @@ public class SmisService {
 
         if(phones.length>0 || contactNames.length>0 ||positions.length > 0) {
 
-            if(phones.length < 1)phones = new String[1];
-            if(contactNames.length < 1)contactNames = new String[1];
-            if(positions.length < 1)positions = new String[1];
+            if(phones.length < 1)phones = new String[]{""};
+            if(contactNames.length < 1)contactNames = new String[]{""};
+            if(positions.length < 1)positions = new String[]{""};
 
             for (int i = 0; i < phones.length; i++) {
-                if(phones[i]!=null||contactNames[i]!=null||positions[i]!=null) {
-                    String contactName = "";
-                    if (contactNames[i]!=null)
-                        contactName = contactNames[i];
+                if(!phones[i].isEmpty()||!contactNames[i].isEmpty()||!positions[i].isEmpty()) {
+//                    String contactName = "";
+////                    if (contactNames[i]!=null)
+//                        contactName = contactNames[i];
+//
+//                    String position = "";
+////                    if (positions[i]!=null)
+//                        position = positions[i];
+//
+//                    String phone = "";
+////                    if (phones[i]!=null)
+//                        phone = phones[i];
 
-                    String position = "";
-                    if (positions[i]!=null)
-                        position = positions[i];
-
-                    String phone = "";
-                    if (phones[i]!=null)
-                        phone = phones[i];
-
-                    smisEntity.getContacts().add(new ContactEntity(smisEntity, contactName, position, phone));
+                    smisEntity.getContacts().add(new ContactEntity(smisEntity, contactNames[i], positions[i], phones[i]));
                 }
             }
         }
@@ -276,7 +275,7 @@ public class SmisService {
         smisesRepo.save(smisEntity);
 
         for (int i = 0; i < equipments.length; i++) {
-            if( equipments[i]!=null)
+            if( !equipments[i].isEmpty())
                 smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
         }
 
