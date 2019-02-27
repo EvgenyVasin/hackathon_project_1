@@ -110,6 +110,7 @@ public class SmisController {
             e.printStackTrace();
         }
 
+
         return "redirect:/smises_list";
 
     }

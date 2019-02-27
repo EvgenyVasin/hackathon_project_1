@@ -91,53 +91,24 @@ public class SmisService {
 //            folder.mkdir();
 //        }
         SmisEntity smisEntity = new SmisEntity();
-        smisEntity.setName(name);
-        if (parent_smis_id != null)
-            smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
-
-        smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
-        smisEntity.setAddress(street + " " + number);
-        smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
-
-        if (!validity.isEmpty())
-            smisEntity.setValidity(new SimpleDateFormat("yyyy-MM-dd").parse(validity));
-
-
-        smisEntity.setDescription(description);
         smisEntity.setDateRegistration(new Date());
-
-        smisesRepo.save(smisEntity);
-
-        for (int i = 0; i < fileNames.length; i++) {
-
-            SmisFileEntity asset = new SmisFileEntity();
-            asset.setSmis(smisEntity);
-            asset.setCustomName(fileNames[i]);
-            if(!fileDescriptions[i].isEmpty())
-                asset.setDescription(fileDescriptions[i]);
-            else
-                asset.setDescription("");
-
-            asset.setName(files[i].getOriginalFilename());
-            File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
-            files[i].transferTo(tempFile);
-
-            smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
-
-        }
-
-        for (int i = 0; i < phones.length; i++) {
-            smisEntity.getContacts().add(new ContactEntity(smisEntity, contactNames[i], positions[i], phones[i]));
-        }
-
-
-        smisesRepo.save(smisEntity);
-
-        for (int i = 0; i < equipments.length; i++) {
-            smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
-        }
-
-        return smisEntity;
+        return saveSmisEntity(
+                files,
+                fileNames,
+                fileDescriptions,
+                phones,
+                contactNames,
+                positions,
+                equipments,
+                region_id,
+                cities,
+                street + " " + number,
+                name,
+                parent_smis_id,
+                validity,
+                description,
+                areaState_id,
+                smisEntity);
     }
 
     public SmisEntity editSmis(MultipartFile[] files,
@@ -187,12 +158,54 @@ public class SmisService {
 
         SmisEntity smisEntity = smisesRepo.findById(smis_id).get();
 
+        return saveSmisEntity(
+                                files,
+                                fileNames,
+                                fileDescriptions,
+                                phones,
+                                contactNames,
+                                positions,
+                                equipments,
+                                region_id,
+                                cities,
+                                street,
+                                name,
+                                parent_smis_id,
+                                validity,
+                                description,
+                                areaState_id,
+                                smisEntity);
+
+    }
+
+
+
+    private SmisEntity saveSmisEntity(
+            MultipartFile[] files,
+            String[] fileNames,
+            String[] fileDescriptions,
+
+            String[] phones,
+            String[] contactNames,
+            String[] positions,
+
+            String[] equipments,
+
+            Long region_id,
+            String cities,
+            String address,
+            String name,
+            Long parent_smis_id,
+            String validity,
+            String description,
+            Long areaState_id,
+            SmisEntity smisEntity) throws ParseException, IOException {
         smisEntity.setName(name);
         if (parent_smis_id != null)
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
 
         smisEntity.setCity(getCityByNameOrCreate(cities, region_id));
-        smisEntity.setAddress(street);
+        smisEntity.setAddress(address);
         smisEntity.setAreaState(areaStateRepository.findById(areaState_id).get());
 
         if (!validity.isEmpty())
@@ -200,7 +213,6 @@ public class SmisService {
 
 
         smisEntity.setDescription(description);
-        smisEntity.setDateRegistration(new Date());
 
         smisesRepo.save(smisEntity);
 
@@ -231,7 +243,6 @@ public class SmisService {
         }
 
         return smisEntity;
-
     }
 
     private CityEntity getCityByNameOrCreate(String city_name, Long region_id) {

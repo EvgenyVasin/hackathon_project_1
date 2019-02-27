@@ -247,13 +247,13 @@
                                         <table>
                                             <tr>
                                                 <textarea type="text" class="form-control form-control-fix" name="fileDescriptions"
-                                                          th:placeholder="#{complex.description}" autofocus="True" title="указать сроки действия документов"></textarea>
+                                                          th:placeholder="#{complex.description}" autofocus="True" title="указать сроки действия документов" value=''></textarea>
                                             </tr>
                                             <tr>
 
                                                 <td><input class="form-control" aria-describedby="sizing-addon3"
-                                                           type="text" name="fileNames"
-                                                           placeholder="Понятное имя файла"></td>
+                                                           type="text" name="fileNames" value=""
+                                                           placeholder="Понятное имя файла" multiple></td>
                                                 <td><input class="form-control" type="file" name="files" multiple></td>
                                                 <td><span class="input-group-btn"><button type="button"
                                                                                           class="btn btn-success btn-add">✚</button></span>
