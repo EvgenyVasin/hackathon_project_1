@@ -200,6 +200,7 @@ public class SmisService {
             String description,
             Long areaState_id,
             SmisEntity smisEntity) throws ParseException, IOException {
+
         smisEntity.setName(name);
         if (parent_smis_id != null) {
             smisEntity.setParentSmis(smisesRepo.findById(parent_smis_id).get());
@@ -219,30 +220,64 @@ public class SmisService {
 
         smisesRepo.save(smisEntity);
 
-        for (int i = 0; i < fileNames.length; i++) {
+        if(files.length>0) {
+            if(fileNames.length<1)fileNames = new String[1];
+            if(fileDescriptions.length<1)fileDescriptions = new String[1];
+            for (int i = 0; i < files.length; i++) {
+                if(files[i]!=null) {
+                    SmisFileEntity asset = new SmisFileEntity();
+                    asset.setSmis(smisEntity);
+                    if(fileNames[i]==null)
+                        asset.setCustomName(files[i].getOriginalFilename());
+                    else
+                        asset.setCustomName(fileNames[i]);
+                    if(fileDescriptions[i]==null)
+                        asset.setDescription("");
+                    else
+                        asset.setDescription(fileDescriptions[i]);
 
-            SmisFileEntity asset = new SmisFileEntity();
-            asset.setSmis(smisEntity);
-            asset.setCustomName(fileNames[i]);
-            asset.setDescription(fileDescriptions[i]);
-            asset.setName(files[i].getOriginalFilename());
-            File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
-            files[i].transferTo(tempFile);
-
-            smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
+                    asset.setName(files[i].getOriginalFilename());
+                    File tempFile = Files.createTempFile(UUID.randomUUID().toString(), files[i].getOriginalFilename()).toFile();
+                    files[i].transferTo(tempFile);
 
 
+                    smisEntity.getFiles().add(assetService.createFileAsset(asset, tempFile));
+                }
+
+            }
         }
 
-        for (int i = 0; i < phones.length; i++) {
-            smisEntity.getContacts().add(new ContactEntity(smisEntity, contactNames[i], positions[i], phones[i]));
+        if(phones.length>0 || contactNames.length>0 ||positions.length > 0) {
+
+            if(phones.length < 1)phones = new String[1];
+            if(contactNames.length < 1)contactNames = new String[1];
+            if(positions.length < 1)positions = new String[1];
+
+            for (int i = 0; i < phones.length; i++) {
+                if(phones[i]!=null||contactNames[i]!=null||positions[i]!=null) {
+                    String contactName = "";
+                    if (contactNames[i]!=null)
+                        contactName = contactNames[i];
+
+                    String position = "";
+                    if (positions[i]!=null)
+                        position = positions[i];
+
+                    String phone = "";
+                    if (phones[i]!=null)
+                        phone = phones[i];
+
+                    smisEntity.getContacts().add(new ContactEntity(smisEntity, contactName, position, phone));
+                }
+            }
         }
 
 
         smisesRepo.save(smisEntity);
 
         for (int i = 0; i < equipments.length; i++) {
-            smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
+            if( equipments[i]!=null)
+                smisEquipmentRepo.save(new SmisEquipmentEntity(smisEntity, getEquipmentByNameOrAdd(equipments[i])));
         }
 
         return smisEntity;
