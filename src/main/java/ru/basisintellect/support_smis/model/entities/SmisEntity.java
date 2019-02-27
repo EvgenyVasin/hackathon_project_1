@@ -18,7 +18,7 @@ public class SmisEntity extends CustomEntity {
     private SmisEntity parentSmis;
 
     //название
-    @Column(name = "name", length = 512)
+    @Column(name = "name", length = 128)
     private String name;
 
     //дата регистрации ПК ИВ в системе

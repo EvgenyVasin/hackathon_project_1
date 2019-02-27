@@ -126,7 +126,8 @@
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-list-alt"></span></span>
                                         <select class="form-control" name="parent_smis_id" >
-                                            <option selected th:if="${smis.parentSmis != null}" class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.name}"></option>
+                                            <option th:if="${smis.parentSmis == null}" th:text="#{complex.parentSmis}" th:value="${null}"></option>
+                                            <option th:if="${smis.parentSmis != null}" selected class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.name}"></option>
                                             <option th:each="smis : ${smisesList}" th:if="${smis.parentSmis != smis}"  th:value="${smis.id}" th:text="${smis.name}"></option>
                                         </select>
                                     </div>
