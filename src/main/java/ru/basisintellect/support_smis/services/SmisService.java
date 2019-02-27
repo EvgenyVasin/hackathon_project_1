@@ -95,6 +95,12 @@ public class SmisService {
 //        }
         SmisEntity smisEntity = new SmisEntity();
         smisEntity.setDateRegistration(new Date());
+
+
+        String address = "";
+        if (!street.isEmpty())
+            address = street + " " + number;
+
         return saveSmisEntity(
                 files,
                 fileNames,
@@ -105,7 +111,7 @@ public class SmisService {
                 equipments,
                 region_id,
                 cities,
-                street + " " + number,
+                address,
                 name,
                 parent_smis_id,
                 smis_type_id,

@@ -130,7 +130,7 @@
                                     <div class="input-group input-group-fix">
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-calendar"></span></span>
-                                        <input type="text" class="form-control" name="validity" title="установить дату напоминания об окончании срока соглашения"
+                                        <input type="text" class="form-control" name="validity" placeholder="Дата окончания срока договора" title="установить дату напоминания об окончании срока соглашения"
                                                onfocus="(this.type='date')" onblur="this.type='text'"
                                                th:value="${smis.validity}"/>
                                     </div>
@@ -162,7 +162,7 @@
                                     <span class="input-group-addon"><span
                                             class="glyphicon glyphicon-comment"></span></span>
                                         <textarea type="text" class="form-control form-control-fix comment-trick" name="description"
-                                                  th:text="${smis.description}" autofocus="True"></textarea>
+                                                  th:text="${smis.description}" placeholder="Комментарий" autofocus="True"></textarea>
                                     </div>
 
 
@@ -224,7 +224,7 @@
                                     <div  id="street_"  class="input-group input-group-fix">
                                             <span class="input-group-addon"><span
                                                     class="glyphicon glyphicon-comment"></span></span>
-                                        <input th:value="${smis.address}" class="form-control form-control-fix" type=text name="street" >
+                                        <input th:value="${smis.address}" va placeholder="Адрес" class="form-control form-control-fix" type=text name="street" >
                                         </input>
                                     </div>
 
