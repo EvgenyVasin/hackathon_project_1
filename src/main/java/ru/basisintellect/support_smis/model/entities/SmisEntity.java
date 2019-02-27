@@ -17,6 +17,8 @@ public class SmisEntity extends CustomEntity {
     @JoinColumn(name = "parent_smis_id")
     private SmisEntity parentSmis;
 
+    public String nameByAreaState;
+
     @ManyToOne
     @JoinColumn(name = "smis_type_id", nullable = false)
     private SmisTypeEntity smisType;
@@ -77,6 +79,25 @@ public class SmisEntity extends CustomEntity {
         this.description = description;
         this.contacts = contacts;
         this.files = files;
+        getNameByAreaState();
+    }
+
+    public String getNameByAreaState(){
+        switch (getAreaState().getName()){
+            case "Федеральный":
+                nameByAreaState =  getCity().getRegion().getDistrict().getCountry().getName();
+                break;
+            case "Окружной":
+                nameByAreaState =  getCity().getRegion().getDistrict().getName();
+                break;
+            case "Региональный":
+                nameByAreaState =  getCity().getRegion().getName();
+                break;
+            default:
+                nameByAreaState =  getCity().getName();
+                break;
+        }
+        return  nameByAreaState;
     }
 
     public SmisTypeEntity getSmisType() {
@@ -121,6 +142,7 @@ public class SmisEntity extends CustomEntity {
 
     public void setAreaState(AreaStateEntity areaState) {
         this.areaState = areaState;
+        getNameByAreaState();
     }
 
     /**

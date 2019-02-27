@@ -122,7 +122,7 @@
                                     <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-text-color"></span></span>
                                         <input type="text" class="form-control" name="name"
-                                               th:value="${smis.name}" required="True" autofocus="True"/>
+                                               th:value="${smis.name}" autofocus="True"/>
                                     </div>
 
 
@@ -141,8 +141,8 @@
                                             class="glyphicon glyphicon-list-alt"></span></span>
                                         <select class="form-control" name="parent_smis_id" >
                                             <option th:text="#{complex.parentSmis}" th:value="${null}"></option>
-                                            <option th:if="${smis.parentSmis != null}" selected class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.name}"></option>
-                                            <option th:each="oursmis : ${smisesList}" th:if="${smis.parentSmis != oursmis and oursmis != smis and oursmis.parentSmis != smis}" th:value="${oursmis.id}" th:text="${oursmis.name}"></option>
+                                            <option th:if="${smis.parentSmis != null}" selected class="form-control form-control-fix" th:value="${smis.parentSmis.id}" th:text="${smis.parentSmis.smisType.name + ' ' + smis.parentSmis.getNameByAreaState() + ' ' + smis.parentSmis.name}"></option>
+                                            <option th:each="oursmis : ${smisesList}" th:if="${smis.parentSmis != oursmis and oursmis != smis and oursmis.parentSmis != smis}" th:value="${oursmis.id}" th:text="${oursmis.smisType.name + ' ' + oursmis.getNameByAreaState() + ' ' + oursmis.name}"></option>
                                         </select>
                                     </div>
                                     <!---->

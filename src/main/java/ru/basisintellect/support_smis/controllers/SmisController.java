@@ -283,23 +283,8 @@ public class SmisController {
             JSONObject obj = new JSONObject();
             obj.put("itemId", entity.getId());
             obj.put("itemName", entity.getName());
-
-            switch (entity.getAreaState().getName()){
-                case "Федеральный":
-                    obj.put("regionName", entity.getCity().getRegion().getDistrict().getCountry().getName());
-                    break;
-                case "Окружной":
-                    obj.put("regionName", entity.getCity().getRegion().getDistrict().getName());
-                    break;
-                case "Региональный":
-                    obj.put("regionName", entity.getCity().getRegion().getName());
-                    break;
-                default:
-                    obj.put("regionName", entity.getCity().getName());
-                    break;
-            }
-
-
+            obj.put("regionName", entity.getNameByAreaState());
+            obj.put("typeName", entity.getSmisType().getName());
 
             if (parentSMIS != null)
                 obj.put("itemParentId", entity.getParentSmis().getId());
