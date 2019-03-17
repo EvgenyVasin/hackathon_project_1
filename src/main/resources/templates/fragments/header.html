@@ -8,18 +8,7 @@
             margin-bottom: 180px;
         }
 
-        #menu {
-            /*  position:static;
-                height: 25px; */
-            text-align: right;
-            float: left;
-            width: 100%;
-            background-color: #FFFFFF;
-            color: #3B1A91;
 
-            font-size: 14px;
-            font-family: Verdana, Arial, sans-serif;
-        }
 
         #menu ul {
             list-style: none;
@@ -34,27 +23,9 @@
             float: left;
         }
 
-        #menu a {
-            display: block;
-            padding: 5px 12px 5px;
-            text-decoration: none;
-            color: #122b40;
-        }
-
-        #menu a:hover {
-            background: transparent;
-            color: #1C005A;
-        }
-
-        #menu a:active {
-        }
-
-        #menu a.active {
-            color: #00c4ff;
-        }
 
         .navbar-inverse {
-            background-color: #3700b3 !important;
+            background-color: #e3001b !important;
         }
 
         .menu-link:hover {
@@ -74,10 +45,10 @@
             <ul class="nav navbar-nav navbar-left">
                 <!--логотип-->
                 <li>
-                    <img src="/images/app_basis.bmp" vspace="10" hspace="10">
+                    <img src="/images/mts_rus_logo.jpg" style="height: 50px;" vspace="10" hspace="10">
                 </li>
                 <!--название-->
-                <li th:href="@{/}"><h3 style="color: White">Центр Оперативной Поддержки СМИС </h3></li>
+                <li th:href="@{/}"><h3 style="color: White" th:text="#{navMenu.title}"></h3></li>
             </ul>
             <!--навигация по пользователю-->
             <ul class="nav navbar-nav navbar-right">
@@ -94,43 +65,27 @@
                     </a>
                 </li>
                 <!--профиль пользователя-->
-                <li th:if="${#authorization.expression('isAuthenticated()')}" style=" color: #FFFFFF">
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
                     <a href="#" th:href="@{'/getUser/'+ ${session.currentUser.id}}">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <b th:text="${session.currentUser.firstName}"></b>
-                        <b th:text="${session.currentUser.lastName}"></b>
+                        <span style="color: White;" class="glyphicon glyphicon-user"></span>
+                        <b style="color: White;" th:text="${session.currentUser.firstName}"></b>
+                        <b style="color: White;" th:text="${session.currentUser.lastName}"></b>
                     </a>
                 </li>
                 <!--выход-->
                 <li class="divider-vertical"/>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a href="#" style="color: White;" th:href="@{/j_spring_security_logout}">
-                        <span th:text="#{navMenu.logout}"/>
+                    <a href="#" th:href="@{/j_spring_security_logout}">
+                        <span style="color: White;" th:text="#{navMenu.logout}"/>
                     </a>
                 </li>
+                <!--открыть БД в новой вкладке-->
+                <li><a style="color: White;" class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"
+                                         th:text="#{navMenu.DB}"
+                                         href="/h2-console" target="_blank"></a></li>
             </ul>
         </ul>
-        <!--навигация по сайту-->
-        <div id="menu">
-            <nav class="navbar-inverse">
-                <ul>
-                    <!--список ПК ИВ СМИС-->
-                    <li class="menu-link"><a class="menu-link" th:text="#{navMenu.SMISTable}" href="/smises_table"></a>
-                    </li>
-                    <!--<li><a th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}" th:text="#{navMenu.Admin}"></a></li>-->
-                    <!--дерево СМИСов-->
-                    <li class="menu-link"><a class="menu-link"
-                                             th:text="#{navMenu.ThreeSmis}"
-                                             href="/smises_list"></a>
-                        <!--th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')||#httpServletRequest.isUserInRole('ROLE_USER')}"-->
-                    </li>
-                    <!--открыть БД в новой вкладке-->
-                    <!--<li class="menu-link"><a class="menu-link" th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"
-                                             th:text="#{navMenu.DB}"
-                                             href="/h2-console" target="_blank"></a></li>-->
-                </ul>
-            </nav>
-        </div>
+
     </nav>
     <div class="under_header"></div>
 </div>

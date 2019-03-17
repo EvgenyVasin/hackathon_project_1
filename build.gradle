@@ -14,7 +14,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'ru.basis-intellect'
+group = 'ru.mts.test'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -32,8 +32,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-	runtimeOnly('org.postgresql:postgresql')
-	//runtimeOnly 'com.h2database:h2'
+	//runtimeOnly('org.postgresql:postgresql')
+	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 

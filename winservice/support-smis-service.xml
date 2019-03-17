@@ -1,8 +1,0 @@
-<service>
-    <id>support-smis-service</id>
-    <name>support-smis-service</name>
-    <description>Support of SMIS</description>
-    <executable>C:\Program Files\Java\jre1.8.0_51\bin\java</executable>
-    <arguments>-jar "%BASE%\support_smis-0.0.1-SNAPSHOT.jar"</arguments>
-    <logmode>rotate</logmode>
-</service>
